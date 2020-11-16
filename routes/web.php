@@ -13,16 +13,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'App\Http\Controllers\WebsiteController@index')->name('website.index');
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Auth::routes();
-
-Route::get('/home', 'App\Http\Controllers\HomeController@index')->name('dashboard');
+// Route::get('/home', 'App\Http\Controllers\HomeController@index')->name('dashboard');
 
 Route::group(['middleware' => 'auth'], function () {
 	Route::resource('user', 'App\Http\Controllers\UserController', ['except' => ['show']]);
