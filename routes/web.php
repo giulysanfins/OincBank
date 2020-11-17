@@ -17,7 +17,7 @@ Route::get('/', 'App\Http\Controllers\WebsiteController@index')->name('website.i
 
 Auth::routes();
 
-// Route::get('/home', 'App\Http\Controllers\HomeController@index')->name('dashboard');
+Route::get('/home', 'App\Http\Controllers\HomeController@dashboard')->name('dashboard');
 
 Route::group(['middleware' => 'auth'], function () {
 	Route::resource('user', 'App\Http\Controllers\UserController', ['except' => ['show']]);
@@ -26,7 +26,7 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::patch('profile/password', ['as' => 'profile.password', 'uses' => 'App\Http\Controllers\ProfileController@password']);
 });
 
-Route::group(['middleware' => 'auth'], function () {
-	Route::get('{page}', ['as' => 'page.index', 'uses' => 'App\Http\Controllers\PageController@index']);
-});
+// Route::group(['middleware' => 'auth'], function () {
+// 	Route::get('{page}', ['as' => 'page.index', 'uses' => 'App\Http\Controllers\PageController@index']);
+// });
 
