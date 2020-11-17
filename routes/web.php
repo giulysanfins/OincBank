@@ -17,7 +17,7 @@ Route::get('/', 'App\Http\Controllers\WebsiteController@index')->name('website.i
 
 Auth::routes();
 
-// Route::get('/home', 'App\Http\Controllers\HomeController@index')->name('dashboard');
+Route::get('/home', 'App\Http\Controllers\HomeController@dashboard')->name('dashboard');
 
 Route::group(['middleware' => 'auth'], function () {
 	Route::resource('user', 'App\Http\Controllers\UserController', ['except' => ['show']]);
