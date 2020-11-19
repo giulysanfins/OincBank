@@ -17,7 +17,7 @@ Tip 2: you can also add an image using data-image tag
                     <p>{{ __("Dashboard") }}</p>
                 </a>
             </li>
-           
+
             <li class="nav-item">
                 <a class="nav-link" data-toggle="collapse" href="#laravelExamples" @if($activeButton =='laravel') aria-expanded="true" @endif>
                     <i>
@@ -47,37 +47,37 @@ Tip 2: you can also add an image using data-image tag
             </li>
 
             <li class="nav-item @if($activePage == 'table') active @endif">
-                <a class="nav-link" href="{{route('page.index', 'table')}}">
+                <a class="nav-link" href="{{route('user.index', 'table')}}">
                     <i class="nc-icon nc-notes"></i>
                     <p>{{ __("Table List") }}</p>
                 </a>
             </li>
             <li class="nav-item @if($activePage == 'typography') active @endif">
-                <a class="nav-link" href="{{route('page.index', 'typography')}}">
+                <a class="nav-link" href="{{route('user.index', 'typography')}}">
                     <i class="nc-icon nc-paper-2"></i>
                     <p>{{ __("Typography") }}</p>
                 </a>
             </li>
             <li class="nav-item @if($activePage == 'icons') active @endif">
-                <a class="nav-link" href="{{route('page.index', 'icons')}}">
+                <a class="nav-link" href="{{route('user.index', 'icons')}}">
                     <i class="nc-icon nc-atom"></i>
                     <p>{{ __("Icons") }}</p>
                 </a>
             </li>
             <li class="nav-item @if($activePage == 'maps') active @endif">
-                <a class="nav-link" href="{{route('page.index', 'maps')}}">
+                <a class="nav-link" href="{{route('user.index', 'maps')}}">
                     <i class="nc-icon nc-pin-3"></i>
                     <p>{{ __("Maps") }}</p>
                 </a>
             </li>
             <li class="nav-item @if($activePage == 'notifications') active @endif">
-                <a class="nav-link" href="{{route('page.index', 'notifications')}}">
+                <a class="nav-link" href="{{route('user.index', 'notifications')}}">
                     <i class="nc-icon nc-bell-55"></i>
                     <p>{{ __("Notifications") }}</p>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link active bg-danger" href="{{route('page.index', 'upgrade')}}">
+                <a class="nav-link active bg-danger" href="{{route('user.index', 'upgrade')}}">
                     <i class="nc-icon nc-alien-33"></i>
                     <p>{{ __("Upgrade to PRO") }}</p>
                 </a>
