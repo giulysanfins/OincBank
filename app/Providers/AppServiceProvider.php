@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use App\Yahp\Services\ModuleService;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -21,8 +22,14 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
+    public function boot(ModuleService $moduleService)
     {
-        //
+        $this->moduleService = $moduleService;
+
+        view()->composer('layouts.app', function ($view) 
+        {
+            $view->with('modules', $this->moduleService->renderList());
+        });
+
     }
 }
