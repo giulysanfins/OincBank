@@ -10,12 +10,14 @@
         <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
         <!--     Fonts and icons     -->
         <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
         <!-- CSS Files -->
         <link href="{{ asset('light-bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" />
         <link href="{{ asset('light-bootstrap/css/light-bootstrap-dashboard.css?v=2.0.0') }} " rel="stylesheet" />
         <!-- CSS Just for demo purpose, don't include it in your project -->
         <link href="{{ asset('light-bootstrap/css/demo.css') }}" rel="stylesheet" />
+        <link href="{{ asset('vendors') }}/fontawesome/css/all.min.css" rel="stylesheet" />
+        <link href="{{ asset('vendors') }}/datatables/datatables.min.css" rel="stylesheet" />
+
     </head>
 
     <body>
@@ -23,7 +25,6 @@
 
             @if (auth()->check() && request()->route()->getName() != "")
                 @include('layouts.navbars.sidebar')
-                @include('pages/sidebarstyle')
             @endif
 
             <div class="@if (auth()->check() && request()->route()->getName() != "") main-panel @endif">
@@ -41,19 +42,19 @@
     <script src="{{ asset('light-bootstrap/js/core/jquery.3.2.1.min.js') }}" type="text/javascript"></script>
     <script src="{{ asset('light-bootstrap/js/core/popper.min.js') }}" type="text/javascript"></script>
     <script src="{{ asset('light-bootstrap/js/core/bootstrap.min.js') }}" type="text/javascript"></script>
-
-    <script src="{{ asset('light-bootstrap/js/plugins/jquery.sharrre.js') }}"></script>
     <!--  Plugin for Switches, full documentation here: http://www.jque.re/plugins/version3/bootstrap.switch/ -->
     <script src="{{ asset('light-bootstrap/js/plugins/bootstrap-switch.js') }}"></script>
-    <!--  Google Maps Plugin    -->
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
     <!--  Chartist Plugin  -->
     <script src="{{ asset('light-bootstrap/js/plugins/chartist.min.js') }}"></script>
     <!--  Notifications Plugin    -->
-    <script src="{{ asset('light-bootstrap/js/plugins/bootstrap-notify.js') }}"></script>
+    {{-- <script src="{{ asset('light-bootstrap/js/plugins/bootstrap-notify.js') }}"></script> --}}
     <!-- Control Center for Light Bootstrap Dashboard: scripts for the example pages etc -->
     <script src="{{ asset('light-bootstrap/js/light-bootstrap-dashboard.js?v=2.0.0') }}" type="text/javascript"></script>
     <!-- Light Bootstrap Dashboard DEMO methods, don't include it in your project! -->
     <script src="{{ asset('light-bootstrap/js/demo.js') }}"></script>
+    <script src="{{ asset('vendors') }}/fontawesome/js/all.min.js"></script>
+    <script src="{{ asset('vendors') }}/datatables/datatables.min.js"></script>
+    @include('sweetalert::alert')
+
     @stack('js')
 </html>

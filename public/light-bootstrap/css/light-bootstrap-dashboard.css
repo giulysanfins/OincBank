@@ -421,7 +421,6 @@ body>.navbar-collapse .logo-tim img {
 
 .sidebar .nav,
 body>.navbar-collapse .nav {
-    margin-top: 20px;
     float: none;
     display: block;
 }
@@ -1185,8 +1184,8 @@ fieldset[disabled] .btn-info.active {
 
 .btn-warning {
     border: 1px solid #FFA534;
-    color: #FFFFFF;
-    background-color: #FFA534;
+    color: #FFA534;
+    background-color: transparent;
     cursor: pointer;
 }
 
@@ -1552,6 +1551,10 @@ fieldset[disabled] .btn-neutral.active {
     height: 40px;
     -webkit-box-shadow: none;
     box-shadow: none;
+}
+
+.form-control.form-control-textarea {
+    height: auto !important;
 }
 
 .form-control:focus {
