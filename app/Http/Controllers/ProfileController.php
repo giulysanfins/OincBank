@@ -5,9 +5,23 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ProfileRequest;
 use App\Http\Requests\PasswordRequest;
 use Illuminate\Support\Facades\Hash;
+use App\Yahp\Services\PhotoService;
+use Storage;
+use Carbon\Carbon;
 
 class ProfileController extends Controller
 {
+
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct(PhotoService $photoService)
+    {
+        $this->photoService = $photoService;
+    }
+
     /**
      * Show the form for editing the profile.
      *
@@ -15,7 +29,10 @@ class ProfileController extends Controller
      */
     public function edit()
     {
-        return view('profile.edit');
+        $data = [
+            'photo' => $this->photoService->renderPhotoUser('users',auth()->user()->id)
+        ];
+        return view('profile.edit',$data);
     }
 
     /**
@@ -26,9 +43,32 @@ class ProfileController extends Controller
      */
     public function update(ProfileRequest $request)
     {
-        auth()->user()->update($request->all());
+        try {
+            $user_id = auth()->user()->id;
 
-        return back()->withStatus(__('Profile successfully updated.'));
+            if($request->file('photo_perfil'))
+            {
+                $ext = $request->file('photo_perfil')->extension();
+                $ts = Carbon::now()->timestamp;
+                $filename = $ts."_".$user_id.".".$ext;
+                $upload = Storage::putFileAs('public/profile',$request->file('photo_perfil'),$filename);
+                $insert = $this->photoService->buildInsert([
+                    'area' => 'users',
+                    'area_id' => $user_id,
+                    'path' => $filename,
+                    'principal' => 1,
+                ]);
+            }
+
+            auth()->user()->update($request->all());
+            alert()->success('Sucesso','Perfil atualizado com sucesso.');
+            return redirect()->route('profile.edit');
+        }
+        catch(\Exeception $e){
+            \Log::error($e->getFile() . "\n" . $e->getLine() . "\n" . $e->getMessage());
+            alert()->error('Erro','Erro em atualizar o perfil.')->persistent('Fechar');
+            return redirect()->route('profile.edit')->withInput();
+        }
     }
 
     /**

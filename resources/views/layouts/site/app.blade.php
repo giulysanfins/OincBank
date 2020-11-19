@@ -29,7 +29,8 @@
 		<script src="{{asset('helpo-theme')}}/js/libs.min.js"></script>
 		<!-- scripts-->
         <script src="{{asset('helpo-theme')}}/js/common.min.js"></script>
-        <script src="{{asset('vendors')}}/fontawesome/js/all.min.js"></script>
+		<script src="{{asset('vendors')}}/fontawesome/js/all.min.js"></script>
+		@include('sweetalert::alert')
 
 	</body>
 </html>
