@@ -1,12 +1,7 @@
 <div class="sidebar" data-color="green" data-image="{{ asset('helpo-theme') }}/img/promo_3.jpg">
-    <!--
-Tip 1: You can change the color of the sidebar using: data-color="purple | blue | green | orange | red"
-
-Tip 2: you can also add an image using data-image tag
--->
     <div class="sidebar-wrapper">
         <div class="logo">
-            <a href="http://www.creative-tim.com" class="simple-text">
+            <a class="simple-text">
                OincBank
             </a>
         </div>
@@ -32,9 +27,9 @@ Tip 2: you can also add an image using data-image tag
                                 @foreach ($modules as $s_module)
                                     @if ($s_module->type == 3 && $s_module->menu_master == $module->id)
                                         <li class="nav-item @if($activePage == $s_module->slug) active @endif">
-                                            <a class="nav-link" href="{{route($s_module->route)}}">
+                                            <a class="nav-link pl-4" href="{{route($s_module->route)}}">
                                                 <i class="{{$s_module->icon}}"></i>
-                                                <p>{{$s_module->name}}</p>
+                                                <p class='ml-2'>{{$s_module->name}}</p>
                                             </a>
                                         </li>
                                     @endif
@@ -43,6 +38,7 @@ Tip 2: you can also add an image using data-image tag
                         </div>
                     </li>
                 @endif
+                
             @endforeach
         </ul>
     </div>

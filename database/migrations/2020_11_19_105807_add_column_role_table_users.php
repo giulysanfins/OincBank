@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AlterTableUsersAddColumnDescription extends Migration
+class AddColumnRoleTableUsers extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,7 @@ class AlterTableUsersAddColumnDescription extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('description',300)->after('remember_token')->nullable();
+            $table->integer('role')->after('description')->default(2)->comment('1-admin, 2-usuario');
         });
     }
 
@@ -26,7 +26,7 @@ class AlterTableUsersAddColumnDescription extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('description');
+            $table->dropColumn('role');
         });
     }
 }
