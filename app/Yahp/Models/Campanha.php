@@ -6,9 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 class Campanha extends Model
 {
 
-    protected $table = 'dados';
+    protected $table = 'campanhas';
     protected $fillable = [
-        'dispositivo_id','litros','nivel_galao_01','nivel_galao_02'
+        'titulo','categoria','valor','data_encerramento','url','video','descricao'
     ];
-    
+    protected $guarded = ['id', 'created_at', 'update_at'];
 }

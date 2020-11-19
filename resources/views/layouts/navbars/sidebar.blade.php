@@ -44,6 +44,7 @@ Tip 2: you can also add an image using data-image tag
                     </li>
                 @endif
             @endforeach
+
         </ul>
     </div>
 </div>

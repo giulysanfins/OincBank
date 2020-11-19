@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg " color-on-scroll="500">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#"> {{ $navName }} </a>
+        <a class="navbar-brand" href="#"> {{ $navName ?? '' }} </a>
         <button href="" class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-bar burger-lines"></span>
             <span class="navbar-toggler-bar burger-lines"></span>
@@ -25,7 +25,19 @@
 
                 <li class="nav-item">
                     <a class="nav-link" href=" {{route('profile.edit') }} ">
-                        <i class="far fa-user-circle fa-2x"></i>
+                        <li class="far fa-user-circle fa-2x"></i>
+
+                        <span class="no-icon">{{ __('Criar Campanha') }}</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href=" {{route('profile.edit') }} ">
+                        <span class="no-icon">{{ __('Account') }}</span>
+                    </a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span class="no-icon">{{ __('Dropdown') }}</span>
                     </a>
                 </li>
                 <li class="nav-item">
