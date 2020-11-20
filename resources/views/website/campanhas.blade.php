@@ -62,7 +62,7 @@
                                         <div class="causes-item__details-item text-right"><span>Conquistado: </span><br /><span>R$ 1110,00</span></div>
                                     </div>
                                 </div>
-                                </div><a class="button causes-item__button button--primary" href="{{route('website.detalhes',$campanha->id)}}">+ Doar</a>
+                                </div><a class="button causes-item__button button--primary" href="{{route('website.campanhas.detalhes',$campanha->id)}}">+ Doar</a>
                         </div>
                     </div>
 

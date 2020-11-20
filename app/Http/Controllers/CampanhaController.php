@@ -30,7 +30,7 @@ class CampanhaController extends Controller
      public function index()
      {
          $data = [
-             'campanha' => $this->campanhaService->renderList(),
+             'campanhas' => $this->campanhaService->renderList(),
              'pageTitle' => 'Campanha'
          ];
 
