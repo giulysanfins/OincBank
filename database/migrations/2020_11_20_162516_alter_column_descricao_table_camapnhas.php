@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AlterTableUsersAddColumnDescription extends Migration
+class AlterColumnDescricaoTableCamapnhas extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class AlterTableUsersAddColumnDescription extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->string('description',300)->after('remember_token')->nullable();
+        Schema::table('campanhas', function (Blueprint $table) {
+            $table->string('descricao',3000)->change();
         });
     }
 
@@ -25,8 +25,8 @@ class AlterTableUsersAddColumnDescription extends Migration
      */
     public function down()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('description');
+        Schema::table('campanhas', function (Blueprint $table) {
+            $table->string('descricao')->change();
         });
     }
 }

@@ -14,6 +14,15 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', 'App\Http\Controllers\WebsiteController@index')->name('website.index');
+Route::get('/termos-e-condicoes', 'App\Http\Controllers\WebsiteController@tos')->name('website.tos');
+Route::get('/politica-de-privacidade', 'App\Http\Controllers\WebsiteController@politica')->name('website.politica');
+
+Route::group(['middleware' => ['campanhas']], function () {
+	Route::get('/', 'App\Http\Controllers\WebsiteController@campanhas')->name('website.campanhas');
+	Route::get('/detalhes/{id}', 'App\Http\Controllers\WebsiteController@detalhes')->name('website.campanhas.detalhes');
+});
+
+
 
 Auth::routes();
 
@@ -31,23 +40,22 @@ Route::group(['prefix' => 'admin'], function () {
 		Route::get('/', ['as' => 'users.index', 'uses' => 'App\Http\Controllers\UsersController@index']);
 		Route::get('/criar', ['as' => 'users.create', 'uses' => 'App\Http\Controllers\UsersController@create']);
 	});
+
+	Route::group(['prefix' => 'campanhas','middleware' => 'auth'], function () {
+		Route::get('/', ['as' => 'campanha.index', 'uses' => 'App\Http\Controllers\CampanhaController@index']);
+		Route::get('/criar', ['as' => 'campanha.create', 'uses' => 'App\Http\Controllers\CampanhaController@create']);
+		Route::post('/criar', ['as' => 'campanha.store', 'uses' => 'App\Http\Controllers\CampanhaController@store']);
+		Route::get('/alterar/{id}', ['as' => 'campanha.edit', 'uses' => 'App\Http\Controllers\CampanhaController@edit']);
+		Route::put('/update/{id}', ['as' => 'campanha.update', 'uses' => 'App\Http\Controllers\CampanhaController@update']);
+	});
+
 });
 
 
 
-// Route::group(['middleware' => 'auth'], function () {
-// 	Route::get('{page}', ['as' => 'page.index', 'uses' => 'App\Http\Controllers\PageController@index']);
-// });
+//  Route::group(['middleware' => 'auth'], function () {
+//  	Route::get('{page}', ['as' => 'page.index', 'uses' => 'App\Http\Controllers\PageController@index']);
+//  });
 
 
-Route::group(['prefix' => 'campanha','middleware' => 'auth'], function () {
-	Route::get('/', ['as' => 'campanha.index', 'uses' => 'App\Http\Controllers\CampanhaController@index']);
-	Route::get('/criar', ['as' => 'campanha.create', 'uses' => 'App\Http\Controllers\CampanhaController@create']);
-	Route::post('/add', ['as' => 'campanha.store', 'uses' => 'App\Http\Controllers\CampanhaController@store']);
-	Route::get('/alterar/{id}', ['as' => 'campanha.edit', 'uses' => 'App\Http\Controllers\CampanhaController@edit']);
-	Route::put('/update/{id}', ['as' => 'campanha.update', 'uses' => 'App\Http\Controllers\CampanhaController@update']);
-});
-
-Route::get('image-upload', 'App\Http\Controllers\ImageUploadController@imageUpload')->name('image.upload');
-Route::post('image-upload', 'App\Http\Controllers\ImageUploadController@imageUploadPost')->name('image.upload.post');
 

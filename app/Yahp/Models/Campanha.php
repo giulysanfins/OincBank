@@ -8,7 +8,7 @@ class Campanha extends Model
 
     protected $table = 'campanhas';
     protected $fillable = [
-        'titulo','categoria','valor','data_encerramento','url','video','descricao'
+        'titulo','categoria_id','valor','data_encerramento','profile_image','video','descricao','status','user_id'
     ];
     protected $guarded = ['id', 'created_at', 'update_at'];
 }

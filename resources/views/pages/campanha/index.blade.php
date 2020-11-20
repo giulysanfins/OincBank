@@ -1,13 +1,12 @@
-@extends('layouts.app', [
-    'class' => '',
-    'elementActive' => 'campanha'
-])
+@extends('layouts/app', ['activePage' => '',
+'activeButton' => '',
+'title' => 'Criação de Campanhas'])
 
 @section('content')
     <div class="content">
         <div class="row">
             <div class="col-12 text-right">
-                <a href="{{route('clientes.create')}}" class="btn btn-primary btn-sm">Adicionar campanha</a>
+                <a href="{{route('campanha.store')}}" class="btn btn-primary btn-sm">Adicionar campanha</a>
             </div>
 
             <div class="col-12">
@@ -19,20 +18,22 @@
                                     <thead>
                                     <tr>
                                         <th scope="col">#</th>
-                                        <th scope="col">Cliente</th>
-                                        <th scope="col">Apelido</th>
+                                        <th scope="col">Titulo</th>
+                                        <th scope="col">Categoria</th>
+                                        <th scope="col">Data Criacao</th>
                                         <th scope="col"></th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($clientes as $cliente)
+                                        @foreach ($campanhas as $campanha)
                                             <tr>
-                                                <th scope="row">{{$cliente->id}}</th>
-                                                <td>{{$cliente->empresa}}</td>
-                                                <td>{{$cliente->apelido}}</td>
+                                                <th scope="row">{{$campanha->id}}</th>
+                                                <td>{{$campanha->titulo}}</td>
+                                                <td>{{$campanha->categoria_id}}</td>
+                                                <td>{{$campanha->created_at->format('d/m/Y h:i:s')}}</td>
                                                 <td>
-                                                    <div class="btn-group float-right" role="group" aria-label="Botões de Ação - Clientes">
-                                                        <a href="{{route('clientes.edit',$cliente->id)}}" class="btn btn-secondary btn-sm">Editar</a>
+                                                    <div class="btn-group float-right" role="group" aria-label="Botões de Ação - Campanhas">
+                                                        <a href="" class="btn btn-secondary btn-sm">Editar</a>
                                                     </div>
                                                 </td>
                                             </tr>

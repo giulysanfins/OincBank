@@ -107,93 +107,6 @@
         </div>
         <!-- slider nav end-->
     </section>
-    <!-- promo end-->
-    <!-- about us start-->
-    {{-- <section class="section about-us" id="about">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-6">
-                    <div class="heading heading--primary"><span class="heading__pre-title">About Us</span>
-                        <h2 class="heading__title"><span>Help is Our</span> <span>Main Goal</span></h2>
-                    </div>
-                    <p><strong>Thresher shark rudd African lungfish silverside, Red salmon rockfish grunion, garpike zebra danio king-of-the-salmon banjo catfish."</strong></p>
-                    <p>Sea chub demoiselle whalefish zebra lionfish mud cat pelican eel. Minnow snoek icefish velvet-belly shark, California halibut round stingray northern sea robin. Southern grayling trout-perch</p>
-                    <p>Sharksucker sea toad candiru rocket danio tilefish stingray deepwater stingray Sacramento splittail, Canthigaster rostrata. Midshipman dartfish Modoc sucker, yellowtail kingfish basslet. Buri chimaera triplespine northern sea robin zingel lancetfish galjoen fish, catla wolffish, mosshead warbonnet</p><a class="button button--primary" href="about.html">More About</a>
-                </div>
-                <div class="col-lg-6 col-xl-5 offset-xl-1">
-                    <div class="info-box"><img class="img--layout" src="{{asset('helpo-theme')}}/img/about_layout.png" alt="img"/><img class="img--bg" src="{{asset('helpo-theme')}}/img/about-us.jpg" alt="img"/>
-                        <h4 class="info-box__title">We are Awesome Volounteer Team</h4>
-                        <p>Gray eel-catfish longnose whiptail catfish smalleye squaretail queen danio unicorn fish shortnose greeneye fusilier fish silver carp nibbler sharksucker tench lookdown catfish</p><a class="info-box__link" href="volunteer.html">Become a volounteer</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section> --}}
-    <!-- about us end-->
-    <!-- icons section start-->
-    {{-- <section class="section icons-section no-padding-top">
-        <div class="container">
-            <div class="row margin-bottom">
-                <div class="col-12">
-                    <div class="heading heading--center"><span class="heading__pre-title">Services</span>
-                        <h2 class="heading__title"><span>What we do</span> <span>for all people</span></h2>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-6 col-lg-3">
-                    <div class="icon-item">
-                        <div class="icon-item__img"><img class="img--layout" src="{{asset('helpo-theme')}}/img/icon_1-1.png" alt="img"/>
-                            <svg class="icon icon-item__icon icon--red">
-                                <use xlink:href="#donation"></use>
-                            </svg>
-                        </div>
-                        <div class="icon-item__text">
-                            <p>Medicine Help</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-6 col-lg-3">
-                    <div class="icon-item">
-                        <div class="icon-item__img"><img class="img--layout" src="{{asset('helpo-theme')}}/img/icon_2-2.png" alt="img"/>
-                            <svg class="icon icon-item__icon icon--orange">
-                                <use xlink:href="#church"></use>
-                            </svg>
-                        </div>
-                        <div class="icon-item__text">
-                            <p>We Build and Create</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-6 col-lg-3">
-                    <div class="icon-item">
-                        <div class="icon-item__img"><img class="img--layout" src="{{asset('helpo-theme')}}/img/icon_3-3.png" alt="img"/>
-                            <svg class="icon icon-item__icon icon--green">
-                                <use xlink:href="#blood"></use>
-                            </svg>
-                        </div>
-                        <div class="icon-item__text">
-                            <p>Water Delivery</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-6 col-lg-3">
-                    <div class="icon-item">
-                        <div class="icon-item__img"><img class="img--layout" src="{{asset('helpo-theme')}}/img/icon_4-4.png" alt="img"/>
-                            <svg class="icon icon-item__icon icon--blue">
-                                <use xlink:href="#charity"></use>
-                            </svg>
-                        </div>
-                        <div class="icon-item__text">
-                            <p>We Care About</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section> --}}
-    <!-- icons section end-->
-    <!-- causes start-->
     <section class="section causes"><img class="causes__bg" src="{{asset('helpo-theme')}}/img/causes_img.png" alt="img"/>
         <div class="container">
             <div class="row align-items-end">
@@ -434,22 +347,5 @@
             </div>
         </div>
     </section>
-    <!-- projects end-->
-    <!-- events end-->
-
-
-    <!-- testimonials style-2 end-->
-    <!-- blog start-->
-
-    <!-- blog end-->
-    <!-- donors start-->
-
-    <!-- donors end-->
-
-    <!-- instagram end-->
-    <!-- subscribe start-->
-
-    <!-- subscribe end-->
 </main>
 @endsection
-

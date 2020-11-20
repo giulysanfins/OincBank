@@ -5,6 +5,13 @@ namespace App\Http\Controllers;
 use App\Yahp\Services\CampanhaService;
 use Illuminate\Http\Request;
 
+use App\Http\Requests\ProfileRequest;
+use App\Http\Requests\PasswordRequest;
+use Illuminate\Support\Facades\Hash;
+use App\Yahp\Services\PhotoService;
+use Storage;
+use Carbon\Carbon;
+
 class CampanhaController extends Controller
 {
     //
@@ -23,7 +30,7 @@ class CampanhaController extends Controller
      public function index()
      {
          $data = [
-             'campanha' => $this->campanhaService->renderList(),
+             'campanhas' => $this->campanhaService->renderList(),
              'pageTitle' => 'Campanha'
          ];
 
@@ -52,17 +59,34 @@ class CampanhaController extends Controller
       */
      public function store(Request $request)
      {
-         try {
 
-             $insert = $this->campanhaService->buildInsert($request->all());
-             alert()->success('Sucesso','Campanha adicionada com sucesso.')->persistent('Fechar');
-             return redirect()->route('campanha.index');
+        try
+        {
+            $user_id = auth()->user()->id;
+            // dd($request->all());
+            //  if($request->file('photo_perfil'))
+            //  {
+                $ext = $request->file('photo_perfil')->extension();
+                $ts = Carbon::now()->timestamp;
+                $filename = $ts."_".$user_id.".".$ext;
+                $upload = Storage::putFileAs('public/images',$request->file('photo_perfil'),$filename);
 
-         } catch (\Exception $e) {
+                $data = $this->campanhaService->buildInsert($request->merge([
+                    'profile_image' => $filename,
+                    'user_id' => auth()->user()->id,
+                    'status' => 1
+                ])->all());
+                alert()->success('Sucesso','Campanha adicionada com sucesso.')->persistent('Fechar');
+            //  }
+
+            //  dd($data);
+             return redirect()->route('campanha.index',$data);
+
+        } catch (\Exception $e) {
 
              \Log::error($e->getFile() . "\n" . $e->getLine() . "\n" . $e->getMessage());
              alert()->error('Erro','Erro em adicionar a Campanha.')->persistent('Fechar');
-             return redirect()->route('campanha.create')->withInput();
+             return redirect()->route('campanha.index')->withInput();
 
          }
      }
