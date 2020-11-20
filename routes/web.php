@@ -17,7 +17,7 @@ Route::get('/', 'App\Http\Controllers\WebsiteController@index')->name('website.i
 Route::get('/termos-e-condicoes', 'App\Http\Controllers\WebsiteController@tos')->name('website.tos');
 Route::get('/politica-de-privacidade', 'App\Http\Controllers\WebsiteController@politica')->name('website.politica');
 
-Route::group(['middleware' => ['campanhas']], function () {
+Route::group(['prefix' => 'campanhas'], function () {
 	Route::get('/', 'App\Http\Controllers\WebsiteController@campanhas')->name('website.campanhas');
 	Route::get('/detalhes/{id}', 'App\Http\Controllers\WebsiteController@detalhes')->name('website.campanhas.detalhes');
 });
