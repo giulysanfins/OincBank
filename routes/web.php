@@ -15,7 +15,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'App\Http\Controllers\WebsiteController@index')->name('website.index');
 Route::get('/campanhas', 'App\Http\Controllers\WebsiteController@campanhas')->name('website.campanhas');
-
+Route::get('/termos-e-condicoes', 'App\Http\Controllers\WebsiteController@tos')->name('website.tos');
+Route::get('/politica-de-privacidade', 'App\Http\Controllers\WebsiteController@politica')->name('website.politica');
 Auth::routes();
 
 Route::group(['prefix' => 'admin'], function () {
@@ -40,7 +41,7 @@ Route::group(['prefix' => 'admin'], function () {
 		Route::get('/alterar/{id}', ['as' => 'campanha.edit', 'uses' => 'App\Http\Controllers\CampanhaController@edit']);
 		Route::put('/update/{id}', ['as' => 'campanha.update', 'uses' => 'App\Http\Controllers\CampanhaController@update']);
 	});
-	
+
 });
 
 

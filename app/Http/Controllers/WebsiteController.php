@@ -35,4 +35,15 @@ class WebsiteController extends Controller
     {
         return view('website.campanhas');
     }
+
+    public function tos()
+    {
+        return view('website.tos');
+    }
+
+
+    public function politica(){
+
+        return view('website.politica');
+    }
 }

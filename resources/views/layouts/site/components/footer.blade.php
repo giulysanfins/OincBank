@@ -47,7 +47,7 @@
                 <p class="footer-copyright">© 2020 OincBank</p>
             </div>
             <div class="col-md-6">
-                <div class="footer-privacy"><a class="footer-privacy__link" href="#">Privacy Policy</a><span class="footer-privacy__divider">|</span><a class="footer-privacy__link" href="#">Term and Condision</a></div>
+                <div class="footer-privacy"><a class="footer-privacy__link" href="/politica-de-privacidade">Política de Privacidade</a><span class="footer-privacy__divider">|</span><a class="footer-privacy__link" href="/termos-e-condicoes">Termos e Condições</a></div>
             </div>
         </div>
     </div>
