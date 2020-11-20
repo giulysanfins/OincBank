@@ -1,71 +1,97 @@
 <?php
 
-
-
 namespace App\Http\Controllers;
 
-
-
-use Illuminate\Http\Request;
-
-
+use App\Http\Requests\ProfileRequest;
+use App\Http\Requests\PasswordRequest;
+use Illuminate\Support\Facades\Hash;
+use App\Yahp\Services\PhotoService;
+use Storage;
+use Carbon\Carbon;
 
 class ImageUploadController extends Controller
-
 {
 
     /**
-
-     * Display a listing of the resource.
-
+     * Create a new controller instance.
      *
-
-     * @return \Illuminate\Http\Response
-
+     * @return void
      */
-
-    public function imageUpload()
-
+    public function __construct(ImageUploadController $photoService)
     {
-
-        return view('imageUpload');
-
+        $this->photoService = $photoService;
     }
-
-
 
     /**
-
-     * Display a listing of the resource.
-
+     * Show the form for editing the profile.
      *
-
-     * @return \Illuminate\Http\Response
-
+     * @return \Illuminate\View\View
      */
-
-    public function imageUploadPost(Request $request)
-
+    public function edit()
     {
-
-        $request->validate([
-
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-
-        ]);
-
-        $imageName = time().'.'.$request->image->extension();
-
-        $request->image->move(public_path('images'), $imageName);
-
-        return back()
-
-            ->with('success','You have successfully upload image.')
-
-            ->with('image',$imageName);
+        $data = [
+            'photo' => $this->photoService->renderPhotoUser('users',auth()->user()->id)
+        ];
+        return view('profile.edit',$data);
+    }
 
 
+     /**
+      * Store a newly created resource in storage.
+      *
+      * @param  \Illuminate\Http\Request  $request
+      * @return \Illuminate\Http\Response
+      */
+    public function store(ProfileRequest $request)
+    {
+        try {
+            $user_id = auth()->user()->id;
+
+            if($request->file('photo_perfil'))
+            {
+                $ext = $request->file('photo_perfil')->extension();
+                $ts = Carbon::now()->timestamp;
+                $filename = $ts."_".$user_id.".".$ext;
+                $upload = Storage::putFileAs('public/images',$request->file('photo_perfil'),$filename);
+                $insert = $this->photoService->buildInsert([
+                    'area' => 'users',
+                    'area_id' => $user_id,
+                    'path' => $filename,
+                    'principal' => 1,
+                ]);
+            }
+
+            auth()->user()->update($request->all());
+            alert()->success('Sucesso','Perfil atualizado com sucesso.');
+            return redirect()->route('profile.edit');
+        }
+        catch(\Exeception $e){
+            \Log::error($e->getFile() . "\n" . $e->getLine() . "\n" . $e->getMessage());
+            alert()->error('Erro','Erro em atualizar o perfil.')->persistent('Fechar');
+            return redirect()->route('profile.edit')->withInput();
+        }
+    }
+    /**
+     * Update the profile
+     *
+     * @param  \App\Http\Requests\ProfileRequest  $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function update(ProfileRequest $request)
+    {
 
     }
 
+    /**
+     * Change the password
+     *
+     * @param  \App\Http\Requests\PasswordRequest  $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function password(PasswordRequest $request)
+    {
+        auth()->user()->update(['password' => Hash::make($request->get('password'))]);
+
+        return back()->withPasswordStatus(__('Password successfully updated.'));
+    }
 }

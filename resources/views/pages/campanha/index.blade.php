@@ -1,13 +1,12 @@
-@extends('layouts.app', [
-    'class' => '',
-    'elementActive' => 'campanha'
-])
+@extends('layouts/app', ['activePage' => '',
+'activeButton' => '',
+'title' => 'Criação de Campanhas'])
 
 @section('content')
     <div class="content">
         <div class="row">
             <div class="col-12 text-right">
-                <a href="{{route('clientes.create')}}" class="btn btn-primary btn-sm">Adicionar campanha</a>
+                <a href="{{route('campanha.store')}}" class="btn btn-primary btn-sm">Adicionar campanha</a>
             </div>
 
             <div class="col-12">
@@ -25,7 +24,7 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($clientes as $cliente)
+                                        {{-- @foreach ($clientes as $cliente)
                                             <tr>
                                                 <th scope="row">{{$cliente->id}}</th>
                                                 <td>{{$cliente->empresa}}</td>
@@ -36,7 +35,7 @@
                                                     </div>
                                                 </td>
                                             </tr>
-                                        @endforeach
+                                        @endforeach --}}
                                     </tbody>
                                 </table>
                             </div>
