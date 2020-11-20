@@ -2,9 +2,9 @@
 
 namespace App\Yahp\Repositories;
 
-use App\Yahp\Models\Alerta;
+use App\Yahp\Models\Campanha;
 
-class CampanhaRepository 
+class CampanhaRepository
 {
 
      /**
@@ -14,11 +14,11 @@ class CampanhaRepository
 
     /**
      * Contato Repository constructor.
-     * @param Alerta $alerta
+     * @param Campanha $campanha
      */
-    public function __construct(Alerta $alerta)
+    public function __construct(Campanha $campanha)
     {
-        $this->model = $alerta;
+        $this->model = $campanha;
     }
 
     /**
@@ -36,6 +36,13 @@ class CampanhaRepository
     public function getById($id)
     {
         return $this->model->find($id);
+    }
+
+    public function getImageAttribute()
+    {
+
+        return $this->url;
+
     }
 
     /**

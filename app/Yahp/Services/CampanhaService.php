@@ -2,24 +2,24 @@
 
 namespace App\Yahp\Services;
 
-use App\Yahp\Repositories\AlertaRepository;
+use App\Yahp\Repositories\CampanhaRepository;
 use App\Yahp\Contracts\ServiceContract;
 
 class CampanhaService implements ServiceContract
 {
      /**
-     * @var AlertaRepository
+     * @var CampanhaRepository
      */
     private $repository;
-    
-    
+
+
     /**
      * ClienteService constructor.
-     * @param AlertaRepository $clienteRepository
+     * @param CampanhaRepository $campanhaRepository
      */
-    public function __construct(AlertaRepository $alertaRepository)
+    public function __construct(CampanhaRepository $campanhaRepository)
     {
-        $this->repository = $alertaRepository;
+        $this->repository = $campanhaRepository;
     }
 
     /**
