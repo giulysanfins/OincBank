@@ -1,9 +1,4 @@
-<<<<<<< HEAD
-@extends('layouts/app', ['activePage' => 'login',
-'title' => 'Light Bootstrap Dashboard Laravel by Creative Tim & UPDIVISION'])
-=======
 @extends('layouts/app', ['activePage' => 'login', 'title' => 'Oincbank'])
->>>>>>> dev-makoto
 
 @section('content')
     <div class="full-page section-image" data-color="black" data-image="{{ asset('charity.jpg') }}">
@@ -19,15 +14,9 @@
                             <div class="card-body ">
                                 <div class="card-body">
                                     <div class="form-group">
-<<<<<<< HEAD
-                                        <label for="email" class="col-md-6 col-form-label">{{ __('E-Mail Address') }}</label>
-
-                                        <div class="col-md-14">
-=======
                                         <label for="email" class="col-md-6 col-form-label">E-mail</label>
             
                                         <div class="col-12">
->>>>>>> dev-makoto
                                             <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
             
 
@@ -38,16 +27,9 @@
                                             @enderror
                                         </div>
                                         <div class="form-group">
-<<<<<<< HEAD
-                                            <label for="password" class="col-md-6 col-form-label">{{ __('Password') }}</label>
-
-                                            <div class="col-md-14">
-
-=======
                                             <label for="password" class="col-md-6 col-form-label">Senha</label>
                 
                                             <div class="col-12">
->>>>>>> dev-makoto
                                                 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
                 
 
