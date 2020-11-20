@@ -24,7 +24,7 @@
                                         
                                 <div class="pl-lg-4 row">
 
-                                    <div class="col-12">
+                                    <div class="col-12" style="padding: 6px;">
                                         <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
                                             <label class="form-control-label" for="input-name">
                                                 <i class="w3-xxlarge fas fa-user"></i> Nome
@@ -44,7 +44,7 @@
                                         <div class="form-group{{ $errors->has('email') ? ' has-danger' : '' }}">
                                             <label class="form-control-label" for="input-photo_perfil"><i class="w3-xxlarge fas fa-portrait"></i> Foto Perfil</label>
                                             <br />
-                                            <label for="files" class="btn btn-info">Selecionar Imagem</label>
+                                            <label for="files" class="btn btn-default">Selecionar Imagem</label>
                                             <input id="files" style="display: none;" type="file" name="photo_perfil">
                                         </div>
                                     </div>
@@ -68,7 +68,7 @@
         
                                 <h6 class="heading-small text-muted mb-4">Senha</h6>
         
-                                <div class="pl-lg-4">
+                                <div class="pl-lg-3">
                                     <div class="form-group{{ $errors->has('old_password') ? ' has-danger' : '' }}">
                                         <label class="form-control-label" for="input-current-password">
                                             <i class="w3-xxlarge fa fa-eye-slash"></i> Senha atual

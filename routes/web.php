@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', 'App\Http\Controllers\WebsiteController@index')->name('website.index');
+Route::get('/campanhas', 'App\Http\Controllers\WebsiteController@campanhas')->name('website.campanhas');
 
 Auth::routes();
 
