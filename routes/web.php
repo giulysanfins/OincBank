@@ -14,10 +14,15 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', 'App\Http\Controllers\WebsiteController@index')->name('website.index');
-Route::get('/campanhas', 'App\Http\Controllers\WebsiteController@campanhas')->name('website.campanhas');
-Route::get('/campanhas/detalhes/{id}', 'App\Http\Controllers\WebsiteController@detalhes')->name('website.detalhes');
 Route::get('/termos-e-condicoes', 'App\Http\Controllers\WebsiteController@tos')->name('website.tos');
 Route::get('/politica-de-privacidade', 'App\Http\Controllers\WebsiteController@politica')->name('website.politica');
+
+Route::group(['prefix' => 'campanhas'], function () {
+	Route::get('/', 'App\Http\Controllers\WebsiteController@campanhas')->name('website.campanhas');
+	Route::get('/detalhes/{id}', 'App\Http\Controllers\WebsiteController@detalhes')->name('website.campanhas.detalhes');
+});
+
+
 
 Auth::routes();
 
@@ -36,7 +41,7 @@ Route::group(['prefix' => 'admin'], function () {
 		Route::get('/criar', ['as' => 'users.create', 'uses' => 'App\Http\Controllers\UsersController@create']);
 	});
 
-	Route::group(['prefix' => 'campanha','middleware' => 'auth'], function () {
+	Route::group(['prefix' => 'campanhas','middleware' => 'auth'], function () {
 		Route::get('/', ['as' => 'campanha.index', 'uses' => 'App\Http\Controllers\CampanhaController@index']);
 		Route::get('/criar', ['as' => 'campanha.create', 'uses' => 'App\Http\Controllers\CampanhaController@create']);
 		Route::post('/criar', ['as' => 'campanha.store', 'uses' => 'App\Http\Controllers\CampanhaController@store']);
