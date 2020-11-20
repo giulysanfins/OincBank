@@ -61,7 +61,7 @@ class ProfileController extends Controller
             }
 
             auth()->user()->update($request->all());
-            alert()->success('Sucesso','Perfil atualizado com sucesso.');
+            alert()->success('Sucesso','Perfil atualizado com sucesso.')->persistent('Fechar');
             return redirect()->route('profile.edit');
         }
         catch(\Exeception $e){
@@ -79,8 +79,17 @@ class ProfileController extends Controller
      */
     public function password(PasswordRequest $request)
     {
-        auth()->user()->update(['password' => Hash::make($request->get('password'))]);
+        try {
 
-        return back()->withPasswordStatus(__('Password successfully updated.'));
+            auth()->user()->update(['password' => Hash::make($request->get('password'))]);
+            alert()->success('Sucesso','Senha alterada com sucesso.');
+            return redirect()->route('profile.edit');
+
+        }
+        catch(\Exeception $e){
+            \Log::error($e->getFile() . "\n" . $e->getLine() . "\n" . $e->getMessage());
+            alert()->error('Erro','Erro em atualizar o perfil.')->persistent('Fechar');
+            return redirect()->route('profile.edit')->withInput();
+        }
     }
 }

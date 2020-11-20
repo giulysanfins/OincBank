@@ -25,4 +25,14 @@ class WebsiteController extends Controller
     {
         return view('website.index');
     }
+
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function campanhas()
+    {
+        return view('website.campanhas');
+    }
 }

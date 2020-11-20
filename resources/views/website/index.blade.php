@@ -434,22 +434,5 @@
             </div>
         </div>
     </section>
-    <!-- projects end-->
-    <!-- events end-->
-
-
-    <!-- testimonials style-2 end-->
-    <!-- blog start-->
-
-    <!-- blog end-->
-    <!-- donors start-->
-
-    <!-- donors end-->
-
-    <!-- instagram end-->
-    <!-- subscribe start-->
-
-    <!-- subscribe end-->
 </main>
 @endsection
-
