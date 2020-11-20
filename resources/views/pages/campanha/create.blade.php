@@ -23,7 +23,7 @@
                                     <div class="form-group col-lg-10">
                                         <label for="categoria">Categoria*</label>
                                         <br>
-                                        <select class="custom-select" id="categoria" name="categoria" >
+                                        <select class="custom-select" id="categoria_id" name="categoria_id" >
                                             <option selected>Selecione</option>
                                             <option value="1">Animais</option>
                                             <option value="2">Casamento / Lua-de-Mel / Chá de Panela</option>
@@ -59,13 +59,14 @@
                                     <label class="form-control-label" for="input-photo_perfil"><i class="w3-xxlarge fas fa-portrait"></i> Foto Campanha</label>
                                     <br />
                                     <label for="photo_perfil" class="btn btn-info">Selecionar Imagem</label>
-                                    <input id="photo_perfil" style="display: none;" type="file" name="photo_perfil">
+                                    <input id="photo_perfil" style="display: none;" type="file" name="photo_perfil" required>
                                 </div>
 
                                     <div class="col-12">
                                         <div class="form-group{{ $errors->has('descricao') ? ' has-danger' : '' }}">
                                             <label class="form-control-label" for="input-description"><i class="w3-xxlarge far fa-edit"></i> Descrição</label>
                                             <textarea rows="6" name="descricao" class="form-control form-control-textarea" >{{ auth()->user()->description }}</textarea>
+                                            <label><small>(Máximo de 3000 caracteres)</small></label>
                                         </div>
                                     </div>
                                     <div class="col-md-12" >

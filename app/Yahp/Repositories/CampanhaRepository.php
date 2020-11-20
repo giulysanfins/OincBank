@@ -38,11 +38,13 @@ class CampanhaRepository
         return $this->model->find($id);
     }
 
-    public function getImageAttribute()
+    /**
+     * @param $id
+     * @return mixed
+     */
+    public function getByStatus($status)
     {
-
-        return $this->url;
-
+        return $this->model->where('status',$status)->get();
     }
 
     /**
