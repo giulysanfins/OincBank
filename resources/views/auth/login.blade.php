@@ -15,10 +15,10 @@
                                 <div class="card-body">
                                     <div class="form-group">
                                         <label for="email" class="col-md-6 col-form-label">E-mail</label>
-            
+
                                         <div class="col-12">
                                             <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
-            
+
 
                                             @error('email')
                                                 <span class="invalid-feedback" role="alert">
@@ -28,10 +28,10 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="password" class="col-md-6 col-form-label">Senha</label>
-                
+
                                             <div class="col-12">
                                                 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
-                
+
 
                                                 @error('password')
                                                     <span class="invalid-feedback" role="alert">
@@ -40,15 +40,6 @@
                                                 @enderror
                                             </div>
                                         </div>
-                                        {{-- <div class="form-group">
-                                            <div class="form-check">
-                                                <label class="form-check-label d-flex align-items-center">
-                                                    <input class="form-check-input" type="checkbox" name="remember"  id="remember">
-                                                    <span class="form-check-sign"></span>
-                                                    {{ __('Remember me') }}
-                                                </label>
-                                            </div>
-                                        </div> --}}
                                     </div>
                                 </div>
                                 <div class="card-footer ml-auto mr-auto pt-0">
@@ -67,6 +58,7 @@
                                 </div>
                             </div>
                         </div>
+                        {{-- acaba aqui --}}
                     </form>
                 </div>
             </div>

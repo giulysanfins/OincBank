@@ -55,4 +55,15 @@ class WebsiteController extends Controller
         
         return view('website.detalhe-campanhas',$data);
     }
+
+    public function tos()
+    {
+        return view('website.tos');
+    }
+
+
+    public function politica(){
+
+        return view('website.politica');
+    }
 }

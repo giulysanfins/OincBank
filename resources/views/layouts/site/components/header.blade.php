@@ -24,7 +24,7 @@
 
                             <!-- sub menu end-->
                         </li>
-                        <li class="main-menu__item main-menu__item--has-child"><a class="main-menu__link" href="javascript:void(0);"><span>Login</span></a>
+                        <li class="main-menu__item main-menu__item--has-child"><a class="main-menu__link" href="/login"><span>Login</span></a>
                             <!-- sub menu start-->
 
                             <!-- sub menu end-->
