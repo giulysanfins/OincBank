@@ -73,6 +73,7 @@ class CampanhaController extends Controller
 
                 $data = $this->campanhaService->buildInsert($request->merge([
                     'profile_image' => $filename,
+                    'user_id' => auth()->user()->id,
                     'status' => 1
                 ])->all());
                 alert()->success('Sucesso','Campanha adicionada com sucesso.')->persistent('Fechar');
