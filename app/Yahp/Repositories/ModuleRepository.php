@@ -26,7 +26,7 @@ class ModuleRepository
      */
     public function getAll()
     {
-        return $this->model->get();
+        return $this->model->orderBy('order','ASC')->get();
     }
 
     /**

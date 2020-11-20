@@ -52,5 +52,17 @@ class ModulesSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now(),
         ]);
+
+        DB::table('modules')->insert([
+            'name' => 'Campanhas',
+            'route' => 'campanha.index',
+            'icon' => 'far  fa-file-alt fa-2x',
+            'slug' => 'campanha',
+            'type' => 1,
+            'menu_master' => NULL,
+            'order' => 2,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
     }
 }

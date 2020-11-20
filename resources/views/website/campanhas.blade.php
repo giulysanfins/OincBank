@@ -7,13 +7,14 @@
         <picture>
         <source srcset="{{asset('helpo-theme')}}/img/causes.jpg" media="(min-width: 992px)"><img class="img--bg" src="{{asset('helpo-theme')}}/img/causes.jpg" alt="img">
         </picture>
-        <div class="promo-primary__description"> <span>Charity</span></div>
+        <div class="promo-primary__description"> <span>Campanhas</span></div>
         <div class="container">
             <div class="row">
                 <div class="col-auto">
                     <div class="align-container">
-                        <div class="align-container__item"><span class="promo-primary__pre-title">Helpo</span>
-                            <h1 class="promo-primary__title"><span>Our</span> <span>Causes</span></h1>
+                        <div class="align-container__item">
+                            <span class="promo-primary__pre-title"></span>
+                            <h1 class="promo-primary__title"><span>Campanhas</span> <span></span></h1>
                         </div>
                     </div>
                 </div>
@@ -24,32 +25,48 @@
     <section class="section causes-inner">
         <div class="container">
             <div class="row offset-margin">
-                
-                <div class="col-md-6 col-lg-4">
-                    <div class="causes-item causes-item--primary">
-                        <div class="causes-item__body">
-                            <div class="causes-item__top">
-                                <h6 class="causes-item__title"> <a href="cause-details.html">Water Delivery in Africa</a></h6>
-                                <p>Sharksucker sea toad candiru rocket danio tilefish stingray deepwater stingray Sacramento splittail</p>
-                            </div>
-                            <div class="causes-item__img">
-                            <div class="causes-item__badge" style="background-color: #49C2DF">Water Delivery</div><img class="img--bg" src="{{asset('helpo-theme')}}/img/causes_1.jpg" alt="img">
-                            </div>
-                            <div class="causes-item__lower">
-                                <div class="progress-bar">
-                                    <div class="progress-bar__inner" style="width: 78%;">
-                                        <div class="progress-bar__value">78%</div>
+                @foreach ($campanhas as $campanha)
+
+                    <div class="col-6 col-lg-4">
+                        <div class="causes-item causes-item--primary">
+                            <div class="causes-item__body">
+                                <div class="causes-item__top">
+                                    <h6 class="causes-item__title"> <a href="{{route('website.detalhes',$campanha->id)}}">{{$campanha->titulo}}</a></h6>
+                                    <p>
+                                        @if (strlen($campanha->descricao) > 65)
+                                            @php
+                                                $string = Str::substr($campanha->descricao, 0, 65)
+                                            @endphp
+                                            {{$string."..."}}
+                                        @else
+                                            {{$campanha->descricao}}
+                                        @endif                                    
+                                    </p>
+                                </div>
+                                <div class="causes-item__img">
+                                    <div class="causes-item__badge" style="background-color: #49C2DF">{{$campanha->categoria_id}}</div>
+                                    <a href="{{route('website.detalhes',$campanha->id)}}">
+                                        <img class="img--bg" src="{{asset('storage')}}/images/{{$campanha->profile_image}}" alt="foto_{{$campanha->titulo}}">
+                                    </a>
+                                    </div>
+                                <div class="causes-item__lower">
+                                    <div class="progress-bar">
+                                        <div class="progress-bar__inner" style="width: 78%;">
+                                            <div class="progress-bar__value">78%</div>
+                                        </div>
+                                    </div>
+                                    <div class="causes-item__details-holder">
+                                        <div class="causes-item__details-item">
+                                            <span>Meta: </span><br /><span>R$ {{$campanha->valor}}</span>
+                                        </div>
+                                        <div class="causes-item__details-item text-right"><span>Conquistado: </span><br /><span>R$ 1110,00</span></div>
                                     </div>
                                 </div>
-                                <div class="causes-item__details-holder">
-                                    <div class="causes-item__details-item"><span>Goal: </span><span>25 000$</span></div>
-                                    <div class="causes-item__details-item text-right"><span>Pledged: </span><span>20 350$</span></div>
-                                </div>
-                            </div>
-                        </div><a class="button causes-item__button button--primary" href="#">+ Donate</a>
+                                </div><a class="button causes-item__button button--primary" href="{{route('website.detalhes',$campanha->id)}}">+ Doar</a>
+                        </div>
                     </div>
-                </div>
 
+                @endforeach
             </div>
         </div>
         <div class="container">
@@ -57,7 +74,7 @@
                 <div class="col-12">
                     <!-- pagination start-->
                     <ul class="pagination">
-                        <li class="pagination__item pagination__item--prev"><i class="fa fa-angle-left" aria-hidden="true"></i><span>Back</span>
+                        <li class="pagination__item pagination__item--prev"><i class="fa fa-angle-left" aria-hidden="true"></i><span> Anterior</span>
                         </li>
                         <li class="pagination__item"><span>1</span></li>
                         <li class="pagination__item pagination__item--active"><span>2</span></li>
@@ -66,7 +83,7 @@
                         <li class="pagination__item"><span>5</span></li>
                         <li class="pagination__item pagination__item--disabled">...</li>
                         <li class="pagination__item"><span>12</span></li>
-                        <li class="pagination__item pagination__item--next"><span>Next</span><i class="fa fa-angle-right" aria-hidden="true"></i>
+                        <li class="pagination__item pagination__item--next"><span>Próxima </span><i class="fa fa-angle-right" aria-hidden="true"></i>
                         </li>
                     </ul>
                     <!-- pagination end-->
