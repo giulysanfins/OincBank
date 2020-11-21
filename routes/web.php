@@ -22,8 +22,6 @@ Route::group(['prefix' => 'campanhas'], function () {
 	Route::get('/detalhes/{id}', 'App\Http\Controllers\WebsiteController@detalhes')->name('website.campanhas.detalhes');
 });
 
-
-
 Auth::routes();
 
 Route::group(['prefix' => 'admin'], function () {
@@ -49,13 +47,12 @@ Route::group(['prefix' => 'admin'], function () {
 		Route::put('/update/{id}', ['as' => 'campanha.update', 'uses' => 'App\Http\Controllers\CampanhaController@update']);
 	});
 
+	Route::group(['prefix' => 'categorias'], function () {
+		Route::get('/', ['as' => 'categorias.index', 'uses' => 'App\Http\Controllers\CategoryController@index']);
+		Route::post('/create', ['as' => 'categorias.store', 'uses' => 'App\Http\Controllers\CategoryController@store']);
+		Route::put('/update/{id}', ['as' => 'categorias.update', 'uses' => 'App\Http\Controllers\CategoryController@update']);
+		Route::put('/deactive/{id}', ['as' => 'categorias.deactive', 'uses' => 'App\Http\Controllers\CategoryController@deactive']);
+		Route::put('/active/{id}', ['as' => 'categorias.active', 'uses' => 'App\Http\Controllers\CategoryController@active']);
+	});
+
 });
-
-
-
-//  Route::group(['middleware' => 'auth'], function () {
-//  	Route::get('{page}', ['as' => 'page.index', 'uses' => 'App\Http\Controllers\PageController@index']);
-//  });
-
-
-
