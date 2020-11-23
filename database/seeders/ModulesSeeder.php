@@ -54,6 +54,18 @@ class ModulesSeeder extends Seeder
         ]);
 
         DB::table('modules')->insert([
+            'name' => 'Categorias',
+            'route' => 'categorias.index',
+            'icon' => 'fas fa-tags fa-2x',
+            'slug' => 'categorias',
+            'type' => 3,
+            'menu_master' => 2,
+            'order' => 2,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        DB::table('modules')->insert([
             'name' => 'Campanhas',
             'route' => 'campanha.index',
             'icon' => 'far  fa-file-alt fa-2x',

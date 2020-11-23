@@ -9,7 +9,8 @@
             <div class="promo-slider__item promo-slider__item--style-1">
                 <picture>
                     <source srcset="{{asset('helpo-theme')}}/img/promo_1.jpg" media="(min-width: 835px)"/>
-                    <source srcset="{{asset('helpo-theme')}}/img/834promo_1.jpg" media="(min-width: 376px)"/><img class="img--bg" src="{{asset('helpo-theme')}}/img/375promo_1.jpg" alt="img"/>
+                    <source srcset="{{asset('helpo-theme')}}/img/promo_1.jpg" media="(min-width: 376px)"/>
+                    <img class="img--bg" src="{{asset('helpo-theme')}}/img/promo_1.jpg" alt="img"/>
                 </picture>
                 <div class="container">
                     <div class="row">
@@ -32,7 +33,8 @@
             <div class="promo-slider__item promo-slider__item--style-2">
                 <picture>
                     <source srcset="{{asset('helpo-theme')}}/img/promo_2.jpg" media="(min-width: 835px)"/>
-                    <source srcset="{{asset('helpo-theme')}}/img/834promo_2.jpg" media="(min-width: 376px)"/><img class="img--bg" src="{{asset('helpo-theme')}}/img/375promo_2.jpg" alt="img"/>
+                    <source srcset="{{asset('helpo-theme')}}/img/promo_2.jpg" media="(min-width: 376px)"/>
+                    <img class="img--bg" src="{{asset('helpo-theme')}}/img/promo_2.jpg" alt="img"/>
                 </picture>
                 <div class="container">
                     <div class="row">
@@ -55,7 +57,8 @@
             <div class="promo-slider__item promo-slider__item--style-3">
                 <picture>
                     <source srcset="{{asset('helpo-theme')}}/img/promo_3.jpg" media="(min-width: 835px)"/>
-                    <source srcset="{{asset('helpo-theme')}}/img/834promo_3.jpg" media="(min-width: 376px)"/><img class="img--bg" src="{{asset('helpo-theme')}}/img/375promo_3.jpg" alt="img"/>
+                    <source srcset="{{asset('helpo-theme')}}/img/promo_3.jpg" media="(min-width: 376px)"/>
+                    <img class="img--bg" src="{{asset('helpo-theme')}}/img/promo_3.jpg" alt="img"/>
                 </picture>
                 <div class="container">
                     <div class="row">
