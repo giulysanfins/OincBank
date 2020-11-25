@@ -29,7 +29,7 @@ class UsersController extends Controller
             'clientes' => $this->userService->renderList(),
         ];
 
-        return view('users.index',$data);
+        return view('admin.config.users.index',$data);
     }
 
     /**
@@ -44,6 +44,6 @@ class UsersController extends Controller
             
         ];
 
-        return view('users.create',$data);
+        return view('admin.config.users.create',$data);
     }
 }

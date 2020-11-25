@@ -27,7 +27,7 @@
             <div class="row offset-margin">
                 @foreach ($campanhas as $campanha)
 
-                    <div class="col-6 col-lg-4">
+                    <div class="col-12 col-md-6 col-lg-4">
                         <div class="causes-item causes-item--primary">
                             <div class="causes-item__body">
                                 <div class="causes-item__top">

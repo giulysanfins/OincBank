@@ -4092,7 +4092,7 @@ Copyright (c) 2015 Daniel Eden
         background-color: rgba(255, 255, 255, 0.23);
     }
     .nav-mobile-menu .nav-item .nav-link span {
-        display: inline-block !important;
+        display: inline-block;
     }
     .nav-mobile-menu .nav-item .nav-link .no-icon {
         padding-left: 50px;
