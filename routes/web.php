@@ -24,22 +24,25 @@ Route::group(['prefix' => 'campanhas'], function () {
 
 Auth::routes();
 
-Route::group(['prefix' => 'admin'], function () {
+Route::group(['prefix' => 'admin','middleware' => ['CheckPermission','auth']], function () {
 	Route::get('/home', 'App\Http\Controllers\HomeController@dashboard')->name('dashboard');
 
-	Route::group(['middleware' => 'auth'], function () {
-		// Route::resource('user', 'App\Http\Controllers\UserController', ['except' => ['show']]);
+	Route::group(['middleware' => ['auth','CheckPermission']], function () {
 		Route::get('profile', ['as' => 'profile.edit', 'uses' => 'App\Http\Controllers\ProfileController@edit']);
 		Route::patch('profile', ['as' => 'profile.update', 'uses' => 'App\Http\Controllers\ProfileController@update']);
 		Route::patch('profile/password', ['as' => 'profile.password', 'uses' => 'App\Http\Controllers\ProfileController@password']);
 	});
 
-	Route::group(['middleware' => 'auth','prefix' => 'usuarios'], function () {
+	Route::group(['middlware' => ['auth','CheckPermission']], function () {
+		Route::resource('usuario', 'App\Http\Controllers\UsersController', ['except' => ['show']]);
+	});
+
+	Route::group(['middleware' => ['auth','CheckPermission'],'prefix' => 'usuarios'], function () {
 		Route::get('/', ['as' => 'users.index', 'uses' => 'App\Http\Controllers\UsersController@index']);
 		Route::get('/criar', ['as' => 'users.create', 'uses' => 'App\Http\Controllers\UsersController@create']);
 	});
 
-	Route::group(['prefix' => 'campanhas','middleware' => 'auth'], function () {
+	Route::group(['prefix' => 'campanhas','middleware' => ['auth','CheckPermission']], function () {
 		Route::get('/', ['as' => 'campanha.index', 'uses' => 'App\Http\Controllers\CampanhaController@index']);
 		Route::get('/criar', ['as' => 'campanha.create', 'uses' => 'App\Http\Controllers\CampanhaController@create']);
 		Route::post('/criar', ['as' => 'campanha.store', 'uses' => 'App\Http\Controllers\CampanhaController@store']);
@@ -50,7 +53,7 @@ Route::group(['prefix' => 'admin'], function () {
 
 	});
 
-	Route::group(['prefix' => 'categorias'], function () {
+	Route::group(['prefix' => 'categorias', 'middleware' => ['auth','CheckPermission']], function () {
 		Route::get('/', ['as' => 'categorias.index', 'uses' => 'App\Http\Controllers\CategoryController@index']);
 		Route::post('/create', ['as' => 'categorias.store', 'uses' => 'App\Http\Controllers\CategoryController@store']);
 		Route::put('/update/{id}', ['as' => 'categorias.update', 'uses' => 'App\Http\Controllers\CategoryController@update']);

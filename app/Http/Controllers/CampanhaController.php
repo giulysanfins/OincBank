@@ -32,12 +32,20 @@ class CampanhaController extends Controller
       */
      public function index()
      {
-         $data = [
-             'campanhas' => $this->campanhaService->renderList(),
-             'pageTitle' => 'Campanha'
-         ];
+         if(auth()->user()->role == 1)
+         {
+            $data = [
+                'campanhas' => $this->campanhaService->renderList(),
+                'pageTitle' => 'Campanha'
+            ];
+         } elseif (auth()->user()->role == 2) {
+            $data = [
+                'campanhas' => $this->campanhaService->renderByUser(auth()->user()->id),
+                'pageTitle' => 'Campanha'
+            ]; 
+        }
 
-         return view('admin.campanha.index',$data);
+        return view('admin.campanha.index',$data);
      }
 
      /**
