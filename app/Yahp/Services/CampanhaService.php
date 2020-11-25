@@ -60,8 +60,7 @@ class CampanhaService implements ServiceContract
      */
     public function buildInsert($data)
     {
-        $account = $this->repository->create($data);
-        return $account;
+        return $this->repository->create($data);
     }
 
     /**
