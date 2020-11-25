@@ -2,24 +2,33 @@
 
 namespace App\Http\Controllers;
 
+
 use App\Yahp\Services\CampanhaService;
 use App\Yahp\Services\PhotoService;
+
 use Illuminate\Http\Request;
+use Storage;
+use Carbon\Carbon;
 
 use App\Http\Requests\ProfileRequest;
 use App\Http\Requests\PasswordRequest;
 use Illuminate\Support\Facades\Hash;
-use Storage;
-use Carbon\Carbon;
+
+
+use App\Yahp\Services\CategoryService;
+
+
 
 class CampanhaController extends Controller
 {
     //
-    public function __construct(CampanhaService $campanhaService,PhotoService $photoService)
+
+    public function __construct(CampanhaService $campanhaService,CategoryService $categoryService)
     {
         $this->middleware('auth');
         $this->campanhaService = $campanhaService;
-        $this->photoService = $photoService;
+        $this->categoryService = $categoryService;
+
     }
 
 
@@ -38,7 +47,7 @@ class CampanhaController extends Controller
              'campanhas_aprovadas' => $this->campanhaService->renderByStatus(2)
          ];
 
-         return view('pages.campanha.index',$data);
+         return view('admin.campanha.index',$data);
      }
 
      public function mostrar($id)
@@ -61,10 +70,11 @@ class CampanhaController extends Controller
      public function create()
      {
          $data = [
-             'pageTitle' => 'Adicionar Campanha'
+             'pageTitle' => 'Adicionar Campanha',
+             'categorias' => $this->categoryService->renderByStatus(1),
          ];
 
-         return view('pages.campanha.create',$data);
+         return view('admin.campanha.create',$data);
      }
 
      /**
@@ -132,7 +142,7 @@ class CampanhaController extends Controller
              'pageTitle' => 'Editar Campanha'
          ];
 
-         return view('pages.campanha.edit',$data);
+         return view('admin.campanha.edit',$data);
      }
 
      /**
@@ -153,11 +163,9 @@ class CampanhaController extends Controller
              return redirect()->route('campanha.index',$id);
 
          } catch (\Exception $e) {
-
              \Log::error($e->getFile() . "\n" . $e->getLine() . "\n" . $e->getMessage());
              alert()->error('Erro','Erro em alterar a Campanha.')->persistent('Fechar');
              return redirect()->route('campanha.index',$id)->withInput();
-
          }
      }
 

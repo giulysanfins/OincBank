@@ -2,10 +2,10 @@
 
 namespace App\Yahp\Services;
 
-use App\Yahp\Repositories\PhotoRepository;
+use App\Yahp\Repositories\CategoryRepository;
 use App\Yahp\Contracts\ServiceContract;
 
-class PhotoService implements ServiceContract
+class CategoryService implements ServiceContract
 {
      /**
      * @var PhotoRepository
@@ -15,11 +15,11 @@ class PhotoService implements ServiceContract
     
     /**
      * ClienteService constructor.
-     * @param PhotoRepository $photoRepository
+     * @param ategoryRepository $categoryRepository
      */
-    public function __construct(PhotoRepository $photoRepository)
+    public function __construct(CategoryRepository $categoryRepository)
     {
-        $this->repository = $photoRepository;
+        $this->repository = $categoryRepository;
     }
 
     /**
@@ -38,14 +38,15 @@ class PhotoService implements ServiceContract
     {
         return $this->repository->getById($id);
     }
+    
 
     /**
      * @param $id
      * @return mixed
      */
-    public function renderPhotoUser($area,$area_id)
+    public function renderByStatus($status)
     {
-        return $this->repository->getByPhoto($area,$area_id);
+        return $this->repository->getByStatus($status);
     }
     
     /**
