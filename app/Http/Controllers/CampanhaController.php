@@ -131,13 +131,13 @@ class CampanhaController extends Controller
 
              $update = $this->campanhaService->buildUpdate($id,$request->all());
              alert()->success('Sucesso','Campanha alterada com sucesso.')->persistent('Fechar');
-             return redirect()->route('campanha.edit',$id);
+             return redirect()->route('campanha.index',$id);
 
          } catch (\Exception $e) {
 
              \Log::error($e->getFile() . "\n" . $e->getLine() . "\n" . $e->getMessage());
              alert()->error('Erro','Erro em alterar a Campanha.')->persistent('Fechar');
-             return redirect()->route('campanha.edit',$id)->withInput();
+             return redirect()->route('campanha.index',$id)->withInput();
 
          }
      }
@@ -151,5 +151,44 @@ class CampanhaController extends Controller
      public function destroy($id)
      {
          //
+     }
+
+
+     public function desativar(Request $request, $id)
+     {
+         try {
+
+             $update = $this->campanhaService->buildUpdate($id,['status' => 0]);
+
+             alert()->success('Sucesso','Campanha desativada com sucesso.')->persistent('Fechar');
+             return redirect()->route('campanha.index');
+
+         } catch (\Exception $e) {
+
+             \Log::error($e->getFile() . "\n" . $e->getLine() . "\n" . $e->getMessage());
+             alert()->error('Erro','Erro em alterar a Campanha.')->persistent('Fechar');
+             return redirect()->route('campanha.index')->withInput();
+
+
+         }
+     }
+
+     public function ativar(Request $request, $id)
+     {
+         try {
+
+             $update = $this->campanhaService->buildUpdate($id,['status' => 2]);
+
+             alert()->success('Sucesso','Campanha ativada com sucesso.')->persistent('Fechar');
+             return redirect()->route('campanha.index');
+
+         } catch (\Exception $e) {
+
+             \Log::error($e->getFile() . "\n" . $e->getLine() . "\n" . $e->getMessage());
+             alert()->error('Erro','Erro em alterar a Campanha.')->persistent('Fechar');
+             return redirect()->route('campanha.index')->withInput();
+
+
+         }
      }
  }

@@ -46,7 +46,10 @@ Route::group(['prefix' => 'admin'], function () {
 		Route::get('/criar', ['as' => 'campanha.create', 'uses' => 'App\Http\Controllers\CampanhaController@create']);
 		Route::post('/criar', ['as' => 'campanha.store', 'uses' => 'App\Http\Controllers\CampanhaController@store']);
 		Route::get('/alterar/{id}', ['as' => 'campanha.edit', 'uses' => 'App\Http\Controllers\CampanhaController@edit']);
-		Route::put('/update/{id}', ['as' => 'campanha.update', 'uses' => 'App\Http\Controllers\CampanhaController@update']);
+        Route::put('/update/{id}', ['as' => 'campanha.update', 'uses' => 'App\Http\Controllers\CampanhaController@update']);
+        Route::put('/d/{id}', ['as' => 'campanha.desativar', 'uses' => 'App\Http\Controllers\CampanhaController@desativar']);
+        Route::put('/a/{id}', ['as' => 'campanha.ativar', 'uses' => 'App\Http\Controllers\CampanhaController@ativar']);
+
 	});
 
 });
