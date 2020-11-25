@@ -42,7 +42,8 @@ Route::group(['prefix' => 'admin'], function () {
 	});
 
 	Route::group(['prefix' => 'campanhas','middleware' => 'auth'], function () {
-		Route::get('/', ['as' => 'campanha.index', 'uses' => 'App\Http\Controllers\CampanhaController@index']);
+        Route::get('/', ['as' => 'campanha.index', 'uses' => 'App\Http\Controllers\CampanhaController@index']);
+        Route::get('/m/{id}', ['as' => 'campanha.mostrar', 'uses' => 'App\Http\Controllers\CampanhaController@mostrar']);
 		Route::get('/criar', ['as' => 'campanha.create', 'uses' => 'App\Http\Controllers\CampanhaController@create']);
 		Route::post('/criar', ['as' => 'campanha.store', 'uses' => 'App\Http\Controllers\CampanhaController@store']);
 		Route::get('/alterar/{id}', ['as' => 'campanha.edit', 'uses' => 'App\Http\Controllers\CampanhaController@edit']);
