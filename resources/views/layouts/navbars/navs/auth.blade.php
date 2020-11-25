@@ -8,7 +8,7 @@
         </button>
         <div class="collapse navbar-collapse justify-content-end" id="navigation">
             <ul class="navbar-nav d-flex align-items-center">
-                <li class="dropdown nav-item">
+                {{-- <li class="dropdown nav-item">
                     <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
                         <i class="far fa-bell fa-2x"></i>
                         <span class="notification d-none d-lg-block">5</span>
@@ -21,7 +21,7 @@
                         <a class="dropdown-item" href="#">{{ __('Notification 4') }}</a>
                         <a class="dropdown-item" href="#">{{ __('Another notification') }}</a>
                     </ul>
-                </li>
+                </li> --}}
 
                 <li class="nav-item pr-2">
                     <a class="nav-link" href=" {{route('profile.edit') }} ">

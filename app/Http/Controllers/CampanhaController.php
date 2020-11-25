@@ -39,15 +39,25 @@ class CampanhaController extends Controller
       */
      public function index()
      {
-         $data = [
-             'campanhas' => $this->campanhaService->renderList(),
-             'pageTitle' => 'Campanha',
-             'campanhas_pendentes' => $this->campanhaService->renderByStatus(1),
-             'campanhas_desativadas' => $this->campanhaService->renderByStatus(0),
-             'campanhas_aprovadas' => $this->campanhaService->renderByStatus(2)
-         ];
 
-         return view('admin.campanha.index',$data);
+         if(auth()->user()->role == 1)
+         {
+            $data = [
+                'campanhas' => $this->campanhaService->renderList(),
+                'pageTitle' => 'Campanha',
+                'campanhas_pendentes' => $this->campanhaService->renderByStatus(1),
+                'campanhas_desativadas' => $this->campanhaService->renderByStatus(0),
+                'campanhas_aprovadas' => $this->campanhaService->renderByStatus(2)
+            ];
+   
+         } elseif (auth()->user()->role == 2) {
+            $data = [
+                'campanhas' => $this->campanhaService->renderByUser(auth()->user()->id),
+                'pageTitle' => 'Campanha'
+            ]; 
+        }
+
+        return view('admin.campanha.index',$data);
      }
 
      public function mostrar($id)

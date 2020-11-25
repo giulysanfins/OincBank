@@ -13,7 +13,9 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="col-12 text-right">
-                                    <a href="{{route('campanha.store')}}" class="btn btn-primary">Adicionar campanha</a>
+                                    @if (auth()->user()->role == 2)
+                                        <a href="{{route('campanha.store')}}" class="btn btn-primary">Adicionar campanha</a>
+                                    @endif
                                 </div>
                                 {{-- comeco tabelas ativas --}}
 
