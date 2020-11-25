@@ -1,52 +1,108 @@
-@extends('layouts.app', [
-    'class' => '',
-    'elementActive' => 'campanha'
-])
+@extends('layouts/app', ['activePage' => '',
+'activeButton' => '',
+'title' => 'Criação de Campanhas'])
 
 @section('content')
     <div class="content">
         <div class="row">
             <div class="col-12">
-            <a href="{{route('clientes.index')}}" class="btn btn-secondary btn-sm"> Voltar</a>
-            </div>
-            <div class="col-12">
-                <form method="POST" action="{{route('clientes.update',$cliente->id)}}">
+                <form method="POST" action="{{route('campanha.update',$campanha->id)}}" enctype="multipart/form-data">
                     @csrf
                     @method('put')
                     <div class="card">
-                        <div class="card-header">
-                            <h3>Editar - {{$cliente->apelido}}</h3>
-                        </div>
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-6 col-lg-4">
+                                <div class="col-12">
+                                    <h3 class="">Edite sua campanha</h3>
+                                </div>
+                                <br>
+                                <div class="col-lg-8">
                                     <div class="form-group">
-                                        <label for="empresa">Nome da Empresa</label>
-                                        <input type="text" class="form-control" id="empresa" name="empresa" placeholder="Nome da Empresa" value="{{old('empresa',$cliente->empresa)}}">
+                                        <label for="titulo">Titulo*</label>
+                                        <input type="text" class="form-control" id="titulo" name="titulo" placeholder="Ex: Ajuda para Maria" value="{{old('titulo',$campanha->titulo)}}">
                                     </div>
                                 </div>
-                                <div class="col-6 col-lg-3">
+                                <div class="col-lg-4">
                                     <div class="form-group">
-                                        <label for="apelido">Apelido</label>
-                                        <input type="text" class="form-control" id="apelido" name="apelido" placeholder="Apelido" value="{{old('apelido',$cliente->apelido)}}">
+                                        <label for="categoria">Categoria*</label>
+                                        <br>
+                                        <select class="custom-select" id="categoria_id" name="categoria_id" >
+                                            <option selected >
+                                                 {{old('categoria_id',$campanha->categoria_id)}}
+
+                                                </option>
+                                            <option value="1">Animais</option>
+                                            <option value="2">Casamento / Lua-de-Mel / Chá de Panela</option>
+                                            <option value="3">Educação / Formatura / Cursos</option>
+                                            <option value="4">Evento / Festa / Aniversário</option>
+                                            <option value="5">Nascimento / Bebê</option>
+                                            <option value="6">Projetos / Produtos</option>
+                                            <option value="7">Solidariedade / Pessoas / Saúde / Caridade</option>
+                                            <option value="8">Vaquinha / Outros / Dinheiro</option>
+                                            <option value="9">Viagem / Turismo</option>
+                                        </select>
                                     </div>
                                 </div>
-                                <div class="col-6 col-lg-3">
+                                {{-- valor --}}
+                                <div class="col-md-3">
                                     <div class="form-group">
-                                        <label for="apelido">Intervalo de Medição <small>(em Minutos)</small></label>
-                                        <input type="number" class="form-control" id="intervalo_medicao" name="intervalo_medicao" placeholder="Intervalo de Medição" value="{{old('intervalo_medicao',$cliente->intervalo_medicao)}}">
+                                        <label for="apelido">Valor*<small>(em Real)</small></label>
+                                        <input type="number" class="form-control" id="valor" name="valor" placeholder="EX: 10.000,00"  value="{{old('valor',$campanha->valor)}}">
                                     </div>
                                 </div>
+                                {{-- data encerramento --}}
+                                <div class="col-md-4" >
+                                    <label for="data_encerramento">Que data a campanha deve encerrar?*</label>
+                                    <br>
+                                    <div class="form-group">
+                                        <input type="date" name="data_encerramento" max="3000-12-31"
+                                               min="2020-01-01" class="form-control" data-date-format="DD MM YYYY" value="{{old('data_encerramento',$campanha->data_encerramento)}}">
+                                    </div>
+                                </div>
+
+
+                                <div class="col-12">
+                                    <div class="form-group{{ $errors->has('descricao') ? ' has-danger' : '' }}">
+                                        <label class="form-control-label" for="input-description"><i class="w3-xxlarge far fa-edit"></i> Descrição</label>
+                                        <textarea rows="6" name="descricao" class="form-control form-control-textarea"  >{{old('descricao',$campanha->descricao)}}{{ auth()->user()->description }}</textarea>
+                                        <label><small>(Máximo de 3000 caracteres)</small></label>
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <hr />
+                                    <h4>Mídia</h4>
+                                </div>
+
+                                {{-- img upload --}}
+                                <div class="col-md-2">
+                                    {{-- @include('pages.campanha.imageUpload') --}}
+                                    <label class="form-control-label" for="input-photo_perfil">Foto Campanha</label>
+                                    <br />
+                                    <label for="photo_perfil" class="btn btn-info">Selecionar Imagem</label>
+                                    <input id="photo_perfil" style="display: none;" type="file" name="photo_perfil">
+                                </div>
+
+                                <div class="col-md-10" >
+                                    <label for="data_encerramento">Vídeo*(url)</label>
+                                    <br>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" id="video" name="video" placeholder="Ex: Coloque seu URL" value="{{old('video',$campanha->video)}}" >
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
+
                         <div class="card-footer text-right">
-                            <button type="submit" class="btn btn-success ">Salvar</button>
+                            <button type="submit" class="btn btn-success">Alterar</button>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
     </div>
+
 @endsection
 
 @section('scripts')
