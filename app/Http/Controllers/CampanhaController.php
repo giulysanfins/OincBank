@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+
+use App\Yahp\Services\CampanhaService;
+use App\Yahp\Services\PhotoService;
+
 use Illuminate\Http\Request;
 use Storage;
 use Carbon\Carbon;
@@ -9,19 +13,22 @@ use Carbon\Carbon;
 use App\Http\Requests\ProfileRequest;
 use App\Http\Requests\PasswordRequest;
 use Illuminate\Support\Facades\Hash;
-use App\Yahp\Services\PhotoService;
-use App\Yahp\Services\CampanhaService;
+
+
 use App\Yahp\Services\CategoryService;
+
 
 
 class CampanhaController extends Controller
 {
     //
+
     public function __construct(CampanhaService $campanhaService,CategoryService $categoryService)
     {
         $this->middleware('auth');
         $this->campanhaService = $campanhaService;
         $this->categoryService = $categoryService;
+
     }
 
 
@@ -32,12 +39,17 @@ class CampanhaController extends Controller
       */
      public function index()
      {
+
          if(auth()->user()->role == 1)
          {
             $data = [
                 'campanhas' => $this->campanhaService->renderList(),
-                'pageTitle' => 'Campanha'
+                'pageTitle' => 'Campanha',
+                'campanhas_pendentes' => $this->campanhaService->renderByStatus(1),
+                'campanhas_desativadas' => $this->campanhaService->renderByStatus(0),
+                'campanhas_aprovadas' => $this->campanhaService->renderByStatus(2)
             ];
+   
          } elseif (auth()->user()->role == 2) {
             $data = [
                 'campanhas' => $this->campanhaService->renderByUser(auth()->user()->id),
@@ -46,6 +58,18 @@ class CampanhaController extends Controller
         }
 
         return view('admin.campanha.index',$data);
+     }
+
+     public function mostrar($id)
+     {
+         $data = [
+             'campanhas' => $this->campanhaService->renderEdit($id),
+             'pageTitle' => 'Campanha',
+                         'photo' => $this->photoService->renderPhotoUser('users',auth()->user()->id)
+
+         ];
+
+         return view('pages.campanha.show',$data);
      }
 
      /**
@@ -86,7 +110,8 @@ class CampanhaController extends Controller
                 $data = $this->campanhaService->buildInsert($request->merge([
                     'profile_image' => $filename,
                     'user_id' => auth()->user()->id,
-                    'status' => 1
+                    'status' => 1,
+                    'valor' => str_replace(',','.',str_replace('.','',$request->valor))
                 ])->all());
                 alert()->success('Sucesso','Campanha adicionada com sucesso.')->persistent('Fechar');
             //  }
@@ -141,7 +166,9 @@ class CampanhaController extends Controller
      {
          try {
 
-             $update = $this->campanhaService->buildUpdate($id,$request->all());
+             $update = $this->campanhaService->buildUpdate($id,$request->merge([
+                'valor' => str_replace(',','.',str_replace('.','',$request->valor))
+             ])->all());
              alert()->success('Sucesso','Campanha alterada com sucesso.')->persistent('Fechar');
              return redirect()->route('campanha.index',$id);
 

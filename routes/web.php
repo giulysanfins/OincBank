@@ -50,7 +50,6 @@ Route::group(['prefix' => 'admin','middleware' => ['CheckPermission','auth']], f
         Route::put('/update/{id}', ['as' => 'campanha.update', 'uses' => 'App\Http\Controllers\CampanhaController@update']);
         Route::put('/d/{id}', ['as' => 'campanha.desativar', 'uses' => 'App\Http\Controllers\CampanhaController@desativar']);
         Route::put('/a/{id}', ['as' => 'campanha.ativar', 'uses' => 'App\Http\Controllers\CampanhaController@ativar']);
-
 	});
 
 	Route::group(['prefix' => 'categorias', 'middleware' => ['auth','CheckPermission']], function () {

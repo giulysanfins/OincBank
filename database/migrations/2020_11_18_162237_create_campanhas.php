@@ -17,11 +17,11 @@ class CreateCampanhas extends Migration
             $table->id();
             $table->string('titulo');
             $table->string('categoria');
-            $table->integer('valor');
+            $table->decimal('valor',20,2);
             $table->string('data_encerramento');
             $table->string('profile_image');
             $table->string('video')->nullable();
-            $table->string('descricao');
+            $table->string('descricao',3000);
             $table->integer('status')->comment('0 desativado 1 pendente 2 aprovado 3 rejeitado');
             $table->timestamps();
         });

@@ -3,6 +3,8 @@
 'title' => 'Criação de Campanhas'])
 
 @section('content')
+
+
     <div class="content">
         <div class="row">
             <div class="col-12">
@@ -38,7 +40,7 @@
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="apelido">Valor*<small>(em Real)</small></label>
-                                        <input type="number" class="form-control" id="valor" name="valor" placeholder="EX: 10.000,00" value="{{old('valor')}}">
+                                        <input type="text" class="form-control" id="valor" name="valor" placeholder="EX: 10.000,00" value="{{old('valor')}}">
                                     </div>
                                 </div>
                                 {{-- data encerramento --}}
@@ -88,13 +90,28 @@
                         <div class="card-footer text-right">
                             <button type="submit" class="btn btn-success">Salvar</button>
                         </div>
-                    </form>
-                </div>
+                    </div>
+
+                </form>
+
+
             </div>
+
         </div>
+
     </div>
 
+
+
+    <script>
+        $(document).ready(function(){
+            $('#valor').mask("#.##0,00", {reverse: true});
+            console.log('sddf');
+        });
+    </script>
 @endsection
+
+
 
 @section('scripts')
 
