@@ -29,7 +29,7 @@
                                             <tr>
                                                 <th scope="row">{{$campanha->id}}</th>
                                                 <td>{{$campanha->titulo}}</td>
-                                                <td>{{$campanha->categoria_id}}</td>
+                                                <td>{{$campanha->categoria->name}}</td>
                                                 <td>{{$campanha->created_at->format('d/m/Y h:i:s')}}</td>
                                                 <td>
                                                     <div class="btn-group float-right" role="group" aria-label="Botões de Ação - Campanhas">

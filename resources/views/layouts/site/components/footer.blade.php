@@ -22,17 +22,14 @@
                 </div>
             </div>
             <div class="col-sm-6 col-lg-3">
-                <h4 class="footer__title">Menu & Links</h4>
+                <h4 class="footer__title">Links</h4>
                 <!-- footer nav start-->
                 <nav>
                     <ul class="footer-menu">
-                        <li class="footer-menu__item footer-menu__item--active"><a class="footer-menu__link" href="index.html">Home</a></li>
-                        <li class="footer-menu__item"><a class="footer-menu__link" href="#">Blog</a></li>
-                        <li class="footer-menu__item"><a class="footer-menu__link" href="about.html">About</a></li>
+                        <li class="footer-menu__item footer-menu__item--active"><a class="footer-menu__link" href="{{route('website.index')}}">Home</a></li>
+                        <li class="footer-menu__item"><a class="footer-menu__link" href="#">Sobre</a></li>
+                        <li class="footer-menu__item"><a class="footer-menu__link" href="{{route('website.campanhas')}}">Campanha</a></li>
                         <li class="footer-menu__item"><a class="footer-menu__link" href="#">Contacts</a></li>
-                        <li class="footer-menu__item"><a class="footer-menu__link" href="#">Pages</a></li>
-                        <li class="footer-menu__item"><a class="footer-menu__link" href="#">Elements</a></li>
-                        <li class="footer-menu__item"><a class="footer-menu__link" href="causes.html">Causes</a></li>
                     </ul>
                 </nav>
                 <!-- footer nav end-->
