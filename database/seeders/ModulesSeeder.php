@@ -43,7 +43,7 @@ class ModulesSeeder extends Seeder
 
         DB::table('modules')->insert([
             'name' => 'Usuários',
-            'route' => 'users.index',
+            'route' => 'usuario.index',
             'icon' => 'fas fa-users fa-2x',
             'slug' => 'users',
             'type' => 3,

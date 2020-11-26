@@ -40,7 +40,7 @@
                                             <td>{{$cliente->created_at->format('d/m/Y h:i:s')}}</td>
                                             <td>
                                                 <div class="btn-group" role="group" aria-label="Exemplo básico">
-                                                    <button type="button" class="btn btn-info">Editar</button>
+                                                    <a href="{{route('usuario.edit',$cliente->id)}}" class="btn btn-info">Editar</a>
                                                     <button type="button" class="btn btn-secondary">Campanhas</button>
                                                     <button type="button" class="btn btn-warning">Bloquear</button>
                                                     <button type="button" class="btn btn-danger">Deletar</button>

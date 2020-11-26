@@ -47,7 +47,7 @@
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="apelido">Valor*<small>(em Real)</small></label>
-                                        <input type="number" class="form-control" id="valor" name="valor" placeholder="EX: 10.000,00"  value="{{old('valor',$campanha->valor)}}">
+                                        <input type="text" class="form-control" id="valor" name="valor" placeholder="EX: 100.000,00"   value="{{old('valor',$campanha->valor)}}">
                                     </div>
                                 </div>
                                 {{-- data encerramento --}}
@@ -97,14 +97,21 @@
                         <div class="card-footer text-right">
                             <button type="submit" class="btn btn-success">Alterar</button>
                         </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
+                    </div>
 
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
 @endsection
 
 @section('scripts')
-
+<script>
+    $(document).ready(function(){
+        $('#valor').mask("#.##0,00", {reverse: true});
+    });
+</script>
 @endsection

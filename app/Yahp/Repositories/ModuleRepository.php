@@ -39,6 +39,15 @@ class ModuleRepository
     }
 
     /**
+     * @param $id
+     * @return mixed
+     */
+    public function getByPermission($ids)
+    {
+        return $this->model->whereIn('id',$ids)->orderBy('order','ASC')->get();
+    }
+
+    /**
      * @param $data
      * @return mixed
      */

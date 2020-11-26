@@ -33,9 +33,9 @@ class AlterTableCampanhaAddColumnUserId extends Migration
     {
         Schema::table('campanhas', function (Blueprint $table) {
             $table->dropColumn('categoria_id');
-            $table->string('categoria_id',255)->after('titulo');
+            $table->string('categoria',255)->after('titulo');
         });
-        
+
         Schema::table('campanhas', function (Blueprint $table) {
             $table->dropColumn('user_id');
         });

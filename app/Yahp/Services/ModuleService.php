@@ -41,6 +41,16 @@ class ModuleService implements ServiceContract
 
     /**
      * @param $id
+     * @return mixed
+     */
+    public function renderByPermission($id)
+    {
+        return $this->repository->getByPermission($id);
+    }
+    
+
+    /**
+     * @param $id
      * @param $data
      * @return mixed
      */

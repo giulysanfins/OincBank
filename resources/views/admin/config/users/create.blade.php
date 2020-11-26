@@ -16,6 +16,7 @@
                     </div>
                     <div class="card-body">
                         <div class="row">
+                            
                             <div class="col-12 col-md-4">
                                 <div class="form-group">
                                     <label>Nome</label>
@@ -30,6 +31,18 @@
                                 </div>
                             </div>
 
+                            <div class="col-12 col-md-4">
+                                <div class="form-group">
+                                    <label>Permissão</label>
+                                    <select class="custom-select" id="inputGroupSelect02">
+                                        <option selected disabled>Escolher...</option>
+                                        <option value="1">Administrador</option>
+                                        <option value="2">Usuário</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                        </div>
                     </div>
                 </div>
             </div>
