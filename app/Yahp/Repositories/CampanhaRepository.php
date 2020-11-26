@@ -47,13 +47,22 @@ class CampanhaRepository
         return $this->model->where('status',$status)->get();
     }
 
-        /**
+    /**
      * @param $id
      * @return mixed
      */
     public function getByUser($user_id)
     {
         return $this->model->where('user_id',$user_id)->get();
+    }
+
+    /**
+     * @param $id
+     * @return mixed
+     */
+    public function getByStatusUser($status,$user_id)
+    {
+        return $this->model->where('status',$status)->where('user_id',$user_id)->get();
     }
 
     /**

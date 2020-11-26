@@ -106,16 +106,12 @@
         </div>
 
     </div>
-
-
-    <script>
-        $(document).ready(function(){
-            $('#valor').mask("#.##0,00", {reverse: true});
-            console.log('sddf');
-        });
-    </script>
 @endsection
 
 @section('scripts')
-
+<script>
+    $(document).ready(function(){
+        $('#valor').mask("#.##0,00", {reverse: true});
+    });
+</script>
 @endsection

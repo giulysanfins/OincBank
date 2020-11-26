@@ -53,7 +53,10 @@ class CampanhaController extends Controller
          } elseif (auth()->user()->role == 2) {
             $data = [
                 'campanhas' => $this->campanhaService->renderByUser(auth()->user()->id),
-                'pageTitle' => 'Campanha'
+                'pageTitle' => 'Campanha',
+                'campanhas_pendentes' => $this->campanhaService->renderByStatusUser(1,auth()->user()->id),
+                'campanhas_desativadas' => $this->campanhaService->renderByStatusUser(0,auth()->user()->id),
+                'campanhas_aprovadas' => $this->campanhaService->renderByStatusUser(2,auth()->user()->id)
             ]; 
         }
 
@@ -136,8 +139,13 @@ class CampanhaController extends Controller
       */
      public function show($id)
      {
-         //
-     }
+        $data = [
+            'campanha' => $this->campanhaService->renderEdit($id),
+            'pageTitle' => 'Editar Campanha'
+        ];
+
+        return view('admin.campanha.show',$data);
+    }
 
      /**
       * Show the form for editing the specified resource.

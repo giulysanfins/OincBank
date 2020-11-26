@@ -12,6 +12,7 @@ class Campanha extends Model
     ];
     protected $guarded = ['id', 'created_at', 'update_at'];
     protected $with = ['categoria'];
+    protected $dates = ['data_encerramento'];
 
     // 
     public function categoria()
