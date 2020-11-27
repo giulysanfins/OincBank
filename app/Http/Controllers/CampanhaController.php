@@ -46,8 +46,9 @@ class CampanhaController extends Controller
                 'campanhas' => $this->campanhaService->renderList(),
                 'pageTitle' => 'Campanha',
                 'campanhas_pendentes' => $this->campanhaService->renderByStatus(1),
-                'campanhas_desativadas' => $this->campanhaService->renderByStatus(0),
-                'campanhas_aprovadas' => $this->campanhaService->renderByStatus(2)
+                'campanhas_desativadas' => $this->campanhaService->renderByStatus(4),
+                'campanhas_aprovadas' => $this->campanhaService->renderByStatus(2),
+                'campanhas_expiradas' => $this->campanhaService->renderByStatus(5)
             ];
    
          } elseif (auth()->user()->role == 2) {
@@ -55,8 +56,9 @@ class CampanhaController extends Controller
                 'campanhas' => $this->campanhaService->renderByUser(auth()->user()->id),
                 'pageTitle' => 'Campanha',
                 'campanhas_pendentes' => $this->campanhaService->renderByStatusUser(1,auth()->user()->id),
-                'campanhas_desativadas' => $this->campanhaService->renderByStatusUser(0,auth()->user()->id),
-                'campanhas_aprovadas' => $this->campanhaService->renderByStatusUser(2,auth()->user()->id)
+                'campanhas_desativadas' => $this->campanhaService->renderByStatusUser(4,auth()->user()->id),
+                'campanhas_aprovadas' => $this->campanhaService->renderByStatusUser(2,auth()->user()->id),
+                'campanhas_expiradas' => $this->campanhaService->renderByStatusUser(5,auth()->user()->id)
             ]; 
         }
 
@@ -98,7 +100,6 @@ class CampanhaController extends Controller
       */
      public function store(Request $request)
      {
-
         try
         {
             $user_id = auth()->user()->id;
@@ -195,26 +196,28 @@ class CampanhaController extends Controller
       */
      public function destroy($id)
      {
-         //
+        try {
+            $update = $this->campanhaService->buildUpdate($id,['status' => 0]);
+            alert()->success('Sucesso','Campanha excluido com sucesso.')->persistent('Fechar');
+            return redirect()->route('campanha.index');
+        } catch (\Exception $e) {
+            \Log::error($e->getFile() . "\n" . $e->getLine() . "\n" . $e->getMessage());
+            alert()->error('Erro','Erro em excluir a Campanha.')->persistent('Fechar');
+            return redirect()->route('campanha.index')->withInput();
+        }
      }
 
 
      public function desativar(Request $request, $id)
      {
          try {
-
-             $update = $this->campanhaService->buildUpdate($id,['status' => 0]);
-
+             $update = $this->campanhaService->buildUpdate($id,['status' => 4]);
              alert()->success('Sucesso','Campanha desativada com sucesso.')->persistent('Fechar');
              return redirect()->route('campanha.index');
-
          } catch (\Exception $e) {
-
              \Log::error($e->getFile() . "\n" . $e->getLine() . "\n" . $e->getMessage());
              alert()->error('Erro','Erro em alterar a Campanha.')->persistent('Fechar');
              return redirect()->route('campanha.index')->withInput();
-
-
          }
      }
 
