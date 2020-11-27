@@ -47,9 +47,10 @@ class CampanhaController extends Controller
                 'pageTitle' => 'Campanha',
                 'campanhas_pendentes' => $this->campanhaService->renderByStatus(1),
                 'campanhas_desativadas' => $this->campanhaService->renderByStatus(0),
-                'campanhas_aprovadas' => $this->campanhaService->renderByStatus(2)
+                'campanhas_aprovadas' => $this->campanhaService->renderByStatus(2),
+                'campanhas_rejeitadas' => $this->campanhaService->renderByStatus(3)
             ];
-   
+
          } elseif (auth()->user()->role == 2) {
             $data = [
                 'campanhas' => $this->campanhaService->renderByUser(auth()->user()->id),
@@ -57,7 +58,7 @@ class CampanhaController extends Controller
                 'campanhas_pendentes' => $this->campanhaService->renderByStatusUser(1,auth()->user()->id),
                 'campanhas_desativadas' => $this->campanhaService->renderByStatusUser(0,auth()->user()->id),
                 'campanhas_aprovadas' => $this->campanhaService->renderByStatusUser(2,auth()->user()->id)
-            ]; 
+            ];
         }
 
         return view('admin.campanha.index',$data);
