@@ -19,6 +19,7 @@ class CreateTablePhootos extends Migration
             $table->integer('area_id');
             $table->string('path',30);
             $table->integer('principal')->default(0)->nullable()->comment('0-nao, 1-sim');
+            $table->string('mensagem_rejeitado',100);
             $table->timestamps();
         });
     }

@@ -32,17 +32,20 @@
                                     <tbody>
                                         @foreach ($campanhas_aprovadas as $campanha)
                                             <tr>
+                                                {{-- @dd($campanha) --}}
                                                 <th scope="row">{{$campanha->id}}</th>
                                                 <td>{{$campanha->titulo}}</td>
                                                 <td>{{$campanha->categoria->name}}</td>
                                                 <td>{{$campanha->created_at->format('d/m/Y h:i:s')}}</td>
                                                 <td>
                                                     <div class="btn-group float-right" role="group" aria-label="Botões de Ação - Clientes">
-                                                        <a href="{{route('campanha.edit',$campanha->id)}}" class="btn btn-info">Editar</a>
-                                                        <a href="{{route('campanha.show',$campanha->id)}}" class="btn btn-info">Visualizar</a>
+
+
                                                         <form action="{{ route('campanha.desativar', $campanha->id) }}" method="POST">
                                                             @csrf
                                                             @method('put')
+                                                            <a href="{{route('campanha.edit',$campanha->id)}}" class="btn btn-info">Editar</a>
+                                                            <a href="{{route('campanha.show',$campanha->id)}}" class="btn btn-secondary">Visualizar</a>
                                                             <button type="submit" class="btn btn-danger">Desativar</button>
                                                         </form>
                                                     </div>
@@ -74,11 +77,12 @@
                                                     <td>{{$campanha->created_at->format('d/m/Y h:i:s')}}</td>
                                                     <td>
                                                         <div class="btn-group float-right" role="group" aria-label="Botões de Ação - Clientes">
-                                                            <a href="{{route('campanha.edit',$campanha->id)}}" class="btn btn-info">Editar</a>
-                                                            <a href="{{route('campanha.show',$campanha->id)}}" class="btn btn-info">Visualizar</a>
+
                                                             <form action="{{ route('campanha.desativar', $campanha->id) }}" method="POST">
                                                                 @csrf
                                                                 @method('put')
+                                                                <a href="{{route('campanha.edit',$campanha->id)}}" class="btn btn-info">Editar</a>
+                                                                <a href="{{route('campanha.show',$campanha->id)}}" class="btn btn-secondary">Visualizar</a>
                                                                 <button type="submit" class="btn btn-danger">Desativar</button>
                                                             </form>
                                                         </div>
@@ -111,11 +115,12 @@
                                                     <td>{{$campanha->created_at->format('d/m/Y h:i:s')}}</td>
                                                     <td>
                                                         <div class="btn-group float-right" role="group" aria-label="Botões de Ação - Clientes">
-                                                            <a href="{{route('campanha.edit',$campanha->id)}}" class="btn btn-info">Editar</a>
-                                                            <a href="{{route('campanha.show',$campanha->id)}}" class="btn btn-info">Visualizar</a>
+
                                                             <form action="{{ route('campanha.ativar', $campanha->id) }}" method="POST">
                                                                 @csrf
                                                                 @method('put')
+                                                                <a href="{{route('campanha.edit',$campanha->id)}}" class="btn btn-info">Editar</a>
+                                                                <a href="{{route('campanha.show',$campanha->id)}}" class="btn btn-secondary">Visualizar</a>
                                                                 <button type="submit" class="btn btn-success">Ativar</button>
                                                             </form>
                                                         </div>
@@ -126,6 +131,44 @@
                                     </table>
                                 @endif
                         {{-- fim tabela desativada --}}
+
+                                @if($campanhas_rejeitadas->count() >0)
+                                            {{-- comeco tabela rejeitada --}}
+                                            <h2>Campanhas Rejeitadas</h2>
+                                            <table class="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th scope="col">#</th>
+                                                        <th scope="col">Titulo</th>
+                                                        <th scope="col">Categoria</th>
+                                                        <th scope="col">Data Criacao</th>
+                                                        <th scope="col"></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @foreach ($campanhas_rejeitadas as $campanha)
+                                                        <tr>
+                                                            <th scope="row">{{$campanha->id}}</th>
+                                                            <td>{{$campanha->titulo}}</td>
+                                                            <td>{{$campanha->categoria->name}}</td>
+                                                            <td>{{$campanha->created_at->format('d/m/Y h:i:s')}}</td>
+                                                            <td>
+                                                                <div class="btn-group float-right" role="group" aria-label="Botões de Ação - Clientes">
+
+                                                                    <form action="{{ route('campanha.ativar', $campanha->id) }}" method="POST">
+                                                                        @csrf
+                                                                        @method('put')
+                                                                        <a href="{{route('campanha.edit',$campanha->id)}}" class="btn btn-info">Editar</a>
+                                                                        <a href="{{route('campanha.show',$campanha->id)}}" class="btn btn-secondary">Visualizar</a>
+                                                                        <button type="submit" class="btn btn-danger">Re-Ativar</button>
+                                                                    </form>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    @endforeach
+                                                </tbody>
+                                            </table>
+                                @endif
                             </div>
                         </div>
                     </div>
