@@ -49,8 +49,9 @@ class CampanhaController extends Controller
                 'campanhas_desativadas' => $this->campanhaService->renderByStatus(4),
                 'campanhas_aprovadas' => $this->campanhaService->renderByStatus(2),
                 'campanhas_expiradas' => $this->campanhaService->renderByStatus(5)
+
             ];
-   
+
          } elseif (auth()->user()->role == 2) {
             $data = [
                 'campanhas' => $this->campanhaService->renderByUser(auth()->user()->id),
@@ -60,6 +61,7 @@ class CampanhaController extends Controller
                 'campanhas_aprovadas' => $this->campanhaService->renderByStatusUser(2,auth()->user()->id),
                 'campanhas_expiradas' => $this->campanhaService->renderByStatusUser(5,auth()->user()->id)
             ]; 
+
         }
 
         return view('admin.campanha.index',$data);
