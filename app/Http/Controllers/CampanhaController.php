@@ -21,16 +21,13 @@ use App\Yahp\Services\CategoryService;
 
 class CampanhaController extends Controller
 {
-    //
 
     public function __construct(CampanhaService $campanhaService,CategoryService $categoryService)
     {
         $this->middleware('auth');
         $this->campanhaService = $campanhaService;
         $this->categoryService = $categoryService;
-
     }
-
 
      /**
       * Display a listing of the resource.
@@ -61,7 +58,6 @@ class CampanhaController extends Controller
                 'campanhas_aprovadas' => $this->campanhaService->renderByStatusUser(2,auth()->user()->id),
                 'campanhas_expiradas' => $this->campanhaService->renderByStatusUser(5,auth()->user()->id)
             ]; 
-
         }
 
         return view('admin.campanha.index',$data);
@@ -111,7 +107,7 @@ class CampanhaController extends Controller
                 $ext = $request->file('photo_perfil')->extension();
                 $ts = Carbon::now()->timestamp;
                 $filename = $ts."_".$user_id.".".$ext;
-                $upload = Storage::putFileAs('public/images',$request->file('photo_perfil'),$filename);
+                $upload = Storage::putFileAs('public/images', $request->file('photo_perfil'),$filename);
 
                 $data = $this->campanhaService->buildInsert($request->merge([
                     'profile_image' => $filename,

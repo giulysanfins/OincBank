@@ -12,9 +12,9 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="col-12 text-right">
-                                    @if (auth()->user()->role == 2)
+                                    {{-- @if (auth()->user()->role == 2) --}}
                                         <a href="{{route('campanha.store')}}" class="btn btn-primary">Adicionar campanha</a>
-                                    @endif
+                                    {{-- @endif --}}
                                 </div>
                                 {{-- comeco tabelas ativas --}}
 
