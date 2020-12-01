@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
-
+use App\Models\User;
 use App\Yahp\Services\CampanhaService;
 use App\Yahp\Services\PhotoService;
+use App\Mail\newLaravelTips;
+use Illuminate\Support\Facades\Mail;
 
 use Illuminate\Http\Request;
 use Storage;
@@ -57,7 +59,7 @@ class CampanhaController extends Controller
                 'campanhas_desativadas' => $this->campanhaService->renderByStatusUser(4,auth()->user()->id),
                 'campanhas_aprovadas' => $this->campanhaService->renderByStatusUser(2,auth()->user()->id),
                 'campanhas_expiradas' => $this->campanhaService->renderByStatusUser(5,auth()->user()->id)
-            ]; 
+            ];
         }
 
         return view('admin.campanha.index',$data);
@@ -112,7 +114,7 @@ class CampanhaController extends Controller
                 $data = $this->campanhaService->buildInsert($request->merge([
                     'profile_image' => $filename,
                     'user_id' => auth()->user()->id,
-                    'status' => 1,
+                    'status' => 2,
                     'valor' => str_replace(',','.',str_replace('.','',$request->valor))
                 ])->all());
                 alert()->success('Sucesso','Campanha adicionada com sucesso.')->persistent('Fechar');
@@ -194,7 +196,12 @@ class CampanhaController extends Controller
       */
      public function destroy($id)
      {
+
+
         try {
+
+             Mail::send(new newLaravelTips($id));
+             dd('passou');
             $update = $this->campanhaService->buildUpdate($id,['status' => 0]);
             alert()->success('Sucesso','Campanha excluido com sucesso.')->persistent('Fechar');
             return redirect()->route('campanha.index');
@@ -209,6 +216,8 @@ class CampanhaController extends Controller
      public function desativar(Request $request, $id)
      {
          try {
+
+
              $update = $this->campanhaService->buildUpdate($id,['status' => 4]);
              alert()->success('Sucesso','Campanha desativada com sucesso.')->persistent('Fechar');
              return redirect()->route('campanha.index');

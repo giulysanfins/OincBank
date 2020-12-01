@@ -1,5 +1,8 @@
 <?php
 
+use App\Mail\newLaravelTips;
+use App\Models\User;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,6 +19,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', 'App\Http\Controllers\WebsiteController@index')->name('website.index');
 Route::get('/termos-e-condicoes', 'App\Http\Controllers\WebsiteController@tos')->name('website.tos');
 Route::get('/politica-de-privacidade', 'App\Http\Controllers\WebsiteController@politica')->name('website.politica');
+
+
+Route::get('/envio-email/{id}', 'App\Http\Controllers\CampanhaController@destroy');
+
 
 Route::group(['prefix' => 'campanhas'], function () {
 	Route::get('/', 'App\Http\Controllers\WebsiteController@campanhas')->name('website.campanhas');
@@ -59,6 +66,8 @@ Route::group(['prefix' => 'admin','middleware' => ['CheckPermission','auth']], f
 		Route::put('/update/{id}', ['as' => 'categorias.update', 'uses' => 'App\Http\Controllers\CategoryController@update']);
 		Route::put('/deactive/{id}', ['as' => 'categorias.deactive', 'uses' => 'App\Http\Controllers\CategoryController@deactive']);
 		Route::put('/active/{id}', ['as' => 'categorias.active', 'uses' => 'App\Http\Controllers\CategoryController@active']);
-	});
+    });
+
+
 
 });

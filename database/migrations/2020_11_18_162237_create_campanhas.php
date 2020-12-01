@@ -18,7 +18,7 @@ class CreateCampanhas extends Migration
             $table->string('titulo');
             $table->string('categoria');
             $table->decimal('valor',20,2);
-            $table->string('data_encerramento');
+            $table->date('data_encerramento');
             $table->string('profile_image');
             $table->string('video')->nullable();
             $table->string('descricao',3000);

@@ -55,11 +55,12 @@
                                     <label for="data_encerramento">Que data a campanha deve encerrar?*</label>
                                     <br>
                                     <div class="form-group">
-                                        <input type="date" name="data_encerramento" max="3000-12-31"
-                                               min="2020-01-01" class="form-control" data-date-format="DD MM YYYY" value="{{old('data_encerramento',$campanha->data_encerramento)}}">
+
+                                        <input type="datetime" name="data_encerramento" max="3000-12-31"
+                                               min="2020-01-01" class="form-control"  value="{{(old('data_encerramento',$campanha['data_encerramento'] ))}}">
                                     </div>
                                 </div>
-
+                                {{(old('data_encerramento',$campanha['data_encerramento']->format('d/m/Y') ))}}
 
                                 <div class="col-12">
                                     <div class="form-group{{ $errors->has('descricao') ? ' has-danger' : '' }}">
@@ -113,5 +114,6 @@
     $(document).ready(function(){
         $('#valor').mask("#.##0,00", {reverse: true});
     });
+
 </script>
 @endsection
