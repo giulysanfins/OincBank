@@ -57,7 +57,7 @@
                                     </div>
                                     <div class="causes-item__details-holder">
                                         <div class="causes-item__details-item">
-                                            <span>Meta: </span><br /><span>R$ {{$campanha->valor}}</span>
+                                            <span>Meta: </span><br /><span>R$ {{ number_format($campanha->valor,2,",",".") }}</span>
                                         </div>
                                         <div class="causes-item__details-item text-right"><span>Conquistado: </span><br /><span>R$ 1110,00</span></div>
                                     </div>
