@@ -106,11 +106,15 @@
                                                                     <td>
                                                                         <div class="btn-group float-right" role="group" aria-label="Botões de Ação - Clientes">
 
-                                                                            <form action="{{ route('campanha.desativar', $campanha->id) }}" method="POST">
+                                                                            <form action="{{ route('campanha.desativar', $campanha->id) }}" method="POST" id="my-form">
                                                                                 @csrf
                                                                                 @method('put')
                                                                                 <a href="{{route('campanha.edit',$campanha->id)}}" class="btn btn-info">Editar</a>
                                                                                 <a href="{{route('campanha.show',$campanha->id)}}" class="btn btn-secondary">Visualizar</a>
+
+
+
+
                                                                                 <button type="submit" class="btn btn-danger">Desativar</button>
                                                                             </form>
                                                                         </div>
@@ -157,12 +161,13 @@
                                                                 <td>
                                                                     <div class="btn-group float-right" role="group" aria-labe   l="Botões de Ação - Clientes">
 
-                                                                        <form action="{{ route('campanha.desativar', $campanha->id) }}" method="POST">
+                                                                        <form action="{{ route('campanha.desativar', $campanha->id) }}" method="POST" id="my-form" onsubmit="validate(event)">
                                                                             @csrf
                                                                             @method('put')
                                                                             <a href="{{route('campanha.edit',$campanha->id)}}" class="btn btn-info">Editar</a>
                                                                             <a href="{{route('campanha.show',$campanha->id)}}" class="btn btn-secondary">Visualizar</a>
-                                                                            <button type="submit" class="btn btn-danger">Desativar</button>
+
+                                                                            <button type="submit" class="btn btn-danger button">Desativar</button>
                                                                         </form>
                                                                     </div>
                                                                 </td>
@@ -239,5 +244,30 @@
 @endsection
 
 @section('scripts')
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.9/sweetalert2.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.9/sweetalert2.min.js"></script>
+  <script>
 
+    function validate() {
+      event.preventDefault(); // prevent form submit
+      var form = document.forms["my-form"]; // storing the form
+      swal({
+        title: "Tem certeza que você deseja desabilitar essa campanha?",
+        text: "Não será possível recuperá-la!",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#DD6B55",
+        confirmButtonText: "Sim, apague-a!",
+        cancelButtonText: "Cancelar",
+        closeOnConfirm: false
+           })
+          .then((willDelete) => {
+               if (willDelete) {
+                     form.submit();
+               } else {
+                      swal("Cancelou");
+           }
+        });
+    }
+    </script>
 @endsection

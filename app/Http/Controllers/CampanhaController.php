@@ -215,10 +215,12 @@ class CampanhaController extends Controller
 
      public function desativar(Request $request, $id)
      {
+
+
          try {
 
 
-             $update = $this->campanhaService->buildUpdate($id,['status' => 4]);
+             $update = $this->campanhaService->buildUpdate($id,['status' => 0]);
              alert()->success('Sucesso','Campanha desativada com sucesso.')->persistent('Fechar');
              return redirect()->route('campanha.index');
          } catch (\Exception $e) {
