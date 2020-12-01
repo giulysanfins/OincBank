@@ -65,6 +65,31 @@ class CampanhaController extends Controller
         return view('admin.campanha.index',$data);
      }
 
+     public function index_delete()
+     {
+
+         if(auth()->user()->role == 1)
+         {
+            $data = [
+                'campanhas' => $this->campanhaService->renderList(),
+                'pageTitle' => 'Campanha',
+                'campanhas_aprovadas' => $this->campanhaService->renderByStatus(2),
+                'campanhas_expiradas' => $this->campanhaService->renderByStatus(5)
+
+            ];
+
+         } elseif (auth()->user()->role == 2) {
+            $data = [
+                'campanhas' => $this->campanhaService->renderByUser(auth()->user()->id),
+                'pageTitle' => 'Campanha',
+                'campanhas_aprovadas' => $this->campanhaService->renderByStatusUser(2,auth()->user()->id),
+                'campanhas_expiradas' => $this->campanhaService->renderByStatusUser(5,auth()->user()->id)
+            ];
+        }
+
+        return view('admin.campanha.desativar',$data);
+     }
+
      public function mostrar($id)
      {
          $data = [
@@ -158,6 +183,7 @@ class CampanhaController extends Controller
      {
          $data = [
              'campanha' => $this->campanhaService->renderEdit($id),
+             'categorias' => $this->categoryService->renderByStatus(1),
              'pageTitle' => 'Editar Campanha'
          ];
 
@@ -194,15 +220,19 @@ class CampanhaController extends Controller
       * @param  int  $id
       * @return \Illuminate\Http\Response
       */
-     public function destroy($id)
+     public function destroy(Request $request,$id)
      {
 
 
         try {
 
-             Mail::send(new newLaravelTips($id));
-             dd('passou');
-            $update = $this->campanhaService->buildUpdate($id,['status' => 0]);
+
+             $escolha =
+             $update = $this->campanhaService->buildUpdate($id,[
+                'status' => 0,
+                'motivo_deletado' => $request->motivo_deletado
+            ]);
+            Mail::send(new newLaravelTips($id));
             alert()->success('Sucesso','Campanha excluido com sucesso.')->persistent('Fechar');
             return redirect()->route('campanha.index');
         } catch (\Exception $e) {
@@ -218,9 +248,12 @@ class CampanhaController extends Controller
 
 
          try {
-
-
-             $update = $this->campanhaService->buildUpdate($id,['status' => 0]);
+            $escolha = 'Escolha do Usuário';
+            $update = $this->campanhaService->buildUpdate($id,[
+                'status' => 0,
+                'motivo_deletado' => $escolha
+            ]);
+            Mail::send(new newLaravelTips($id));
              alert()->success('Sucesso','Campanha desativada com sucesso.')->persistent('Fechar');
              return redirect()->route('campanha.index');
          } catch (\Exception $e) {
@@ -247,5 +280,24 @@ class CampanhaController extends Controller
 
 
          }
+     }
+
+
+     public function apagar_adm($id)
+     {
+
+
+        try {
+
+            // Mail::send(new newLaravelTips($id));
+             dd('passou');
+            $update = $this->campanhaService->buildUpdate($id,['status' => 0]);
+            alert()->success('Sucesso','Campanha excluido com sucesso.')->persistent('Fechar');
+            return redirect()->route('campanha.index');
+        } catch (\Exception $e) {
+            \Log::error($e->getFile() . "\n" . $e->getLine() . "\n" . $e->getMessage());
+            alert()->error('Erro','Erro em excluir a Campanha.')->persistent('Fechar');
+            return redirect()->route('campanha.index')->withInput();
+        }
      }
  }

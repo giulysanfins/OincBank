@@ -14,6 +14,7 @@
                                 <div class="col-12 text-right">
                                     {{-- @if (auth()->user()->role == 2) --}}
                                         <a href="{{route('campanha.store')}}" class="btn btn-primary">Adicionar campanha</a>
+                                        <a href="{{route('campanha.apagar_adm')}}" class="btn btn-primary">Deletar campanha</a>
                                     {{-- @endif --}}
                                 </div>
                                 {{-- comeco tabelas ativas --}}
@@ -115,7 +116,7 @@
 
 
 
-                                                                                <button type="submit" class="btn btn-danger">Desativar</button>
+                                                                                <button type="submit" class="btn btn-danger">Deletar</button>
                                                                             </form>
                                                                         </div>
                                                                     </td>
@@ -167,7 +168,7 @@
                                                                             <a href="{{route('campanha.edit',$campanha->id)}}" class="btn btn-info">Editar</a>
                                                                             <a href="{{route('campanha.show',$campanha->id)}}" class="btn btn-secondary">Visualizar</a>
 
-                                                                            <button type="submit" class="btn btn-danger button">Desativar</button>
+                                                                            <button type="submit" class="btn btn-danger button">Deletar</button>
                                                                         </form>
                                                                     </div>
                                                                 </td>

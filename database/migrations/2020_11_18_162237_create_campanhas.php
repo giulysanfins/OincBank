@@ -23,6 +23,7 @@ class CreateCampanhas extends Migration
             $table->string('video')->nullable();
             $table->string('descricao',3000);
             $table->integer('status')->comment('0 desativado 1 pendente 2 aprovado 3 rejeitado');
+            $table->string('motivo_deletado',3000)->nullable();
             $table->timestamps();
         });
     }

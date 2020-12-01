@@ -27,19 +27,13 @@
                                         <label for="categoria">Categoria*</label>
                                         <br>
                                         <select class="custom-select" id="categoria_id" name="categoria_id" >
-                                            <option selected >
-                                                 {{old('categoria_id',$campanha->categoria_id)}}
+                                            <option disabled selected >
+                                                 {{old('categoria_id',$campanha->categoria->name)}}
 
                                                 </option>
-                                            <option value="1">Animais</option>
-                                            <option value="2">Casamento / Lua-de-Mel / Chá de Panela</option>
-                                            <option value="3">Educação / Formatura / Cursos</option>
-                                            <option value="4">Evento / Festa / Aniversário</option>
-                                            <option value="5">Nascimento / Bebê</option>
-                                            <option value="6">Projetos / Produtos</option>
-                                            <option value="7">Solidariedade / Pessoas / Saúde / Caridade</option>
-                                            <option value="8">Vaquinha / Outros / Dinheiro</option>
-                                            <option value="9">Viagem / Turismo</option>
+                                                @foreach ($categorias as $categoria)
+                                                <option value="{{$categoria->id}}">{{$categoria->name}}</option>
+                                                @endforeach
                                         </select>
                                     </div>
                                 </div>

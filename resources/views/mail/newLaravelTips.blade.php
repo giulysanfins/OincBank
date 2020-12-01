@@ -26,6 +26,10 @@
 <p>
     Valor da Campanha: R$:{{$campanha->valor}}
 </p>
+<br>
+<p>
+    Motivo da Deleção: {{$campanha->motivo_deletado}}
+</p>
 
 
 {{-- Subcopy --}}
