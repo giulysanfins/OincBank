@@ -66,7 +66,7 @@
                                         @if ($campanha->video != NULL)
                                             <iframe id="ytplayer" type="text/html" width="100%" height="360"
                                             src="{{$campanha->video}}"
-                                            frameborder="0" />
+                                            frameborder="0" ></iframe>
                                         @endif
                                     </div>
                                 </div>

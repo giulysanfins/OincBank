@@ -49,7 +49,7 @@
                                     <br>
                                     <div class="form-group">
                                         <input type="date" name="data_encerramento" max="3000-12-31"
-                                               min="2020-01-01" class="form-control" data-date-format="DD MM YYYY">
+                                               min="2020-01-01" class="form-control" data-date-format="DD MMMM YYYY">
                                     </div>
                                 </div>
 
