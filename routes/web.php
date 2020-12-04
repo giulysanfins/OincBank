@@ -17,11 +17,17 @@ Route::get('/', 'App\Http\Controllers\WebsiteController@index')->name('website.i
 Route::get('/termos-e-condicoes', 'App\Http\Controllers\WebsiteController@tos')->name('website.tos');
 Route::get('/politica-de-privacidade', 'App\Http\Controllers\WebsiteController@politica')->name('website.politica');
 
-Route::post('/pagamento/{id}','App\Http\Controllers\WebsiteController@payment')->name('website.payment.store');
-
 Route::group(['prefix' => 'campanhas'], function () {
 	Route::get('/', 'App\Http\Controllers\WebsiteController@campanhas')->name('website.campanhas');
 	Route::get('/detalhes/{id}', 'App\Http\Controllers\WebsiteController@detalhes')->name('website.campanhas.detalhes');
+});
+
+Route::group(['prefix' => 'pagamento'], function () {
+	Route::post('/{id}','App\Http\Controllers\WebsiteController@payment')->name('website.payment.store');
+	Route::get('/checkout/{id}','App\Http\Controllers\WebsiteController@checkout')->name('website.payment.checkout');
+	Route::get('/sucesso/{id}','App\Http\Controllers\WebsiteController@sucesso')->name('website.payment.success');
+	Route::get('/falha/{id}','App\Http\Controllers\WebsiteController@failed')->name('website.payment.failed');
+	Route::get('/pendente/{id}','App\Http\Controllers\WebsiteController@pending')->name('website.payment.pending');
 });
 
 Auth::routes();

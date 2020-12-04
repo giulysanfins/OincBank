@@ -8,7 +8,8 @@ class Payment extends Model
 
     protected $table = 'payments';
     protected $fillable = [
-       'user_id','campanha_id','valor','status'
+       'user_id','campanha_id','valor','status','pagamento_id',
+       'pagamento_tipo','preference_id'
     ];
     protected $with = ['user','campanha'];
 

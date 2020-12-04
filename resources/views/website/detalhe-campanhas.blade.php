@@ -46,7 +46,7 @@
                                 </div>
                                 <div class="col-lg-5">
                                     <div class="donation-item__details-holder">
-                                        <div class="donation-item__details-item"><span>Meta: </span><span>{{$campanha->valor}}</span></div>
+                                        <div class="donation-item__details-item"><span>Meta: </span><span>R$ {{number_format($campanha->valor,2,",",".")}}</span></div>
                                         <div class="donation-item__details-item"><span>Pledged: </span><span>95 200$</span></div>
                                     </div>
                                 </div>
@@ -61,16 +61,16 @@
                                         </label>
                                     </div>
                                     <div class="col-lg-9 col-xl-8 text-lg-right">
-                                        <label class="form__radio-label"><span class="form__label-text">R$100,00</span>
+                                        <label class="form__radio-label"><span class="form__label-text">R$ {{ number_format('100',2,",",".") }}</span>
                                             <input class="form__input-radio" type="radio" name="valor_auto" value="100" checked="checked"><span class="form__radio-mask form__radio-mask"></span>
                                         </label>
-                                        <label class="form__radio-label"><span class="form__label-text">R$200,00</span>
+                                        <label class="form__radio-label"><span class="form__label-text">R$ {{ number_format('200',2,",",".") }}</span>
                                             <input class="form__input-radio" type="radio" name="valor_auto" value="200"><span class="form__radio-mask form__radio-mask"></span>
                                         </label>
-                                        <label class="form__radio-label"><span class="form__label-text">R$500,00</span>
+                                        <label class="form__radio-label"><span class="form__label-text">R$ {{ number_format('500',2,",",".") }}</span>
                                             <input class="form__input-radio" type="radio" name="valor_auto" value="500"><span class="form__radio-mask form__radio-mask"></span>
                                         </label>
-                                        <label class="form__radio-label"><span class="form__label-text">R$1000,00</span>
+                                        <label class="form__radio-label"><span class="form__label-text">R$ {{ number_format('1000',2,",",".") }}</span>
                                             <input class="form__input-radio" type="radio" name="valor_auto" value="1000"><span class="form__radio-mask form__radio-mask"></span>
                                         </label>
                                     </div>
@@ -94,12 +94,17 @@
                                         @if (Auth::check())
                                             <p> Doar como: <b>{{auth()->user()->name}}</b></p>
                                         @else
-                                            <p> Para doar, <a href="{{route('login')}}" target="_blank">faça o login</a></p>
+                                            {{-- <p> Para doar, <a href="{{route('login')}}" target="_blank">faça o login</a></p> --}}
+                                            <p>Para doar, faça login.</p>
                                         @endif
                                     </div>
 
                                     <div class="col-lg-4">
-                                        <button class="form__submit" type="submit">+ Doar</button>
+                                        @if (Auth::check())
+                                            <button class="form__submit" type="submit">+ Doar</button>
+                                        @else
+                                            <a class="form__submit" href="{{route('login')}}" >Login</a>
+                                        @endif
                                     </div>
                                 </div>
                             </form>
