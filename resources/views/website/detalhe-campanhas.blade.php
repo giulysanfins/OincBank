@@ -103,7 +103,7 @@
                                         @if (Auth::check())
                                             <button class="form__submit" type="submit">+ Doar</button>
                                         @else
-                                            <a class="form__submit" href="{{route('login')}}" >Login</a>
+                                            <a class="form__submit" href="{{route('login',['campanha' => $campanha->id])}}" >Login</a>
                                         @endif
                                     </div>
                                 </div>

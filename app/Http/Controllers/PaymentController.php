@@ -24,9 +24,17 @@ class PaymentController extends Controller
      */
     public function index()
     {
-        $data = [
-            'pagamentos' => $this->paymentService->renderList(),
-        ];
+        if(auth()->user()->role == 1)
+        {
+            $data = [
+                'pagamentos' => $this->paymentService->renderList(),
+            ];
+        } else {
+            $data = [
+                'pagamentos' => $this->paymentService->renderByUser(auth()->user()->id),
+            ];
+        }
+
 
         return view('admin.pagamentos.index',$data);
     }

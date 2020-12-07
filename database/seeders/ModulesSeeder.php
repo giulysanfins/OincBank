@@ -79,12 +79,12 @@ class ModulesSeeder extends Seeder
 
         DB::table('modules')->insert([
             'name' => 'Pagamentos',
-            'route' => 'campanha.index',
-            'icon' => 'far fa-file-alt fa-2x',
-            'slug' => 'campanha',
+            'route' => 'pagamentos.index',
+            'icon' => 'fas fa-money-bill-wave fa-2x',
+            'slug' => 'pagamentos',
             'type' => 1,
             'menu_master' => NULL,
-            'order' => 2,
+            'order' => 3,
             'created_at' => now(),
             'updated_at' => now(),
         ]);

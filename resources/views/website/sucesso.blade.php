@@ -1,4 +1,4 @@
-@extends('layouts.site.app', ['activePage' => '', 'title' => 'OincBank - TOS', 'navName' => '', 'activeButton' => ''])
+@extends('layouts.site.app', ['activePage' => '', 'title' => '| Sucesso no pagamento', 'navName' => '', 'activeButton' => ''])
 
 
 
@@ -29,7 +29,7 @@
         <div class="row align-items-end">
             <div class="col-xl-12">
                 <div class="heading heading--primary"><span class="heading__pre-title"></span>
-                    <h2 class="heading__title"> <span>Sucesso</span></h2>
+                    {{-- <h2 class="heading__title"> <span>Sucesso</span></h2> --}}
                     <p>
                         Obrigado pela sua doação.
                     </p>

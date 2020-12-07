@@ -29,8 +29,7 @@
                                         <select class="custom-select" id="categoria_id" name="categoria_id" >
                                             <option selected >
                                                  {{old('categoria_id',$campanha->categoria_id)}}
-
-                                                </option>
+                                            </option>
                                             <option value="1">Animais</option>
                                             <option value="2">Casamento / Lua-de-Mel / Chá de Panela</option>
                                             <option value="3">Educação / Formatura / Cursos</option>

@@ -39,6 +39,24 @@ class PaymentRepository
     }
 
     /**
+     * @param $id
+     * @return mixed
+     */
+    public function getByCampanha($campanha_id)
+    {
+        return $this->model->where('campanha_id',$campanha_id)->get();
+    }
+
+    /**
+     * @param $id
+     * @return mixed
+     */
+    public function getByUser($user_id)
+    {
+        return $this->model->where('user_id',$user_id)->get();
+    }
+
+    /**
      * @param $data
      * @return mixed
      */

@@ -1,20 +1,19 @@
-@extends('layouts/app', ['activePage' => '',
-'activeButton' => '',
-'title' => 'Criação de Campanhas'])
+@extends('layouts/app', ['activePage' => '','activeButton' => '','title' => 'Campanhas | OincBank'])
 
 @section('content')
     <div class="content">
         <div class="row">
 
             <div class="col-12">
+                <h3>Campanhas</h3>
                 <div class="card card-stats">
                     <div class="card-body">
                         <div class="row">
                             <div class="col-12">
                                 <div class="col-12 text-right">
-                                    {{-- @if (auth()->user()->role == 2) --}}
+                                    @if (auth()->user()->role == 2)
                                         <a href="{{route('campanha.store')}}" class="btn btn-primary">Adicionar campanha</a>
-                                    {{-- @endif --}}
+                                    @endif
                                 </div>
                                 {{-- comeco tabelas ativas --}}
 
@@ -221,8 +220,8 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
 
+                                </div>
 
                             </div>
 

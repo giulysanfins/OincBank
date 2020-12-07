@@ -37,7 +37,25 @@ class PaymentService implements ServiceContract
     {
         return $this->repository->getById($id);
     }
+
+    /**
+     * @param $id
+     * @return mixed
+     */
+    public function renderByCampanha($campanha_id)
+    {
+        return $this->repository->getByCampanha($campanha_id);
+    }
     
+    /**
+     * @param $id
+     * @return mixed
+     */
+    public function renderByUser($user_id)
+    {
+        return $this->repository->getByUser($user_id);
+    }
+
     /**
      * @param $id
      * @param $data

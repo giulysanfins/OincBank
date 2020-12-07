@@ -1,7 +1,4 @@
-@extends('layouts.site.app', ['activePage' => '', 'title' => 'OincBank - TOS', 'navName' => '', 'activeButton' => ''])
-
-
-
+@extends('layouts.site.app', ['activePage' => '', 'title' => '| Pagamento Pendente', 'navName' => '', 'activeButton' => ''])
 
 @section('content')
 
@@ -18,7 +15,7 @@
                         <span class="promo-primary__pre-title"></span>
                         <h1 class="promo-primary__title"><span>Pendente</span> <span></span></h1>
                     </div>
-                </div>
+                </div> 
             </div>
         </div>
     </div>
@@ -29,7 +26,7 @@
         <div class="row align-items-end">
             <div class="col-xl-12">
                 <div class="heading heading--primary"><span class="heading__pre-title"></span>
-                    <h2 class="heading__title"> <span>Pendente</span></h2>
+                    {{-- <h2 class="heading__title"> <span>Pendente</span></h2> --}}
                     <p>
                         Obrigado pela sua doação. <br />
                         O seu pagamento está pendente, assim que tivermos a confirmação conversamos.

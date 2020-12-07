@@ -1,12 +1,11 @@
-@extends('layouts/app', ['activePage' => 'payments',
-'activeButton' => '',
-'title' => 'Pagamentos'])
+@extends('layouts/app', ['activePage' => 'payments', 'activeButton' => '', 'title' => 'Pagamentos | OincBank'])
 
 @section('content')
     <div class="content">
         <div class="row">
 
             <div class="col-12">
+                <h3>Pagamentos</h3>
                 <div class="card card-stats">
                     <div class="card-body">
                         <div class="row">
@@ -34,7 +33,11 @@
                                                         Pendente
                                                     @elseif ($pagamento->status == 2)
                                                         Pago
-                                                    @endif
+                                                    @elseif ($pagamento->status == 3)
+                                                        Pendente Pagamento - Mercado Pago
+                                                    @elseif ($pagamento->status == 4)
+                                                        Falha no pagamento
+                                                    @endif     
                                                 </td>
                                                 <td></td>
                                             </tr>

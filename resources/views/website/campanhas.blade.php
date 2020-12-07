@@ -1,4 +1,4 @@
-@extends('layouts.site.app', ['activePage' => '', 'title' => 'OincBank', 'navName' => '', 'activeButton' => ''])
+@extends('layouts.site.app', ['activePage' => '', 'title' => '| Campanhas', 'navName' => '', 'activeButton' => ''])
 
 @section('content')
 <!-- header end-->
@@ -74,8 +74,7 @@
                 <div class="col-12">
                     <!-- pagination start-->
                     <ul class="pagination">
-                        <li class="pagination__item pagination__item--prev"><i class="fa fa-angle-left" aria-hidden="true"></i><span> Anterior</span>
-                        </li>
+                        <li class="pagination__item pagination__item--prev"><i class="fa fa-angle-left" aria-hidden="true"></i><span> Anterior</span></li>
                         <li class="pagination__item"><span>1</span></li>
                         <li class="pagination__item pagination__item--active"><span>2</span></li>
                         <li class="pagination__item"><span>3</span></li>

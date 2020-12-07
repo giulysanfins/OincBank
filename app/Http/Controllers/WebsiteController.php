@@ -131,8 +131,8 @@ class WebsiteController extends Controller
         $preference->items = array($item);
         $preference->back_urls = array(
             "success" => "http://localhost:8000/pagamento/sucesso/".$pagamento->campanha_id,
-            "failure" => "http://localhost:8000/pagamento/falha",
-            "pending" => "http://localhost:8000/pagamento/pendente"
+            "failure" => "http://localhost:8000/pagamento/falha/".$pagamento->campanha_id,
+            "pending" => "http://localhost:8000/pagamento/pendente/".$pagamento->campanha_id
         );
         $preference->auto_return = "approved";
         $preference->save();
@@ -166,7 +166,7 @@ class WebsiteController extends Controller
                     'preference_id' => $request->preference_id,
                 ]);
 
-                return view('website.pendente');
+                return view('website.sucesso');
             }
 
         } catch (\Exception $e) {
