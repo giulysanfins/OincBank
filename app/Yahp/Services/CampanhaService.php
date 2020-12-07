@@ -94,4 +94,16 @@ class CampanhaService implements ServiceContract
     {
         return $this->repository->delete($id);
     }
+
+
+        /**
+     * @param $q - request vinda do formulario;
+     * @return mixed
+     */
+    public function renderBySearch($q)
+    {
+        return $this->repository->getBySearch($q);
+    }
+
+
 }

@@ -19,6 +19,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', 'App\Http\Controllers\WebsiteController@index')->name('website.index');
 Route::get('/termos-e-condicoes', 'App\Http\Controllers\WebsiteController@tos')->name('website.tos');
 Route::get('/politica-de-privacidade', 'App\Http\Controllers\WebsiteController@politica')->name('website.politica');
+Route::get('/duvidas-frequentes', 'App\Http\Controllers\WebsiteController@duvidas')->name('website.duvidas');
+Route::post('/pesquisar','App\Http\Controllers\WebsiteController@search')->name('website.search');
+Route::get('/faq', 'App\Http\Controllers\WebsiteController@faq')->name('website.faq');
 
 
 Route::get('/envio-email/{id}', 'App\Http\Controllers\CampanhaController@destroy');

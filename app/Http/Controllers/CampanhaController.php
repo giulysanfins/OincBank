@@ -47,7 +47,8 @@ class CampanhaController extends Controller
                 'campanhas_pendentes' => $this->campanhaService->renderByStatus(1),
                 'campanhas_desativadas' => $this->campanhaService->renderByStatus(4),
                 'campanhas_aprovadas' => $this->campanhaService->renderByStatus(2),
-                'campanhas_expiradas' => $this->campanhaService->renderByStatus(5)
+                'campanhas_expiradas' => $this->campanhaService->renderByStatus(5),
+                'categorias' => $this->categoryService->renderByStatus(1)
 
             ];
 
@@ -58,7 +59,8 @@ class CampanhaController extends Controller
                 'campanhas_pendentes' => $this->campanhaService->renderByStatusUser(1,auth()->user()->id),
                 'campanhas_desativadas' => $this->campanhaService->renderByStatusUser(4,auth()->user()->id),
                 'campanhas_aprovadas' => $this->campanhaService->renderByStatusUser(2,auth()->user()->id),
-                'campanhas_expiradas' => $this->campanhaService->renderByStatusUser(5,auth()->user()->id)
+                'campanhas_expiradas' => $this->campanhaService->renderByStatusUser(5,auth()->user()->id),
+                'categorias' => $this->categoryService->renderByStatus(1)
             ];
         }
 
@@ -300,4 +302,6 @@ class CampanhaController extends Controller
             return redirect()->route('campanha.index')->withInput();
         }
      }
+
+
  }
