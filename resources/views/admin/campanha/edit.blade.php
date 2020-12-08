@@ -1,6 +1,4 @@
-@extends('layouts/app', ['activePage' => '',
-'activeButton' => '',
-'title' => 'Criação de Campanhas'])
+@extends('layouts/app', ['activePage' => '', 'activeButton' => '', 'title' => 'Edição de Campanhas'])
 
 @section('content')
     <div class="content">
@@ -27,18 +25,9 @@
                                         <label for="categoria">Categoria*</label>
                                         <br>
                                         <select class="custom-select" id="categoria_id" name="categoria_id" >
-                                            <option selected >
-                                                 {{old('categoria_id',$campanha->categoria_id)}}
-                                            </option>
-                                            <option value="1">Animais</option>
-                                            <option value="2">Casamento / Lua-de-Mel / Chá de Panela</option>
-                                            <option value="3">Educação / Formatura / Cursos</option>
-                                            <option value="4">Evento / Festa / Aniversário</option>
-                                            <option value="5">Nascimento / Bebê</option>
-                                            <option value="6">Projetos / Produtos</option>
-                                            <option value="7">Solidariedade / Pessoas / Saúde / Caridade</option>
-                                            <option value="8">Vaquinha / Outros / Dinheiro</option>
-                                            <option value="9">Viagem / Turismo</option>
+                                                @foreach ($categorias as $categoria)
+                                                    <option value="{{$categoria->id}}">{{$categoria->name}}</option>
+                                                @endforeach
                                         </select>
                                     </div>
                                 </div>
@@ -54,11 +43,12 @@
                                     <label for="data_encerramento">Que data a campanha deve encerrar?*</label>
                                     <br>
                                     <div class="form-group">
-                                        <input type="date" name="data_encerramento" max="3000-12-31"
-                                               min="2020-01-01" class="form-control" data-date-format="DD MM YYYY" value="{{old('data_encerramento',$campanha->data_encerramento)}}">
+
+                                        <input type="datetime" name="data_encerramento" max="3000-12-31"
+                                               min="2020-01-01" class="form-control"  value="{{(old('data_encerramento',$campanha['data_encerramento'] ))}}">
                                     </div>
                                 </div>
-
+                                {{(old('data_encerramento',$campanha['data_encerramento']->format('d/m/Y') ))}}
 
                                 <div class="col-12">
                                     <div class="form-group{{ $errors->has('descricao') ? ' has-danger' : '' }}">
@@ -112,5 +102,6 @@
     $(document).ready(function(){
         $('#valor').mask("#.##0,00", {reverse: true});
     });
+
 </script>
 @endsection

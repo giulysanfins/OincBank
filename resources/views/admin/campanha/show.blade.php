@@ -56,15 +56,16 @@
                                 <img class="img-thumbnail border-gray" src="{{asset('storage')}}/images/{{$campanha->profile_image}}" alt="foto_{{$campanha->titulo}}">
                             </div>
 
-                            <div class="col-md-6" >
-                                <label for="data_encerramento">Vídeo*(url)</label>
-                                <br>
-                                <div class="form-group">
-                                    @if ($campanha->video != NULL)
-                                        <iframe id="ytplayer" type="text/html" width="100%" height="360"
-                                        src="{{$campanha->video}}"
-                                        frameborder="0" />
-                                    @endif
+                                <div class="col-md-6" >
+                                    <label for="data_encerramento">Vídeo*(url)</label>
+                                    <br>
+                                    <div class="form-group">
+                                        @if ($campanha->video != NULL)
+                                            <iframe id="ytplayer" type="text/html" width="100%" height="360"
+                                            src="{{$campanha->video}}"
+                                            frameborder="0" ></iframe>
+                                        @endif
+                                    </div>
                                 </div>
                             </div>
 
