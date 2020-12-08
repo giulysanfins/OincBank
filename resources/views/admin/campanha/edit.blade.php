@@ -44,11 +44,11 @@
                                     <br>
                                     <div class="form-group">
 
-                                        <input type="datetime" name="data_encerramento" max="3000-12-31"
-                                               min="2020-01-01" class="form-control"  value="{{(old('data_encerramento',$campanha['data_encerramento'] ))}}">
+                                        <input type="date" name="data_encerramento" max="3000-12-31"
+                                        min="{{\Carbon\Carbon::today()->format('Y-m-d')}}" class="form-control"  value="{{(old('data_encerramento',$campanha->data_encerramento->format('Y-m-d')))}}">
                                     </div>
                                 </div>
-                                {{(old('data_encerramento',$campanha['data_encerramento']->format('d/m/Y') ))}}
+
 
                                 <div class="col-12">
                                     <div class="form-group{{ $errors->has('descricao') ? ' has-danger' : '' }}">

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Yahp\Services\CampanhaService;
+use App\Yahp\Services\CategoryService;
 use App\Yahp\Services\PaymentService;
 use App\Yahp\Services\ParameterService;
 use Illuminate\Support\Facades\Input;
@@ -18,6 +19,7 @@ class WebsiteController extends Controller
     public function __construct(CampanhaService $campanhaService, PaymentService $paymentService, ParameterService $parameterService)
     {
         $this->campanhaService = $campanhaService;
+        $this->categoryService = $categoryService;
         $this->paymentService = $paymentService;
         $this->parameterService = $parameterService;
     }
@@ -45,6 +47,7 @@ class WebsiteController extends Controller
     {
         $data = [
             'campanhas' => $this->campanhaService->renderByStatus(2),
+            'categorias' => $this->categoryService->renderByStatus(1),
             'minpay' => $this->parameterService->renderBySlug('campanha.num'),
         ];
 
@@ -61,7 +64,7 @@ class WebsiteController extends Controller
         $data = [
             'campanha' => $this->campanhaService->renderEdit($id),
         ];
-        
+
         return view('website.detalhe-campanhas',$data);
     }
 
@@ -244,4 +247,47 @@ class WebsiteController extends Controller
            return redirect()->route('website.campanhas.detalhes',$id)->withInput();
         }
     }
+
+    public function duvidas(){
+
+        return view('website.duvidas');
+    }
+
+    public function faq(){
+
+        return view('website.faq');
+    }
+
+
+
+    public function search(Request $request){
+
+        if($request->q != ''){
+
+             $campanha = $this->campanhaService->renderBySearch($request->q);
+            // dd($campanha);
+             if(count($campanha) > 0)
+             {
+                 $data = [
+                     'campanhas' => $campanha,
+                     'pageTitle' => 'Campanha',
+                     'query' => $request->q,
+                 ];
+                //  dd($data);
+                 return view('website.search',$data);
+             }
+             else{
+
+                 $data = [
+                     'campanha' => $this->campanhaService->renderList(),
+                     'pageTitle' => 'Campanha'
+                 ];
+
+                 //mudar para rota
+                 alert()->warning("Dados não encontrados");
+                 return view('website.campanhas',$data);
+             }
+        }
+        return view('website.index')->withMessage("Nada encontrado 2");
+     }
 }

@@ -2,9 +2,9 @@
 
 namespace App\Yahp\Repositories;
 
-use App\Yahp\Models\Campanha;
+use App\Yahp\Models\Website;
 
-class CampanhaRepository
+class WebsiteRepository
 {
 
      /**
@@ -14,11 +14,11 @@ class CampanhaRepository
 
     /**
      * Contato Repository constructor.
-     * @param Campanha $campanha
+     * @param Alerta $alerta
      */
-    public function __construct(Campanha $campanha)
+    public function __construct(Website $website)
     {
-        $this->model = $campanha;
+        $this->model = $website;
     }
 
     /**
@@ -42,28 +42,11 @@ class CampanhaRepository
      * @param $id
      * @return mixed
      */
-    public function getByStatus($status)
+    public function getByPhoto($area,$area_id)
     {
-        return $this->model->where('status',$status)->get();
+        return $this->model->where('area',$area)->where('area_id',$area_id)->orderBy('created_at','desc')->first();
     }
 
-    /**
-     * @param $id
-     * @return mixed
-     */
-    public function getByUser($user_id)
-    {
-        return $this->model->where('user_id',$user_id)->get();
-    }
-
-    /**
-     * @param $id
-     * @return mixed
-     */
-    public function getByStatusUser($status,$user_id)
-    {
-        return $this->model->where('status',$status)->where('user_id',$user_id)->get();
-    }
 
     /**
      * @param $data
@@ -92,12 +75,4 @@ class CampanhaRepository
     {
         return $this->model->find($id)->delete();
     }
-
-    public function getBySearch($q)
-    {
-        return $this->model->where('titulo','LIKE','%'.$q.'%')
-        ->orWhere('id','LIKE','%'.$q.'%')->get();
-    }
-
-
 }

@@ -44,7 +44,7 @@
             <li class="aside-socials__item"><a class="aside-socials__link" href="#"><i class="fab fa-facebook" aria-hidden="true"></i></a></li>
         </ul>
     </div>
-    <div class="aside-dropdown__item"><a class="button button--squared" href="{{route('campanha.create')}}"><span>Criar Doação</span></a></div>
+    <div class="aside-dropdown__item"><a class="button button--squared" href="{{route('campanha.create')}}"><span>Criar Cofrinho</span></a></div>
     </div>
 </div>
 {{-- Header Mobile END --}}
@@ -59,28 +59,17 @@
                 </div>
                 <div class="header-logo">
                     <a class="header-logo__link" href="{{route('website.index')}}"><img class="header-logo__img logo--light" src="{{asset('helpo-theme')}}/img/logo_white.png" alt="logo"/>
-                        <img class="header-logo__img logo--dark" src="{{asset('helpo-theme')}}/img/logo_dark.png" alt="logo"/></a>
-                    </div>
+                        <img class="header-logo__img logo--dark" src="{{asset('helpo-theme')}}/img/logo_dark.png" alt="logo"/>
+                    </a>
+                </div>
             </div>
             <div class="col-auto">
                 <!-- main menu start-->
                 <nav>
                     <ul class="main-menu">
-                        {{-- <li class="main-menu__item main-menu__item--has-child main-menu__item--active"><a class="main-menu__link" href="javascript:void(0);"><span>Home</span></a>
-                            <!-- sub menu start-->
-                            <ul class="main-menu__sub-list">
-                                <li class="item--active"><a href="index.html"><span>01 Home Color Style</span></a></li>
-                                <li><a href="front_2.html"> <span>02 Home Color Style</span></a></li>
-                                <li><a href="front_3.html"><span>03 Home Color Style</span></a></li>
-                                <li><a href="mono/index.html"><span>04 Home Monochrome</span></a></li>
-                                <li><a href="mono/front_2.html"><span>05 Home Monochrome</span></a></li>
-                                <li><a href="mono/front_3.html"><span>06 Home Monochrome</span></a></li>
-                            </ul>
-                            <!-- sub menu end-->
-                        </li> --}}
 
                         <li class="main-menu__item"><a class="main-menu__link" href="{{route('website.campanhas')}}"><span>Campanhas</span></a></li>
-                        {{-- <li class="main-menu__item"><a class="main-menu__link" href="contacts.html"><span>Contacts</span></a></li> --}}
+                        <li class="main-menu__item"><a class="main-menu__link" href="{{route('website.faq')}}"><span>FAQ</span></a></li>
                         <li class="main-menu__item"><a class="main-menu__link" href="{{route('login')}}"><span>Login</span></a></li>
 
                     </ul>
@@ -105,7 +94,7 @@
                 </div>
                 <div class="dropdown-trigger d-block d-sm-none">
                     <div class="dropdown-trigger__item"></div>
-                </div><a class="button button--squared" href="{{route('campanha.create')}}"><span>Criar Doação</span></a>
+                </div><a class="button button--squared" href="{{route('campanha.create')}}"><span>Criar Cofrinho</span></a>
             </div>
         </div>
     </div>
