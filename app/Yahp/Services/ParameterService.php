@@ -3,22 +3,22 @@
 namespace App\Yahp\Services;
 
 use App\Yahp\Contracts\ServiceContract;
-use App\Yahp\Repositories\UserRepository;
+use App\Yahp\Repositories\ParameterRepository;
 
-class UserService implements ServiceContract
+class ParameterService implements ServiceContract
 {
      /**
-     * @var AlertaRepository
+     * @var ParameterRepository
      */
     private $repository;
     
     /**
      * ClienteService constructor.
-     * @param AlertaRepository $clienteRepository
+     * @param ParameterRepository $parameterRepository
      */
-    public function __construct(UserRepository $userRepository)
+    public function __construct(ParameterRepository $parameterRepository)
     {
-        $this->repository = $userRepository;
+        $this->repository = $parameterRepository;
     }
 
     /**
@@ -36,6 +36,15 @@ class UserService implements ServiceContract
     public function renderEdit($id)
     {
         return $this->repository->getById($id);
+    }
+
+    /**
+     * @param $id
+     * @return mixed
+     */
+    public function renderBySlug($slug)
+    {
+        return $this->repository->getBySlug($slug);
     }
 
     /**

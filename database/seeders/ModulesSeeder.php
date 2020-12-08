@@ -13,6 +13,9 @@ class ModulesSeeder extends Seeder
      * @return void
      */
 
+    //  ATENCAO QUALQUER ALTERACAO DEVE SER FEITA TAMBEM NO APP SERVICE PROVIDES
+    // E TAMBEM NO MIDDLEWARE
+    
     public function run()
     {
         DB::table('modules')->truncate();
@@ -68,11 +71,35 @@ class ModulesSeeder extends Seeder
         DB::table('modules')->insert([
             'name' => 'Campanhas',
             'route' => 'campanha.index',
-            'icon' => 'far  fa-file-alt fa-2x',
+            'icon' => 'far fa-file-alt fa-2x',
             'slug' => 'campanha',
             'type' => 1,
             'menu_master' => NULL,
             'order' => 2,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        DB::table('modules')->insert([
+            'name' => 'Pagamentos',
+            'route' => 'pagamentos.index',
+            'icon' => 'fas fa-money-bill-wave fa-2x',
+            'slug' => 'pagamentos',
+            'type' => 1,
+            'menu_master' => NULL,
+            'order' => 3,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        DB::table('modules')->insert([
+            'name' => 'Parametros',
+            'route' => 'parametros.index',
+            'icon' => 'fas fa-cog fa-2x',
+            'slug' => 'parametros',
+            'type' => 3,
+            'menu_master' => 2,
+            'order' => 3,
             'created_at' => now(),
             'updated_at' => now(),
         ]);
