@@ -13,6 +13,9 @@ class ModulesSeeder extends Seeder
      * @return void
      */
 
+    //  ATENCAO QUALQUER ALTERACAO DEVE SER FEITA TAMBEM NO APP SERVICE PROVIDES
+    // E TAMBEM NO MIDDLEWARE
+    
     public function run()
     {
         DB::table('modules')->truncate();
@@ -84,6 +87,18 @@ class ModulesSeeder extends Seeder
             'slug' => 'pagamentos',
             'type' => 1,
             'menu_master' => NULL,
+            'order' => 3,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        DB::table('modules')->insert([
+            'name' => 'Parametros',
+            'route' => 'parametros.index',
+            'icon' => 'fas fa-cog fa-2x',
+            'slug' => 'parametros',
+            'type' => 3,
+            'menu_master' => 2,
             'order' => 3,
             'created_at' => now(),
             'updated_at' => now(),

@@ -73,4 +73,9 @@ Route::group(['prefix' => 'admin','middleware' => ['CheckPermission','auth']], f
 		Route::resource('pagamentos', 'App\Http\Controllers\PaymentController');
 	});
 
+	Route::group(['middleware' => ['auth','CheckPermission'], 'prefix' => 'parametros'], function () {
+		Route::get('/',['as' => 'parametros.index', 'uses' => 'App\Http\Controllers\ParametersController@index']);
+		Route::put('/update/{id}',['as' => 'parametros.update', 'uses' => 'App\Http\Controllers\ParametersController@update']);
+	});
+
 });

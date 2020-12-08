@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Yahp\Services\CampanhaService;
 use App\Yahp\Services\PaymentService;
+use App\Yahp\Services\ParameterService;
 use Illuminate\Support\Facades\Input;
 
 class WebsiteController extends Controller
@@ -14,10 +15,11 @@ class WebsiteController extends Controller
      *
      * @return void
      */
-    public function __construct(CampanhaService $campanhaService, PaymentService $paymentService)
+    public function __construct(CampanhaService $campanhaService, PaymentService $paymentService, ParameterService $parameterService)
     {
         $this->campanhaService = $campanhaService;
         $this->paymentService = $paymentService;
+        $this->parameterService = $parameterService;
     }
 
     /**
@@ -27,7 +29,11 @@ class WebsiteController extends Controller
      */
     public function index()
     {
-        return view('website.index');
+        $data = [
+            'minpay' => $this->parameterService->renderBySlug('campanha.num'),
+        ];
+
+        return view('website.index',$data);
     }
 
     /**
@@ -39,6 +45,7 @@ class WebsiteController extends Controller
     {
         $data = [
             'campanhas' => $this->campanhaService->renderByStatus(2),
+            'minpay' => $this->parameterService->renderBySlug('campanha.num'),
         ];
 
         return view('website.campanhas',$data);

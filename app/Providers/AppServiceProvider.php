@@ -34,7 +34,7 @@ class AppServiceProvider extends ServiceProvider
                 // LEMBRE-SE
                 // ALTERAR NO MIDDLWARE -> CheckPermission
                 
-                $admin_perm = [1,2,3,4,5,6];
+                $admin_perm = [1,2,3,4,5,6,7];
                 $user_perm = [1,5,6];
                 $else_perm = [];
     
@@ -51,6 +51,5 @@ class AppServiceProvider extends ServiceProvider
                 $view->with('modules', $modulos);
             }
         });
-
     }
 }

@@ -19,7 +19,8 @@ class CheckPermission
         // ATENCAO
         // ALTERAR APP SERVICE PROVIDER
         // ATENCAO
-        $admin_perm = ['dashboard','usuario','categorias','campanha','pagamentos'];
+        
+        $admin_perm = ['dashboard','usuario','categorias','campanha','pagamentos','parametros'];
         $user_perm = ['dashboard','campanha','pagamentos'];
         $route = explode('.', \Route::currentRouteName());
 
