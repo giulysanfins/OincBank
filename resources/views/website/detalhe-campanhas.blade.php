@@ -46,30 +46,32 @@
                                 </div>
                                 <div class="col-lg-5">
                                     <div class="donation-item__details-holder">
-                                        <div class="donation-item__details-item"><span>Meta: </span><span>{{$campanha->valor}}</span></div>
+                                        <div class="donation-item__details-item"><span>Meta: </span><span>R$ {{number_format($campanha->valor,2,",",".")}}</span></div>
                                         <div class="donation-item__details-item"><span>Pledged: </span><span>95 200$</span></div>
                                     </div>
                                 </div>
                             </div>
-                            <form class="form donation-form" action="javascript:void(0);">
+                            <form class="form donation-form" action="{{route('website.payment.store',$campanha->id)}}" method="POST">
+                                @csrf
+                                @method('post')
                                 <div class="row align-items-baseline margin-bottom">
                                     <div class="col-lg-3 col-xl-4">
                                         <label class="form__label"><span class="form__icon">R$</span>
-                                            <input class="form__field form__input-number" type="number">
+                                            <input class="form__field form__input-number money" name='valor_manual' value="{{old('valor_manual')}}" type="text">
                                         </label>
                                     </div>
                                     <div class="col-lg-9 col-xl-8 text-lg-right">
-                                        <label class="form__radio-label"><span class="form__label-text">R$100,00</span>
-                                            <input class="form__input-radio" type="radio" name="value-select" value="100" checked="checked"><span class="form__radio-mask form__radio-mask"></span>
+                                        <label class="form__radio-label"><span class="form__label-text">R$ {{ number_format('100',2,",",".") }}</span>
+                                            <input class="form__input-radio" type="radio" name="valor_auto" value="100" checked="checked"><span class="form__radio-mask form__radio-mask"></span>
                                         </label>
-                                        <label class="form__radio-label"><span class="form__label-text">R$200,00</span>
-                                            <input class="form__input-radio" type="radio" name="value-select" value="200"><span class="form__radio-mask form__radio-mask"></span>
+                                        <label class="form__radio-label"><span class="form__label-text">R$ {{ number_format('200',2,",",".") }}</span>
+                                            <input class="form__input-radio" type="radio" name="valor_auto" value="200"><span class="form__radio-mask form__radio-mask"></span>
                                         </label>
-                                        <label class="form__radio-label"><span class="form__label-text">R$500,00</span>
-                                            <input class="form__input-radio" type="radio" name="value-select" value="500"><span class="form__radio-mask form__radio-mask"></span>
+                                        <label class="form__radio-label"><span class="form__label-text">R$ {{ number_format('500',2,",",".") }}</span>
+                                            <input class="form__input-radio" type="radio" name="valor_auto" value="500"><span class="form__radio-mask form__radio-mask"></span>
                                         </label>
-                                        <label class="form__radio-label"><span class="form__label-text">R$1000,00</span>
-                                            <input class="form__input-radio" type="radio" name="value-select" value="1000"><span class="form__radio-mask form__radio-mask"></span>
+                                        <label class="form__radio-label"><span class="form__label-text">R$ {{ number_format('1000',2,",",".") }}</span>
+                                            <input class="form__input-radio" type="radio" name="valor_auto" value="1000"><span class="form__radio-mask form__radio-mask"></span>
                                         </label>
                                     </div>
                                 </div>
@@ -80,7 +82,7 @@
                                     <div class="col-12">
                                         <label class="form__radio-label">
                                             <img class="form__label-img" src="{{asset('helpo-theme')}}/img/pagamentos/mercadopago.png" alt="mercado pago" width="30%">
-                                            <input class="form__input-radio" type="radio" name="method-select" value="mercado_pago" checked="checked"><span class="form__radio-mask form__radio-mask"></span>
+                                            <input class="form__input-radio" type="radio" name="tipo_pagamento" value="mercado_pago" checked="checked"><span class="form__radio-mask form__radio-mask"></span>
                                         </label>
                                     </div>
                                 </div>
@@ -89,16 +91,20 @@
                                         <h6 class="form__title">Informações Pessoais</h6>
                                     </div>
                                     <div class="col-lg-4 margin-30">
-                                        <input class="form__field" type="text" name="first-name" placeholder="Primeiro Nome">
+                                        @if (Auth::check())
+                                            <p> Doar como: <b>{{auth()->user()->name}}</b></p>
+                                        @else
+                                            {{-- <p> Para doar, <a href="{{route('login')}}" target="_blank">faça o login</a></p> --}}
+                                            <p>Para doar, faça login.</p>
+                                        @endif
                                     </div>
-                                    <div class="col-lg-4 margin-30">
-                                        <input class="form__field" type="text" name="last-name" placeholder="Último Name">
-                                    </div>
-                                    <div class="col-lg-4 margin-30">
-                                        <input class="form__field" type="email" name="email" placeholder="E-mail">
-                                    </div>
+
                                     <div class="col-lg-4">
-                                        <button class="form__submit" type="submit">+ Doar</button>
+                                        @if (Auth::check())
+                                            <button class="form__submit" type="submit">+ Doar</button>
+                                        @else
+                                            <a class="form__submit" href="{{route('login',['campanha' => $campanha->id])}}" >Login</a>
+                                        @endif
                                     </div>
                                 </div>
                             </form>
@@ -193,4 +199,12 @@
         </div>
     </section>
 </main>
+@endsection
+
+@section('scripts')
+<script>
+    $(document).ready(function(){
+        $('.money').mask("#.##0,00", {reverse: true});
+    });
+</script>
 @endsection

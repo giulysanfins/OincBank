@@ -7,7 +7,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 		<meta http-equiv="X-UA-Compatible" content="ie=edge"/>
 		<link rel="shortcut icon" href="{{asset('helpo-theme')}}/img/favicon.ico"/>
-		<title>Helpo HTML Template</title>
+		<title>OincBank {{$title ?? ''}}</title>
 		<!-- styles-->
         <link rel="stylesheet" href="{{asset('helpo-theme')}}/css/styles.min.css"/>
         <link rel="stylesheet" href="{{asset('vendors')}}/fontawesome/css/all.min.css"/>
@@ -31,7 +31,10 @@
 		<!-- scripts-->
         <script src="{{asset('helpo-theme')}}/js/common.min.js"></script>
 		<script src="{{asset('vendors')}}/fontawesome/js/all.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.12/jquery.mask.min.js"></script>
 		@include('sweetalert::alert')
+
+		@yield('scripts')
 
 	</body>
 </html>

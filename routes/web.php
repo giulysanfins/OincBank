@@ -32,6 +32,14 @@ Route::group(['prefix' => 'campanhas'], function () {
 	Route::get('/detalhes/{id}', 'App\Http\Controllers\WebsiteController@detalhes')->name('website.campanhas.detalhes');
 });
 
+Route::group(['prefix' => 'pagamento'], function () {
+	Route::post('/{id}','App\Http\Controllers\WebsiteController@payment')->name('website.payment.store');
+	Route::get('/checkout/{id}','App\Http\Controllers\WebsiteController@checkout')->name('website.payment.checkout');
+	Route::get('/sucesso/{id}','App\Http\Controllers\WebsiteController@sucesso')->name('website.payment.success');
+	Route::get('/falha/{id}','App\Http\Controllers\WebsiteController@failed')->name('website.payment.failed');
+	Route::get('/pendente/{id}','App\Http\Controllers\WebsiteController@pending')->name('website.payment.pending');
+});
+
 Auth::routes();
 
 Route::group(['prefix' => 'admin','middleware' => ['CheckPermission','auth']], function () {
@@ -74,6 +82,13 @@ Route::group(['prefix' => 'admin','middleware' => ['CheckPermission','auth']], f
 		Route::put('/active/{id}', ['as' => 'categorias.active', 'uses' => 'App\Http\Controllers\CategoryController@active']);
     });
 
+	Route::group(['middleware' => ['auth','CheckPermission']], function () {
+		Route::resource('pagamentos', 'App\Http\Controllers\PaymentController');
+	});
 
+	Route::group(['middleware' => ['auth','CheckPermission'], 'prefix' => 'parametros'], function () {
+		Route::get('/',['as' => 'parametros.index', 'uses' => 'App\Http\Controllers\ParametersController@index']);
+		Route::put('/update/{id}',['as' => 'parametros.update', 'uses' => 'App\Http\Controllers\ParametersController@update']);
+	});
 
 });

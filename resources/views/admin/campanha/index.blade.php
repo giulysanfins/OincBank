@@ -1,26 +1,25 @@
-@extends('layouts/app', ['activePage' => '',
-'activeButton' => '',
-'title' => 'Criação de Campanhas'])
+@extends('layouts/app', ['activePage' => '','activeButton' => '','title' => 'Campanhas | OincBank'])
 
 @section('content')
     <div class="content">
         <div class="row">
 
             <div class="col-12">
+                <h3>Campanhas</h3>
                 <div class="card card-stats">
                     <div class="card-body">
                         <div class="row">
                             <div class="col-12">
                                 <div class="col-12 text-right">
-                                    {{-- @if (auth()->user()->role == 2) --}}
+                                    @if (auth()->user()->role == 2)
                                         <a href="{{route('campanha.store')}}" class="btn btn-primary">Adicionar campanha</a>
                                         <a href="{{route('campanha.apagar_adm')}}" class="btn btn-primary">Deletar campanha</a>
-                                    {{-- @endif --}}
+                                    @endif
                                 </div>
                                 {{-- comeco tabelas ativas --}}
 
                                 <div class="accordion" id="acoordion_campanhas">
-{{--
+                                {{--
                                     <div class="card">
                                         <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#pendentes" aria-expanded="true" aria-controls="collapseOne">
                                             <div class="card-header" id="headerPendentes">
@@ -72,7 +71,8 @@
                                                 @endif
                                             </div>
                                         </div>
-                                    </div> --}}
+                                    </div> 
+                                --}}
 
                                     <div class="card">
                                         <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
@@ -231,8 +231,8 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
 
+                                </div>
 
                             </div>
 

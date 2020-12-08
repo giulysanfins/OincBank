@@ -1,6 +1,4 @@
-@extends('layouts/app', ['activePage' => '',
-'activeButton' => '',
-'title' => 'Criação de Campanhas'])
+@extends('layouts/app', ['activePage' => '', 'activeButton' => '', 'title' => 'Edição de Campanhas'])
 
 @section('content')
     <div class="content">
@@ -27,12 +25,8 @@
                                         <label for="categoria">Categoria*</label>
                                         <br>
                                         <select class="custom-select" id="categoria_id" name="categoria_id" >
-                                            <option disabled selected >
-                                                 {{old('categoria_id',$campanha->categoria->name)}}
-
-                                                </option>
                                                 @foreach ($categorias as $categoria)
-                                                <option value="{{$categoria->id}}">{{$categoria->name}}</option>
+                                                    <option value="{{$categoria->id}}">{{$categoria->name}}</option>
                                                 @endforeach
                                         </select>
                                     </div>

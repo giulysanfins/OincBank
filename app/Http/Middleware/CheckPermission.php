@@ -19,8 +19,10 @@ class CheckPermission
         // ATENCAO
         // ALTERAR APP SERVICE PROVIDER
         // ATENCAO
-        $admin_perm = ['dashboard','usuario','categorias','campanha','profile'];
-        $user_perm = ['dashboard','campanha','profile'];
+        
+        $admin_perm = ['dashboard','usuario','categorias','campanha','profile','pagamentos','parametros'];
+        $user_perm = ['dashboard','campanha','profile','pagamentos'];
+
         $route = explode('.', \Route::currentRouteName());
 
         if(auth()->user()->role == 2 && in_array($route[0],$user_perm))

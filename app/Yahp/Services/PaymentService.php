@@ -2,23 +2,23 @@
 
 namespace App\Yahp\Services;
 
+use App\Yahp\Repositories\PaymentRepository;
 use App\Yahp\Contracts\ServiceContract;
-use App\Yahp\Repositories\UserRepository;
 
-class UserService implements ServiceContract
+class PaymentService implements ServiceContract
 {
      /**
-     * @var AlertaRepository
+     * @var PhotoRepository
      */
     private $repository;
-    
+        
     /**
      * ClienteService constructor.
-     * @param AlertaRepository $clienteRepository
+     * @param PaymentRepository $paymentRepository
      */
-    public function __construct(UserRepository $userRepository)
+    public function __construct(PaymentRepository $paymentRepository)
     {
-        $this->repository = $userRepository;
+        $this->repository = $paymentRepository;
     }
 
     /**
@@ -36,6 +36,24 @@ class UserService implements ServiceContract
     public function renderEdit($id)
     {
         return $this->repository->getById($id);
+    }
+
+    /**
+     * @param $id
+     * @return mixed
+     */
+    public function renderByCampanha($campanha_id)
+    {
+        return $this->repository->getByCampanha($campanha_id);
+    }
+    
+    /**
+     * @param $id
+     * @return mixed
+     */
+    public function renderByUser($user_id)
+    {
+        return $this->repository->getByUser($user_id);
     }
 
     /**

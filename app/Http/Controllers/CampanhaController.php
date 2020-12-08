@@ -16,19 +16,20 @@ use App\Http\Requests\ProfileRequest;
 use App\Http\Requests\PasswordRequest;
 use Illuminate\Support\Facades\Hash;
 
-
 use App\Yahp\Services\CategoryService;
+use App\Yahp\Services\PaymentService;
 
 
 
 class CampanhaController extends Controller
 {
 
-    public function __construct(CampanhaService $campanhaService,CategoryService $categoryService)
+    public function __construct(CampanhaService $campanhaService,CategoryService $categoryService,PaymentService $paymentService)
     {
         $this->middleware('auth');
         $this->campanhaService = $campanhaService;
         $this->categoryService = $categoryService;
+        $this->paymentService = $paymentService;
     }
 
      /**
@@ -49,7 +50,6 @@ class CampanhaController extends Controller
                 'campanhas_aprovadas' => $this->campanhaService->renderByStatus(2),
                 'campanhas_expiradas' => $this->campanhaService->renderByStatus(5),
                 'categorias' => $this->categoryService->renderByStatus(1)
-
             ];
 
          } elseif (auth()->user()->role == 2) {
@@ -95,10 +95,9 @@ class CampanhaController extends Controller
      public function mostrar($id)
      {
          $data = [
-             'campanhas' => $this->campanhaService->renderEdit($id),
-             'pageTitle' => 'Campanha',
-                         'photo' => $this->photoService->renderPhotoUser('users',auth()->user()->id)
-
+            'campanhas' => $this->campanhaService->renderEdit($id),
+            'pageTitle' => 'Campanha',
+            'photo' => $this->photoService->renderPhotoUser('users',auth()->user()->id)
          ];
 
          return view('pages.campanha.show',$data);
@@ -169,7 +168,8 @@ class CampanhaController extends Controller
      {
         $data = [
             'campanha' => $this->campanhaService->renderEdit($id),
-            'pageTitle' => 'Editar Campanha'
+            'pageTitle' => 'Visualizar Campanha',
+            'pagamentos' => $this->paymentService->renderByCampanha($id),
         ];
 
         return view('admin.campanha.show',$data);
