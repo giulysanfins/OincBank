@@ -212,11 +212,14 @@ class CampanhaController extends Controller
      public function update(Request $request, $id)
      {
          try {
+            if($request->file('photo_perfil'))
+              {
+
             $this->validate($request, [
 
                 'photo_perfil' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             ]);
-
+              }
              $update = $this->campanhaService->buildUpdate($id,$request->merge([
                 'valor' => str_replace(',','.',str_replace('.','',$request->valor))
              ])->all());
