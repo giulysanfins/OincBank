@@ -16,7 +16,7 @@ class WebsiteController extends Controller
      *
      * @return void
      */
-    public function __construct(CampanhaService $campanhaService, PaymentService $paymentService, ParameterService $parameterService)
+    public function __construct(CampanhaService $campanhaService, PaymentService $paymentService, ParameterService $parameterService, CategoryService $categoryService)
     {
         $this->campanhaService = $campanhaService;
         $this->categoryService = $categoryService;
