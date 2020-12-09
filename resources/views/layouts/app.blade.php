@@ -26,6 +26,8 @@
 
         {{-- Jquery mask --}}
         <script text="type=text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+        {{-- Uso para SweetAlert no JS --}}
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 
     </head>
