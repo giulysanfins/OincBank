@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Mail;
 
 use Illuminate\Http\Request;
 use Storage;
+use Validator;
 use Carbon\Carbon;
 
 use App\Http\Requests\ProfileRequest;
@@ -132,6 +133,14 @@ class CampanhaController extends Controller
             // dd($request->all());
             //  if($request->file('photo_perfil'))
             //  {
+
+
+
+                //process the file
+
+
+
+
                 $ext = $request->file('photo_perfil')->extension();
                 $ts = Carbon::now()->timestamp;
                 $filename = $ts."_".$user_id.".".$ext;
@@ -144,16 +153,17 @@ class CampanhaController extends Controller
                     'valor' => str_replace(',','.',str_replace('.','',$request->valor))
                 ])->all());
                 alert()->success('Sucesso','Campanha adicionada com sucesso.')->persistent('Fechar');
-            //  }
+
 
             //  dd($data);
              return redirect()->route('campanha.index',$data);
 
         } catch (\Exception $e) {
 
+
              \Log::error($e->getFile() . "\n" . $e->getLine() . "\n" . $e->getMessage());
              alert()->error('Erro','Erro em adicionar a Campanha.')->persistent('Fechar');
-             return redirect()->route('campanha.index')->withInput();
+             return redirect()->route('campanha.create')->withInput();
 
          }
      }
@@ -202,7 +212,14 @@ class CampanhaController extends Controller
      public function update(Request $request, $id)
      {
          try {
+            if($request->file('photo_perfil'))
+              {
 
+            $this->validate($request, [
+
+                'photo_perfil' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            ]);
+              }
              $update = $this->campanhaService->buildUpdate($id,$request->merge([
                 'valor' => str_replace(',','.',str_replace('.','',$request->valor))
              ])->all());
