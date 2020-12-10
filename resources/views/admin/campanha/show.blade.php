@@ -1,4 +1,4 @@
-@extends('layouts/app', ['activePage' => '', 'activeButton' => '', 'title' => 'Visualização Campanha'])
+@extends('layouts/app', ['activePage' => '', 'activeButton' => '', 'title' => 'Visualização Cofrinhos'])
 
 @section('content')
     <div class="content">
@@ -8,7 +8,7 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-12">
-                                <h3 class="">Informações da Campanha "{{$campanha->titulo}}"</h3>
+                                <h3 class="">Informações do Cofrinho"{{$campanha->titulo}}"</h3>
                             </div>
                             <br>
                             <div class="col-lg-8">
@@ -32,7 +32,7 @@
                             </div>
                             {{-- data encerramento --}}
                             <div class="col-md-4" >
-                                <label for="data_encerramento">Que data a campanha deve encerrar?*</label>
+                                <label for="data_encerramento">Que data o cofrinho deve encerrar?*</label>
                                 <p>{{$campanha->data_encerramento->format('d/m/Y')}}</p>
                             </div>
 
@@ -51,7 +51,7 @@
 
                             {{-- img upload --}}
                             <div class="col-md-6">
-                                <label class="form-control-label" for="input-photo_perfil">Foto Campanha</label>
+                                <label class="form-control-label" for="input-photo_perfil">Foto Cofrinho</label>
                                 <br />
                                 <img class="img-thumbnail border-gray" src="{{asset('storage')}}/images/{{$campanha->profile_image}}" alt="foto_{{$campanha->titulo}}">
                             </div>
@@ -80,7 +80,7 @@
                         <div class="row">
 
                             <div class="col-12">
-                                <h3 class="">Doações para a Campanha</h3>
+                                <h3 class="">Doações para o Cofrinho</h3>
                             </div>
 
                             <div class="col-12 table-responsive">
@@ -102,7 +102,7 @@
                                                 @if (auth()->user()->role == 1)
                                                     <td>{{$pagamento->user->name}}</td>
                                                 @endif
-                                               
+
                                                 <td>R$ {{number_format($pagamento->valor ,2,",",".")}}</td>
                                                 <td>
                                                     @if ($pagamento->status == 1)
@@ -113,7 +113,7 @@
                                                         Pendente Pagamento - Mercado Pago
                                                     @elseif ($pagamento->status == 4)
                                                         Falha no pagamento
-                                                    @endif                                                
+                                                    @endif
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -125,7 +125,7 @@
                     </div>
                 </div>
             </div>
-            
+
         </div>
     </div>
 @endsection

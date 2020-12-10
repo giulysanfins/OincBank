@@ -1,4 +1,4 @@
-@extends('layouts.site.app', ['activePage' => '', 'title' => 'OincBank - TOS', 'navName' => '', 'activeButton' => ''])
+@extends('layouts.site.app', ['activePage' => '', 'title' => '- Termos de Uso', 'navName' => '', 'activeButton' => ''])
 
 
 

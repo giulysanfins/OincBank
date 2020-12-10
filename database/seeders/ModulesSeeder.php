@@ -15,7 +15,7 @@ class ModulesSeeder extends Seeder
 
     //  ATENCAO QUALQUER ALTERACAO DEVE SER FEITA TAMBEM NO APP SERVICE PROVIDES
     // E TAMBEM NO MIDDLEWARE
-    
+
     public function run()
     {
         DB::table('modules')->truncate();
@@ -69,7 +69,7 @@ class ModulesSeeder extends Seeder
         ]);
 
         DB::table('modules')->insert([
-            'name' => 'Campanhas',
+            'name' => 'Cofrinhos',
             'route' => 'campanha.index',
             'icon' => 'far fa-file-alt fa-2x',
             'slug' => 'campanha',

@@ -15,13 +15,13 @@
                                         <tr>
                                             <th>#</th>
                                             <th>Usuário</th>
-                                            <th>Campanha</th>
+                                            <th>Cofrinho</th>
                                             <th>Valor</th>
                                             <th>Status</th>
                                             <th></th>
                                         </tr>
                                     </thead>
-                                    <tbody> 
+                                    <tbody>
                                         @foreach ($pagamentos as $pagamento)
                                             <tr>
                                                 <td>{{$pagamento->id}}</td>
@@ -37,7 +37,7 @@
                                                         Pendente Pagamento - Mercado Pago
                                                     @elseif ($pagamento->status == 4)
                                                         Falha no pagamento
-                                                    @endif     
+                                                    @endif
                                                 </td>
                                                 <td></td>
                                             </tr>
