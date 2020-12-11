@@ -93,6 +93,7 @@
                                                                 <th scope="col">#</th>
                                                                 <th scope="col">Titulo</th>
                                                                 <th scope="col">Categoria</th>
+                                                                <th scope="col">Valores</th>
                                                                 <th scope="col">Data Criacao</th>
                                                                 <th scope="col"></th>
                                                             </tr>
@@ -103,24 +104,24 @@
                                                                     <th scope="row">{{$campanha->id}}</th>
                                                                     <td>{{$campanha->titulo}}</td>
                                                                     <td>{{$campanha->categoria->name}}</td>
+                                                                    <td>
+
+                                                                    </td>
                                                                     <td>{{$campanha->created_at->format('d/m/Y h:i:s')}}</td>
                                                                     <td>
                                                                         <div class="btn-group float-right" role="group" aria-label="Botões de Ação - Clientes">
-
-                                                                            <form action="{{ route('campanha.desativar', $campanha->id) }}" method="POST" id="my-form">
-                                                                                @csrf
-                                                                                @method('put')
-                                                                                <a href="{{route('campanha.edit',$campanha->id)}}" class="btn btn-info">Editar</a>
-                                                                                <a href="{{route('campanha.show',$campanha->id)}}" class="btn btn-secondary">Visualizar</a>
-
-
-
-
-                                                                                <button type="submit" class="btn btn-danger">Deletar</button>
-                                                                            </form>
+                                                                            <a href="{{route('campanha.edit',$campanha->id)}}" class="btn btn-info">Editar</a>
+                                                                            <a href="{{route('campanha.show',$campanha->id)}}" class="btn btn-secondary">Visualizar</a>
+                                                                            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#sacar{{$campanha->id}}">Sacar valor</button>
+                                                                            <button type="button" class="btn btn-danger">Deletar</button>
                                                                         </div>
                                                                     </td>
                                                                 </tr>
+
+                                                                @component('admin.campanha.components.solicitar',[
+                                                                    'campanha' => $campanha
+                                                                ])@endcomponent
+                                                                
                                                             @endforeach
                                                         </tbody>
                                                     </table>
@@ -148,31 +149,42 @@
                                                             <th scope="col">#</th>
                                                             <th scope="col">Titulo</th>
                                                             <th scope="col">Categoria</th>
+                                                            <th scope="col">Arrecadação</th>
                                                             <th scope="col">Data Criacao</th>
                                                             <th scope="col"></th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
                                                         @foreach ($campanhas_aprovadas as $campanha)
+                                                            @php
+                                                                $total = 0;
+                                                                foreach($campanha->payments as $pag)
+                                                                {
+                                                                    $total = $total + $pag->valor;
+                                                                }
+
+                                                            @endphp
                                                             <tr>
                                                                 <th scope="row">{{$campanha->id}}</th>
                                                                 <td>{{$campanha->titulo}}</td>
                                                                 <td>{{$campanha->categoria->name}}</td>
+                                                                <td><b>R$ {{number_format($total,2,",",".")}}</b> / R$ {{number_format($campanha->valor,2,",",".")}}</td>
+
                                                                 <td>{{$campanha->created_at->format('d/m/Y h:i:s')}}</td>
                                                                 <td>
                                                                     <div class="btn-group float-right" role="group" aria-labe   l="Botões de Ação - Clientes">
-
-                                                                        <form action="{{ route('campanha.desativar', $campanha->id) }}" method="POST" id="my-form" onsubmit="validate(event)">
-                                                                            @csrf
-                                                                            @method('put')
-                                                                            <a href="{{route('campanha.edit',$campanha->id)}}" class="btn btn-info">Editar</a>
-                                                                            <a href="{{route('campanha.show',$campanha->id)}}" class="btn btn-secondary">Visualizar</a>
-
-                                                                            <button type="submit" class="btn btn-danger button">Deletar</button>
-                                                                        </form>
+                                                                        <a href="{{route('campanha.edit',$campanha->id)}}" class="btn btn-info">Editar</a>
+                                                                        <a href="{{route('campanha.show',$campanha->id)}}" class="btn btn-secondary">Visualizar</a>
+                                                                        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#sacar{{$campanha->id}}">Sacar valor</button>
+                                                                        <button type="submit" class="btn btn-danger button">Deletar</button>
                                                                     </div>
                                                                 </td>
                                                             </tr>
+
+                                                            @component('admin.campanha.components.solicitar',[
+                                                                'campanha' => $campanha,
+                                                                'bancos' => $bancos
+                                                            ])@endcomponent
                                                         @endforeach
                                                     </tbody>
                                                 </table>
@@ -211,17 +223,17 @@
                                                                     <td>{{$campanha->created_at->format('d/m/Y h:i:s')}}</td>
                                                                     <td>
                                                                         <div class="btn-group float-right" role="group" aria-label="Botões de Ação - Clientes">
-
-                                                                            <form action="{{ route('campanha.ativar', $campanha->id) }}" method="POST">
-                                                                                @csrf
-                                                                                @method('put')
-                                                                                <a href="{{route('campanha.edit',$campanha->id)}}" class="btn btn-info">Editar</a>
-                                                                                <a href="{{route('campanha.show',$campanha->id)}}" class="btn btn-secondary">Visualizar</a>
-                                                                                <button type="submit" class="btn btn-success">Ativar</button>
-                                                                            </form>
+                                                                            <a href="{{route('campanha.edit',$campanha->id)}}" class="btn btn-info">Editar</a>
+                                                                            <a href="{{route('campanha.show',$campanha->id)}}" class="btn btn-secondary">Visualizar</a>
+                                                                            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#sacar{{$campanha->id}}">Sacar valor</button>
+                                                                            <button type="submit" class="btn btn-success">Ativar</button>
                                                                         </div>
                                                                     </td>
                                                                 </tr>
+
+                                                                @component('admin.campanha.components.solicitar',[
+                                                                    'campanha' => $campanha
+                                                                ])@endcomponent
                                                             @endforeach
                                                         </tbody>
                                                     </table>
@@ -246,7 +258,7 @@
 
 @section('scripts')
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.9/sweetalert2.min.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.9/sweetalert2.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.9/sweetalert2.min.js"></script>
   <script>
 
     function validate() {
@@ -271,4 +283,35 @@
         });
     }
     </script>
+
+<script>
+    $(".agencia").mask("0000");
+    $(".conta").mask("#0-0",{reverse:true});
+    $('.dinheiro').mask("#.##0,00", {reverse: true});
+
+$("#documento").keydown(function(){
+    try {
+        $(".documento").unmask();
+    } catch (e) {}
+
+    var tamanho = $(".documento").val().length;
+
+    if(tamanho < 11){
+        $(".documento").mask("999.999.999-99");
+    } else {
+        $(".documento").mask("99.999.999/9999-99");
+    }
+
+    // ajustando foco
+    var elem = this;
+    setTimeout(function(){
+        // mudo a posição do seletor
+        elem.selectionStart = elem.selectionEnd = 10000;
+    }, 0);
+    // reaplico o valor para mudar o foco
+    var currentValue = $(this).val();
+    $(this).val('');
+    $(this).val(currentValue);
+});
+</script>
 @endsection

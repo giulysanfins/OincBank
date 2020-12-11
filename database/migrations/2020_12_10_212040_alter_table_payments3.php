@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AlterTablePayments extends Migration
+class AlterTablePayments3 extends Migration
 {
     /**
      * Run the migrations.
@@ -14,9 +14,7 @@ class AlterTablePayments extends Migration
     public function up()
     {
         Schema::table('payments', function (Blueprint $table) {
-            $table->integer('pagamento_id')->after('status')->nullable();
-            $table->string('pagamento_tipo',30)->after('pagamento_id')->nullable();
-            $table->string('preference_id',100)->after('pagamento_tipo')->nullable();
+            $table->integer('tipo')->after('status')->comment('1-deposito','2-retirada');
         });
     }
 
@@ -28,9 +26,7 @@ class AlterTablePayments extends Migration
     public function down()
     {
         Schema::table('payments', function (Blueprint $table) {
-            $table->dropColumn('pagamento_id');
-            $table->dropColumn('pagamento_tipo');
-            $table->dropColumn('preference_id');
+            $table->dropColumn('tipo');
         });
     }
 }

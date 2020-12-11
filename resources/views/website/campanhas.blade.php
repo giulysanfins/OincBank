@@ -53,24 +53,22 @@
                     {{-- botões de categorias --}}
                 </div>
 
-
                 <div class="col-12 mt-4">
-                    <!-- Portfolio Gallery Grid -->
-                    {{-- coloquei aqui minha file --}}
                     @foreach ($campanhas as $campanha)
-                    
+
                         @if (count($campanha->payments) > $minpay)
+                    
                             <div class="col-12 col-md-6 col-lg-4 column {{ $campanha->categoria->name }}">
-                                <div class="causes-item causes-item--primary col-12">
+                                <div class="causes-item causes-item--primary">
                                     <div class="causes-item__body">
                                         <div class="causes-item__top">
-                                            <h6 class="causes-item__title"> <a
-                                                    href="{{ route('website.campanhas.detalhes', $campanha->id) }}">{{ $campanha->titulo }}</a>
+                                            <h6 class="causes-item__title"> 
+                                                <a href="{{ route('website.campanhas.detalhes', $campanha->id) }}">{{ $campanha->titulo }}</a>
                                             </h6>
                                             <p>
-                                                @if (strlen($campanha->descricao) > 65)
+                                                @if (strlen($campanha->descricao) > 35)
                                                     @php
-                                                    $string = Str::substr($campanha->descricao, 0, 65)
+                                                    $string = Str::substr($campanha->descricao, 0, 35)
                                                     @endphp
                                                     {{ $string . '...' }}
                                                 @else
@@ -111,9 +109,8 @@
                         @endif
                     
                     @endforeach
-                    {{-- end minha file --}}
-
                 </div>
+
 
                 <div class="col-12">
                     <!-- pagination start-->

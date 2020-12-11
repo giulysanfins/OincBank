@@ -104,4 +104,32 @@ class PaymentController extends Controller
     {
         //
     }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function saque($id, Request $request)
+    {
+        try {
+            $insert = $this->paymentService->buildInsert($request->merge([
+                'status' => 1,
+                'tipo' => 2,
+                'valor' => str_replace(',','.',str_replace('.','',$request->valor)),
+                'user_id' => auth()->user()->id,
+                'campanha_id' => $id,
+                'tipo' => 2
+                ])->all());
+            alert()->success('Sucesso','Saque solicitado com sucesso.')->persistent('Fechar');
+            return redirect()->route('campanha.index');
+
+        } catch (\Exception $e) {
+           \Log::error($e->getFile() . "\n" . $e->getLine() . "\n" . $e->getMessage());
+           alert()->error('Erro','Erro em solicitar o saque.')->persistent('Fechar');
+           return redirect()->route('campanha.index')->withInput();
+        }
+    }
+
 }

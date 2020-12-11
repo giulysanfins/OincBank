@@ -84,6 +84,7 @@ Route::group(['prefix' => 'admin','middleware' => ['CheckPermission','auth']], f
 
 	Route::group(['middleware' => ['auth','CheckPermission']], function () {
 		Route::resource('pagamentos', 'App\Http\Controllers\PaymentController');
+		Route::post('pagamentos/saque/{id}','App\Http\Controllers\PaymentController@saque')->name('pagamentos.saque');
 	});
 
 	Route::group(['middleware' => ['auth','CheckPermission'], 'prefix' => 'parametros'], function () {
