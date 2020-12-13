@@ -51,7 +51,7 @@ class CampanhaController extends Controller
                 'campanhas_desativadas' => $this->campanhaService->renderByStatus(4),
                 'campanhas_aprovadas' => $this->campanhaService->renderByStatus(2),
                 'campanhas_expiradas' => $this->campanhaService->renderByStatus(5),
-                'categorias' => $this->categoryService->renderByStatus(1)
+                'categorias' => $this->categoryService->renderByStatus(1),
             ];
 
          } elseif (auth()->user()->role == 2) {

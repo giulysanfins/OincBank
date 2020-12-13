@@ -114,14 +114,17 @@
                                 </div>
 
                                 <div class="col-4 mt-3 text-right">
-                                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#sacar{{$campanha->id}}">Sacar valor</button>
+                                    @if (auth()->user()->role == 2)
+                                        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#sacar{{$campanha->id}}">Sacar valor</button>
+                                    @endif
                                 </div>
 
-                                @component('admin.campanha.components.solicitar',[
-                                    'campanha' => $campanha,
-                                    'bancos' => $bancos
-                                ])@endcomponent
-
+                                @if (auth()->user()->role == 2)
+                                    @component('admin.campanha.components.solicitar',[
+                                        'campanha' => $campanha,
+                                        'bancos' => $bancos
+                                    ])@endcomponent
+                                @endif
                                 <div class="col-12 table-responsive">
                                     <table class="table">
                                         <thead>
