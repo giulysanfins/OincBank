@@ -19,18 +19,19 @@ use Illuminate\Support\Facades\Hash;
 
 use App\Yahp\Services\CategoryService;
 use App\Yahp\Services\PaymentService;
-
+use App\Yahp\Services\BankService;
 
 
 class CampanhaController extends Controller
 {
 
-    public function __construct(CampanhaService $campanhaService,CategoryService $categoryService,PaymentService $paymentService)
+    public function __construct(CampanhaService $campanhaService,CategoryService $categoryService,PaymentService $paymentService, BankService $bankService)
     {
         $this->middleware('auth');
         $this->campanhaService = $campanhaService;
         $this->categoryService = $categoryService;
         $this->paymentService = $paymentService;
+        $this->bankService = $bankService;
     }
 
      /**
@@ -50,7 +51,7 @@ class CampanhaController extends Controller
                 'campanhas_desativadas' => $this->campanhaService->renderByStatus(4),
                 'campanhas_aprovadas' => $this->campanhaService->renderByStatus(2),
                 'campanhas_expiradas' => $this->campanhaService->renderByStatus(5),
-                'categorias' => $this->categoryService->renderByStatus(1)
+                'categorias' => $this->categoryService->renderByStatus(1),
             ];
 
          } elseif (auth()->user()->role == 2) {
@@ -61,7 +62,8 @@ class CampanhaController extends Controller
                 'campanhas_desativadas' => $this->campanhaService->renderByStatusUser(4,auth()->user()->id),
                 'campanhas_aprovadas' => $this->campanhaService->renderByStatusUser(2,auth()->user()->id),
                 'campanhas_expiradas' => $this->campanhaService->renderByStatusUser(5,auth()->user()->id),
-                'categorias' => $this->categoryService->renderByStatus(1)
+                'categorias' => $this->categoryService->renderByStatus(1),
+                'bancos' => $this->bankService->renderList(),
             ];
         }
 
@@ -176,10 +178,35 @@ class CampanhaController extends Controller
       */
      public function show($id)
      {
+        $pags = $this->paymentService->renderByCampanha($id);
+        $campanha =  $this->campanhaService->renderEdit($id);
+        $valorTotal = 0;
+        $balanco = 0;
+
+        foreach($pags as $pag)
+        {
+            if($pag->status == 2 && $pag->tipo == 1)
+            {
+                $valorTotal = $valorTotal + $pag->valor;
+            }
+
+            if($pag->tipo == 1 && $pag->status == 2)
+            {
+                $balanco = $balanco + $pag->valor;
+            } elseif ($pag->tipo == 2 && $pag->status == 2)
+            {
+                $balanco = $balanco - $pag->valor;
+            }
+        }
+
         $data = [
             'campanha' => $this->campanhaService->renderEdit($id),
             'pageTitle' => 'Visualizar Campanha',
             'pagamentos' => $this->paymentService->renderByCampanha($id),
+            'valorTotal' => $valorTotal,
+            'bancos' => $this->bankService->renderList(),
+            'balanco' => $balanco,
+            'perc' => (($valorTotal*100)/$campanha->valor),
         ];
 
         return view('admin.campanha.show',$data);
@@ -241,12 +268,7 @@ class CampanhaController extends Controller
       */
      public function destroy(Request $request,$id)
      {
-
-
         try {
-
-
-             $escolha =
              $update = $this->campanhaService->buildUpdate($id,[
                 'status' => 0,
                 'motivo_deletado' => $request->motivo_deletado
@@ -264,8 +286,6 @@ class CampanhaController extends Controller
 
      public function desativar(Request $request, $id)
      {
-
-
          try {
             $escolha = 'Escolha do Usuário';
             $update = $this->campanhaService->buildUpdate($id,[
@@ -304,10 +324,7 @@ class CampanhaController extends Controller
 
      public function apagar_adm($id)
      {
-
-
         try {
-
             // Mail::send(new newLaravelTips($id));
              dd('passou');
             $update = $this->campanhaService->buildUpdate($id,['status' => 0]);

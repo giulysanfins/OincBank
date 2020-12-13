@@ -53,24 +53,23 @@
                     {{-- botões de categorias --}}
                 </div>
 
-
                 <div class="col-12 mt-4">
-                    <!-- Portfolio Gallery Grid -->
-                    {{-- coloquei aqui minha file --}}
+                    <div class="row">
                     @foreach ($campanhas as $campanha)
-                    
+
                         @if (count($campanha->payments) > $minpay)
+                    
                             <div class="col-12 col-md-6 col-lg-4 column {{ $campanha->categoria->name }}">
-                                <div class="causes-item causes-item--primary col-12">
+                                <div class="causes-item causes-item--primary">
                                     <div class="causes-item__body">
                                         <div class="causes-item__top">
-                                            <h6 class="causes-item__title"> <a
-                                                    href="{{ route('website.campanhas.detalhes', $campanha->id) }}">{{ $campanha->titulo }}</a>
+                                            <h6 class="causes-item__title"> 
+                                                <a href="{{ route('website.campanhas.detalhes', $campanha->id) }}">{{ $campanha->titulo }}</a>
                                             </h6>
                                             <p>
-                                                @if (strlen($campanha->descricao) > 65)
+                                                @if (strlen($campanha->descricao) > 35)
                                                     @php
-                                                    $string = Str::substr($campanha->descricao, 0, 65)
+                                                    $string = Str::substr($campanha->descricao, 0, 35)
                                                     @endphp
                                                     {{ $string . '...' }}
                                                 @else
@@ -96,24 +95,25 @@
                                             </div>
                                             <div class="causes-item__details-holder">
                                                 <div class="causes-item__details-item">
-                                                    <span>Meta: </span><br /><span>R$ {{ $campanha->valor }}</span>
+                                                    <span>Meta: </span><br /><span>R$ {{number_format($campanha->valor,2,",",".")}}</span>
                                                 </div>
                                                 <div class="causes-item__details-item text-right"><span>Conquistado:
-                                                    </span><br /><span>R$ 1110,00</span></div>
+                                                    </span><br /><span>R$  {{number_format(1110,2,",",".")}}</span></div>
                                             </div>
                                         </div>
                                     </div>
-                                    <a class="button causes-item__button button--primary" href="{{ route('website.campanhas.detalhes', $campanha->id) }}">
+                                    <a class="button causes-item__button button--primary btn-block" href="{{ route('website.campanhas.detalhes', $campanha->id) }}">
                                         + Doar
                                     </a>
                                 </div>
+
                             </div>
                         @endif
                     
                     @endforeach
-                    {{-- end minha file --}}
-
+                    </div>
                 </div>
+
 
                 <div class="col-12">
                     <!-- pagination start-->

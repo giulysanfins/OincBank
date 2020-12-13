@@ -14,9 +14,9 @@ class AlterTablePayments extends Migration
     public function up()
     {
         Schema::table('payments', function (Blueprint $table) {
-            $table->integer('pagamento_id')->nullable();
-            $table->string('pagamento_tipo',30)->nullable();
-            $table->string('preference_id',100)->nullable();
+            $table->integer('pagamento_id')->after('status')->nullable();
+            $table->string('pagamento_tipo',30)->after('pagamento_id')->nullable();
+            $table->string('preference_id',100)->after('pagamento_tipo')->nullable();
         });
     }
 
