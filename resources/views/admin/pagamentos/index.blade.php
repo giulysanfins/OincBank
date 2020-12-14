@@ -57,9 +57,55 @@
                 </div>
             </div>
             @endif
+
+            @if (auth()->user()->role == 2)
+                <div class="col-12">
+                    <h3>Minhas Contribuições</h3>
+                    <div class="card card-stats">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-12 table-responsive">
+                                    <table class="table" id="tableContribuições">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Usuário</th>    
+                                                <th>Campanha</th>
+                                                <th>Valor</th>
+                                                <th>Solicitado em:</th>
+                                                <th></th>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody> 
+                                            @foreach ($pagamentos as $pagamento)
+                                                @if ($pagamento->tipo == 1)
+
+                                                <tr>
+                                                    <td>{{$pagamento->id}}</td>
+                                                    <td>{{$pagamento->user->name}}</td>
+                                                    <td>{{$pagamento->campanha->titulo}}</td>
+                                                    <td> R$ {{ number_format($pagamento->valor,2,",",".") }}</td>
+                                                    <td>{{$pagamento->created_at->format('d/m/Y H:i:s')}}</td>
+                                                    <td></td>
+                                                </tr>
+                                                @endif
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                        </div>
+                    </div>
+                </div>
+            @endif
             
             <div class="col-12">
-                <h3>Pagamentos</h3>
+                <h3>
+                    Movimentações
+                </h3>
                 <div class="card card-stats">
                     <div class="card-body">
                         <div class="row">
@@ -68,7 +114,6 @@
                                     <thead>
                                         <tr>
                                             <th>#</th>
-
                                             @if (auth()->user()->role == 1)
                                                 <th>Usuário</th>    
                                             @endif
