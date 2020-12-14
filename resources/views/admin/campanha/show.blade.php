@@ -110,11 +110,10 @@
                             <div class="row">
 
 
-
-
                             <div class="col-12">
                                 <h3 class="">Doações para o Cofrinho</h3>
                             </div>
+
 
                                 <div class="col-4 mt-3 text-right">
                                     @if (auth()->user()->role == 2)

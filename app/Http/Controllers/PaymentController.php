@@ -91,7 +91,17 @@ class PaymentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        try {
+            $update = $this->paymentService->buildUpdate($id,$request->all());
+
+            alert()->success('Sucesso','Pagamento solicitado com sucesso.')->persistent('Fechar');
+            return redirect()->route('pagamentos.index');
+
+        } catch (\Exception $e) {
+           \Log::error($e->getFile() . "\n" . $e->getLine() . "\n" . $e->getMessage());
+           alert()->error('Erro','Erro em atualizar pagamento.')->persistent('Fechar');
+           return redirect()->route('pagamentos.index')->withInput();
+        }
     }
 
     /**
