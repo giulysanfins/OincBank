@@ -8,13 +8,6 @@
         <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
         <!--     Fonts and icons     -->
         <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
-        <!-- CSS Files -->
-        <link href="{{ asset('light-bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" />
-        <link href="{{ asset('light-bootstrap/css/light-bootstrap-dashboard.css?v=2.0.0') }} " rel="stylesheet" />
-        <!-- CSS Just for demo purpose, don't include it in your project -->
-        <link href="{{ asset('light-bootstrap/css/demo.css') }}" rel="stylesheet" />
-        <link href="{{ asset('vendors') }}/fontawesome/css/all.min.css" rel="stylesheet" />
-        <link href="{{ asset('vendors') }}/datatables/datatables.min.css" rel="stylesheet" />
 
         <link rel="apple-touch-icon" sizes="57x57" href="{{asset('img')}}/icons/apple-icon-57x57.png">
         <link rel="apple-touch-icon" sizes="60x60" href="{{asset('img')}}/icons/apple-icon-60x60.png">
@@ -34,27 +27,21 @@
         <meta name="msapplication-TileImage" content="{{asset('img')}}/icons/ms-icon-144x144.png">
         <meta name="theme-color" content="#ffffff">
 
-        <script
-			  src="https://code.jquery.com/jquery-3.5.1.js"
-			  integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
-			  crossorigin="anonymous"></script>
-
-
-        {{-- Jquery mask --}}
-        <script text="type=text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
-        {{-- Uso para SweetAlert no JS --}}
-        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-
+        <!-- CSS Files -->
+        <link href="{{ asset('light-bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" />
+        <link href="{{ asset('light-bootstrap/css/light-bootstrap-dashboard.css') }} " rel="stylesheet" />
+        <!-- CSS Just for demo purpose, don't include it in your project -->
+        <link href="{{ asset('light-bootstrap/css/demo.css') }}" rel="stylesheet" />
+        <link href="{{ asset('vendors') }}/fontawesome/css/all.min.css" rel="stylesheet" />
+        <link href="{{ asset('vendors') }}/datatables/datatables.min.css" rel="stylesheet" />
 
     </head>
 
-    <body>
-        <div class="wrapper @if (!auth()->check() || request()->route()->getName() == "") wrapper-full-page @endif">
+    <body >
+        <div class="@if (!auth()->check() || request()->route()->getName() == "login") bg-login @endif  wrapper @if (!auth()->check() || request()->route()->getName() == "") wrapper-full-page @endif">
 
             @if (auth()->check() && request()->route()->getName() != "")
                 @include('layouts.navbars.sidebar')
-
-                {{-- @include('pages/sidebarstyle') --}}
             @endif
 
             <div class="@if (auth()->check() && request()->route()->getName() != "") main-panel @endif">
@@ -66,7 +53,11 @@
         </div>
     </body>
         <!--   Core JS Files   -->
-    <script src="{{ asset('light-bootstrap/js/core/jquery.3.2.1.min.js') }}" type="text/javascript"></script>
+        <script
+        src="https://code.jquery.com/jquery-3.5.1.js"
+        integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+        crossorigin="anonymous"></script>
+    
     <script src="{{ asset('light-bootstrap/js/core/popper.min.js') }}" type="text/javascript"></script>
     <script src="{{ asset('light-bootstrap/js/core/bootstrap.min.js') }}" type="text/javascript"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.12/jquery.mask.js"></script>
@@ -80,9 +71,18 @@
     <!-- Control Center for Light Bootstrap Dashboard: scripts for the example pages etc -->
     <script src="{{ asset('light-bootstrap') }}/js/light-bootstrap-dashboard.js?v=2.0.0" type="text/javascript"></script>
     <!-- Light Bootstrap Dashboard DEMO methods, don't include it in your project! -->
-    <script src="{{ asset('light-bootstrap/js/demo.js') }}"></script>
     <script src="{{ asset('vendors') }}/fontawesome/js/all.min.js"></script>
     <script src="{{ asset('vendors') }}/datatables/datatables.min.js"></script>
+    <script src="{{ asset('light-bootstrap/js/demo.js') }}"></script>
+
+
+
+    {{-- Jquery mask --}}
+    <script text="type=text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+    {{-- Uso para SweetAlert no JS --}}
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    
     @include('sweetalert::alert')
 
     @yield('scripts')
