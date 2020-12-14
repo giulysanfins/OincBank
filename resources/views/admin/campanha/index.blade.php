@@ -1,84 +1,30 @@
-@extends('layouts/app', ['activePage' => '','activeButton' => '','title' => 'Campanhas | OincBank'])
+@extends('layouts/app', ['activePage' => '','activeButton' => '','title' => 'Cofrinhos | OincBank'])
 
 @section('content')
     <div class="content">
         <div class="row">
 
             <div class="col-12">
-                <h3>Campanhas</h3>
+                <h3>Cofrinhos</h3>
                 <div class="card card-stats">
                     <div class="card-body">
                         <div class="row">
                             <div class="col-12">
                                 <div class="col-12 text-right">
                                     @if (auth()->user()->role == 2)
-                                        <a href="{{route('campanha.store')}}" class="btn btn-primary">Adicionar campanha</a>
-                                        <a href="{{route('campanha.apagar_adm')}}" class="btn btn-primary">Deletar campanha</a>
+                                        <a href="{{route('campanha.store')}}" class="btn btn-primary">Adicionar Cofrinho</a>
+                                        <a href="{{route('campanha.apagar_adm')}}" class="btn btn-primary">Deletar Cofrinho</a>
                                     @endif
                                 </div>
                                 {{-- comeco tabelas ativas --}}
 
                                 <div class="accordion" id="acoordion_campanhas">
-                                {{--
-                                    <div class="card">
-                                        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#pendentes" aria-expanded="true" aria-controls="collapseOne">
-                                            <div class="card-header" id="headerPendentes">
-                                                <h5 class="mb-0 text-left">
-                                                    Campanhas Pendentes
-                                                </h5>
-                                            </div>
-                                        </button>
-
-                                        <div id="pendentes" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
-                                            <div class="card-body">
-                                                @if($campanhas_pendentes->count() >0)
-
-                                                    <table class="table">
-                                                        <thead>
-                                                            <tr>
-                                                                <th scope="col">#</th>
-                                                                <th scope="col">Titulo</th>
-                                                                <th scope="col">Categoria</th>
-                                                                <th scope="col">Data Criacao</th>
-                                                                <th scope="col"></th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            @foreach ($campanhas_pendentes as $campanha)
-                                                                <tr>
-                                                                    <th scope="row">{{$campanha->id}}</th>
-                                                                    <td>{{$campanha->titulo}}</td>
-                                                                    <td>{{$campanha->categoria->name}}</td>
-                                                                    <td>{{$campanha->created_at->format('d/m/Y h:i:s')}}</td>
-                                                                    <td>
-                                                                        <div class="btn-group float-right" role="group" aria-label="Botões de Ação - Clientes">
-
-                                                                            <form action="{{ route('campanha.desativar', $campanha->id) }}" method="POST">
-                                                                                @csrf
-                                                                                @method('put')
-                                                                                 <a href="{{route('campanha.edit',$campanha->id)}}" class="btn btn-info">Editar</a>
-                                                                                <a href="{{route('campanha.show',$campanha->id)}}" class="btn btn-secondary">Visualizar</a>
-                                                                                <button type="submit" class="btn btn-danger">Desativar</button>
-                                                                            </form>
-                                                                        </div>
-                                                                    </td>
-                                                                </tr>
-                                                            @endforeach
-                                                        </tbody>
-                                                    </table>
-                                                @else
-                                                    <p class="text-center"> Sem resultados </p>
-                                                @endif
-                                            </div>
-                                        </div>
-                                    </div> 
-                                --}}
 
                                     <div class="card">
                                         <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                                             <div class="card-header" id="expirados">
                                                 <h5 class="mb-0 text-left">
-                                                    Campanhas Expiradas
+                                                    Cofrinhos Expirados
                                                 </h5>
                                             </div>
                                         </button>
@@ -141,7 +87,7 @@
                                         <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#ativos" aria-expanded="false" aria-controls="collapseThree">
                                             <div class="card-header" id="header_ativos">
                                                 <h5 class="mb-0 text-left">
-                                                    Campanhas Ativas
+                                                    Cofrinhos Ativos
                                                 </h5>
                                             </div>
                                         </button>
@@ -206,7 +152,7 @@
                                         <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#desativadas" aria-expanded="false" aria-controls="header_desativadas">
                                             <div class="card-header" id="header_desativadas">
                                                 <h5 class="mb-0 text-left">
-                                                    Campanhas Desativadas
+                                                    Cofrinhos Desativados
                                                 </h5>
                                             </div>
                                         </button>
@@ -280,12 +226,12 @@
       event.preventDefault(); // prevent form submit
       var form = document.forms["my-form"]; // storing the form
       swal({
-        title: "Tem certeza que você deseja desabilitar essa campanha?",
-        text: "Não será possível recuperá-la!",
+        title: "Tem certeza que você deseja desabilitar esse Cofrinho?",
+        text: "Não será possível recuperá-lo!",
         type: "warning",
         showCancelButton: true,
         confirmButtonColor: "#DD6B55",
-        confirmButtonText: "Sim, apague-a!",
+        confirmButtonText: "Sim, apague-o!",
         cancelButtonText: "Cancelar",
         closeOnConfirm: false
            })

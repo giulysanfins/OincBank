@@ -1,4 +1,4 @@
-@extends('layouts.site.app', ['activePage' => '', 'title' => '| Campanhas', 'navName' => '', 'activeButton' => ''])
+@extends('layouts.site.app', ['activePage' => '', 'title' => '| Cofrinhos', 'navName' => '', 'activeButton' => ''])
 
 @section('content')
     <!-- header end-->
@@ -8,14 +8,14 @@
             <source srcset="{{ asset('helpo-theme') }}/img/causes.jpg" media="(min-width: 992px)"><img class="img--bg"
                 src="{{ asset('helpo-theme') }}/img/causes.jpg" alt="img">
         </picture>
-        <div class="promo-primary__description"> <span>Campanhas</span></div>
+        <div class="promo-primary__description"> <span>Cofrinhos</span></div>
         <div class="container">
             <div class="row">
                 <div class="col-auto">
                     <div class="align-container">
                         <div class="align-container__item">
                             <span class="promo-primary__pre-title"></span>
-                            <h1 class="promo-primary__title"><span>Campanhas</span> <span></span></h1>
+                            <h1 class="promo-primary__title"><span>Cofrinhos</span> <span></span></h1>
                         </div>
                     </div>
                 </div>
@@ -57,8 +57,9 @@
                     <div class="row">
                     @foreach ($campanhas as $campanha)
 
-                        @if (count($campanha->payments) > $minpay)
-                    
+
+                        @if (count($campanha->payments) >= $minpay)
+
                             <div class="col-12 col-md-6 col-lg-4 column {{ $campanha->categoria->name }}">
                                 <div class="causes-item causes-item--primary">
                                     <div class="causes-item__body">
@@ -109,7 +110,7 @@
 
                             </div>
                         @endif
-                    
+
                     @endforeach
                     </div>
                 </div>
