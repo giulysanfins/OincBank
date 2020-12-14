@@ -1,4 +1,4 @@
-@extends('layouts/app', ['activePage' => '', 'activeButton' => '', 'title' => 'Edição de Campanhas'])
+@extends('layouts/app', ['activePage' => '', 'activeButton' => '', 'title' => 'Edição de Cofrinhos'])
 
 @section('content')
     <div class="content">
@@ -11,7 +11,7 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-12">
-                                    <h3 class="">Edite sua campanha</h3>
+                                    <h3 class="">Edite seu Cofrinho</h3>
                                 </div>
                                 <br>
                                 <div class="col-lg-8">
@@ -44,7 +44,7 @@
                                 </div>
                                 {{-- data encerramento --}}
                                 <div class="col-md-4" >
-                                    <label for="data_encerramento">Que data a campanha deve encerrar?*</label>
+                                    <label for="data_encerramento">Que data o cofrinho deve encerrar?*</label>
                                     <br>
                                     <div class="form-group">
 
@@ -73,7 +73,7 @@
                                 {{-- img upload --}}
                                 <div class="col-md-2">
                                     {{-- @include('pages.campanha.imageUpload') --}}
-                                    <label class="form-control-label" for="input-photo_perfil">Foto Campanha</label>
+                                    <label class="form-control-label" for="input-photo_perfil">Foto Cofrinho</label>
                                     <br />
                                     <label for="photo_perfil" class="btn btn-info">Selecionar Imagem</label>
                                     <input id="photo_perfil" style="display: none;" type="file" name="photo_perfil">

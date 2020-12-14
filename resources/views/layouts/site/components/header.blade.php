@@ -63,7 +63,7 @@
                 <nav>
                     <ul class="main-menu">
 
-                        <li class="main-menu__item"><a class="main-menu__link" href="{{route('website.campanhas')}}"><span>Campanhas</span></a></li>
+                        <li class="main-menu__item"><a class="main-menu__link" href="{{route('website.campanhas')}}"><span>Cofrinhos</span></a></li>
                         <li class="main-menu__item"><a class="main-menu__link" href="{{route('website.faq')}}"><span>FAQ</span></a></li>
                         <li class="main-menu__item"><a class="main-menu__link" href="{{route('login')}}"><span>Login</span></a></li>
 

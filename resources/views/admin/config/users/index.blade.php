@@ -15,7 +15,7 @@
                         </div>
                     </div>
                     <div class="toolbar">
-                        
+
                     </div>
                     <div class="card-body ">
                         <div class="table-responsive table-full-width">
@@ -25,7 +25,7 @@
                                         <th scope="col">#</th>
                                         <th scope="col">Nome</th>
                                         <th scope="col">E-mail</th>
-                                        <th scope="col"># Campanhas</th>
+                                        <th scope="col"># Cofrinhos</th>
                                         <th scope="col">Criado em:</th>
                                         <th scope="col"></th>
                                     </tr>
@@ -41,7 +41,7 @@
                                             <td>
                                                 <div class="btn-group" role="group" aria-label="Exemplo básico">
                                                     <a href="{{route('usuario.edit',$cliente->id)}}" class="btn btn-info">Editar</a>
-                                                    <button type="button" class="btn btn-secondary">Campanhas</button>
+                                                    <button type="button" class="btn btn-secondary">Cofrinhos</button>
                                                     <button type="button" class="btn btn-warning">Bloquear</button>
                                                     <button type="button" class="btn btn-danger">Deletar</button>
                                                 </div>
