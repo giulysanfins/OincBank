@@ -1,4 +1,4 @@
-<div class="sidebar" data-color="green" data-image="{{ asset('helpo-theme') }}/img/promo_3.jpg">
+<div class="sidebar" data-color="pink" data-image="{{ asset('helpo-theme') }}/img/promo_3.jpg">
     <div class="sidebar-wrapper">
         <div class="logo">
             <a class="simple-text">

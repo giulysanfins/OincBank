@@ -23,9 +23,9 @@
 
                     <ul class="" style="padding-left: 8px">
                         <li class="footer-menu__item footer-menu__item--active"><a class="footer-menu__link" href="{{route('website.index')}}">Home</a></li>
-                        <li class="footer-menu__item"><a class="footer-menu__link" href="#">Sobre a OincBank</a></li>
-                        <li class="footer-menu__item"><a class="footer-menu__link" href="#">Dúvidas Frequentes</a></li>
-                        <li class="footer-menu__item"><a class="footer-menu__link" href="#">Ajuda</a></li>
+                        <li class="footer-menu__item"><a class="footer-menu__link" href="{{route('website.index')}}">Sobre a OincBank</a></li>
+                        <li class="footer-menu__item"><a class="footer-menu__link" href="{{route('website.index')}}">Dúvidas Frequentes</a></li>
+                        <li class="footer-menu__item"><a class="footer-menu__link" href="{{route('website.faq')}}">Ajuda</a></li>
                     </ul>
                 <!-- footer nav end-->
             </div>

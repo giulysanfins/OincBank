@@ -110,17 +110,22 @@
                                                                     <td>{{$campanha->created_at->format('d/m/Y h:i:s')}}</td>
                                                                     <td>
                                                                         <div class="btn-group float-right" role="group" aria-label="Botões de Ação - Clientes">
+                                                                            @if (auth()->user()->role == 2)
                                                                             <a href="{{route('campanha.edit',$campanha->id)}}" class="btn btn-info">Editar</a>
+                                                                            @endif
                                                                             <a href="{{route('campanha.show',$campanha->id)}}" class="btn btn-secondary">Visualizar</a>
+                                                                            @if (auth()->user()->role == 2)
                                                                             <button type="button" class="btn btn-success" data-toggle="modal" data-target="#sacar{{$campanha->id}}">Sacar valor</button>
+                                                                            @endif
                                                                             <button type="button" class="btn btn-danger">Deletar</button>
                                                                         </div>
                                                                     </td>
                                                                 </tr>
-
+                                                                @if (auth()->user()->role == 2)
                                                                 @component('admin.campanha.components.solicitar',[
                                                                     'campanha' => $campanha
                                                                 ])@endcomponent
+                                                                @endif
                                                                 
                                                             @endforeach
                                                         </tbody>
@@ -173,18 +178,23 @@
                                                                 <td>{{$campanha->created_at->format('d/m/Y h:i:s')}}</td>
                                                                 <td>
                                                                     <div class="btn-group float-right" role="group" aria-labe   l="Botões de Ação - Clientes">
+                                                                        @if (auth()->user()->role == 2)
                                                                         <a href="{{route('campanha.edit',$campanha->id)}}" class="btn btn-info">Editar</a>
+                                                                        @endif
                                                                         <a href="{{route('campanha.show',$campanha->id)}}" class="btn btn-secondary">Visualizar</a>
+                                                                        @if (auth()->user()->role == 2)
                                                                         <button type="button" class="btn btn-success" data-toggle="modal" data-target="#sacar{{$campanha->id}}">Sacar valor</button>
+                                                                        @endif
                                                                         <button type="submit" class="btn btn-danger button">Deletar</button>
                                                                     </div>
                                                                 </td>
                                                             </tr>
-
+                                                            @if (auth()->user()->role == 2)
                                                             @component('admin.campanha.components.solicitar',[
                                                                 'campanha' => $campanha,
                                                                 'bancos' => $bancos
                                                             ])@endcomponent
+                                                            @endif
                                                         @endforeach
                                                     </tbody>
                                                 </table>
@@ -223,17 +233,22 @@
                                                                     <td>{{$campanha->created_at->format('d/m/Y h:i:s')}}</td>
                                                                     <td>
                                                                         <div class="btn-group float-right" role="group" aria-label="Botões de Ação - Clientes">
+                                                                            @if (auth()->user()->role == 2)
                                                                             <a href="{{route('campanha.edit',$campanha->id)}}" class="btn btn-info">Editar</a>
+                                                                            @endif
                                                                             <a href="{{route('campanha.show',$campanha->id)}}" class="btn btn-secondary">Visualizar</a>
+                                                                            @if (auth()->user()->role == 2)
                                                                             <button type="button" class="btn btn-success" data-toggle="modal" data-target="#sacar{{$campanha->id}}">Sacar valor</button>
+                                                                            @endif
                                                                             <button type="submit" class="btn btn-success">Ativar</button>
                                                                         </div>
                                                                     </td>
                                                                 </tr>
-
+                                                                @if (auth()->user()->role == 2)
                                                                 @component('admin.campanha.components.solicitar',[
                                                                     'campanha' => $campanha
                                                                 ])@endcomponent
+                                                                @endif
                                                             @endforeach
                                                         </tbody>
                                                     </table>

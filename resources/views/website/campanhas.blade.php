@@ -54,6 +54,7 @@
                 </div>
 
                 <div class="col-12 mt-4">
+                    <div class="row">
                     @foreach ($campanhas as $campanha)
 
                         @if (count($campanha->payments) > $minpay)
@@ -94,21 +95,23 @@
                                             </div>
                                             <div class="causes-item__details-holder">
                                                 <div class="causes-item__details-item">
-                                                    <span>Meta: </span><br /><span>R$ {{ $campanha->valor }}</span>
+                                                    <span>Meta: </span><br /><span>R$ {{number_format($campanha->valor,2,",",".")}}</span>
                                                 </div>
                                                 <div class="causes-item__details-item text-right"><span>Conquistado:
-                                                    </span><br /><span>R$ 1110,00</span></div>
+                                                    </span><br /><span>R$  {{number_format(1110,2,",",".")}}</span></div>
                                             </div>
                                         </div>
                                     </div>
-                                    <a class="button causes-item__button button--primary" href="{{ route('website.campanhas.detalhes', $campanha->id) }}">
+                                    <a class="button causes-item__button button--primary btn-block" href="{{ route('website.campanhas.detalhes', $campanha->id) }}">
                                         + Doar
                                     </a>
                                 </div>
+
                             </div>
                         @endif
                     
                     @endforeach
+                    </div>
                 </div>
 
 

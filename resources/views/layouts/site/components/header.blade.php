@@ -1,50 +1,44 @@
 {{-- Header Mobile Start --}}
 <div class="aside-dropdown">
-    <div class="aside-dropdown__inner"><span class="aside-dropdown__close">
-        <svg class="icon">
-            <use xlink:href="#close"></use>
-        </svg></span>
-    <div class="aside-dropdown__item d-lg-none d-block">
-        <ul class="aside-menu">
-            {{-- <li class="aside-menu__item aside-menu__item--has-child aside-menu__item--active"><a class="aside-menu__link" href="javascript:void(0);"><span>Home</span></a>
-                <!-- sub menu start-->
-                <ul class="aside-menu__sub-list">
-                    <li class="item--active"><a href="index.html"><span>01 Home Color Style</span></a></li>
-                    <li><a href="front_2.html"> <span>02 Home Color Style</span></a></li>
-                    <li><a href="front_3.html"><span>03 Home Color Style</span></a></li>
-                    <li><a href="mono/index.html"><span>04 Home Monochrome</span></a></li>
-                    <li><a href="mono/front_2.html"><span>05 Home Monochrome</span></a></li>
-                    <li><a href="mono/front_3.html"><span>06 Home Monochrome</span></a></li>
-                </ul>
-                <!-- sub menu end-->
-            </li> --}}
+    <div class="aside-dropdown__inner">
+        <div class="aside-dropdown__item d-lg-none d-block text-center ">
+            <a class="header-logo__link " href="{{route('website.index')}}">
+                <img class="header-logo__img logo--light" src="{{asset('img')}}/logos/porquim-com-nome-crop.png" alt="logo"/>
+            </a>
+        </div>
+        <div class="aside-dropdown__item d-lg-none d-block">
 
-            <li class="aside-menu__item"><a class="aside-menu__link" href="{{route('website.campanhas')}}"><span>Campanhas</span></a></li>
-            {{-- <li class="aside-menu__item"><a class="aside-menu__link" href="{{route('website.campanhas')}}"><span>Campanhas</span></a></li> --}}
-            <li class="aside-menu__item"><a class="aside-menu__link" href="{{route('login')}}"><span>Login</span></a></li>
+            <ul class="aside-menu">
+                <li class="aside-menu__item"><a class="aside-menu__link" href="{{route('website.campanhas')}}"><span>Campanhas</span></a></li>
+                <li class="aside-menu__item"><a class="aside-menu__link" href="{{route('website.faq')}}"><span>FAQ</span></a></li>
+                <li class="aside-menu__item"><a class="aside-menu__link" href="{{route('login')}}"><span>Login</span></a></li>
 
-        </ul>
-    </div>
-    <div class="aside-dropdown__item">
-        <!-- aside menu start-->
-        <ul class="aside-menu">
-            {{-- <li class="aside-menu__item"><a class="aside-menu__link" href="#">Documents</a></li>
-            <li class="aside-menu__item"><a class="aside-menu__link" href="#">Information</a></li>
-            <li class="aside-menu__item"><a class="aside-menu__link" href="#">Additional Pages</a></li>
-            <li class="aside-menu__item"><a class="aside-menu__link" href="#">Elements</a></li>
-            <li class="aside-menu__item"><a class="aside-menu__link" href="#">Contacts</a></li> --}}
-        </ul>
-        <!-- aside menu end-->
-        <div class="aside-inner"><span class="aside-inner__title">Email</span><a class="aside-inner__link" href="mailto:support@helpo.org">support@helpo.org</a></div>
-        <div class="aside-inner"><span class="aside-inner__title">Phone numbers</span><a class="aside-inner__link" href="tel:+180012345678">+ 1800 - 123 456 78</a><a class="aside-inner__link" href="tel:+18009756511">+ 1800 - 975 65 11</a></div>
-        <ul class="aside-socials">
-            <li class="aside-socials__item"><a class="aside-socials__link" href="#"><i class="fab fa-instagram" aria-hidden="true"></i></a></li>
-            <li class="aside-socials__item"><a class="aside-socials__link" href="#"><i class="fab fa-google-plus" aria-hidden="true"></i></a></li>
-            <li class="aside-socials__item"><a class="aside-socials__link aside-socials__link--active" href="#"><i class="fab fa-twitter" aria-hidden="true"></i></a></li>
-            <li class="aside-socials__item"><a class="aside-socials__link" href="#"><i class="fab fa-facebook" aria-hidden="true"></i></a></li>
-        </ul>
-    </div>
-    <div class="aside-dropdown__item"><a class="button button--squared" href="{{route('campanha.create')}}"><span>Criar Cofrinho</span></a></div>
+            </ul>
+        </div>
+        <div class="aside-dropdown__item">
+            <!-- aside menu start-->
+            <a class="header-logo__link d-lg-block d-none" href="{{route('website.index')}}">
+                <img class="header-logo__img logo--light" src="{{asset('img')}}/logos/porquim-com-nome-crop.png" alt="logo"/>
+            </a>
+            
+            <ul class="aside-menu">
+
+            </ul>
+            <!-- aside menu end-->
+            <div class="aside-inner"><span class="aside-inner__title">Email</span><a class="aside-inner__link" href="mailto:suporte@oincbank.com.br">suporte@oincbank.com.br</a></div>
+            {{-- <div class="aside-inner"><span class="aside-inner__title">Phone numbers</span><a class="aside-inner__link" href="tel:+180012345678">+ 1800 - 123 456 78</a><a class="aside-inner__link" href="tel:+18009756511">+ 1800 - 975 65 11</a></div> --}}
+            <ul class="aside-socials">
+                <li class="aside-socials__item"><a class="aside-socials__link" href="#"><i class="fab fa-instagram" aria-hidden="true"></i></a></li>
+                <li class="aside-socials__item"><a class="aside-socials__link" href="#"><i class="fab fa-google-plus" aria-hidden="true"></i></a></li>
+                <li class="aside-socials__item"><a class="aside-socials__link aside-socials__link--active" href="#"><i class="fab fa-twitter" aria-hidden="true"></i></a></li>
+                <li class="aside-socials__item"><a class="aside-socials__link" href="#"><i class="fab fa-facebook" aria-hidden="true"></i></a></li>
+            </ul>
+        </div>
+
+        <div class="aside-dropdown__item d-lg-none d-block">
+            <a class="button button--squared btn-block" href="{{route('campanha.create')}}" style="margin: 3% auto auto auto;"><span>Criar Cofrinho</span></a>
+        </div>
+
     </div>
 </div>
 {{-- Header Mobile END --}}
@@ -58,8 +52,9 @@
                     <div class="dropdown-trigger__item"></div>
                 </div>
                 <div class="header-logo">
-                    <a class="header-logo__link" href="{{route('website.index')}}"><img class="header-logo__img logo--light" src="{{asset('helpo-theme')}}/img/logo_white.png" alt="logo"/>
-                        <img class="header-logo__img logo--dark" src="{{asset('helpo-theme')}}/img/logo_dark.png" alt="logo"/>
+                    <a class="header-logo__link" href="{{route('website.index')}}">
+                        <img class="header-logo__img logo--light" src="{{asset('img')}}/logos/porquim-com-nome-crop.png" alt="logo"/>
+                        <img class="header-logo__img logo--dark" src="{{asset('img')}}/logos/porquim-com-nome-crop.png" alt="logo"/>
                     </a>
                 </div>
             </div>

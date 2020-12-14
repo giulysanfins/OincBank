@@ -24,6 +24,7 @@
         "vue-template-compiler": "^2.6.10"
     },
     "dependencies": {
-        "filterizr": "^2.2.4"
+        "filterizr": "^2.2.4",
+        "just-validate": "^1.5.0"
     }
 }

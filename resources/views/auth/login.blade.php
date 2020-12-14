@@ -44,7 +44,7 @@
                                 </div>
                                 <div class="card-footer ml-auto mr-auto pt-0">
                                     <div class="container text-center" >
-                                        <button type="submit" class="btn btn-warning btn-wd">Entrar</button>
+                                        <button type="submit" class="btn btn-oinc-primary btn-wd">Entrar</button>
                                     </div>
                                     <div class="d-flex justify-content-between ">
                                         <a class="btn btn-link" style="color:#23CCEF" href="{{ route('password.request') }}">
