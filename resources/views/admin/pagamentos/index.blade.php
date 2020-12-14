@@ -4,8 +4,11 @@
     <div class="content">
         <div class="row">
 
-            <div class="col-12">
+            <div class="col-4">
                 <h3>Pagamentos</h3>
+            </div>
+            
+            <div class="col-12">
                 <div class="card card-stats">
                     <div class="card-body">
                         <div class="row">
@@ -14,8 +17,13 @@
                                     <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th>Usuário</th>
+
+                                            @if (auth()->user()->role == 1)
+                                                <th>Usuário</th>    
+                                            @endif
                                             <th>Cofrinho</th>
+                                            <th>Tipo</th>
+
                                             <th>Valor</th>
                                             <th>Status</th>
                                             <th></th>
@@ -25,8 +33,17 @@
                                         @foreach ($pagamentos as $pagamento)
                                             <tr>
                                                 <td>{{$pagamento->id}}</td>
-                                                <td>{{$pagamento->user->name}}</td>
+                                                @if (auth()->user()->role == 1)
+                                                    <td>{{$pagamento->user->name}}</td>
+                                                @endif
                                                 <td>{{$pagamento->campanha->titulo}}</td>
+                                                <td>
+                                                    @if ($pagamento->tipo == 1)
+                                                        Doação
+                                                    @elseif ($pagamento->tipo == 2)
+                                                        Retirada
+                                                    @endif
+                                                </td>
                                                 <td> R$ {{ number_format($pagamento->valor,2,",",".") }}</td>
                                                 <td>
                                                     @if ($pagamento->status == 1)

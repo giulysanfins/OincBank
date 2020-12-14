@@ -24,6 +24,7 @@ class CheckPermission
         $user_perm = ['dashboard','campanha','profile','pagamentos'];
 
         $route = explode('.', \Route::currentRouteName());
+        // dd($route);
 
         if(auth()->user()->role == 2 && in_array($route[0],$user_perm))
         {

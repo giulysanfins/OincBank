@@ -110,6 +110,7 @@ class WebsiteController extends Controller
                 'campanha_id' => $id,
                 'valor' => str_replace(',','.',str_replace('.','',$valor)),
                 'status' => 1,
+                'tipo' => 1,
             ]);
 
             return redirect()->route('website.payment.checkout',$insert->id);
