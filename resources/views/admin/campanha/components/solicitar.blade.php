@@ -33,7 +33,6 @@
                                     @foreach ($bancos as $banco)
                                         <option value="{{$banco->id}}">{{$banco->numero}} - {{$banco->nome}}</option>
                                     @endforeach
-                                    
                                 </select>
                             </div>
                         </div>

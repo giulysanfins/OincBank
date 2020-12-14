@@ -109,7 +109,7 @@
                         <div class="card-body">
                             <div class="row">
 
-                                <div class="col-8">
+                                <div class="col-12">
                                     <h3 class="">Doações para a Campanha</h3>
                                 </div>
 
