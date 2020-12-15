@@ -34,7 +34,7 @@ class HomeController extends Controller
             }
         } else {
             
-            return redirect()->route('website.campanhas.detalhes',$var[1]);
+            return redirect()->route('campanha.index');
         }
     }
 }

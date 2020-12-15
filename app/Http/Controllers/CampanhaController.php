@@ -186,13 +186,13 @@ class CampanhaController extends Controller
 
         foreach($pags as $pag)
         {
-            //
+            // arrecadações
             if($pag->status == 2 && $pag->tipo == 1)
             {
                 $valorTotal = $valorTotal + $pag->valor;
             }
 
-            //
+            // saldo
             if($pag->tipo == 1 && $pag->status == 2)
             {
                 $balanco = $balanco + $pag->valor;

@@ -26,7 +26,7 @@
                                     <div class="form-group">
                                         <label for="categoria">Categoria*</label>
                                         <br>
-                                        <select class="custom-select" id="categoria_id" name="categoria_id" oninvalid="this.setCustomValidity('Por favor selecione uma categoria.')"
+                                        <select class="form-control" id="categoria_id" name="categoria_id" oninvalid="this.setCustomValidity('Por favor selecione uma categoria.')"
                                         oninput="this.setCustomValidity('')">
                                                 @foreach ($categorias as $categoria)
                                                     <option value="{{$categoria->id}}">{{$categoria->name}}</option>

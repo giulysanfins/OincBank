@@ -6,11 +6,11 @@
         <!-- promo start-->
         <section class="promo">
             <div class="promo-slider">
-                <div class="promo-slider__item promo-slider__item--style-1">
+                <div class="promo-slider__item promo-slider__item--style-1 img-effect">
                     <picture>
-                        <source srcset="{{ asset('helpo-theme') }}/img/promo_1.jpg" media="(min-width: 835px)" />
-                        <source srcset="{{ asset('helpo-theme') }}/img/promo_1.jpg" media="(min-width: 376px)" />
-                        <img class="img--bg" src="{{ asset('helpo-theme') }}/img/promo_1.jpg" alt="img" />
+                        <source srcset="{{ asset('img') }}/photos/pig1_1.jpeg" media="(min-width: 835px)" />
+                        <source srcset="{{ asset('img') }}/photos/pig1_1.jpeg" media="(min-width: 376px)" />
+                        <img class="img--bg " src="{{ asset('img') }}/photos/pig1_1.jpeg" alt="https://br.freepik.com/fotos/mao'>Mão foto criado por mego-studio - br.freepik.com" />
                     </picture>
                     <div class="container">
                         <div class="row">
@@ -18,17 +18,18 @@
                                 <div class="align-container">
                                     <div class="align-container__item">
                                         <div class="promo-slider__wrapper-1">
-                                            <h2 class="promo-slider__title"><span>We help all people in need</span>
-                                                <span>around the world.</span>
+                                            <h2 class="promo-slider__title"><span>Venha encher seu</span>
+                                                <span>Cofrinho</span>
                                             </h2>
                                         </div>
                                         <div class="promo-slider__wrapper-2">
-                                            <p class="promo-slider__subtitle">Gray eel-catfish longnose whiptail catfish
-                                                smalleye squaretail queen danio unicorn fish shortnose greeneye fusilier
-                                                fish silver carp nibbler sharksucker tench lookdown catfish</p>
+                                            <p class="promo-slider__subtitle " style="margin-top: 3%">
+                                                A vaca foi brejo, mas chamou o Oinc para te ajudar a juntar um dindin que você precisa para a sua causa.
+                                            </p>
                                         </div>
-                                        <div class="promo-slider__wrapper-3"><a
-                                                class="button promo-slider__button button--primary" href="#">Discover</a>
+                                        <div class="promo-slider__wrapper-3">
+                                            <a class="button promo-slider__button button--primary" href="{{route('website.campanhas')}}">Descubra Causas</a>
+                                            <a class="button promo-slider__button button--primary" href="{{route('register')}}">Registre seu cofrinho</a>
                                         </div>
                                     </div>
                                 </div>
@@ -36,7 +37,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="promo-slider__item promo-slider__item--style-2">
+                {{-- <div class="promo-slider__item promo-slider__item--style-2">
                     <picture>
                         <source srcset="{{ asset('helpo-theme') }}/img/promo_2.jpg" media="(min-width: 835px)" />
                         <source srcset="{{ asset('helpo-theme') }}/img/promo_2.jpg" media="(min-width: 376px)" />
@@ -93,7 +94,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> --}}
             </div>
             <!-- promo socials start-->
             <ul class="promo-socials">
@@ -108,7 +109,7 @@
             </ul>
             <!-- promo socials end-->
             <!-- promo pannel start-->
-            <div class="promo-pannel"><a class="anchor promo-pannel__anchor" href="#about"> <span>Scroll Down</span></a>
+            {{-- <div class="promo-pannel"><a class="anchor promo-pannel__anchor" href="#about"> <span>Scroll Down</span></a>
                 <div class="promo-pannel__video"><img class="img--bg" src="{{ asset('helpo-theme') }}/img/video_block.jpg"
                         alt="image" /><a class="video-trigger"
                         href="https://www.youtube.com/watch?v=_sI_Ps7JSEk"><span>Watch our video</span><i class="fa fa-play"
@@ -121,7 +122,7 @@
                     <p class="promo-pannel__title">Email</p><a class="promo-pannel__link"
                         href="mailto:support@helpo.org">support@helpo.org</a>
                 </div>
-            </div>
+            </div> --}}
             <!-- promo pannel end-->
             <!-- slider nav start-->
             <div class="slider__nav slider__nav--promo">
