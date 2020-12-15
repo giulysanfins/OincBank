@@ -46,8 +46,7 @@
             <div class="col-xl-12">
                 <div class="heading heading--primary"><span class="heading__pre-title">Termos de Uso</span>
                     <h2 class="heading__title"> <span>Termos de Uso</span></h2>
-                    <p>Sharksucker sea toad candiru rocket danio tilefish stingray deepwater stingray Sacramento splittail, Canthigaster rostrata. 
-                        Midshipman dartfish Modoc sucker, yellowtail kingfish</p>
+
                     <div>
                         <div>
                         <div>

@@ -140,12 +140,12 @@
                 alt="img" />
             <div class="container">
                 <div class="row align-items-end">
-                    
+
                     <div class="col-xl-6">
                         <div class="heading heading--primary"><span class="heading__pre-title">+ Cofrinhos</span>
                             <h2 class="heading__title"><span>Veja outros</span> <span> Cofrinhos</span></h2>
                             <p>
-                                
+
                             </p>
                         </div>
                     </div>
@@ -198,7 +198,7 @@
                         @foreach ($campanhas as $campanha)
                             @php
                                 $payments = \App\Yahp\Models\Payment::where('campanha_id',$campanha->id)->where('tipo',1)->where('status',2);
-                                $vTotal = 0;                                          
+                                $vTotal = 0;
                                 foreach ($payments->get() as $key => $pag) {
                                     $vTotal = $vTotal+$pag->valor;
                                 }
@@ -209,7 +209,7 @@
                                     <div class="causes-item causes-item--primary">
                                         <div class="causes-item__body">
                                             <div class="causes-item__top">
-                                                <h6 class="causes-item__title"> 
+                                                <h6 class="causes-item__title">
                                                     <a href="{{ route('website.campanhas.detalhes', $campanha->id) }}">{{ $campanha->titulo }}</a>
                                                 </h6>
                                                 <p>
@@ -262,9 +262,9 @@
 
                                 </div>
                             @endif
-                            
+
                         @endforeach
-                       
+
                     </div>
                 </div>
             </div>
@@ -272,7 +272,7 @@
         <!-- causes end-->
 
         <section class="section faq">
-            <div class="container">
+            <div class="container" style="margin-right: 60px">
                 <div class="row margin-bottom">
                     <div class="col-12">
                         <div class="heading heading--primary"><span class="heading__pre-title"></span>
@@ -282,7 +282,7 @@
                 </div>
 
                 @include('layouts.site.components.faq')
-                
+
             </div>
         </section>
     </main>

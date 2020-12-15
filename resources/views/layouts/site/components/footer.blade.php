@@ -33,7 +33,7 @@
         </div>
         <div class="row align-items-baseline">
             <div class="col-md-6">
-                <p class="footer-copyright">Todos os direitos reservados.© 2020 OincBank.</p>
+                <p class="footer-copyright">Desenvolvido pela <a href="https://yahp.com.br/"> <img src="https://yahp.com.br/website/img/logos/yahp-orange_pq.png" alt="logo" style="width: 5%"></a>. Todos os direitos reservados.© 2020 OincBank.</p>
             </div>
             <div class="col-md-6">
                 <div class="footer-privacy"><a class="footer-privacy__link" href="/politica-de-privacidade">Política de Privacidade</a><span class="footer-privacy__divider">|</span><a class="footer-privacy__link" href="/termos-e-condicoes">Termos e Condições</a></div>

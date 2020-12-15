@@ -7,7 +7,7 @@
         </div>
         <ul class="nav">
 
-            @foreach ($modules as $module)
+            @foreach ($modules  as $module)
 
                 @if ($module->type == 1)
                     @if (auth()->user()->role == 2 && $module->slug == 'pagamentos')
@@ -41,7 +41,7 @@
                         </a>
                         <div class="collapse @if($activeButton == $module->slug) show @endif" id="master{{$module->id}}">
                             <ul class="nav">
-                                @foreach ($modules as $s_module)
+                                @foreach ($modules ?? '' as $s_module)
                                     @if ($s_module->type == 3 && $s_module->menu_master == $module->id)
                                         <li class="nav-item @if($activePage == $s_module->slug) active @endif">
                                             <a class="nav-link pl-4" href="{{route($s_module->route)}}">
@@ -55,7 +55,7 @@
                         </div>
                     </li>
                 @endif
-                
+
             @endforeach
 
         </ul>

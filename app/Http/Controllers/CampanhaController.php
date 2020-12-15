@@ -15,6 +15,7 @@ use Carbon\Carbon;
 
 use App\Http\Requests\ProfileRequest;
 use App\Http\Requests\PasswordRequest;
+use App\Mail\mensagemDesativado;
 use Illuminate\Support\Facades\Hash;
 
 use App\Yahp\Services\CategoryService;
@@ -46,7 +47,7 @@ class CampanhaController extends Controller
          {
             $data = [
                 'campanhas' => $this->campanhaService->renderList(),
-                'pageTitle' => 'Campanha',
+                'pageTitle' => 'Cofrinho',
                 'campanhas_pendentes' => $this->campanhaService->renderByStatus(1),
                 'campanhas_desativadas' => $this->campanhaService->renderByStatus(4),
                 'campanhas_aprovadas' => $this->campanhaService->renderByStatus(2),
@@ -58,7 +59,7 @@ class CampanhaController extends Controller
          } elseif (auth()->user()->role == 2) {
             $data = [
                 'campanhas' => $this->campanhaService->renderByUser(auth()->user()->id),
-                'pageTitle' => 'Campanha',
+                'pageTitle' => 'Cofrinho',
                 'campanhas_pendentes' => $this->campanhaService->renderByStatusUser(1,auth()->user()->id),
                 'campanhas_desativadas' => $this->campanhaService->renderByStatusUser(4,auth()->user()->id),
                 'campanhas_aprovadas' => $this->campanhaService->renderByStatusUser(2,auth()->user()->id),
@@ -78,7 +79,7 @@ class CampanhaController extends Controller
          {
             $data = [
                 'campanhas' => $this->campanhaService->renderList(),
-                'pageTitle' => 'Campanha',
+                'pageTitle' => 'Cofrinho',
                 'campanhas_aprovadas' => $this->campanhaService->renderByStatus(2),
                 'campanhas_expiradas' => $this->campanhaService->renderByStatus(5)
 
@@ -87,7 +88,7 @@ class CampanhaController extends Controller
          } elseif (auth()->user()->role == 2) {
             $data = [
                 'campanhas' => $this->campanhaService->renderByUser(auth()->user()->id),
-                'pageTitle' => 'Campanha',
+                'pageTitle' => 'Cofrinho',
                 'campanhas_aprovadas' => $this->campanhaService->renderByStatusUser(2,auth()->user()->id),
                 'campanhas_expiradas' => $this->campanhaService->renderByStatusUser(5,auth()->user()->id)
             ];
@@ -100,7 +101,7 @@ class CampanhaController extends Controller
      {
          $data = [
             'campanhas' => $this->campanhaService->renderEdit($id),
-            'pageTitle' => 'Campanha',
+            'pageTitle' => 'Cofrinho',
             'photo' => $this->photoService->renderPhotoUser('users',auth()->user()->id)
          ];
 
@@ -115,7 +116,7 @@ class CampanhaController extends Controller
      public function create()
      {
          $data = [
-             'pageTitle' => 'Adicionar Campanha',
+             'pageTitle' => 'Adicionar Cofrinho',
              'categorias' => $this->categoryService->renderByStatus(1),
          ];
 
@@ -155,7 +156,7 @@ class CampanhaController extends Controller
                     'status' => 2,
                     'valor' => str_replace(',','.',str_replace('.','',$request->valor))
                 ])->all());
-                alert()->success('Sucesso','Campanha adicionada com sucesso.')->persistent('Fechar');
+                alert()->success('Sucesso','Cofrinho adicionado com sucesso.')->persistent('Fechar');
 
 
             //  dd($data);
@@ -165,7 +166,7 @@ class CampanhaController extends Controller
 
 
              \Log::error($e->getFile() . "\n" . $e->getLine() . "\n" . $e->getMessage());
-             alert()->error('Erro','Erro em adicionar a Campanha.')->persistent('Fechar');
+             alert()->error('Erro','Erro em adicionar o Cofrinho.')->persistent('Fechar');
              return redirect()->route('campanha.create')->withInput();
 
          }
@@ -204,7 +205,7 @@ class CampanhaController extends Controller
 
         $data = [
             'campanha' => $this->campanhaService->renderEdit($id),
-            'pageTitle' => 'Visualizar Campanha',
+            'pageTitle' => 'Visualizar Cofrinho',
             'pagamentos' => $this->paymentService->renderByCampanha($id),
             'valorTotal' => $valorTotal,
             'bancos' => $this->bankService->renderList(),
@@ -226,7 +227,7 @@ class CampanhaController extends Controller
          $data = [
              'campanha' => $this->campanhaService->renderEdit($id),
              'categorias' => $this->categoryService->renderByStatus(1),
-             'pageTitle' => 'Editar Campanha'
+             'pageTitle' => 'Editar Cofrinho'
          ];
 
          return view('admin.campanha.edit',$data);
@@ -253,12 +254,12 @@ class CampanhaController extends Controller
              $update = $this->campanhaService->buildUpdate($id,$request->merge([
                 'valor' => str_replace(',','.',str_replace('.','',$request->valor))
              ])->all());
-             alert()->success('Sucesso','Campanha alterada com sucesso.')->persistent('Fechar');
+             alert()->success('Sucesso','Cofrinho alterado com sucesso.')->persistent('Fechar');
              return redirect()->route('campanha.index',$id);
 
          } catch (\Exception $e) {
              \Log::error($e->getFile() . "\n" . $e->getLine() . "\n" . $e->getMessage());
-             alert()->error('Erro','Erro em alterar a Campanha.')->persistent('Fechar');
+             alert()->error('Erro','Erro em alterar o Cofrinho.')->persistent('Fechar');
              return redirect()->route('campanha.index',$id)->withInput();
          }
      }
@@ -277,11 +278,11 @@ class CampanhaController extends Controller
                 'motivo_deletado' => $request->motivo_deletado
             ]);
             Mail::send(new newLaravelTips($id));
-            alert()->success('Sucesso','Campanha excluido com sucesso.')->persistent('Fechar');
+            alert()->success('Sucesso','Cofrinho excluido com sucesso.')->persistent('Fechar');
             return redirect()->route('campanha.index');
         } catch (\Exception $e) {
             \Log::error($e->getFile() . "\n" . $e->getLine() . "\n" . $e->getMessage());
-            alert()->error('Erro','Erro em excluir a Campanha.')->persistent('Fechar');
+            alert()->error('Erro','Erro em excluir o Cofrinho.')->persistent('Fechar');
             return redirect()->route('campanha.index')->withInput();
         }
      }
@@ -292,11 +293,11 @@ class CampanhaController extends Controller
          try {
             $escolha = 'Escolha do Usuário';
             $update = $this->campanhaService->buildUpdate($id,[
-                'status' => 0,
+                'status' => 4,
                 'motivo_deletado' => $escolha
             ]);
-            Mail::send(new newLaravelTips($id));
-             alert()->success('Sucesso','Campanha desativada com sucesso.')->persistent('Fechar');
+            Mail::send(new mensagemDesativado($id));
+             alert()->success('Sucesso','Cofrinho desativado com sucesso.')->persistent('Fechar');
              return redirect()->route('campanha.index');
          } catch (\Exception $e) {
              \Log::error($e->getFile() . "\n" . $e->getLine() . "\n" . $e->getMessage());
@@ -311,13 +312,13 @@ class CampanhaController extends Controller
 
              $update = $this->campanhaService->buildUpdate($id,['status' => 2]);
 
-             alert()->success('Sucesso','Campanha ativada com sucesso.')->persistent('Fechar');
+             alert()->success('Sucesso','Cofrinho ativado com sucesso.')->persistent('Fechar');
              return redirect()->route('campanha.index');
 
          } catch (\Exception $e) {
 
              \Log::error($e->getFile() . "\n" . $e->getLine() . "\n" . $e->getMessage());
-             alert()->error('Erro','Erro em alterar a Campanha.')->persistent('Fechar');
+             alert()->error('Erro','Erro em alterar o Cofrinho.')->persistent('Fechar');
              return redirect()->route('campanha.index')->withInput();
 
 
@@ -331,11 +332,11 @@ class CampanhaController extends Controller
             // Mail::send(new newLaravelTips($id));
              dd('passou');
             $update = $this->campanhaService->buildUpdate($id,['status' => 0]);
-            alert()->success('Sucesso','Campanha excluido com sucesso.')->persistent('Fechar');
+            alert()->success('Sucesso','Cofrinho excluido com sucesso.')->persistent('Fechar');
             return redirect()->route('campanha.index');
         } catch (\Exception $e) {
             \Log::error($e->getFile() . "\n" . $e->getLine() . "\n" . $e->getMessage());
-            alert()->error('Erro','Erro em excluir a Campanha.')->persistent('Fechar');
+            alert()->error('Erro','Erro em excluir o Cofrinho.')->persistent('Fechar');
             return redirect()->route('campanha.index')->withInput();
         }
      }

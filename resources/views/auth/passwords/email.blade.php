@@ -1,22 +1,35 @@
 @extends('layouts.app', ['activePage' => 'login', 'title' => 'Oincbank - Redefinição de Senha'])
 
 @section('content')
-    <div class="full-page section-image" data-color="black" data-image="{{asset('light-bootstrap/img/full-screen-image-2.jpg')}}">
+    <div class="full-page section-image" data-color="black"
+        data-image="{{ asset('light-bootstrap/img/full-screen-image-2.jpg') }}">
         <div class="content">
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-md-8">
+                        <form method="GET" action="{{ route('website.index') }}">
+                            <div class="col-md-4">
+                                <button type="submit" class="btn btn-warning btn-wd" style="margin-left: 0px">
+                                    {{ __('Voltar') }}
+                                </button>
+                            </div>
+                        </form>
                         <form method="POST" action="{{ route('password.email') }}">
                             @csrf
                             <div class="card card-login card-hidden">
+
+
                                 <div class="card-header">{{ __('Redefinir Senha') }}</div>
 
                                 <div class="card-body">
                                     <div class="form-group row">
-                                        <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('Endereço de E-Mail') }}</label>
+                                        <label for="email"
+                                            class="col-md-4 col-form-label text-md-right">{{ __('Endereço de E-Mail') }}</label>
 
                                         <div class="col-md-6">
-                                            <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                                            <input id="email" type="email"
+                                                class="form-control @error('email') is-invalid @enderror" name="email"
+                                                value="{{ old('email') }}" required autocomplete="email" autofocus>
 
                                             @error('email')
                                                 <span class="invalid-feedback" role="alert">
@@ -54,5 +67,6 @@
                 $('.card').removeClass('card-hidden');
             }, 700)
         });
+
     </script>
 @endpush

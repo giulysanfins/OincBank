@@ -5,19 +5,21 @@
             <img src="https://imgur.com/RPxMcrE.png" class="logo" style="height:100px !important;width:180px !important;" alt="OincBank">
         @endcomponent
     @endslot
-
+    {{-- @dd($payment) --}}
     {{-- Body --}}
-    Olá <b>{{ $payment->user->name }}</b>. <br> Seu pedido de saque foi <b>{{ $mensagem_status }}</b>
+   Olá {{ auth()->user()->name }}. <br> Recebemos um pedido de deleção de uma de suas campanhas do OincBank. <br>
 
-    {!! $mensagem_negado !!}
-    Campanha:
 
-    {{ $payment->campanha->titulo }} - {{ $payment->user->name }}
 
-    Dados informados:
-    Conta: {{ $payment->conta_corrente }}. Agência: {{ $payment->agencia }}
+        Campanha:
 
-    Valor solicitado do saque: R$:{{ $payment->valor }}
+        {{ $campanha->titulo }} - {{ auth()->user()->name }}
+
+        Data de finalização da Campanha: {{ $campanha->data_encerramento->format('d/m/Y') }}
+
+        Valor da Campanha: R$:{{ $campanha->valor }}
+
+
 
 
 
