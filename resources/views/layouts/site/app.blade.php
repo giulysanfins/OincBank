@@ -39,14 +39,6 @@
 
             @include('layouts.site.components.footer')
 			<!-- footer end-->
-
-            <div class="alert alert-dark alert-dismissible fade show alert-policy" role="alert">
-                A gente guarda estatísticas de visias para melhorar sua experiência de navegação.
-                Ao continuar, você concorda com a nossa Politica de Privacidade.
-                <button type="button" class="btn btn-primary" data-dismiss="alert" aria-label="Close">
-                    Continuar e Fechar
-                </button>
-            </div>
 				
         </div>
         <!-- libs-->

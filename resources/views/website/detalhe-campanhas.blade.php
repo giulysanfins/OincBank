@@ -32,19 +32,22 @@
                         </div>
                         <div class="donation-item__body">
                             <div class="row">
-                                <div class="col-12">
+                                <div class="col-12 col-lg-7">
                                     <h5 class="donation-item__title">{{$campanha->titulo}}</h5>
+                                </div>
+                                <div class="col-12 col-lg-5">
+                                    <input class="form-control" readonly type="text" value="{{url()->current()}}">
                                 </div>
                             </div>
                             <div class="row align-items-end">
-                                <div class="col-lg-7">
+                                <div class="col-lg-6">
                                     <div class="progress-bar">
                                         <div class="progress-bar__inner" style="width: {{$perc}}%;">
                                             <div class="progress-bar__value">{{$perc}}%</div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-lg-5">
+                                <div class="col-lg-6">
                                     <div class="donation-item__details-holder">
                                         <div class="donation-item__details-item"><span>Arreacadao: </span><span>R$ {{number_format($arrecadado,2,",",".")}}</span></div>
                                         <div class="donation-item__details-item"><span>Meta: </span><span>R$ {{number_format($campanha->valor,2,",",".")}}</span></div>

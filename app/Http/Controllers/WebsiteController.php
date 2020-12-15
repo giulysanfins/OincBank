@@ -33,6 +33,7 @@ class WebsiteController extends Controller
     {
         $data = [
             'minpay' => $this->parameterService->renderBySlug('campanha.num'),
+            'campanhas' => $this->campanhaService->renderByIndex(),
         ];
 
         return view('website.index',$data);

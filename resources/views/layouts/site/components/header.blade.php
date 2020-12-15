@@ -11,9 +11,13 @@
             <ul class="aside-menu">
                 <li class="aside-menu__item"><a class="aside-menu__link" href="{{route('website.campanhas')}}"><span>Campanhas</span></a></li>
                 <li class="aside-menu__item"><a class="aside-menu__link" href="{{route('website.faq')}}"><span>FAQ</span></a></li>
+                @if (Auth::check())
+                <li class="aside-menu__item"><a class="aside-menu__link" href="{{route('login')}}"><span>Olá, {{auth()->user()->name}}</span></a></li>
+                @else
                 <li class="aside-menu__item"><a class="aside-menu__link" href="{{route('login')}}"><span>Login / Cadastro</span></a></li>
-
+                @endif
             </ul>
+            
         </div>
         <div class="aside-dropdown__item">
             <!-- aside menu start-->
@@ -62,11 +66,13 @@
                 <!-- main menu start-->
                 <nav>
                     <ul class="main-menu">
-
                         <li class="main-menu__item"><a class="main-menu__link" href="{{route('website.campanhas')}}"><span>Cofrinhos</span></a></li>
                         <li class="main-menu__item"><a class="main-menu__link" href="{{route('website.faq')}}"><span>FAQ</span></a></li>
+                        @if (Auth::check())
+                        <li class="main-menu__item"><a class="main-menu__link" href="{{route('profile.edit')}}"><span>Olá, {{auth()->user()->name}}</span></a></li>
+                        @else
                         <li class="main-menu__item"><a class="main-menu__link" href="{{route('login')}}"><span>Login / Cadastro</span></a></li>
-
+                        @endif
                     </ul>
                 </nav>
                 <!-- main menu end-->
