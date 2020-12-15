@@ -20,17 +20,17 @@ class ModulesSeeder extends Seeder
     {
         DB::table('modules')->truncate();
 
-        // DB::table('modules')->insert([
-        //     'name' => 'Dashboard',
-        //     'route' => 'dashboard',
-        //     'icon' => 'fas fa-columns fa-2x',
-        //     'slug' => 'dashboard',
-        //     'type' => '1',
-        //     'menu_master' => NULL,
-        //     'order' => 1,
-        //     'created_at' => now(),
-        //     'updated_at' => now(),
-        // ]);
+        DB::table('modules')->insert([
+            'name' => 'Dashboard',
+            'route' => 'dashboard',
+            'icon' => 'fas fa-columns fa-2x',
+            'slug' => 'dashboard',
+            'type' => '1',
+            'menu_master' => NULL,
+            'order' => 1,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
 
         DB::table('modules')->insert([
             'name' => 'Configuração',

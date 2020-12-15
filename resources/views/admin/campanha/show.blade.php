@@ -103,7 +103,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="col-6">
                 <div class="card">
                     <div class="card-body">
@@ -146,10 +146,9 @@
                                             <tr>
                                                 <td>{{$pagamento->id}}</td>
                                                 @if (auth()->user()->role == 1)
-                                                    <td>{{$pagamento->user->name}}</td> 
+                                                    <td>{{$pagamento->user->name}}</td>
                                                 @endif
-<<<<<<< HEAD
-                                            
+
                                                 <td class="{{($pagamento->tipo == 2?'text-danger':'')}}"> {{($pagamento->tipo == 2?'-':'')}} R$ {{number_format($pagamento->valor ,2,",",".")}}</td>
                                                 <td>
                                                     @if ($pagamento->status == 1)
@@ -160,48 +159,12 @@
                                                         Pendente Pagamento - Mercado Pago
                                                     @elseif ($pagamento->status == 4)
                                                         Falha no pagamento
-                                                    @endif                                                
+                                                    @endif
                                                 </td>
                                             </tr>
                                         @endforeach
                                     </tbody>
                                 </table>
-=======
-
-
-
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @php
-                                                $valorTotal = 0;
-                                            @endphp
-                                            @foreach ($pagamentos as $pagamento)
-                                                <tr>
-                                                    <td>{{$pagamento->id}}</td>
-                                                    @if (auth()->user()->role == 1)
-                                                        <td>{{$pagamento->user->name}}</td>
-                                                    @endif
-
-                                                    <td class="{{($pagamento->tipo == 2?'text-danger':'')}}"> {{($pagamento->tipo == 2?'-':'')}} R$ {{number_format($pagamento->valor ,2,",",".")}}</td>
-                                                    <td>
-                                                        @if ($pagamento->status == 1)
-                                                            Pendente
-                                                        @elseif ($pagamento->status == 2)
-                                                            Pago
-                                                        @elseif ($pagamento->status == 3)
-                                                            Pendente Pagamento - Mercado Pago
-                                                        @elseif ($pagamento->status == 4)
-                                                            Falha no pagamento
-                                                        @endif
-                                                    </td>
-                                                </tr>
-                                            @endforeach
-                                        </tbody>
-                                    </table>
-                                </div>
-
->>>>>>> 6b6c3c795f38f3e1223d4e28a760ce5b65786048
                             </div>
 
                         </div>

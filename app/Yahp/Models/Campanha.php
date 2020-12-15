@@ -19,4 +19,10 @@ class Campanha extends Model
     {
         return $this->hasOne(Category::class, 'id', 'categoria_id');
     }
+
+    // pagamentos
+    public function payments()
+    {
+        return $this->hasMany(Payment::class, 'campanha_id', 'id');
+    }
 }
