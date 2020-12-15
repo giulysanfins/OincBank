@@ -142,7 +142,7 @@
                                         @php
                                             $valorTotal = 0;
                                         @endphp
-                                        @foreach ($pagamentos as $pagamento)
+                                        @foreach ($pagamentos as $pagamento) 
                                             <tr>
                                                 <td>{{$pagamento->id}}</td>
                                                 @if (auth()->user()->role == 1)

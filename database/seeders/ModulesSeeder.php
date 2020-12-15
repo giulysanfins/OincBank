@@ -44,13 +44,15 @@ class ModulesSeeder extends Seeder
             'updated_at' => now(),
         ]);
 
+        $config = DB::table('modules')->where('slug','config')->first();
+
         DB::table('modules')->insert([
             'name' => 'Usuários',
             'route' => 'usuario.index',
             'icon' => 'fas fa-users fa-2x',
             'slug' => 'users',
             'type' => 3,
-            'menu_master' => 2,
+            'menu_master' => $config->id,
             'order' => 1,
             'created_at' => now(),
             'updated_at' => now(),
@@ -62,7 +64,7 @@ class ModulesSeeder extends Seeder
             'icon' => 'fas fa-tags fa-2x',
             'slug' => 'categorias',
             'type' => 3,
-            'menu_master' => 2,
+            'menu_master' => $config->id,
             'order' => 2,
             'created_at' => now(),
             'updated_at' => now(),
@@ -98,7 +100,7 @@ class ModulesSeeder extends Seeder
             'icon' => 'fas fa-cog fa-2x',
             'slug' => 'parametros',
             'type' => 3,
-            'menu_master' => 2,
+            'menu_master' => $config->id,
             'order' => 3,
             'created_at' => now(),
             'updated_at' => now(),

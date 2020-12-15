@@ -23,19 +23,26 @@
                     </ul>
                 </li> --}}
 
-                <li class="nav-item pr-2">
+                <li class="nav-item pr-1">
+                    <a class="nav-link" href="{{route('website.campanhas')}}" data-toggle="tooltip" data-placement="bottom" title="Outros Cofrinhos">
+                        <i class="fas fa-piggy-bank fa-2x"></i>
+                        <span class="d-lg-none pl-2">Outros Cofrinhos</span>
+                    </a>
+                </li>
+
+                <li class="nav-item pr-1">
                     <a class="nav-link" href=" {{route('profile.edit') }} ">
                         <i class="far fa-user-circle fa-2x"></i>
                         <span class="d-lg-none pl-2">Perfil</span>
                     </a>
                 </li>
 
-                <li class="nav-item pl-sm-2">
+                <li class="nav-item pl-1">
                     <form id="logout-form" action="{{ route('logout') }}" method="POST">
                         @csrf
                         <a class="text-danger nav-link" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"> 
                             <i class="fas fa-sign-out-alt fa-2x"></i>
-                            <span class="d-lg-none pl-2">Sair</span>
+                            <span class="d-lg-none">Sair</span>
                         </a>
                     </form>
                 </li>
