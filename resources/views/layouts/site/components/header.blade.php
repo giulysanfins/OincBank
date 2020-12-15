@@ -67,7 +67,7 @@
                 <nav>
                     <ul class="main-menu">
                         <li class="main-menu__item"><a class="main-menu__link" href="{{route('website.campanhas')}}"><span>Cofrinhos</span></a></li>
-                        <li class="main-menu__item"><a class="main-menu__link" href="{{route('website.faq')}}"><span>FAQ</span></a></li>
+                        <li class="main-menu__item"><a class="main-menu__link" href="{{route('website.faq')}}"><span>Dúvidas Frequentes</span></a></li>
                         @if (Auth::check())
                         <li class="main-menu__item"><a class="main-menu__link" href="{{route('profile.edit')}}"><span>Olá, {{auth()->user()->name}}</span></a></li>
                         @else

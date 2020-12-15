@@ -197,7 +197,7 @@
 
                         @foreach ($campanhas as $campanha)
                             @php
-                                $payments = \App\Yahp\Models\Payment::where('campanha_id',$campanha->id)->where('tipo',1);
+                                $payments = \App\Yahp\Models\Payment::where('campanha_id',$campanha->id)->where('tipo',1)->where('status',2);
                                 $vTotal = 0;                                          
                                 foreach ($payments->get() as $key => $pag) {
                                     $vTotal = $vTotal+$pag->valor;
@@ -235,18 +235,23 @@
                                             </div>
 
                                             <div class="causes-item__lower">
-                                                <div class="progress-bar">
-                                                    <div class="progress-bar__inner" style="width: {{$perc}}%;">
+                                                <div class="progress-bar" style="width: 100%">
+                                                    <div class="progress-bar__inner" style="width: {{($perc >= 100)?'100':$perc}}%;">
                                                         <div class="progress-bar__value">{{$perc}}%</div>
                                                     </div>
                                                 </div>
                                                 <div class="causes-item__details-holder">
                                                     <div class="causes-item__details-item">
-                                                        <span>Meta: </span><br /><span>R$ {{number_format($campanha->valor,2,",",".")}}</span>
+                                                        <span>Conquistado:</span>
+                                                        <br />
+                                                        <span>R$  {{number_format($vTotal,2,",",".")}}</span>
                                                     </div>
 
-                                                    <div class="causes-item__details-item text-right"><span>Conquistado:
-                                                        </span><br /><span>R$  {{number_format($vTotal,2,",",".")}}</span></div>
+                                                    <div class="causes-item__details-item text-right">
+                                                        <span>Meta: </span>
+                                                        <br />
+                                                        <span>R$ {{number_format($campanha->valor,2,",",".")}}</span>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -283,7 +288,7 @@
     </main>
 
     <div class="alert alert-dark alert-dismissible fade show alert-policy" role="alert">
-        A gente guarda estatísticas de visias para melhorar sua experiência de navegação.
+        A gente guarda estatísticas de visitas para melhorar sua experiência de navegação.
         Ao continuar, você concorda com a nossa Politica de Privacidade.
         <button type="button" class="btn button--primary" data-dismiss="alert" aria-label="Close">
             Continuar e Fechar

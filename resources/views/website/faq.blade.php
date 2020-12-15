@@ -18,8 +18,8 @@
                                 <div class="align-container">
                                     <div class="align-container__item">
                                         <div class="promo-slider__wrapper-1">
-                                            <h2 class="promo-slider__title"><span>Perguntas Frequentes</span>
-
+                                            <h2 class="promo-slider__title">
+                                                <span>Dúvidas Frequentes</span>
                                             </h2>
                                         </div>
                                         <div class="promo-slider__wrapper-2">
@@ -32,7 +32,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="promo-slider__item promo-slider__item--style-2">
+                {{-- <div class="promo-slider__item promo-slider__item--style-2">
                     <picture>
                         <source srcset="{{ asset('helpo-theme') }}/img/promo_2.jpg" media="(min-width: 835px)" />
                         <source srcset="{{ asset('helpo-theme') }}/img/promo_2.jpg" media="(min-width: 376px)" />
@@ -43,7 +43,7 @@
 
                         </div>
                     </div>
-                </div>
+                </div> --}}
                 <div class="promo-slider__item promo-slider__item--style-3">
                     <picture>
                         <source srcset="{{ asset('helpo-theme') }}/img/promo_3.jpg" media="(min-width: 835px)" />
