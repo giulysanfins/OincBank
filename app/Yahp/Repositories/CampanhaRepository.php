@@ -2,9 +2,10 @@
 
 namespace App\Yahp\Repositories;
 
-use App\Yahp\Models\Alerta;
+use App\Yahp\Models\Campanha;
+use Carbon\Carbon;
 
-class CampanhaRepository 
+class CampanhaRepository
 {
 
      /**
@@ -14,11 +15,11 @@ class CampanhaRepository
 
     /**
      * Contato Repository constructor.
-     * @param Alerta $alerta
+     * @param Campanha $campanha
      */
-    public function __construct(Alerta $alerta)
+    public function __construct(Campanha $campanha)
     {
-        $this->model = $alerta;
+        $this->model = $campanha;
     }
 
     /**
@@ -36,6 +37,39 @@ class CampanhaRepository
     public function getById($id)
     {
         return $this->model->find($id);
+    }
+
+    /**
+     * @param $id
+     * @return mixed
+     */
+    public function getByStatus($status)
+    {
+        $dateToday = Carbon::now()->format('Y-m-d');
+        if($status == 5)
+        {
+            return $this->model->where('status',2)->where('data_encerramento','<',$dateToday)->get();
+        } else {
+            return $this->model->where('status',$status)->get();
+        }
+    }
+
+    /**
+     * @param $id
+     * @return mixed
+     */
+    public function getByUser($user_id)
+    {
+        return $this->model->where('user_id',$user_id)->get();
+    }
+
+    /**
+     * @param $id
+     * @return mixed
+     */
+    public function getByStatusUser($status,$user_id)
+    {
+        return $this->model->where('status',$status)->where('user_id',$user_id)->get();
     }
 
     /**
@@ -65,4 +99,12 @@ class CampanhaRepository
     {
         return $this->model->find($id)->delete();
     }
+
+    public function getBySearch($q)
+    {
+        return $this->model->where('titulo','LIKE','%'.$q.'%')
+        ->orWhere('id','LIKE','%'.$q.'%')->get();
+    }
+
+
 }

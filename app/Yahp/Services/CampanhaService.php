@@ -2,24 +2,24 @@
 
 namespace App\Yahp\Services;
 
-use App\Yahp\Repositories\AlertaRepository;
+use App\Yahp\Repositories\CampanhaRepository;
 use App\Yahp\Contracts\ServiceContract;
 
 class CampanhaService implements ServiceContract
 {
      /**
-     * @var AlertaRepository
+     * @var CampanhaRepository
      */
     private $repository;
-    
-    
+
+
     /**
      * ClienteService constructor.
-     * @param AlertaRepository $clienteRepository
+     * @param CampanhaRepository $campanhaRepository
      */
-    public function __construct(AlertaRepository $alertaRepository)
+    public function __construct(CampanhaRepository $campanhaRepository)
     {
-        $this->repository = $alertaRepository;
+        $this->repository = $campanhaRepository;
     }
 
     /**
@@ -40,6 +40,34 @@ class CampanhaService implements ServiceContract
     }
 
     /**
+     * @param $status
+     * @return mixed
+     */
+    public function renderByStatus($status)
+    {
+        return $this->repository->getByStatus($status);
+    }
+
+    /**
+     * @param $user_id
+     * @return mixed
+     */
+    public function renderByUser($user_id)
+    {
+        return $this->repository->getByUser($user_id);
+    }
+
+    /**
+     * @param $status
+     * @param $user_id
+     * @return mixed
+     */
+    public function renderByStatusUser($status,$user_id)
+    {
+        return $this->repository->getByStatusUser($status,$user_id);
+    }
+
+    /**
      * @param $id
      * @param $data
      * @return mixed
@@ -55,8 +83,7 @@ class CampanhaService implements ServiceContract
      */
     public function buildInsert($data)
     {
-        $account = $this->repository->create($data);
-        return $account;
+        return $this->repository->create($data);
     }
 
     /**
@@ -67,4 +94,16 @@ class CampanhaService implements ServiceContract
     {
         return $this->repository->delete($id);
     }
+
+
+        /**
+     * @param $q - request vinda do formulario;
+     * @return mixed
+     */
+    public function renderBySearch($q)
+    {
+        return $this->repository->getBySearch($q);
+    }
+
+
 }

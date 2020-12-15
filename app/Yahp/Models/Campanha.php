@@ -6,9 +6,17 @@ use Illuminate\Database\Eloquent\Model;
 class Campanha extends Model
 {
 
-    protected $table = 'dados';
+    protected $table = 'campanhas';
     protected $fillable = [
-        'dispositivo_id','litros','nivel_galao_01','nivel_galao_02'
+        'id','titulo','categoria_id','valor','data_encerramento','profile_image','video','descricao','status','user_id','motivo_deletado'
     ];
-    
+    protected $guarded = ['created_at', 'update_at'];
+    protected $with = ['categoria'];
+    protected $dates = ['data_encerramento'];
+
+    // categorias
+    public function categoria()
+    {
+        return $this->hasOne(Category::class, 'id', 'categoria_id');
+    }
 }
