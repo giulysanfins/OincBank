@@ -2,14 +2,15 @@
 
 namespace App\Mail;
 
-use App\Models\User;
 use App\Yahp\Models\Campanha;
+use App\Yahp\Models\Payment;
+use App\Yahp\Models\Bank;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class newLaravelTips extends Mailable
+class mensagemSacar extends Mailable
 {
     use Queueable, SerializesModels;
     private $usuario;
@@ -34,14 +35,13 @@ class newLaravelTips extends Mailable
      */
     public function build()
     {
-
-        $campanha = Campanha::where('id',$this->id)->first();
-        $this->subject('Deleção de Campanha');
+        $payment = Payment::where('id', $this->id)->first();
+        $this->subject('Pedido de Saque');
         $this->to(auth()->user()->email,auth()->user()->name);
-
-        return $this->markdown('mail.newLaravelTips',[
+        // dd($payment->campanha->titulo);
+        return $this->markdown('mail.mensagemSaque',[
             'usuario' =>$this->usuario,
-            'campanha' => $campanha
+            'payment'  => $payment
         ]);
     }
 }
