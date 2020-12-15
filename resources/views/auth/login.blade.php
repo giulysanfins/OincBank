@@ -9,11 +9,23 @@
                         @csrf
                         <div class="card card-login card-hidden">
                             <div class="card-header ">
-                                <h3 class="header text-center">Entrar</h3>
+                                
                             </div>
                             <div class="card-body ">
                                 <div class="card-body">
                                     <div class="form-group">
+                                        <div class="col-12">
+                                            <h3 class="header text-center">Cadastre-se</h3>
+                                            <a class="btn btn-oinc-primary btn-block" href="{{ route('register') }}">
+                                                Criar uma conta
+                                            </a>
+                                            <hr />
+                                            <div>
+                                                <h3 class="header text-center">Entrar</h3>
+                                            </div>
+                                        </div>
+
+
                                         <label for="email" class="col-md-6 col-form-label">E-mail</label>
 
                                         <div class="col-12">
@@ -41,17 +53,15 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="card-footer ml-auto mr-auto pt-0">
                                     <div class="container text-center" >
                                         <button type="submit" class="btn btn-oinc-primary btn-wd">Entrar</button>
                                     </div>
-                                    <div class="d-flex justify-content-between ">
-                                        <a class="btn btn-link" style="color:#23CCEF" href="{{ route('password.request') }}">
+                                </div>
+                                <div class="card-footer ml-auto mr-auto pt-0">
+
+                                    <div class="d-flex justify-content-between text-center">
+                                        <a class="btn btn-link btn-block" style="color:#23CCEF" href="{{ route('password.request') }}">
                                             Perdeu sua senha?
-                                        </a>
-                                        <a class="btn btn-link" style="color:#23CCEF" href="{{ route('register') }}">
-                                            Criar uma conta
                                         </a>
                                     </div>
 

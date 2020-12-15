@@ -11,7 +11,7 @@
             <ul class="aside-menu">
                 <li class="aside-menu__item"><a class="aside-menu__link" href="{{route('website.campanhas')}}"><span>Campanhas</span></a></li>
                 <li class="aside-menu__item"><a class="aside-menu__link" href="{{route('website.faq')}}"><span>FAQ</span></a></li>
-                <li class="aside-menu__item"><a class="aside-menu__link" href="{{route('login')}}"><span>Login</span></a></li>
+                <li class="aside-menu__item"><a class="aside-menu__link" href="{{route('login')}}"><span>Login / Cadastro</span></a></li>
 
             </ul>
         </div>
@@ -65,7 +65,7 @@
 
                         <li class="main-menu__item"><a class="main-menu__link" href="{{route('website.campanhas')}}"><span>Cofrinhos</span></a></li>
                         <li class="main-menu__item"><a class="main-menu__link" href="{{route('website.faq')}}"><span>FAQ</span></a></li>
-                        <li class="main-menu__item"><a class="main-menu__link" href="{{route('login')}}"><span>Login</span></a></li>
+                        <li class="main-menu__item"><a class="main-menu__link" href="{{route('login')}}"><span>Login / Cadastro</span></a></li>
 
                     </ul>
                 </nav>

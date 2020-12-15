@@ -24,7 +24,7 @@
                                         
                                 <div class="pl-lg-4 row">
 
-                                    <div class="col-12" style="padding: 6px;">
+                                    <div class="col-8" style="padding: 6px;">
                                         <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
                                             <label class="form-control-label" for="input-name">
                                                 <i class="w3-xxlarge fas fa-user"></i> Nome
@@ -33,14 +33,45 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-12 col-md-6">
+                                    @if (auth()->user()->tipo == 1)
+                                        <div class="col-12 col-md-4">
+                                            <div class="form-group{{ $errors->has('email') ? ' has-danger' : '' }}">
+                                                <label class="form-control-label" for="documento"><i class="w3-xxlarge far fa-id-card"></i> CPF</label>
+                                                <input type="text" name="documento" id="documento" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" placeholder="CPF" value="{{ old('documento', auth()->user()->documento) }}" required>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-12 col-md-3">
+                                            <div class="form-group{{ $errors->has('data_nascimento') ? ' has-danger' : '' }}">
+                                                <label class="form-control-label" for="documento"><i class="w3-xxlarge far fa-id-card"></i> Data Nascimento</label>
+                                                <input type="date" name="data_nascimento" id="data_nascimento" class="form-control{{ $errors->has('data_nascimento') ? ' is-invalid' : '' }}" placeholder="CPF" value="{{ old('documento', auth()->user()->data_nascimento) }}" required>
+                                            </div>
+                                        </div>
+
+                                    @elseif (auth()->user()->tipo == 2)
+                                        <div class="col-12 col-md-4">
+                                            <div class="form-group{{ $errors->has('email') ? ' has-danger' : '' }}">
+                                                <label class="form-control-label" for="documento"><i class="w3-xxlarge far fa-id-card"></i> CNPJ</label>
+                                                <input type="text" name="documento" id="documento" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" placeholder="CNPJ" value="{{ old('documento', auth()->user()->documento) }}" required>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-12 col-md-3">
+                                            <div class="form-group{{ $errors->has('inscricao_estadual') ? ' has-danger' : '' }}">
+                                                <label class="form-control-label" for="inscricao_estadual"><i class="w3-xxlarge far fa-id-card"></i> Inscricao Estadual</label>
+                                                <input type="text" name="inscricao_estadual" id="inscricao_estadual" class="form-control{{ $errors->has('inscricao_estadual') ? ' is-invalid' : '' }}" placeholder="Inscricao Estadual" value="{{ old('inscricao_estadual', auth()->user()->inscricao_estadual) }}" required>
+                                            </div>
+                                        </div>
+                                    @endif
+
+                                    <div class="col-12 col-md-5">
                                         <div class="form-group{{ $errors->has('email') ? ' has-danger' : '' }}">
                                             <label class="form-control-label" for="input-email"><i class="w3-xxlarge far fa-envelope"></i> E-mail</label>
                                             <input type="email" name="email" id="input-email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" placeholder="E-mail" value="{{ old('email', auth()->user()->email) }}" required>
                                         </div>
                                     </div>
 
-                                    <div class="col-12 col-md-6">
+                                    <div class="col-12 col-md-3">
                                         <div class="form-group{{ $errors->has('email') ? ' has-danger' : '' }}">
                                             <label class="form-control-label" for="input-photo_perfil"><i class="w3-xxlarge fas fa-portrait"></i> Foto Perfil</label>
                                             <br />
@@ -123,17 +154,9 @@
                                     {!! auth()->user()->description !!}
                                 </p>
                             </div>
-                            {{-- <hr> --}}
+
                             <div class="button-container mr-auto ml-auto">
-                                {{-- <button href="#" class="btn btn-simple btn-link btn-icon">
-                                    <i class="fab fa-facebook-square"></i>
-                                </button>
-                                <button href="#" class="btn btn-simple btn-link btn-icon">
-                                    <i class="fab fa-twitter"></i>
-                                </button>
-                                <button href="#" class="btn btn-simple btn-link btn-icon">
-                                    <i class="fab fa-google-plus-square"></i>
-                                </button> --}}
+
                             </div>
                         </div>
                     </div>
@@ -141,4 +164,10 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('scripts')
+<script>
+
+</script>
 @endsection

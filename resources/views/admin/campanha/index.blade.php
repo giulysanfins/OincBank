@@ -4,6 +4,72 @@
     <div class="content">
         <div class="row">
 
+            @if (auth()->user()->role == 1)
+                <div class="col-3">
+                    <div class="card card-stats">
+                        <div class="card-header">
+                            Cofrinhos Expirados
+                        </div>
+                        <div class="card-body text-center">
+                            <h2>
+                                {{$campanhas_expiradas->count()}}<br />
+                                <small>Cofrinhos</small>
+                            </h2>
+                        </div>
+                        <div class="card-footer">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-3">
+                    <div class="card card-stats">
+                        <div class="card-header">
+                            Cofrinhos Ativos
+                        </div>
+                        <div class="card-body text-center">
+                            <h2>
+                                {{$campanhas_aprovadas->count()}}<br />
+                                <small>Cofrinhos</small>
+                            </h2>
+                        </div>
+                        <div class="card-footer">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-3">
+                    <div class="card card-stats">
+                        <div class="card-header">
+                            Cofrinhos Desativados
+                        </div>
+                        <div class="card-body text-center">
+                            <h2>
+                                {{$campanhas_desativadas->count()}}<br />
+                                <small>Cofrinhos</small>
+                            </h2>
+                        </div>
+                        <div class="card-footer">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-3">
+                    <div class="card card-stats">
+                        <div class="card-header">
+                            Cofrinhos Exluídos
+                        </div>
+                        <div class="card-body text-center">
+                            <h2>
+                                {{$campanhas_excluidas->count()}}<br />
+                                <small>Cofrinhos</small>
+                            </h2>
+                        </div>
+                        <div class="card-footer">
+                        </div>
+                    </div>
+                </div>
+            @endif
+
             <div class="col-12">
                 <h3>Cofrinhos</h3>
                 <div class="card card-stats">
@@ -204,6 +270,66 @@
                                             </div>
                                         </div>
                                     </div>
+
+                                    @if (auth()->user()->role == 1)
+                                        <div class="card">
+                                            <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#excluidas" aria-expanded="false" aria-controls="header_desativadas">
+                                                <div class="card-header" id="header_desativadas">
+                                                    <h5 class="mb-0 text-left">
+                                                        Cofrinhos Excluidos
+                                                    </h5>
+                                                </div>
+                                            </button>
+
+                                            <div id="excluidas" class="collapse" aria-labelledby="body_excluidas" data-parent="#excluidas">
+                                                <div class="card-body">
+                                                    @if($campanhas_excluidas->count() > 0)
+                                                        <table class="table">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th scope="col">#</th>
+                                                                    <th scope="col">Titulo</th>
+                                                                    <th scope="col">Categoria</th>
+                                                                    <th scope="col">Data Criacao</th>
+                                                                    <th scope="col"></th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                @foreach ($campanhas_excluidas as $campanha)
+                                                                    <tr>
+                                                                        <th scope="row">{{$campanha->id}}</th>
+                                                                        <td>{{$campanha->titulo}}</td>
+                                                                        <td>{{$campanha->categoria->name}}</td>
+                                                                        <td>{{$campanha->created_at->format('d/m/Y h:i:s')}}</td>
+                                                                        <td>
+                                                                            <div class="btn-group float-right" role="group" aria-label="Botões de Ação - Clientes">
+                                                                                @if (auth()->user()->role == 2)
+                                                                                <a href="{{route('campanha.edit',$campanha->id)}}" class="btn btn-info">Editar</a>
+                                                                                @endif
+                                                                                <a href="{{route('campanha.show',$campanha->id)}}" class="btn btn-secondary">Visualizar</a>
+                                                                                @if (auth()->user()->role == 2)
+                                                                                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#sacar{{$campanha->id}}">Sacar valor</button>
+                                                                                <button type="submit" class="btn btn-success">Ativar</button>
+                                                                                @endif
+                                                                            </div>
+                                                                        </td>
+                                                                    </tr>
+                                                                    @if (auth()->user()->role == 2)
+                                                                        @component('admin.campanha.components.solicitar',[
+                                                                            'campanha' => $campanha
+                                                                        ])@endcomponent
+                                                                    @endif
+                                                                @endforeach
+                                                            </tbody>
+                                                        </table>
+                                                    @else
+                                                        <p class="text-center"> Sem resultados </p>
+                                                    @endif
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endif
+
 
                                 </div>
 

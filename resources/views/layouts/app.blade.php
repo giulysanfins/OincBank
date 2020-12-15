@@ -34,11 +34,13 @@
         <link href="{{ asset('light-bootstrap/css/demo.css') }}" rel="stylesheet" />
         <link href="{{ asset('vendors') }}/fontawesome/css/all.min.css" rel="stylesheet" />
         <link href="{{ asset('vendors') }}/datatables/datatables.min.css" rel="stylesheet" />
+        <link href="{{ asset('light-bootstrap') }}/css/app.css" rel="stylesheet" />
+
 
     </head>
 
     <body >
-        <div class="@if (!auth()->check() || request()->route()->getName() == "login") bg-login @endif  wrapper @if (!auth()->check() || request()->route()->getName() == "") wrapper-full-page @endif">
+        <div class="@if (!auth()->check() || request()->route()->getName() == "login" || request()->route()->getName() == "register") bg-login @endif  wrapper @if (!auth()->check() || request()->route()->getName() == "") wrapper-full-page @endif">
 
             @if (auth()->check() && request()->route()->getName() != "")
                 @include('layouts.navbars.sidebar')

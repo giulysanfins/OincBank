@@ -1,4 +1,4 @@
-@extends('layouts.site.app', ['activePage' => '', 'title' => 'OincBank', 'navName' => '', 'activeButton' => ''])
+@extends('layouts.site.app', ['activePage' => '', 'title' => '| Detalhes da Campanha', 'navName' => '', 'activeButton' => ''])
 
 @section('content')
 <div class="main">

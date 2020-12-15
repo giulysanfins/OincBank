@@ -71,7 +71,7 @@ class ModulesSeeder extends Seeder
         DB::table('modules')->insert([
             'name' => 'Cofrinhos',
             'route' => 'campanha.index',
-            'icon' => 'far fa-file-alt fa-2x',
+            'icon' => 'fas fa-piggy-bank fa-2x',
             'slug' => 'campanha',
             'type' => 1,
             'menu_master' => NULL,
