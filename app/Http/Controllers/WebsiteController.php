@@ -307,4 +307,14 @@ class WebsiteController extends Controller
         }
         return view('website.index')->withMessage("Nada encontrado 2");
      }
+
+         /**
+     * Show the application TOS.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function sobre()
+    {
+        return view('website.sobre');
+    }
 }
