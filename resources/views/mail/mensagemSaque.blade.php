@@ -8,7 +8,7 @@
     @endslot
 
     {{-- Body --}}
-    <p>Olá {{ auth()->user()->name }}. <br> Recebemos um pedido de deleção de uma de suas campanhas do OincBank. <br>
+    <p>Olá {{ auth()->user()->name }}. <br> Recebemos um pedido de saque de uma de suas campanhas do OincBank. <br>
 
     </p>
 
@@ -17,20 +17,18 @@
     </p>
     <br>
     <p>
-        {{ $campanha->titulo }} - {{ auth()->user()->name }}
+        {{ $payment->campanha->titulo }} - {{ auth()->user()->name }}
     </p>
     <br>
     <p>
-        Data de finalização da Campanha: {{ $campanha->data_encerramento->format('d/m/Y') }}
+        Conta: {{ $payment->conta_corrente }}. Agência: {{ $payment->agencia }}
     </p>
     <br>
     <p>
-        Valor da Campanha: R$:{{ $campanha->valor }}
+        Valor solicitado do saque: R$:{{ $payment->valor }}
     </p>
     <br>
-    <p>
-        Motivo da Deleção: {{ $campanha->motivo_deletado }}
-    </p>
+
 
 
     {{-- Subcopy --}}
@@ -42,7 +40,6 @@
         @endslot
     @endisset
 
-    {{-- Footer --}}
     {{-- Footer --}}
     @slot('footer')
 
@@ -60,6 +57,9 @@
         </p>
 
     @endslot
+
+
+
 @endcomponent
 
 

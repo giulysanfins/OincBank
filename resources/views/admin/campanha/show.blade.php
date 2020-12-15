@@ -103,7 +103,7 @@
                         </div>
                     </div>
                 </div>
-            
+
                 <div class="col-6">
                     <div class="card">
                         <div class="card-body">
@@ -138,18 +138,6 @@
                                                 @endif
 
 
-                                                <td>R$ {{number_format($pagamento->valor ,2,",",".")}}</td>
-                                                <td>
-                                                    @if ($pagamento->status == 1)
-                                                        Pendente
-                                                    @elseif ($pagamento->status == 2)
-                                                        Pago
-                                                    @elseif ($pagamento->status == 3)
-                                                        Pendente Pagamento - Mercado Pago
-                                                    @elseif ($pagamento->status == 4)
-                                                        Falha no pagamento
-                                                    @endif
-                                                </td>
 
                                             </tr>
                                         </thead>
@@ -163,7 +151,7 @@
                                                     @if (auth()->user()->role == 1)
                                                         <td>{{$pagamento->user->name}}</td>
                                                     @endif
-                                                
+
                                                     <td class="{{($pagamento->tipo == 2?'text-danger':'')}}"> {{($pagamento->tipo == 2?'-':'')}} R$ {{number_format($pagamento->valor ,2,",",".")}}</td>
                                                     <td>
                                                         @if ($pagamento->status == 1)
@@ -174,7 +162,7 @@
                                                             Pendente Pagamento - Mercado Pago
                                                         @elseif ($pagamento->status == 4)
                                                             Falha no pagamento
-                                                        @endif                                                
+                                                        @endif
                                                     </td>
                                                 </tr>
                                             @endforeach

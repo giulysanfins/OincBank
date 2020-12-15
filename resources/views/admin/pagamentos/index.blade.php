@@ -14,7 +14,7 @@
                                     <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th>Usuário</th>    
+                                            <th>Usuário</th>
                                             <th>Campanha</th>
                                             <th>Valor</th>
                                             <th>Solicitado em:</th>
@@ -23,7 +23,7 @@
 
                                         </tr>
                                     </thead>
-                                    <tbody> 
+                                    <tbody>
                                         @foreach ($pagamentos as $pagamento)
                                             @if ($pagamento->status == 1 && $pagamento->tipo == 2)
 
@@ -58,50 +58,7 @@
             </div>
             @endif
 
-            @if (auth()->user()->role == 2)
-                <div class="col-12">
-                    <h3>Minhas Contribuições</h3>
-                    <div class="card card-stats">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-12 table-responsive">
-                                    <table class="table" id="tableContribuições">
-                                        <thead>
-                                            <tr>
-                                                <th>#</th>
-                                                <th>Usuário</th>    
-                                                <th>Campanha</th>
-                                                <th>Valor</th>
-                                                <th>Solicitado em:</th>
-                                                <th></th>
 
-                                            </tr>
-                                        </thead>
-                                        <tbody> 
-                                            @foreach ($pagamentos as $pagamento)
-                                                @if ($pagamento->tipo == 1)
-
-                                                <tr>
-                                                    <td>{{$pagamento->id}}</td>
-                                                    <td>{{$pagamento->user->name}}</td>
-                                                    <td>{{$pagamento->campanha->titulo}}</td>
-                                                    <td> R$ {{ number_format($pagamento->valor,2,",",".") }}</td>
-                                                    <td>{{$pagamento->created_at->format('d/m/Y H:i:s')}}</td>
-                                                    <td></td>
-                                                </tr>
-                                                @endif
-                                            @endforeach
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-footer">
-                        </div>
-                    </div>
-                </div>
-            @endif
-            
             <div class="col-12">
                 <h3>
                     Movimentações
@@ -115,7 +72,7 @@
                                         <tr>
                                             <th>#</th>
                                             @if (auth()->user()->role == 1)
-                                                <th>Usuário</th>    
+                                                <th>Usuário</th>
                                             @endif
                                             <th>Cofrinho</th>
                                             <th>Tipo</th>
@@ -126,12 +83,14 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+
                                         @foreach ($pagamentos as $pagamento)
                                             <tr>
                                                 <td>{{$pagamento->id}}</td>
                                                 @if (auth()->user()->role == 1)
                                                     <td>{{$pagamento->user->name}}</td>
                                                 @endif
+                                                {{-- @dd($pagamento->campanha->titulo) --}}
                                                 <td>{{$pagamento->campanha->titulo}}</td>
                                                 <td>
                                                     @if ($pagamento->tipo == 1)
@@ -148,10 +107,40 @@
                                                         Pago
                                                     @elseif ($pagamento->status == 3)
                                                         Pendente Pagamento - Mercado Pago
+
                                                     @elseif ($pagamento->status == 4)
                                                         Falha no pagamento
+
+                                                            <a href="#{{$pagamento->id}}" class="edit" data-toggle="modal"><i class="fas fa-question" style="color: black"></i></a>
+                                                            <div id="{{$pagamento->id}}" class="modal fade">
+                                                                <div class="modal-dialog">
+                                                                    <div class="modal-content">
+
+                                                                            <div class="modal-header">
+                                                                                <h4 class="modal-title">Motivo Falha</h4>
+                                                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                                                            </div>
+                                                                            <div class="modal-body">
+                                                                                <p>
+                                                                                    @if($pagamento->motivo_negado)
+                                                                                    {{$pagamento->motivo_negado}}
+                                                                                    @else
+                                                                                    Motivo: não informado.
+                                                                                    @endif
+                                                                                    {{$pagamento->motivo_negado}}
+                                                                                </p>
+                                                                            </div>
+                                                                            <div class="modal-footer">
+                                                                                <input type="button" class="btn btn-danger" data-dismiss="modal" value="Sair">
+                                                                            </div>
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
                                                     @endif
                                                 </td>
+
                                                 <td></td>
                                             </tr>
                                         @endforeach
@@ -168,6 +157,8 @@
         </div>
     </div>
 @endsection
+
+
 
 @section('scripts')
 <script>
