@@ -12,7 +12,7 @@
             <div class="row">
                 <div class="col-auto">
                     <div class="align-container">
-                        <div class="align-container__item"><span class="promo-primary__pre-title">{{}}</span>
+                        <div class="align-container__item"><span class="promo-primary__pre-title">{{$campanha->user->name}}</span>
                             <h1 class="promo-primary__title"><span>{{$campanha->titulo}}</span></h1>
                         </div>
                     </div>
