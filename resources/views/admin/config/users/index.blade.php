@@ -28,6 +28,7 @@
                                         <th scope="col"># Cofrinhos</th>
                                         <th scope="col">Criado em:</th>
                                         <th scope="col"></th>
+                                        <th scope="col"></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -41,11 +42,12 @@
                                             <td>
                                                 <div class="btn-group" role="group" aria-label="Exemplo básico">
                                                     <a href="{{route('usuario.edit',$cliente->id)}}" class="btn btn-info">Editar</a>
-                                                    <button type="button" class="btn btn-secondary">Cofrinhos</button>
+                                                    {{-- <button type="button" class="btn btn-secondary">Cofrinhos</button>
                                                     <button type="button" class="btn btn-warning">Bloquear</button>
-                                                    <button type="button" class="btn btn-danger">Deletar</button>
+                                                    <button type="button" class="btn btn-danger">Deletar</button> --}}
                                                 </div>
                                             </td>
+                                            <td></td>
                                         </tr>
                                     @endforeach
                                 </tbody>

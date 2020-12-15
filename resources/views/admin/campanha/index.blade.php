@@ -175,6 +175,7 @@
                                                         @foreach ($campanhas_aprovadas as $campanha)
                                                             @php
                                                                 $total = 0;
+                                                            
                                                                 foreach($campanha->payments as $pag)
                                                                 {
                                                                     if($pag->tipo == 1 && $pag->status == 2){

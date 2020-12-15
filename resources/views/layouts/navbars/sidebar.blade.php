@@ -17,6 +17,14 @@
                                 <p class="ml-2">Minhas Contribuições</p>
                             </a>
                         </li>
+
+                    @elseif ($module->slug == 'dashboard')
+                        {{-- <li class="nav-item  d-none @if($activePage == $module->slug) disabled @endif">
+                            <a class="nav-link" href="{{route($module->route)}}">
+                                <i class="{{$module->icon}}"></i>
+                                <p class="ml-2">{{$module->name}}</p>
+                            </a>
+                        </li> --}}
                     @else
                         <li class="nav-item @if($activePage == $module->slug) active @endif">
                             <a class="nav-link" href="{{route($module->route)}}">
