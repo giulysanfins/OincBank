@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Carbon\Carbon;
 
 class RegisterController extends Controller
 {
@@ -50,9 +51,9 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],  
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'agree' => ['required']
         ]);
     }
 
@@ -64,10 +65,28 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        
+        if($data['documento_cpf'] != null)
+        {
+            $nome = $data['name_pessoa'];
+            $documento = $data['documento_cpf'];
+
+        } elseif ($data['documento_cnpj'] != null)
+        {
+            $nome = $data['name_empresa'];
+            $documento = $data['documento_cnpj'];
+        }
+
         return User::create([
-            'name' => $data['name'],
+            'name' => $nome,
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'documento' => $documento,
+            'data_nascimento' => $data['data_nascimento'],
+            'inscricao_estadual' => $data['inscricao_estadual'],
+            'telefone' => $data['telefone'],
+            'termos_condicoes' => \Carbon\Carbon::now(),
+            'tipo' => $data['tipo'],
         ]);
     }
 }

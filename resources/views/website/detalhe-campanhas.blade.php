@@ -1,4 +1,4 @@
-@extends('layouts.site.app', ['activePage' => '', 'title' => 'OincBank', 'navName' => '', 'activeButton' => ''])
+@extends('layouts.site.app', ['activePage' => '', 'title' => '| Detalhes da Campanha', 'navName' => '', 'activeButton' => ''])
 
 @section('content')
 <div class="main">
@@ -39,15 +39,15 @@
                             <div class="row align-items-end">
                                 <div class="col-lg-7">
                                     <div class="progress-bar">
-                                        <div class="progress-bar__inner" style="width: 42%;">
-                                            <div class="progress-bar__value">42%</div>
+                                        <div class="progress-bar__inner" style="width: {{$perc}}%;">
+                                            <div class="progress-bar__value">{{$perc}}%</div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-lg-5">
                                     <div class="donation-item__details-holder">
+                                        <div class="donation-item__details-item"><span>Arreacadao: </span><span>R$ {{number_format($arrecadado,2,",",".")}}</span></div>
                                         <div class="donation-item__details-item"><span>Meta: </span><span>R$ {{number_format($campanha->valor,2,",",".")}}</span></div>
-                                        <div class="donation-item__details-item"><span>Pledged: </span><span>95 200$</span></div>
                                     </div>
                                 </div>
                             </div>
@@ -123,11 +123,11 @@
                     <div class="tabs horizontal-tabs cause-details-tabs r-tabs">
                         <ul class="horizontal-tabs__header r-tabs-nav">
                             <li class="r-tabs-tab r-tabs-state-active"><a href="#horizontal-tabs__item-1" class="r-tabs-anchor"><span>Descrição</span></a></li>
-                            <li class="r-tabs-state-default r-tabs-tab"><a href="#horizontal-tabs__item-2" class="r-tabs-anchor"><span>Doadores</span></a></li>
+                            {{-- <li class="r-tabs-state-default r-tabs-tab"><a href="#horizontal-tabs__item-2" class="r-tabs-anchor"><span>Doadores</span></a></li> --}}
                             @if ($campanha->video != null)
                             <li class="r-tabs-state-default r-tabs-tab"><a href="#horizontal-tabs__item-3" class="r-tabs-anchor"><span>Video</span></a></li>
                             @endif
-                            <li class="r-tabs-state-default r-tabs-tab"><a href="#horizontal-tabs__item-4" class="r-tabs-anchor"><span>Fotos</span></a></li>
+                            {{-- <li class="r-tabs-state-default r-tabs-tab"><a href="#horizontal-tabs__item-4" class="r-tabs-anchor"><span>Fotos</span></a></li> --}}
                         </ul>
                         <div class="horizontal-tabs__content">
                             <div class="r-tabs-accordion-title r-tabs-state-active"><a href="#horizontal-tabs__item-1" class="r-tabs-anchor">
@@ -137,10 +137,12 @@
                                 <p >{!!nl2br($campanha->descricao)!!}</p>
                             </div>
                             
-                            <div class="r-tabs-accordion-title"><a href="#horizontal-tabs__item-2" class="r-tabs-anchor"><span>Donors</span></a></div><div class="horizontal-tabs__item r-tabs-state-default r-tabs-panel" id="horizontal-tabs__item-2">
+                            {{-- <div class="r-tabs-accordion-title">
+                                <a href="#horizontal-tabs__item-2" class="r-tabs-anchor"><span>Donors</span></a>
+                            </div> --}}
+
+                            {{-- <div class="horizontal-tabs__item r-tabs-state-default r-tabs-panel" id="horizontal-tabs__item-2">
                                 <div class="row offset-30">
-
-
 
                                     <div class="col-md-6 col-xl-4">
                                         <!-- item start-->
@@ -163,9 +165,8 @@
                                         <!-- item end-->
                                     </div>
 
-
                                 </div>
-                            </div>
+                            </div> --}}
 
                             @if ($campanha->video != null)
                             <div class="r-tabs-accordion-title"><a href="#horizontal-tabs__item-3" class="r-tabs-anchor"><span>Video</span></a></div><div class="horizontal-tabs__item r-tabs-state-default r-tabs-panel" id="horizontal-tabs__item-3">

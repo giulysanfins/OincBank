@@ -1,21 +1,21 @@
-@extends('layouts.site.app', ['activePage' => '', 'title' => '| Campanhas', 'navName' => '', 'activeButton' => ''])
+@extends('layouts.site.app', ['activePage' => '', 'title' => '| Cofrinhos', 'navName' => '', 'activeButton' => ''])
 
 @section('content')
     <!-- header end-->
 <main class="main">
     <section class="promo-primary">
         <picture>
-            <source srcset="{{ asset('helpo-theme') }}/img/causes.jpg" media="(min-width: 992px)"><img class="img--bg"
-                src="{{ asset('helpo-theme') }}/img/causes.jpg" alt="img">
+            <source srcset="{{ asset('img') }}/photos/pig1_3.jpeg" media="(min-width: 992px)">
+            <img class="img--bg" src="{{ asset('img') }}/photos/pig1_3.jpeg" alt="img">
         </picture>
-        <div class="promo-primary__description"> <span>Campanhas</span></div>
+        <div class="promo-primary__description" > <span style="color: #efc940;">Cofrinhos</span></div>
         <div class="container">
             <div class="row">
                 <div class="col-auto">
                     <div class="align-container">
                         <div class="align-container__item">
                             <span class="promo-primary__pre-title"></span>
-                            <h1 class="promo-primary__title"><span>Campanhas</span> <span></span></h1>
+                            <h1 class="promo-primary__title"><span>Cofrinhos</span> <span></span></h1>
                         </div>
                     </div>
                 </div>
@@ -56,9 +56,15 @@
                 <div class="col-12 mt-4">
                     <div class="row">
                     @foreach ($campanhas as $campanha)
-
-                        @if (count($campanha->payments) > $minpay)
-                    
+                    @php
+                        $payments = \App\Yahp\Models\Payment::where('campanha_id',$campanha->id)->where('tipo',1);
+                        $vTotal = 0;                                          
+                        foreach ($payments->get() as $key => $pag) {
+                            $vTotal = $vTotal+$pag->valor;
+                        }
+                        $perc = (($vTotal*100)/$campanha->valor);
+                    @endphp
+                        @if ($payments->count() >= $minpay)
                             <div class="col-12 col-md-6 col-lg-4 column {{ $campanha->categoria->name }}">
                                 <div class="causes-item causes-item--primary">
                                     <div class="causes-item__body">
@@ -87,18 +93,20 @@
                                                     alt="foto_{{ $campanha->titulo }}">
                                             </a>
                                         </div>
+
                                         <div class="causes-item__lower">
                                             <div class="progress-bar">
-                                                <div class="progress-bar__inner" style="width: 78%;">
-                                                    <div class="progress-bar__value">78%</div>
+                                                <div class="progress-bar__inner" style="width: {{$perc}}%;">
+                                                    <div class="progress-bar__value">{{$perc}}%</div>
                                                 </div>
                                             </div>
                                             <div class="causes-item__details-holder">
                                                 <div class="causes-item__details-item">
                                                     <span>Meta: </span><br /><span>R$ {{number_format($campanha->valor,2,",",".")}}</span>
                                                 </div>
+
                                                 <div class="causes-item__details-item text-right"><span>Conquistado:
-                                                    </span><br /><span>R$  {{number_format(1110,2,",",".")}}</span></div>
+                                                    </span><br /><span>R$  {{number_format($vTotal,2,",",".")}}</span></div>
                                             </div>
                                         </div>
                                     </div>
@@ -109,7 +117,7 @@
 
                             </div>
                         @endif
-                    
+
                     @endforeach
                     </div>
                 </div>

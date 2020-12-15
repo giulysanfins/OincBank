@@ -51,6 +51,7 @@ class CampanhaController extends Controller
                 'campanhas_desativadas' => $this->campanhaService->renderByStatus(4),
                 'campanhas_aprovadas' => $this->campanhaService->renderByStatus(2),
                 'campanhas_expiradas' => $this->campanhaService->renderByStatus(5),
+                'campanhas_excluidas' => $this->campanhaService->renderByStatus(0),
                 'categorias' => $this->categoryService->renderByStatus(1),
             ];
 
@@ -185,11 +186,13 @@ class CampanhaController extends Controller
 
         foreach($pags as $pag)
         {
+            // arrecadações
             if($pag->status == 2 && $pag->tipo == 1)
             {
                 $valorTotal = $valorTotal + $pag->valor;
             }
 
+            // saldo
             if($pag->tipo == 1 && $pag->status == 2)
             {
                 $balanco = $balanco + $pag->valor;

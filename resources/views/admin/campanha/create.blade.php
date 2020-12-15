@@ -1,6 +1,6 @@
 @extends('layouts/app', ['activePage' => '',
 'activeButton' => '',
-'title' => 'Criação de Campanhas'])
+'title' => 'Criação de Cofrinhos'])
 
 @section('content')
 
@@ -15,7 +15,7 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-12">
-                                    <h3 class="">Crie sua campanha</h3>
+                                    <h3 class="">Crie seu cofrinho</h3>
                                 </div>
                                 <br>
                                 <div class="col-lg-8">
@@ -84,7 +84,7 @@
                                 {{-- img upload --}}
                                 <div class="col-md-2">
 
-                                    <label class="form-control-label" for="input-photo_perfil"> Foto Campanha*</label>
+                                    <label class="form-control-label" for="input-photo_perfil"> Foto Cofrinho*</label>
                                     <br />
                                     <label for="photo_perfil" class="btn btn-info">Selecionar Imagem</label>
                                     <input id="photo_perfil" required onchange="return fileValidation()"
