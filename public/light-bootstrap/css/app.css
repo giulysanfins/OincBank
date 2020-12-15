@@ -10,3 +10,10 @@
     opacity: 0.8;
 }
 
+
+.btn.btn-oinc-white
+{
+    background-color: #fff;
+    border: 2px solid #fdcfdf;
+    color: #643348;
+}

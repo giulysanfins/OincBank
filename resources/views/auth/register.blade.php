@@ -1,10 +1,11 @@
 @extends('layouts.app', ['activePage' => 'register', 'title' => 'Cadstre um novo Usúario'])
 
 @section('content')
-<div class="full-page section-image" data-color="black" data-image="{{ asset('charity.jpg') }}">
+<div class="full-page section-image" data-color="pink" data-image="{{ asset('charity.jpg') }}">
     <div class="content pt-5">
         <div class="container mt-5">
             <div class="col-md-5 col-sm-12 ml-auto mr-auto">
+                <a class="btn btn-oinc-white" href="{{url()->previous()}}">Voltar</a>
                 <form class="form" method="POST" action="{{ route('register') }}">
                     @csrf
                     @method('post')
@@ -78,11 +79,12 @@
 
                                             <div class="form-group">
                                                 <label>Digite sua senha</label>
-                                                <input type="password" name="password" placeholder="Digite sua senha" class="form-control" required >
+                                                <input type="password" name="password" id="password" placeholder="Digite sua senha" class="form-control" required >
                                             </div>
                                             <div class="form-group">
                                                 <label>Insira novamente sua Senha</label>
-                                                <input type="password" name="password_confirmation" placeholder="Insira novamente sua Senha" class="form-control" required autofocus>
+                                                <input type="password" name="password_confirmation" id="password_confirmation" placeholder="Insira novamente sua Senha" class="form-control" required>
+                                                <span id="error_confirmation" style="display: none; color: red"> Senhas não são iguais</span>
                                             </div>
 
                                             <div class="form-group d-flex justify-content-center">
@@ -92,6 +94,7 @@
                                                         <span class="form-check-sign"></span>
 
                                                         <b style="color: grey">{{ __('Concordo com os Termos de Serviços') }}</b>
+                                                        
                                                     </label>
                                                 </div>
                                                 <input type="hidden" name="tipo" id="tipo" value="1">
@@ -131,73 +134,87 @@
     $('.cnpj').mask('00.000.000/0000-00', {reverse: true});
     $('.telefone').mask('(00) 0000-0000');
 </script>
-    <script>
-        var cpf = document.getElementById('gr-cpf');
-        var nome_pessoa = document.getElementById('gr-nome_pessoa');
-        var nascimento = document.getElementById('gr-nascimento');
+<script>
+    var cpf = document.getElementById('gr-cpf');
+    var nome_pessoa = document.getElementById('gr-nome_pessoa');
+    var nascimento = document.getElementById('gr-nascimento');
 
-        var cnpj = document.getElementById('gr-cnpj');
-        var name_empresa = document.getElementById('gr-name_empresa');
-        var inscricao = document.getElementById('gr-inscricao');
-        
-        var inp_documento_cpf = document.getElementById('documento_cpf');
-        var inp_name_pessoa = document.getElementById('name_pessoa');
-        var inp_data_nascimento = document.getElementById('data_nascimento');
-        var inp_documento_cnpj = document.getElementById('documento_cnpj');
-        var inp_name_empresa = document.getElementById('name_empresa');
-        var inp_inscricao_estadual = document.getElementById('inscricao_estadual');
-        var inp_tipo = document.getElementById('tipo');
+    var cnpj = document.getElementById('gr-cnpj');
+    var name_empresa = document.getElementById('gr-name_empresa');
+    var inscricao = document.getElementById('gr-inscricao');
+    
+    var inp_documento_cpf = document.getElementById('documento_cpf');
+    var inp_name_pessoa = document.getElementById('name_pessoa');
+    var inp_data_nascimento = document.getElementById('data_nascimento');
+    var inp_documento_cnpj = document.getElementById('documento_cnpj');
+    var inp_name_empresa = document.getElementById('name_empresa');
+    var inp_inscricao_estadual = document.getElementById('inscricao_estadual');
+    var inp_tipo = document.getElementById('tipo');
 
-        var btn_pessoa = document.getElementById('btn_pessoa');
-        var btn_empresa = document.getElementById('btn_empresa');
+    var btn_pessoa = document.getElementById('btn_pessoa');
+    var btn_empresa = document.getElementById('btn_empresa');
+    
+    var input_cp = document.getElementById('password_confirmation');
+    var input_ps = document.getElementById('password');
+    var span_cp = document.getElementById('error_confirmation');
+    
+    input_cp.addEventListener("focusout", function(){
+        if(input_cp.value === input_ps.value)
+        {
+            span_cp.style.display = "none";
+        } else {
+            span_cp.style.display = "block";
+        }
+    }, false);
 
-        btn_empresa.addEventListener("click", function(){
-            btn_pessoa.classList.remove('active')
-            cpf.style.display = 'none';
-            nome_pessoa.style.display = 'none';
-            nascimento.style.display = 'none';
-            cnpj.style.display = 'block';
-            name_empresa.style.display = 'block';
-            inscricao.style.display = 'block';
 
-            inp_documento_cpf.required = false;
-            inp_name_pessoa.required = false;
-            inp_data_nascimento.required = false;
-            inp_documento_cnpj.required = true;
-            inp_name_empresa.required = true;
-            inp_inscricao_estadual.required = true;
+    btn_empresa.addEventListener("click", function(){
+        btn_pessoa.classList.remove('active')
+        cpf.style.display = 'none';
+        nome_pessoa.style.display = 'none';
+        nascimento.style.display = 'none';
+        cnpj.style.display = 'block';
+        name_empresa.style.display = 'block';
+        inscricao.style.display = 'block';
 
-            inp_tipo.value = '2';
-        }, false);
+        inp_documento_cpf.required = false;
+        inp_name_pessoa.required = false;
+        inp_data_nascimento.required = false;
+        inp_documento_cnpj.required = true;
+        inp_name_empresa.required = true;
+        inp_inscricao_estadual.required = true;
 
-        btn_pessoa.addEventListener("click", function(){
-            btn_empresa.classList.remove('active')
-            cpf.style.display = 'block';
-            nome_pessoa.style.display = 'block';
-            nascimento.style.display = 'block';
-            cnpj.style.display = 'none';
-            name_empresa.style.display = 'none';
-            inscricao.style.display = 'none';
+        inp_tipo.value = '2';
+    }, false);
 
-            inp_documento_cpf.required = true;
-            inp_name_pessoa.required = true;
-            inp_data_nascimento.required = true;
-            inp_documento_cnpj.required = false;
-            inp_name_empresa.required = false;
-            inp_inscricao_estadual.required = false;
+    btn_pessoa.addEventListener("click", function(){
+        btn_empresa.classList.remove('active')
+        cpf.style.display = 'block';
+        nome_pessoa.style.display = 'block';
+        nascimento.style.display = 'block';
+        cnpj.style.display = 'none';
+        name_empresa.style.display = 'none';
+        inscricao.style.display = 'none';
 
-            inp_tipo.value = '1';
+        inp_documento_cpf.required = true;
+        inp_name_pessoa.required = true;
+        inp_data_nascimento.required = true;
+        inp_documento_cnpj.required = false;
+        inp_name_empresa.required = false;
+        inp_inscricao_estadual.required = false;
 
-        }, false);
+        inp_tipo.value = '1';
 
-        $(document).ready(function() {
-            demo.checkFullPageBackgroundImage();
+    }, false);
 
-            setTimeout(function() {
-                // after 1000 ms we add the class animated to the login/register card
-                $('.card').removeClass('card-hidden');
-            }, 700)
-        });
+    $(document).ready(function() {
+        demo.checkFullPageBackgroundImage();
 
-    </script>
+        setTimeout(function() {
+            // after 1000 ms we add the class animated to the login/register card
+            $('.card').removeClass('card-hidden');
+        }, 700)
+    });
+
+</script>
 @endsection
