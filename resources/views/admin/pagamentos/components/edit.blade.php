@@ -93,16 +93,4 @@
 </div>
 
 
-<script>
-    $('#status').on('change', function() {
-        var selection = $(this).val();
-        switch (selection) {
-            case "4":
-                $("#otherType").show()
-                break;
-            default:
-                $("#otherType").hide()
-        }
-    });
 
-</script>

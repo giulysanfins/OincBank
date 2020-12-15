@@ -127,7 +127,7 @@
                                                                                     @else
                                                                                     Motivo: não informado.
                                                                                     @endif
-                                                                                    {{$pagamento->motivo_negado}}
+
                                                                                 </p>
                                                                             </div>
                                                                             <div class="modal-footer">
@@ -179,5 +179,18 @@ $(document).ready(function() {
     $('#valor').mask("#.##0,00", {reverse: true});
 
 });
+</script>
+<script>
+    $('#status').on('change', function() {
+        var selection = $(this).val();
+        switch (selection) {
+            case "4":
+                $("#otherType").show()
+                break;
+            default:
+                $("#otherType").hide()
+        }
+    });
+
 </script>
 @endsection
