@@ -32,10 +32,10 @@
             <div class="aside-inner"><span class="aside-inner__title">Email</span><a class="aside-inner__link" href="mailto:suporte@oincbank.com.br">suporte@oincbank.com.br</a></div>
             {{-- <div class="aside-inner"><span class="aside-inner__title">Phone numbers</span><a class="aside-inner__link" href="tel:+180012345678">+ 1800 - 123 456 78</a><a class="aside-inner__link" href="tel:+18009756511">+ 1800 - 975 65 11</a></div> --}}
             <ul class="aside-socials">
-                <li class="aside-socials__item"><a class="aside-socials__link" href="#"><i class="fab fa-instagram" aria-hidden="true"></i></a></li>
-                <li class="aside-socials__item"><a class="aside-socials__link" href="#"><i class="fab fa-google-plus" aria-hidden="true"></i></a></li>
+                <li class="aside-socials__item"><a class="aside-socials__link" href="https://www.instagram.com/oincbank/"><i class="fab fa-instagram" aria-hidden="true"></i></a></li>
+                {{-- <li class="aside-socials__item"><a class="aside-socials__link" href="#"><i class="fab fa-google-plus" aria-hidden="true"></i></a></li>
                 <li class="aside-socials__item"><a class="aside-socials__link aside-socials__link--active" href="#"><i class="fab fa-twitter" aria-hidden="true"></i></a></li>
-                <li class="aside-socials__item"><a class="aside-socials__link" href="#"><i class="fab fa-facebook" aria-hidden="true"></i></a></li>
+                <li class="aside-socials__item"><a class="aside-socials__link" href="#"><i class="fab fa-facebook" aria-hidden="true"></i></a></li> --}}
             </ul>
         </div>
 

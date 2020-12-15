@@ -9,9 +9,9 @@
                 </div>
                 <!-- footer socials start-->
                 <ul class="footer-socials">
-                    <li class="footer-socials__item"><a class="footer-socials__link" href="#"><i class="fab fa-2x fa-facebook" aria-hidden="true"></i></a></li>
-                    <li class="footer-socials__item"><a class="footer-socials__link" href="#"><i class="fab fa-2x fa-twitter" aria-hidden="true"></i></a></li>
-                    <li class="footer-socials__item"><a class="footer-socials__link" href="#"><i class="fab fa-2x fa-instagram" aria-hidden="true"></i></a></li>
+                    {{-- <li class="footer-socials__item"><a class="footer-socials__link" href="#"><i class="fab fa-2x fa-facebook" aria-hidden="true"></i></a></li>
+                    <li class="footer-socials__item"><a class="footer-socials__link" href="#"><i class="fab fa-2x fa-twitter" aria-hidden="true"></i></a></li> --}}
+                    <li class="footer-socials__item"><a class="footer-socials__link" href="https://www.instagram.com/oincbank/"><i class="fab fa-2x fa-instagram" aria-hidden="true"></i></a></li>
                 </ul>
                 <!-- footer socials end-->
             </div>
