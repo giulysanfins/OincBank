@@ -1,12 +1,12 @@
 <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute">
     <div class="container">
         <div class="navbar-wrapper">
-            {{-- <a class="navbar-brand" href="#pablo"></a>
+            <a class="navbar-brand" href="{{route('website.index')}}"><img class="img-fluid" src="{{asset('img')}}/logos/porquim-com-nome-crop.png" alt="logo" width="20%"/></a>
             <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-bar burger-lines"></span>
                 <span class="navbar-toggler-bar burger-lines"></span>
                 <span class="navbar-toggler-bar burger-lines"></span>
-            </button> --}}
+            </button>
         </div>
         <div class="collapse navbar-collapse justify-content-end" id="navbar">
             <ul class="navbar-nav">
