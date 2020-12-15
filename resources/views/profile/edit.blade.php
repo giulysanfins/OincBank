@@ -37,7 +37,7 @@
                                         <div class="col-12 col-md-4">
                                             <div class="form-group{{ $errors->has('email') ? ' has-danger' : '' }}">
                                                 <label class="form-control-label" for="documento"><i class="w3-xxlarge far fa-id-card"></i> CPF</label>
-                                                <input type="text" name="documento" id="documento" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" placeholder="CPF" value="{{ old('documento', auth()->user()->documento) }}" required>
+                                                <input type="text" name="documento" id="documento" class="form-control cpf {{ $errors->has('email') ? ' is-invalid' : '' }}" placeholder="CPF" value="{{ old('documento', auth()->user()->documento) }}" required>
                                             </div>
                                         </div>
 
@@ -52,7 +52,7 @@
                                         <div class="col-12 col-md-4">
                                             <div class="form-group{{ $errors->has('email') ? ' has-danger' : '' }}">
                                                 <label class="form-control-label" for="documento"><i class="w3-xxlarge far fa-id-card"></i> CNPJ</label>
-                                                <input type="text" name="documento" id="documento" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" placeholder="CNPJ" value="{{ old('documento', auth()->user()->documento) }}" required>
+                                                <input type="text" name="documento" id="documento" class="form-control cnpj {{ $errors->has('email') ? ' is-invalid' : '' }}" placeholder="CNPJ" value="{{ old('documento', auth()->user()->documento) }}" required>
                                             </div>
                                         </div>
 
@@ -168,6 +168,8 @@
 
 @section('scripts')
 <script>
-
+    $('.cpf').mask('000.000.000-00', {reverse: true});
+    $('.cnpj').mask('00.000.000/0000-00', {reverse: true});
+    $('.telefone').mask('(00) 0000-0000');
 </script>
 @endsection
