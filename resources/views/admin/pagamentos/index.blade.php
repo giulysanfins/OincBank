@@ -58,8 +58,11 @@
             </div>
             @endif
 
+
             <div class="col-12">
-                <h3>Pagamentos</h3>
+                <h3>
+                    Movimentações
+                </h3>
                 <div class="card card-stats">
                     <div class="card-body">
                         <div class="row">
@@ -68,7 +71,6 @@
                                     <thead>
                                         <tr>
                                             <th>#</th>
-
                                             @if (auth()->user()->role == 1)
                                                 <th>Usuário</th>
                                             @endif

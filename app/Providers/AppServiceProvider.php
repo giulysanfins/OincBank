@@ -29,7 +29,8 @@ class AppServiceProvider extends ServiceProvider
 
         view()->composer('layouts.app', function ($view) 
         {
-            if(Route::currentRouteName() != 'login')
+            $route = Route::currentRouteName();
+            if($route != 'login' && $route != 'register' && $route != 'password.request')
             {
                 // LEMBRE-SE
                 // ALTERAR NO MIDDLWARE -> CheckPermission
