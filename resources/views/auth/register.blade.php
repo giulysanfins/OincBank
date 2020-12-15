@@ -31,7 +31,7 @@
 
                                             <div class="form-group" id="gr-cpf">
                                                 <label>CPF</label>
-                                                <input type="text" name="documento_cpf" id="documento_cpf" class="form-control" placeholder="CPF" value="{{ old('documento') }}" required autofocus>
+                                                <input type="text" name="documento_cpf" id="documento_cpf" class="form-control cpf" placeholder="CPF" value="{{ old('documento') }}" required autofocus>
                                             </div>
 
                                             <div class="form-group" id="gr-nome_pessoa">
@@ -48,7 +48,7 @@
 
                                             <div class="form-group" id="gr-cnpj" style="display: none">
                                                 <label>CNPJ</label>
-                                                <input type="text" name="documento_cnpj" id="documento_cnpj" class="form-control" placeholder="CNPJ" value="{{ old('documento') }}">
+                                                <input type="text" name="documento_cnpj" id="documento_cnpj" class="form-control cnpj" placeholder="CNPJ" value="{{ old('documento') }}">
                                             </div>
 
                                             <div class="form-group" id="gr-name_empresa" style="display: none">
@@ -73,7 +73,7 @@
 
                                             <div class="form-group">
                                                 <label>Telefone</label>
-                                                <input type="text" id="telefone" name="telefone" value="{{ old('telefone') }}" placeholder="Insira seu telefone" class="form-control" required>
+                                                <input type="text" id="telefone" class="form-control telefone" name="telefone" value="{{ old('telefone') }}" placeholder="Insira seu telefone"  required>
                                             </div>
 
                                             <div class="form-group">
@@ -126,6 +126,11 @@
 @endsection
 
 @section('scripts')
+<script>
+    $('.cpf').mask('000.000.000-00', {reverse: true});
+    $('.cnpj').mask('00.000.000/0000-00', {reverse: true});
+    $('.telefone').mask('(00) 0000-0000');
+</script>
     <script>
         var cpf = document.getElementById('gr-cpf');
         var nome_pessoa = document.getElementById('gr-nome_pessoa');

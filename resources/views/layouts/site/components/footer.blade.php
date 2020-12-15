@@ -21,7 +21,7 @@
                 <!-- footer nav start-->
                 <ul class="" style="padding-left: 8px">
                     <li class="footer-menu__item footer-menu__item"><a class="footer-menu__link" href="{{route('website.index')}}">Home</a></li>
-                    <li class="footer-menu__item"><a class="footer-menu__link" href="{{route('website.index')}}">Sobre a OincBank</a></li>
+                    <li class="footer-menu__item"><a class="footer-menu__link" href="{{route('website.sobre')}}">Sobre a OincBank</a></li>
                     <li class="footer-menu__item"><a class="footer-menu__link" href="{{route('website.faq')}}">Dúvidas Frequentes</a></li>
                 </ul>
                 <!-- footer nav end-->
