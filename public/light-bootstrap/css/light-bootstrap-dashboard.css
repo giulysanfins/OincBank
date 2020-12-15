@@ -5584,6 +5584,18 @@ License - nucleoapp.com/license/
     background-size: 150% 150%;
 }
 
+
+.full-page[data-color="pink"]:after {
+    background: #f8bad0;
+    background: -moz-linear-gradient(top, #f8bad0 0%, #ff99bd 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #f8bad0), color-stop(100%, #ff99bd));
+    background: -webkit-linear-gradient(top, #f8bad0 0%, #ff99bd 100%);
+    background: -o-linear-gradient(top, #f8bad0 0%, #ff99bd 100%);
+    background: -ms-linear-gradient(top, #f8bad0 0%, #ff99bd 100%);
+    background: linear-gradient(to bottom, #f8bad0 0%, #ff99bd 100%);
+    background-size: 150% 150%;
+}
+
 .full-page[data-color="blue"]:after {
     background: #1F77D0;
     background: -moz-linear-gradient(top, #1F77D0 0%, #533ce1 100%);
@@ -5650,13 +5662,26 @@ License - nucleoapp.com/license/
     background-size: 150% 150%;
 }
 
+
+.bg-login
+{
+    background-image: url("../../img/charity.jpg");
+    height: 100%;
+    opacity: .77;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
 .full-page[data-image]:after,
 .full-page.has-image:after {
     opacity: .77;
 }
+
 .full-page+.footer li a, .full-page+.footer .copyright a {
     color: #fff !important;
 }
+
 
 .card.card-login {
     box-shadow: 0 25px 30px -13px rgba(40, 40, 40, 0.4);

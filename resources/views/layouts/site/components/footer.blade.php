@@ -22,16 +22,18 @@
                 <!-- footer nav start-->
 
                     <ul class="" style="padding-left: 8px">
-                        <li class="footer-menu__item footer-menu__item--active"><a class="footer-menu__link" href="{{route('website.index')}}">Home</a></li>
+
+                        <li class="footer-menu__item footer-menu__item"><a class="footer-menu__link" href="{{route('website.index')}}">Home</a></li>
                         <li class="footer-menu__item"><a class="footer-menu__link" href="{{route('website.index')}}">Sobre a OincBank</a></li>
-                        <li class="footer-menu__item"><a class="footer-menu__link" href="{{route('website.index')}}">Dúvidas Frequentes</a></li>
+                        <li class="footer-menu__item"><a class="footer-menu__link" href="{{route('website.faq')}}">Dúvidas Frequentes</a></li>
+
                         <li class="footer-menu__item"><a class="footer-menu__link" href="{{route('website.faq')}}">Ajuda</a></li>
                     </ul>
                 <!-- footer nav end-->
             </div>
             <div class="col-sm-6 col-lg-4" style="nav-right: auto ">
                 <h4 class="footer__title">Ajude</h4>
-                <p>Nos ajude mudar as vidas no mundo!</p><a class="button footer__button button--filled" href="#">Ver Cofrinhos</a>
+                <p>Nos ajude mudar as vidas no mundo!</p><a class="button footer__button button--filled" href="{{route('website.campanhas')}}">Ver Cofrinhos</a>
             </div>
         </div>
         <div class="row align-items-baseline">

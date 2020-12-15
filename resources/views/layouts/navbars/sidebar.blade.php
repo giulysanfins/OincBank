@@ -10,12 +10,21 @@
             @foreach ($modules as $module)
 
                 @if ($module->type == 1)
-                    <li class="nav-item @if($activePage == $module->slug) active @endif">
-                        <a class="nav-link" href="{{route($module->route)}}">
-                            <i class="{{$module->icon}}"></i>
-                            <p class="ml-2">{{$module->name}}</p>
-                        </a>
-                    </li>
+                    @if (auth()->user()->role == 2 && $module->slug == 'pagamentos')
+                        <li class="nav-item @if($activePage == $module->slug) active @endif">
+                            <a class="nav-link" href="{{route($module->route)}}">
+                                <i class="{{$module->icon}}"></i>
+                                <p class="ml-2">Minhas Contribuições</p>
+                            </a>
+                        </li>
+                    @else
+                        <li class="nav-item @if($activePage == $module->slug) active @endif">
+                            <a class="nav-link" href="{{route($module->route)}}">
+                                <i class="{{$module->icon}}"></i>
+                                <p class="ml-2">{{$module->name}}</p>
+                            </a>
+                        </li>
+                    @endif
                 @elseif ($module->type == 2)
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="collapse" href="#master{{$module->id}}" @if($activeButton == $module->slug) aria-expanded="true" @endif>

@@ -15,22 +15,22 @@ class ModulesSeeder extends Seeder
 
     //  ATENCAO QUALQUER ALTERACAO DEVE SER FEITA TAMBEM NO APP SERVICE PROVIDES
     // E TAMBEM NO MIDDLEWARE
-    
+
     public function run()
     {
         DB::table('modules')->truncate();
 
-        DB::table('modules')->insert([
-            'name' => 'Dashboard',
-            'route' => 'dashboard',
-            'icon' => 'fas fa-columns fa-2x',
-            'slug' => 'dashboard',
-            'type' => '1',
-            'menu_master' => NULL,
-            'order' => 1,
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
+        // DB::table('modules')->insert([
+        //     'name' => 'Dashboard',
+        //     'route' => 'dashboard',
+        //     'icon' => 'fas fa-columns fa-2x',
+        //     'slug' => 'dashboard',
+        //     'type' => '1',
+        //     'menu_master' => NULL,
+        //     'order' => 1,
+        //     'created_at' => now(),
+        //     'updated_at' => now(),
+        // ]);
 
         DB::table('modules')->insert([
             'name' => 'Configuração',
@@ -69,9 +69,9 @@ class ModulesSeeder extends Seeder
         ]);
 
         DB::table('modules')->insert([
-            'name' => 'Campanhas',
+            'name' => 'Cofrinhos',
             'route' => 'campanha.index',
-            'icon' => 'far fa-file-alt fa-2x',
+            'icon' => 'fas fa-piggy-bank fa-2x',
             'slug' => 'campanha',
             'type' => 1,
             'menu_master' => NULL,

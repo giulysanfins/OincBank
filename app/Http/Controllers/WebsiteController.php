@@ -61,8 +61,23 @@ class WebsiteController extends Controller
      */
     public function detalhes($id)
     {
+        $pags = $this->paymentService->renderByCampanha($id);
+        $campanha = $this->campanhaService->renderEdit($id);
+        $valorTotal = 0;
+
+        foreach($pags as $pag)
+        {
+            // arrecadações
+            if($pag->status == 2 && $pag->tipo == 1)
+            {
+                $valorTotal = $valorTotal + $pag->valor;
+            }
+        }
+
         $data = [
             'campanha' => $this->campanhaService->renderEdit($id),
+            'arrecadado' => $valorTotal,
+            'perc' => (($valorTotal*100)/$campanha->valor)
         ];
 
         return view('website.detalhe-campanhas',$data);

@@ -8,9 +8,9 @@
             <div class="promo-slider">
                 <div class="promo-slider__item promo-slider__item--style-1">
                     <picture>
-                        <source srcset="{{ asset('helpo-theme') }}/img/promo_1.jpg" media="(min-width: 835px)" />
-                        <source srcset="{{ asset('helpo-theme') }}/img/promo_1.jpg" media="(min-width: 376px)" />
-                        <img class="img--bg" src="{{ asset('helpo-theme') }}/img/promo_1.jpg" alt="img" />
+                        <source srcset="{{ asset('img') }}/photos/pig1_3.jpeg" media="(min-width: 835px)" />
+                        <source srcset="{{ asset('img') }}/photos/pig1_3.jpeg" media="(min-width: 376px)" />
+                        <img class="img--bg" src="{{ asset('img') }}/photos/pig1_3.jpeg" alt="img" />
                     </picture>
                     <div class="container">
                         <div class="row">

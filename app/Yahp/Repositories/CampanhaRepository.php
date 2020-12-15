@@ -3,6 +3,7 @@
 namespace App\Yahp\Repositories;
 
 use App\Yahp\Models\Campanha;
+use Carbon\Carbon;
 
 class CampanhaRepository
 {
@@ -44,7 +45,13 @@ class CampanhaRepository
      */
     public function getByStatus($status)
     {
-        return $this->model->where('status',$status)->get();
+        $dateToday = Carbon::now()->format('Y-m-d');
+        if($status == 5)
+        {
+            return $this->model->where('status',2)->where('data_encerramento','<',$dateToday)->get();
+        } else {
+            return $this->model->where('status',$status)->get();
+        }
     }
 
     /**
