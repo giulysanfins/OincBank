@@ -42,7 +42,7 @@
                             <div class="row align-items-end">
                                 <div class="col-lg-6">
                                     <div class="progress-bar">
-                                        <div class="progress-bar__inner" style="width: {{$perc}}%;">
+                                        <div class="progress-bar__inner" style="width: {{($perc >= 100)?'100':$perc}}%;">
                                             <div class="progress-bar__value">{{$perc}}%</div>
                                         </div>
                                     </div>

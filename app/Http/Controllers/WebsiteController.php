@@ -141,9 +141,15 @@ class WebsiteController extends Controller
     public function checkout($id)
     {
         $pagamento = $this->paymentService->renderEdit($id);
-
+        $urlenv = env('APP_URL');
         // Configura credenciais
-        \MercadoPago\SDK::setAccessToken('TEST-3909980958286743-112018-c6a4d0c6de187c2bfd0897f4169cf7cf-41701013');
+        if(env('APP_ENV') == 'production')
+        {
+            \MercadoPago\SDK::setAccessToken('APP_USR-3909980958286743-112018-30608f8141126d95d48219543b6ada80-41701013');
+        } else 
+        {
+            \MercadoPago\SDK::setAccessToken('TEST-3909980958286743-112018-c6a4d0c6de187c2bfd0897f4169cf7cf-41701013');
+        }
 
         // Cria um objeto de preferência
         $preference = new \MercadoPago\Preference();
@@ -156,10 +162,16 @@ class WebsiteController extends Controller
         $item->unit_price = $pagamento->valor;
         $item->currency_id = "BRL";
         $preference->items = array($item);
+        $preference->payment_methods = array(
+            "excluded_payment_methods" => array(
+              array("id" => "paypal"),
+              array("id" => "pec")
+            ),
+        );
         $preference->back_urls = array(
-            "success" => "http://localhost:8000/pagamento/sucesso/".$pagamento->campanha_id,
-            "failure" => "http://localhost:8000/pagamento/falha/".$pagamento->campanha_id,
-            "pending" => "http://localhost:8000/pagamento/pendente/".$pagamento->campanha_id
+            "success" => $urlenv."/pagamento/sucesso/".$pagamento->campanha_id,
+            "failure" => $urlenv."/pagamento/falha/".$pagamento->campanha_id,
+            "pending" => $urlenv."/pagamento/pendente/".$pagamento->campanha_id
         );
         $preference->auto_return = "approved";
         $preference->save();
