@@ -5,7 +5,7 @@
 
 @section('content')
 
-<section class="promo">
+{{-- <section class="promo">
     <div class="promo-slider">
         <div class="promo-slider__item promo-slider__item--style-1">
             <picture>
@@ -31,15 +31,15 @@
 
     </div>
     <!-- promo socials start-->
-    {{-- <ul class="promo-socials">
+    <ul class="promo-socials">
         <li class="promo-socials__item"><a class="promo-socials__link" href="#"><i class="fab fa-instagram" aria-hidden="true"></i></a></li>
         <li class="promo-socials__item"><a class="promo-socials__link" href="#"><i class="fab fa-google-plus" aria-hidden="true"></i></a></li>
         <li class="promo-socials__item"><a class="promo-socials__link" href="#"><i class="fab fa-twitter" aria-hidden="true"></i></a></li>
         <li class="promo-socials__item"><a class="promo-socials__link" href="#"><i class="fab fa-facebook" aria-hidden="true"></i></a></li>
-    </ul> --}}
+    </ul>
     <!-- promo socials end-->
 
-</section>
+</section> --}}
 <section class="section causes"><img class="causes__bg" src="{{asset('helpo-theme')}}/img/causes_img.png" alt="img"/>
     <div class="container">
         <div class="row align-items-end">
