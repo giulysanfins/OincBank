@@ -96,7 +96,8 @@
 
                                         <div class="causes-item__lower">
                                             <div class="progress-bar">
-                                                <div class="progress-bar__inner" style="width: {{$perc}}%;">
+
+                                                <div class="progress-bar__inner" style="width: {{($perc >= 100)?'100':$perc}}%;">
                                                     <div class="progress-bar__value" ">
                                                        @if($perc == 0)
                                                        {{$perc}}%
@@ -104,15 +105,21 @@
                                                        {{number_format($perc, 2, '.', "")}}%
                                                        @endif
                                                     </div>
+                                                    
                                                 </div>
                                             </div>
                                             <div class="causes-item__details-holder">
                                                 <div class="causes-item__details-item">
-                                                    <span>Meta: </span><br /><span>R$ {{number_format($campanha->valor,2,",",".")}}</span>
+                                                    <span>Conquistado:</span>
+                                                    <br />
+                                                    <span>R$  {{number_format($vTotal,2,",",".")}}</span>
                                                 </div>
 
-                                                <div class="causes-item__details-item text-right"><span>Conquistado:
-                                                    </span><br /><span>R$  {{number_format($vTotal,2,",",".")}}</span></div>
+                                                <div class="causes-item__details-item text-right">
+                                                    <span>Meta: </span>
+                                                    <br />
+                                                    <span>R$ {{number_format($campanha->valor,2,",",".")}}</span>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>

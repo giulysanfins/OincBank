@@ -27,7 +27,7 @@ Route::get('/faq', 'App\Http\Controllers\WebsiteController@faq')->name('website.
 Route::get('/envio-email/{id}', 'App\Http\Controllers\CampanhaController@destroy');
 
 
-Route::group(['prefix' => 'campanhas'], function () {
+Route::group(['prefix' => 'cofrinhos'], function () {
 	Route::get('/', 'App\Http\Controllers\WebsiteController@campanhas')->name('website.campanhas');
 	Route::get('/detalhes/{id}', 'App\Http\Controllers\WebsiteController@detalhes')->name('website.campanhas.detalhes');
 });
@@ -60,7 +60,7 @@ Route::group(['prefix' => 'admin','middleware' => ['CheckPermission','auth']], f
 		Route::get('/criar', ['as' => 'users.create', 'uses' => 'App\Http\Controllers\UsersController@create']);
 	});
 
-	Route::group(['prefix' => 'campanhas','middleware' => ['auth','CheckPermission']], function () {
+	Route::group(['prefix' => 'cofrinhos','middleware' => ['auth','CheckPermission']], function () {
 		Route::get('/', ['as' => 'campanha.index', 'uses' => 'App\Http\Controllers\CampanhaController@index']);
 		Route::get('/criar', ['as' => 'campanha.create', 'uses' => 'App\Http\Controllers\CampanhaController@create']);
 		Route::post('/criar', ['as' => 'campanha.store', 'uses' => 'App\Http\Controllers\CampanhaController@store']);
