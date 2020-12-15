@@ -72,7 +72,7 @@
                                                                     'campanha' => $campanha
                                                                 ])@endcomponent
                                                                 @endif
-                                                                
+
                                                             @endforeach
                                                         </tbody>
                                                     </table>
@@ -111,7 +111,9 @@
                                                                 $total = 0;
                                                                 foreach($campanha->payments as $pag)
                                                                 {
-                                                                    $total = $total + $pag->valor;
+                                                                    if($pag->tipo == 1 && $pag->status == 2){
+                                                                         $total = $total + $pag->valor;
+                                                                    }
                                                                 }
 
                                                             @endphp
