@@ -19,7 +19,6 @@ class CreateTablePayment extends Migration
             $table->integer('campanha_id');
             $table->decimal('valor',20,2);
             $table->integer('status')->comment('0-excluido,1-pendente,2-pago');
-            $table->string('motivo_negado',200)->nullable();
             $table->timestamps();
         });
     }
