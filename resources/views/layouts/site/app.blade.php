@@ -1,15 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8"/>
-		<meta name="description" content=""/>
-		<meta name="keywords" content=""/>
-		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-		<meta http-equiv="X-UA-Compatible" content="ie=edge"/>
-		<link rel="shortcut icon" href="{{asset('helpo-theme')}}/img/favicon.ico"/>
-		<title>OincBank {{$title ?? ''}}</title>
-		<!-- styles-->
-		{{-- <link rel="stylesheet" href="{{asset('helpo-theme')}}/css/styles.min.css"/> --}}
+    <head>
+        <meta charset="UTF-8"/>
+        <meta name="description" content=""/>
+        <meta name="keywords" content=""/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+        <title>OincBank {{$title ?? ''}}</title>
+        <!-- styles-->
+        {{-- <link rel="stylesheet" href="{{asset('helpo-theme')}}/css/styles.min.css"/> --}}
         <link rel="stylesheet" href="{{asset('helpo-theme')}}/css/styles.css"/>
         <link rel="stylesheet" href="{{asset('vendors')}}/fontawesome/css/all.min.css"/>
         <link rel="apple-touch-icon" sizes="57x57" href="{{asset('img')}}/icons/apple-icon-57x57.png">
@@ -29,29 +28,38 @@
         <meta name="msapplication-TileColor" content="#ffffff">
         <meta name="msapplication-TileImage" content="{{asset('img')}}/icons/ms-icon-144x144.png">
         <meta name="theme-color" content="#ffffff">
-	</head>
-	<body>
-		<div class="page-wrapper">
+    </head>
+    <body>
+        <div class="page-wrapper">
             <!-- aside dropdown start-->
 
             @include('layouts.site.components.header')
 
-			@yield('content')
+            @yield('content')
 
             @include('layouts.site.components.footer')
 			<!-- footer end-->
-		</div>
-		<!-- libs-->
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-		<script src="{{asset('helpo-theme')}}/js/libs.min.js"></script>
-		<!-- scripts-->
+
+            <div class="alert alert-dark alert-dismissible fade show alert-policy" role="alert">
+                A gente guarda estatísticas de visias para melhorar sua experiência de navegação.
+                Ao continuar, você concorda com a nossa Politica de Privacidade.
+                <button type="button" class="btn btn-primary" data-dismiss="alert" aria-label="Close">
+                    Continuar e Fechar
+                </button>
+            </div>
+				
+        </div>
+        <!-- libs-->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+        <script src="{{asset('helpo-theme')}}/js/libs.min.js"></script>
+        <!-- scripts-->
         <script src="{{asset('helpo-theme')}}/js/common.min.js"></script>
-		<script src="{{asset('vendors')}}/fontawesome/js/all.min.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.12/jquery.mask.min.js"></script>
+        <script src="{{asset('vendors')}}/fontawesome/js/all.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.12/jquery.mask.min.js"></script>
 
-		@include('sweetalert::alert')
+        @include('sweetalert::alert')
 
-		@yield('scripts')
+        @yield('scripts')
 
-	</body>
+    </body>
 </html>

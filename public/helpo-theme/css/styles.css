@@ -22705,3 +22705,17 @@ section.shop {
     line-height: 1.2;
 }
 /*# sourceMappingURL=styles.min.css.map */
+
+.alert-policy 
+{
+    position:fixed;
+    bottom:40px;
+    right:40px;
+    text-align:center;
+    box-shadow: 1px 1px 2px #888;
+    z-index:1000;
+    -webkit-border-radius: 0 !important;
+    -moz-border-radius: 0 !important;
+    border-radius: 0 !important;
+    padding: 25px 40px !important;
+}
