@@ -145,7 +145,7 @@ class WebsiteController extends Controller
         // Configura credenciais
         if(env('APP_ENV') == 'production')
         {
-            \MercadoPago\SDK::setAccessToken('APP_USR-3909980958286743-112018-30608f8141126d95d48219543b6ada80-41701013');
+            \MercadoPago\SDK::setAccessToken('APP_USR-4344514941698315-121600-986ff558dea244808ea6fad7407436b3-671093218');
         } else 
         {
             \MercadoPago\SDK::setAccessToken('TEST-3909980958286743-112018-c6a4d0c6de187c2bfd0897f4169cf7cf-41701013');
