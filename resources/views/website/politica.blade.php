@@ -3,14 +3,14 @@
 @section('content')
 
     <section class="section causes">
-        {{-- <img class="causes__bg" src="{{ asset('helpo-theme') }}/img/causes_img.png"
-            alt="img" /> --}}
+
+        {{-- <img class="causes__bg" src="{{ asset('helpo-theme') }}/img/causes_img.png" alt="img" /> --}}
         <div class="container">
             <div class="row align-items-end">
                 <div class="col-xl-12">
                     <div class="heading heading--primary"><span class="heading__pre-title">Política de Privacidade</span>
                         <h2 class="heading__title"> <span>TERMO DE POLÍTICA DE PRIVACIDADE</span></h2>
-                        {{-- <p>O presente site é mantido e operado por OINCBANK LTDA, pessoa jurídica de direito privado
+                        <p>O presente site é mantido e operado por OINCBANK LTDA, pessoa jurídica de direito privado
                             devidamente inscrita no CNPJ sob o n.º 39.791.515/0001-92.</p>
 
                         <p> Temos por princípio a proteção dos dados pessoais de todos os nossos usuários, sendo a presente
@@ -287,7 +287,7 @@
                             assunto ora referido, disponibilizamos os meios de contato com nosso Encarregado de Proteção de
                             Dados Pessoais (Sra. Paloma Cruz):</p>
                         <p>Email:</p>
-                        <p>Endereço postal:</p> --}}
+                        <p>Endereço postal:</p>
 
 
 

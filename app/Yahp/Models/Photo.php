@@ -8,7 +8,7 @@ class Photo extends Model
 
     protected $table = 'photos';
     protected $fillable = [
-        'area','area_id','path','principal'
+        'area','area_id','path','principal','mensagem_rejeitado'
     ];
-    
+
 }
