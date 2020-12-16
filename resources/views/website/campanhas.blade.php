@@ -58,7 +58,7 @@
                     @foreach ($campanhas as $campanha)
                     @php
                         $payments = \App\Yahp\Models\Payment::where('campanha_id',$campanha->id)->where('tipo',1);
-                        $vTotal = 0;                                          
+                        $vTotal = 0;
                         foreach ($payments->get() as $key => $pag) {
                             $vTotal = $vTotal+$pag->valor;
                         }
@@ -69,7 +69,7 @@
                                 <div class="causes-item causes-item--primary">
                                     <div class="causes-item__body">
                                         <div class="causes-item__top">
-                                            <h6 class="causes-item__title"> 
+                                            <h6 class="causes-item__title">
                                                 <a href="{{ route('website.campanhas.detalhes', $campanha->id) }}">{{ $campanha->titulo }}</a>
                                             </h6>
                                             <p>
@@ -96,17 +96,30 @@
 
                                         <div class="causes-item__lower">
                                             <div class="progress-bar">
-                                                <div class="progress-bar__inner" style="width: {{$perc}}%;">
-                                                    <div class="progress-bar__value">{{$perc}}%</div>
+
+                                                <div class="progress-bar__inner" style="width: {{($perc >= 100)?'100':$perc}}%;">
+                                                    <div class="progress-bar__value" ">
+                                                       @if($perc == 0)
+                                                       {{$perc}}%
+                                                       @else
+                                                       {{number_format($perc, 2, '.', "")}}%
+                                                       @endif
+                                                    </div>
+                                                    
                                                 </div>
                                             </div>
                                             <div class="causes-item__details-holder">
                                                 <div class="causes-item__details-item">
-                                                    <span>Meta: </span><br /><span>R$ {{number_format($campanha->valor,2,",",".")}}</span>
+                                                    <span>Conquistado:</span>
+                                                    <br />
+                                                    <span>R$  {{number_format($vTotal,2,",",".")}}</span>
                                                 </div>
 
-                                                <div class="causes-item__details-item text-right"><span>Conquistado:
-                                                    </span><br /><span>R$  {{number_format($vTotal,2,",",".")}}</span></div>
+                                                <div class="causes-item__details-item text-right">
+                                                    <span>Meta: </span>
+                                                    <br />
+                                                    <span>R$ {{number_format($campanha->valor,2,",",".")}}</span>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -122,13 +135,17 @@
                     </div>
                 </div>
 
+{{-- <div class="col-12">
 
+    teste
+    {{ $campanhas->render() }}
+</div> --}}
                 <div class="col-12">
                     <!-- pagination start-->
                     <ul class="pagination">
                         <li class="pagination__item pagination__item--prev"><i class="fa fa-angle-left" aria-hidden="true"></i><span> Anterior</span></li>
-                        <li class="pagination__item"><span>1</span></li>
-                        <li class="pagination__item pagination__item--active"><span>2</span></li>
+                        <li class="pagination__item pagination__item--active"><span>1</span></li>
+                        <li class="pagination__item"><span>2</span></li>
                         <li class="pagination__item"><span>3</span></li>
                         <li class="pagination__item"><span>4</span></li>
                         <li class="pagination__item"><span>5</span></li>

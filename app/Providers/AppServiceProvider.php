@@ -27,18 +27,18 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->moduleService = $moduleService;
 
-        view()->composer('layouts.app', function ($view) 
+        view()->composer('layouts.app', function ($view)
         {
             $route = Route::currentRouteName();
-            if($route != 'login' && $route != 'register' && $route != 'password.request')
+            if($route != 'login' && $route != 'register' && $route != 'password.request' && $route != 'password.email' && $route != 'password.update' && $route != 'password.reset')
             {
                 // LEMBRE-SE
                 // ALTERAR NO MIDDLWARE -> CheckPermission
-                
+
                 $admin_perm = [1,2,3,4,5,6,7];
                 $user_perm = [1,5,6];
                 $else_perm = [];
-    
+
                 if(auth()->user()->role == 1)
                 {
                     $modulos = $this->moduleService->renderByPermission($admin_perm);
@@ -48,7 +48,7 @@ class AppServiceProvider extends ServiceProvider
                 } else {
                     $modulos = $this->moduleService->renderByPermission($else_perm);
                 }
-                
+
                 $view->with('modules', $modulos);
             }
         });

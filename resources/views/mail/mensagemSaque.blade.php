@@ -2,7 +2,7 @@
     {{-- Header --}}
     @slot('header')
         @component('mail::header', ['url' => config('app.url')])
-            <img src="https://imgur.com/RPxMcrE.png" class="logo" style="height:100px !important;width:140px !important;"
+            <img src="https://imgur.com/RPxMcrE.png" class="logo" style="height:100px !important;width:180px !important;"
                 alt="OincBank">
         @endcomponent
     @endslot

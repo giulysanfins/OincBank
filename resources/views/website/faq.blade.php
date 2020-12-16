@@ -18,8 +18,8 @@
                                 <div class="align-container">
                                     <div class="align-container__item">
                                         <div class="promo-slider__wrapper-1">
-                                            <h2 class="promo-slider__title"><span>Perguntas Frequentes</span>
-
+                                            <h2 class="promo-slider__title">
+                                                <span>Dúvidas Frequentes</span>
                                             </h2>
                                         </div>
                                         <div class="promo-slider__wrapper-2">
@@ -32,7 +32,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="promo-slider__item promo-slider__item--style-2">
+                {{-- <div class="promo-slider__item promo-slider__item--style-2">
                     <picture>
                         <source srcset="{{ asset('helpo-theme') }}/img/promo_2.jpg" media="(min-width: 835px)" />
                         <source srcset="{{ asset('helpo-theme') }}/img/promo_2.jpg" media="(min-width: 376px)" />
@@ -43,14 +43,14 @@
 
                         </div>
                     </div>
-                </div>
+                </div> --}}
                 <div class="promo-slider__item promo-slider__item--style-3">
                     <picture>
                         <source srcset="{{ asset('helpo-theme') }}/img/promo_3.jpg" media="(min-width: 835px)" />
                         <source srcset="{{ asset('helpo-theme') }}/img/promo_3.jpg" media="(min-width: 376px)" />
                         <img class="img--bg" src="{{ asset('helpo-theme') }}/img/promo_3.jpg" alt="img" />
                     </picture>
-                    <div class="container">
+                    <div class="container" >
                         <div class="row">
                             <div class="col-xl-8 offset-xl-2">
                                 <div class="align-container">
@@ -92,7 +92,7 @@
 
         <!-- causes end-->
         <section class="section faq">
-            <div class="container">
+            <div class="container" style="margin-right: 60px">
                 {{-- <div class="row margin-bottom">
                     <div class="col-12">
                         <div class="heading heading--primary"><span class="heading__pre-title"></span>

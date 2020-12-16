@@ -58,6 +58,14 @@ class CampanhaService implements ServiceContract
     }
 
     /**
+     * @return mixed
+     */
+    public function renderByIndex()
+    {
+        return $this->repository->getByIndex();
+    }
+
+    /**
      * @param $status
      * @param $user_id
      * @return mixed

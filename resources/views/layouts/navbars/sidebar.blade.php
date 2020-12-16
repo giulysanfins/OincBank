@@ -7,7 +7,7 @@
         </div>
         <ul class="nav">
 
-            @foreach ($modules as $module)
+            @foreach ($modules  as $module)
 
                 @if ($module->type == 1)
                     @if (auth()->user()->role == 2 && $module->slug == 'pagamentos')
@@ -17,6 +17,14 @@
                                 <p class="ml-2">Minhas Contribuições</p>
                             </a>
                         </li>
+
+                    @elseif ($module->slug == 'dashboard')
+                        {{-- <li class="nav-item  d-none @if($activePage == $module->slug) disabled @endif">
+                            <a class="nav-link" href="{{route($module->route)}}">
+                                <i class="{{$module->icon}}"></i>
+                                <p class="ml-2">{{$module->name}}</p>
+                            </a>
+                        </li> --}}
                     @else
                         <li class="nav-item @if($activePage == $module->slug) active @endif">
                             <a class="nav-link" href="{{route($module->route)}}">
@@ -33,7 +41,7 @@
                         </a>
                         <div class="collapse @if($activeButton == $module->slug) show @endif" id="master{{$module->id}}">
                             <ul class="nav">
-                                @foreach ($modules as $s_module)
+                                @foreach ($modules ?? '' as $s_module)
                                     @if ($s_module->type == 3 && $s_module->menu_master == $module->id)
                                         <li class="nav-item @if($activePage == $s_module->slug) active @endif">
                                             <a class="nav-link pl-4" href="{{route($s_module->route)}}">
@@ -47,7 +55,7 @@
                         </div>
                     </li>
                 @endif
-                
+
             @endforeach
 
         </ul>

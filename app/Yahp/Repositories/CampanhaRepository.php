@@ -58,6 +58,15 @@ class CampanhaRepository
      * @param $id
      * @return mixed
      */
+    public function getByIndex()
+    {
+        return $this->model->where('status',2)->inRandomOrder()->limit(6)->get();
+    }
+
+    /**
+     * @param $id
+     * @return mixed
+     */
     public function getByUser($user_id)
     {
         return $this->model->where('user_id',$user_id)->get();

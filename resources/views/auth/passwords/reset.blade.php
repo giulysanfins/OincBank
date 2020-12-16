@@ -53,7 +53,7 @@
                                     <div class="form-group row mb-0 justify-content-center">
                                         <div class="offset-md-4">
                                             <button type="submit" class="btn btn-warning btn-wd">
-                                                {{ __('Redefinição de Password') }}
+                                                {{ __('Redefinição de Senha') }}
                                             </button>
                                         </div>
                                     </div>

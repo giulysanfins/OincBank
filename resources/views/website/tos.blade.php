@@ -5,7 +5,7 @@
 
 @section('content')
 
-<section class="promo">
+{{-- <section class="promo">
     <div class="promo-slider">
         <div class="promo-slider__item promo-slider__item--style-1">
             <picture>
@@ -39,18 +39,18 @@
     </ul>
     <!-- promo socials end-->
 
-</section>
+</section> --}}
 <section class="section causes"><img class="causes__bg" src="{{asset('helpo-theme')}}/img/causes_img.png" alt="img"/>
     <div class="container">
         <div class="row align-items-end">
             <div class="col-xl-12">
                 <div class="heading heading--primary"><span class="heading__pre-title">Termos de Uso</span>
                     <h2 class="heading__title"> <span>Termos de Uso</span></h2>
-                    <p>Sharksucker sea toad candiru rocket danio tilefish stingray deepwater stingray Sacramento splittail, Canthigaster rostrata. Midshipman dartfish Modoc sucker, yellowtail kingfish</p>
+
                     <div>
                         <div>
                         <div>
-                        <div class="skin_blank">
+                        {{-- <div class="skin_blank">
                         <h5>1. ACEITAÇÃO.</h5>
                         <p>Bem-vindo ao site <a href="http://www.roberthalf.com.br/">www.roberthalf.com.br</a> (o "Site"). O PRESENTE DOCUMENTO ("TERMOS DE USO") ESTABELECE OS TERMOS E CONDIÇÕES APLICÁVEIS AO USO DO SITE. POR FAVOR, REVISE OS TERMOS DE USO CUIDADOSAMENTE ANTES DE UTILIZAR O SITE. AO ACESSAR, NAVEGAR OU UTILIZAR O SITE ("USO"), TODOS OS USUÁRIOS E VISITANTES ("VOCÊ", "VOCÊS," "USUÁRIO" OU "USUÁRIOS") DECLARAM ACEITAR OS TERMOS E CONDIÇÕES CONTIDOS NESTES TERMOS DE USO. CASO VOCÊ NÃO CONCORDE COM OS TERMOS E CONDIÇÕES CONTIDOS NESTES TERMOS DE USO, POR FAVOR, NÃO USE O SITE. A ROBERT HALF TRABALHO TEMPORARIO LTDA ("RHB") E SUAS SUBSIDIÁRIAS RESERVAM-SE O DIREITO DE ATUALIZAR OS TERMOS DE USO PERIODICAMENTE, AO EXCLUSIVO CRITÉRIO DA RHB. VOCÊ DEVE REVISAR OS TERMOS DE USO PERIODICAMENTE PARA EVENTUAIS ATUALIZAÇÕES E MODIFICAÇÕES.</p>
                         <h5>2. ELIGIBILIDADE.</h5>
@@ -115,7 +115,7 @@
                         2884 Sand Hill Road<br>
                         Menlo Park, California94025<br>
                         Endereço de e-mail&nbsp;<a href="mailto:consultor@roberthalf.com.br">consultor@roberthalf.com.br</a></p>
-                        </div>
+                        </div> --}}
                         </div>
                         </div>
         <div>

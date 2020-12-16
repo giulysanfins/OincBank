@@ -12,7 +12,7 @@
             <div class="row">
                 <div class="col-auto">
                     <div class="align-container">
-                        <div class="align-container__item"><span class="promo-primary__pre-title">Helpo</span>
+                        <div class="align-container__item"><span class="promo-primary__pre-title">{{$campanha->user->name}}</span>
                             <h1 class="promo-primary__title"><span>{{$campanha->titulo}}</span></h1>
                         </div>
                     </div>
@@ -32,21 +32,24 @@
                         </div>
                         <div class="donation-item__body">
                             <div class="row">
-                                <div class="col-12">
+                                <div class="col-12 col-lg-7">
                                     <h5 class="donation-item__title">{{$campanha->titulo}}</h5>
+                                </div>
+                                <div class="col-12 col-lg-5">
+                                    <input class="form-control" readonly type="text" value="{{url()->current()}}">
                                 </div>
                             </div>
                             <div class="row align-items-end">
-                                <div class="col-lg-7">
+                                <div class="col-lg-6">
                                     <div class="progress-bar">
-                                        <div class="progress-bar__inner" style="width: {{$perc}}%;">
+                                        <div class="progress-bar__inner" style="width: {{($perc >= 100)?'100':$perc}}%;">
                                             <div class="progress-bar__value">{{$perc}}%</div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-lg-5">
+                                <div class="col-lg-6">
                                     <div class="donation-item__details-holder">
-                                        <div class="donation-item__details-item"><span>Arreacadao: </span><span>R$ {{number_format($arrecadado,2,",",".")}}</span></div>
+                                        <div class="donation-item__details-item"><span>Arrecadação: </span><span>R$ {{number_format($arrecadado,2,",",".")}}</span></div>
                                         <div class="donation-item__details-item"><span>Meta: </span><span>R$ {{number_format($campanha->valor,2,",",".")}}</span></div>
                                     </div>
                                 </div>
@@ -173,7 +176,7 @@
                                 <div class="video-frame"><img class="img--bg" src="{{asset('storage')}}/images/{{$campanha->profile_image}}" alt="frame">
                                     <a class="video-trigger video-frame__trigger" href="{{$campanha->video}}">
                                         <span class="video-frame__icon"><i class="fa fa-play" aria-hidden="true"></i>
-                                        </span><span class="video-frame__text">Veja o video</span>
+                                        </span><span class="video-frame__text">Veja o vídeo</span>
                                     </a>
                                 </div>
                             </div>

@@ -79,7 +79,7 @@
                                 <div class="col-12 text-right">
                                     @if (auth()->user()->role == 2)
                                         <a href="{{route('campanha.store')}}" class="btn btn-primary">Adicionar Cofrinho</a>
-                                        <a href="{{route('campanha.apagar_adm')}}" class="btn btn-primary">Deletar Cofrinho</a>
+                                        <a href="{{route('campanha.apagar_adm')}}" class="btn btn-danger">Deletar Cofrinho</a>
                                     @endif
                                 </div>
                                 {{-- comeco tabelas ativas --}}
@@ -129,7 +129,7 @@
                                                                             @if (auth()->user()->role == 2)
                                                                             <button type="button" class="btn btn-success" data-toggle="modal" data-target="#sacar{{$campanha->id}}">Sacar valor</button>
                                                                             @endif
-                                                                            <button type="button" class="btn btn-danger">Deletar</button>
+                                                                            {{-- <button type="button" class="btn btn-danger">Deletar</button> --}}
                                                                         </div>
                                                                     </td>
                                                                 </tr>
@@ -175,6 +175,7 @@
                                                         @foreach ($campanhas_aprovadas as $campanha)
                                                             @php
                                                                 $total = 0;
+
                                                                 foreach($campanha->payments as $pag)
                                                                 {
                                                                     if($pag->tipo == 1 && $pag->status == 2){
@@ -191,7 +192,7 @@
 
                                                                 <td>{{$campanha->created_at->format('d/m/Y h:i:s')}}</td>
                                                                 <td>
-                                                                    <div class="btn-group float-right" role="group" aria-labe   l="Botões de Ação - Clientes">
+                                                                    <div class="btn-group float-right" role="group" aria-label="Botões de Ação - Clientes">
                                                                         @if (auth()->user()->role == 2)
                                                                         <a href="{{route('campanha.edit',$campanha->id)}}" class="btn btn-info">Editar</a>
                                                                         @endif
@@ -199,7 +200,9 @@
                                                                         @if (auth()->user()->role == 2)
                                                                         <button type="button" class="btn btn-success" data-toggle="modal" data-target="#sacar{{$campanha->id}}">Sacar valor</button>
                                                                         @endif
-                                                                        <button type="submit" class="btn btn-danger button">Deletar</button>
+                                                                        <a href="{{route('campanha.desativar',$campanha->id)}}" class="btn btn-danger">Desativar</a>
+
+
                                                                     </div>
                                                                 </td>
                                                             </tr>
@@ -207,6 +210,10 @@
                                                             @component('admin.campanha.components.solicitar',[
                                                                 'campanha' => $campanha,
                                                                 'bancos' => $bancos
+                                                            ])@endcomponent
+                                                            @else
+                                                            @component('admin.campanha.components.desativar',[
+                                                                'campanha' => $campanha
                                                             ])@endcomponent
                                                             @endif
                                                         @endforeach
@@ -254,13 +261,14 @@
                                                                             @if (auth()->user()->role == 2)
                                                                             <button type="button" class="btn btn-success" data-toggle="modal" data-target="#sacar{{$campanha->id}}">Sacar valor</button>
                                                                             @endif
-                                                                            <button type="submit" class="btn btn-success">Ativar</button>
+                                                                            <a href="{{route('campanha.ativar',$campanha->id)}}" class="btn btn-primary">Ativar</a>
                                                                         </div>
                                                                     </td>
                                                                 </tr>
                                                                 @if (auth()->user()->role == 2)
                                                                 @component('admin.campanha.components.solicitar',[
-                                                                    'campanha' => $campanha
+                                                                    'campanha' => $campanha,
+                                                                    'bancos' => $bancos
                                                                 ])@endcomponent
                                                                 @endif
                                                             @endforeach

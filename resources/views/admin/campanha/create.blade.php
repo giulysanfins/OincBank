@@ -132,57 +132,7 @@
         </div>
 
     </div>
-    {{-- script para validar extensão --}}
-    <script>
-        function fileValidation() {
-            var fileInput =
-                document.getElementById('photo_perfil');
 
-            var filePath = fileInput.value;
-
-            // Allowing file type
-            var allowedExtensions =
-                /(\.jpg|\.jpeg|\.png|\.gif)$/i;
-
-            if (!allowedExtensions.exec(filePath)) {
-                swal("Oops", "Não aceitamos essa extensão. Por favor tente novamente!", "error");
-                fileInput.value = '';
-                return false;
-            } else {
-
-                // Image preview
-                if (fileInput.files && fileInput.files[0]) {
-                    var reader = new FileReader();
-                    reader.onload = function(e) {
-                        document.getElementById(
-                                'imagePreview').innerHTML =
-                            '<img class="img-thumbnail border-gray" src="' + e.target.result +
-                            '"/>';
-
-
-                    };
-
-                    reader.readAsDataURL(fileInput.files[0]);
-                }
-            }
-        }
-
-    </script>
-    {{-- script para validar se foto esta lá --}}
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('#upload').bind("click", function() {
-                var imgVal = $('#photo_perfil').val();
-                if (imgVal == '') {
-                    swal("Oops", "Por favor inclua uma foto!", "error");
-                    return false;
-                }
-
-
-            });
-        });
-
-    </script>
 @endsection
 
 @section('scripts')
@@ -195,4 +145,55 @@
         });
 
     </script>
+        {{-- script para validar extensão --}}
+        <script>
+            function fileValidation() {
+                var fileInput =
+                    document.getElementById('photo_perfil');
+
+                var filePath = fileInput.value;
+
+                // Allowing file type
+                var allowedExtensions =
+                    /(\.jpg|\.jpeg|\.png|\.gif)$/i;
+
+                if (!allowedExtensions.exec(filePath)) {
+                    swal("Oops", "Não aceitamos essa extensão. Por favor tente novamente!", "error");
+                    fileInput.value = '';
+                    return false;
+                } else {
+
+                    // Image preview
+                    if (fileInput.files && fileInput.files[0]) {
+                        var reader = new FileReader();
+                        reader.onload = function(e) {
+                            document.getElementById(
+                                    'imagePreview').innerHTML =
+                                '<img class="img-thumbnail border-gray" src="' + e.target.result +
+                                '"/>';
+
+
+                        };
+
+                        reader.readAsDataURL(fileInput.files[0]);
+                    }
+                }
+            }
+
+        </script>
+        {{-- script para validar se foto esta lá --}}
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $('#upload').bind("click", function() {
+                    var imgVal = $('#photo_perfil').val();
+                    if (imgVal == '') {
+                        swal("Oops", "Por favor inclua uma foto!", "error");
+                        return false;
+                    }
+
+
+                });
+            });
+
+        </script>
 @endsection

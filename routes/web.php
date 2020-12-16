@@ -21,13 +21,15 @@ Route::get('/termos-e-condicoes', 'App\Http\Controllers\WebsiteController@tos')-
 Route::get('/politica-de-privacidade', 'App\Http\Controllers\WebsiteController@politica')->name('website.politica');
 Route::get('/duvidas-frequentes', 'App\Http\Controllers\WebsiteController@duvidas')->name('website.duvidas');
 Route::post('/pesquisar','App\Http\Controllers\WebsiteController@search')->name('website.search');
-Route::get('/faq', 'App\Http\Controllers\WebsiteController@faq')->name('website.faq');
+Route::get('/duvidas-frequencia', 'App\Http\Controllers\WebsiteController@faq')->name('website.faq');
+Route::get('/sobre', 'App\Http\Controllers\WebsiteController@sobre')->name('website.sobre');
+
 
 
 Route::get('/envio-email/{id}', 'App\Http\Controllers\CampanhaController@destroy');
 
 
-Route::group(['prefix' => 'campanhas'], function () {
+Route::group(['prefix' => 'cofrinhos'], function () {
 	Route::get('/', 'App\Http\Controllers\WebsiteController@campanhas')->name('website.campanhas');
 	Route::get('/detalhes/{id}', 'App\Http\Controllers\WebsiteController@detalhes')->name('website.campanhas.detalhes');
 });
@@ -60,7 +62,7 @@ Route::group(['prefix' => 'admin','middleware' => ['CheckPermission','auth']], f
 		Route::get('/criar', ['as' => 'users.create', 'uses' => 'App\Http\Controllers\UsersController@create']);
 	});
 
-	Route::group(['prefix' => 'campanhas','middleware' => ['auth','CheckPermission']], function () {
+	Route::group(['prefix' => 'cofrinhos','middleware' => ['auth','CheckPermission']], function () {
 		Route::get('/', ['as' => 'campanha.index', 'uses' => 'App\Http\Controllers\CampanhaController@index']);
 		Route::get('/criar', ['as' => 'campanha.create', 'uses' => 'App\Http\Controllers\CampanhaController@create']);
 		Route::post('/criar', ['as' => 'campanha.store', 'uses' => 'App\Http\Controllers\CampanhaController@store']);
@@ -68,9 +70,9 @@ Route::group(['prefix' => 'admin','middleware' => ['CheckPermission','auth']], f
         Route::put('/deletar', ['as' => 'campanha.apagar_adm', 'uses' => 'App\Http\Controllers\CampanhaController@apagar_adm']);
 		Route::get('/alterar/{id}', ['as' => 'campanha.edit', 'uses' => 'App\Http\Controllers\CampanhaController@edit']);
         Route::put('/update/{id}', ['as' => 'campanha.update', 'uses' => 'App\Http\Controllers\CampanhaController@update']);
-        Route::put('/d/{id}', ['as' => 'campanha.desativar', 'uses' => 'App\Http\Controllers\CampanhaController@desativar']);
+        Route::get('/d/{id}', ['as' => 'campanha.desativar', 'uses' => 'App\Http\Controllers\CampanhaController@desativar']);
         Route::put('/deletar/{id}', ['as' => 'campanha.destroy', 'uses' => 'App\Http\Controllers\CampanhaController@destroy']);
-		Route::put('/a/{id}', ['as' => 'campanha.ativar', 'uses' => 'App\Http\Controllers\CampanhaController@ativar']);
+		Route::get('/a/{id}', ['as' => 'campanha.ativar', 'uses' => 'App\Http\Controllers\CampanhaController@ativar']);
         Route::get('/visualizacao/{id}', ['as' => 'campanha.show', 'uses' => 'App\Http\Controllers\CampanhaController@show']);
 	});
 
