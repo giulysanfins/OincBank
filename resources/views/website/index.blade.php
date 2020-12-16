@@ -272,11 +272,11 @@
         <!-- causes end-->
 
         <section class="section faq">
-            <div class="container" style="margin-right: 60px">
+            <div class="container">
                 <div class="row margin-bottom">
                     <div class="col-12">
                         <div class="heading heading--primary"><span class="heading__pre-title"></span>
-                            <h2 class="heading__title no-margin-bottom"><span>Perguntas</span> <span>Frequentes</span></h2>
+                            <h2 class="heading__title no-margin-bottom"><span>Dúvidas</span> <span>Frequentes</span></h2>
                         </div>
                     </div>
                 </div>
