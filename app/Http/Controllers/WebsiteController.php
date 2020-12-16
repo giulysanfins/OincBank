@@ -227,7 +227,7 @@ class WebsiteController extends Controller
 
                 return view('errors.403',$data);
 
-            } elseif($request->status === 'pending') {
+            } elseif($request->status === 'pending' || $request->status === 'in_process') {
 
                 $update = $this->paymentService->buildUpdate($id,[
                     'status' => 3, // status = pendente
