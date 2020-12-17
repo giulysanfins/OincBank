@@ -76,8 +76,9 @@
                                     <label class="form-control-label" for="input-photo_perfil">Foto Cofrinho</label>
                                     <br />
                                     <label for="photo_perfil" class="btn btn-info">Selecionar Imagem</label>
-                                    <input id="photo_perfil" style="display: none;" type="file" name="photo_perfil">
-                                    <img class="img-thumbnail border-gray" src="{{asset('storage')}}/images/{{$campanha->profile_image}}" alt="foto_{{$campanha->titulo}}">
+                                    <input id="photo_perfil" style="display: none;" required onchange="return fileValidation()" type="file" name="photo_perfil">
+                                    <img class="img-thumbnail border-gray" src="{{asset('storage')}}/images/{{$campanha->profile_image}}" alt="foto_{{$campanha->titulo}}" id="foto_antiga">
+                                    <div id="imagePreview"></div>
                                 </div>
 
                                 <div class="col-md-10" >
@@ -110,6 +111,43 @@
     $(document).ready(function(){
         $('#valor').mask("#.##0,00", {reverse: true});
     });
+
+</script>
+<script>
+    function fileValidation() {
+        var fileInput =
+            document.getElementById('photo_perfil');
+
+        var filePath = fileInput.value;
+
+        // Allowing file type
+        var allowedExtensions =
+            /(\.jpg|\.jpeg|\.png|\.gif)$/i;
+
+        if (!allowedExtensions.exec(filePath)) {
+            swal("Oops", "Não aceitamos essa extensão. Por favor tente novamente!", "error");
+            fileInput.value = '';
+            return false;
+        } else {
+
+            // Image preview
+            if (fileInput.files && fileInput.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    var myobj = document.getElementById("foto_antiga");
+                    myobj.remove();
+                    document.getElementById(
+                            'imagePreview').innerHTML =
+                        '<img class="img-thumbnail border-gray" src="' + e.target.result +
+                        '"/>';
+
+
+                };
+
+                reader.readAsDataURL(fileInput.files[0]);
+            }
+        }
+    }
 
 </script>
 @endsection

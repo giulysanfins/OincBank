@@ -88,7 +88,7 @@
                                     <br />
                                     <label for="photo_perfil" class="btn btn-info">Selecionar Imagem</label>
                                     <input id="photo_perfil" required onchange="return fileValidation()"
-                                        style="display: none;" type="file" name="photo_perfil">
+                                        style="display: none;" type="file" name="photo_perfil" multiple>
                                     {{-- usei https://sweetalert.js.org/docs/#configuration
                                     --}}
                                     <!-- Image preview -->

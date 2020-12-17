@@ -24,7 +24,7 @@
                                         </div>
                                         <div class="promo-slider__wrapper-2">
                                             <p class="promo-slider__subtitle " style="margin-top: 3%">
-                                                A vaca foi brejo, mas chamou o Oinc para te ajudar a juntar um dindin que você precisa para a sua causa.
+                                                A vaca foi para o brejo, mas chamou o Oinc para te ajudar a juntar um dindin que você precisa para a sua causa.
                                             </p>
                                         </div>
                                         <div class="promo-slider__wrapper-3">
@@ -289,7 +289,7 @@
 
     <div class="alert alert-dark alert-dismissible fade show alert-policy" role="alert">
         A gente guarda estatísticas de visitas para melhorar sua experiência de navegação.
-        Ao continuar, você concorda com a nossa Politica de Privacidade.
+        Ao continuar, você concorda com a nossa <a href="" target="_blank"> Politica de Privacidade</a>.
         <button type="button" class="btn button--primary" data-dismiss="alert" aria-label="Close">
             Continuar e Fechar
         </button>
