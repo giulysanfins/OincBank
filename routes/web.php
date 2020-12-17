@@ -24,10 +24,7 @@ Route::post('/pesquisar','App\Http\Controllers\WebsiteController@search')->name(
 Route::get('/duvidas-frequencia', 'App\Http\Controllers\WebsiteController@faq')->name('website.faq');
 Route::get('/sobre', 'App\Http\Controllers\WebsiteController@sobre')->name('website.sobre');
 
-
-
 Route::get('/envio-email/{id}', 'App\Http\Controllers\CampanhaController@destroy');
-
 
 Route::group(['prefix' => 'cofrinhos'], function () {
 	Route::get('/', 'App\Http\Controllers\WebsiteController@campanhas')->name('website.campanhas');
@@ -44,6 +41,8 @@ Route::group(['prefix' => 'pagamento'], function () {
 
 Auth::routes();
 
+Route::post('/login', ['uses' => 'App\Http\Controllers\Auth\LoginController@login','middleware' => 'checkstatus']);
+
 Route::group(['prefix' => 'admin','middleware' => ['CheckPermission','auth']], function () {
 	Route::get('/home', 'App\Http\Controllers\HomeController@dashboard')->name('dashboard');
 
@@ -55,6 +54,8 @@ Route::group(['prefix' => 'admin','middleware' => ['CheckPermission','auth']], f
 
 	Route::group(['middlware' => ['auth','CheckPermission']], function () {
 		Route::resource('usuario', 'App\Http\Controllers\UsersController', ['except' => ['show']]);
+		Route::put('usuario/desativar/{id}', 'App\Http\Controllers\UsersController@disable')->name('usuario.desativar');
+		Route::put('usuario/ativar/{id}', 'App\Http\Controllers\UsersController@ativar')->name('usuario.ativar');
 	});
 
 	Route::group(['middleware' => ['auth','CheckPermission'],'prefix' => 'usuarios'], function () {

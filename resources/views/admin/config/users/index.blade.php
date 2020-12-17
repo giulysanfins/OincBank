@@ -25,7 +25,7 @@
                                         <th scope="col">#</th>
                                         <th scope="col">Nome</th>
                                         <th scope="col">E-mail</th>
-                                        <th scope="col"># Cofrinhos</th>
+                                        <th scope="col">Status</th>
                                         <th scope="col">Criado em:</th>
                                         <th scope="col"></th>
                                         <th scope="col"></th>
@@ -37,18 +37,40 @@
                                             <th scope="row">{{$cliente->id}}</th>
                                             <td>{{$cliente->name}}</td>
                                             <td>{{$cliente->email}}</td>
-                                            <td></td>
+                                            <td>
+                                                @if ($cliente->status == 1)
+                                                    Ativo
+                                                @elseif ($cliente->status == 2)
+                                                    Desativado
+                                                @endif
+                                            </td>
                                             <td>{{$cliente->created_at->format('d/m/Y h:i:s')}}</td>
                                             <td>
                                                 <div class="btn-group" role="group" aria-label="Exemplo básico">
                                                     <a href="{{route('usuario.edit',$cliente->id)}}" class="btn btn-info">Editar</a>
-                                                    {{-- <button type="button" class="btn btn-secondary">Cofrinhos</button>
-                                                    <button type="button" class="btn btn-warning">Bloquear</button>
-                                                    <button type="button" class="btn btn-danger">Deletar</button> --}}
+                                                    @if ($cliente->status == 1)
+                                                        <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#desativar_{{$cliente->id}}">Desativar</button>
+                                                    @elseif ($cliente->status == 2)
+                                                        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#ativar_{{$cliente->id}}">Ativar</button>
+                                                    @endif
+                                                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deletar_{{$cliente->id}}">Deletar</button>
                                                 </div>
                                             </td>
                                             <td></td>
                                         </tr>
+
+                                        @component('admin.config.users.components.active',[
+                                            'user' => $cliente,
+                                        ])@endcomponent
+
+                                        @component('admin.config.users.components.disable',[
+                                            'user' => $cliente,
+                                        ])@endcomponent
+
+                                        @component('admin.config.users.components.delete',[
+                                            'user' => $cliente,
+                                        ])@endcomponent
+
                                     @endforeach
                                 </tbody>
                             </table>

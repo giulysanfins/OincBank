@@ -1,4 +1,4 @@
-@extends('layouts/app', ['activePage' => 'login', 'title' => 'Oincbank'])
+@extends('layouts/app', ['activePage' => 'login', 'title' => 'Oincbank | Login'])
 
 @section('content')
     <div class="full-page" data-color="pink" data-image="{{ asset('img') }}/charity.jpg">

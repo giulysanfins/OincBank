@@ -16339,7 +16339,7 @@ header.header--inner {
     .dropdown-trigger__item,
     .dropdown-trigger__item::after,
     .dropdown-trigger__item::before {
-        background: #fff;
+        background: #643348;
     }
 }
 .dropdown-trigger__item,
@@ -16802,7 +16802,7 @@ header.header--intro .button {
 .main-menu__item .main-menu__link {
     position: relative;
     display: inline-block;
-    color: #fff;
+    color: #643348;
     font-size: 14px;
     font-weight: 500;
     padding: 31px 0 30px 0;
@@ -16818,7 +16818,7 @@ header.header--intro .button {
     }
 }
 .main-menu__item:hover .main-menu__link {
-    color: #fff;
+    color: #643348;
     opacity: 0.75;
 }
 .main-menu__item .main-menu__link::before {

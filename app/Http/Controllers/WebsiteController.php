@@ -216,9 +216,9 @@ class WebsiteController extends Controller
     }
 
     public function pending(Request $request,$id)
-    {
+    {   
         try {
-            // http://localhost:8000/pagamento/sucesso/1
+            // http://localhost:8000/pagamento/pendente/2
             if (count($request->all()) == 0)
             {
                 $data = [
