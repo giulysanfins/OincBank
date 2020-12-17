@@ -30,7 +30,7 @@
 
                 <div class="col-md-8" id="myBtnContainer">
                     <label for="text">Filtrar</label>
-                    <div class="btn-group" role="group" >
+                    <div class="btn-group " role="group" >
                         <button class="btn btn-link active" onclick="filterSelection('all')" style="text-decoration: none; color: black;"> Todos</button>
                         @foreach ($categorias as $categoria)
                             <button class="btn btn-link" onclick="filterSelection('{{ $categoria->name }}')" >
@@ -57,7 +57,7 @@
                     <div class="row">
                     @foreach ($campanhas as $campanha)
                     @php
-                        $payments = \App\Yahp\Models\Payment::where('campanha_id',$campanha->id)->where('tipo',1);
+                        $payments = \App\Yahp\Models\Payment::where('campanha_id',$campanha->id)->where('tipo',1)->where('status',2);
                         $vTotal = 0;
                         foreach ($payments->get() as $key => $pag) {
                             $vTotal = $vTotal+$pag->valor;
@@ -98,14 +98,14 @@
                                             <div class="progress-bar">
 
                                                 <div class="progress-bar__inner" style="width: {{($perc >= 100)?'100':$perc}}%;">
-                                                    <div class="progress-bar__value" ">
+                                                    <div class="progress-bar__value" >
                                                        @if($perc == 0)
                                                        {{$perc}}%
                                                        @else
                                                        {{number_format($perc, 2, '.', "")}}%
                                                        @endif
                                                     </div>
-                                                    
+
                                                 </div>
                                             </div>
                                             <div class="causes-item__details-holder">
@@ -172,14 +172,8 @@
             </div>
         </div>
     </section>
-
-</main>
-@endsection
-
-@section('scripts')
-
     <!-- bottom bg end-->
-    <script>
+    <script type="text/javascript">
         filterSelection("all") // Execute the function and show all columns
         function filterSelection(c) {
             var x, i;
@@ -187,6 +181,7 @@
             if (c == "all") c = "";
             // Add the "show" class (display:block) to the filtered elements, and remove the "show" class from the elements that are not selected
             for (i = 0; i < x.length; i++) {
+                console.log(x[i]);
                 w3RemoveClass(x[i], "show");
                 if (x[i].className.indexOf(c) > -1) w3AddClass(x[i], "show");
             }
@@ -198,10 +193,12 @@
             arr1 = element.className.split(" ");
             arr2 = name.split(" ");
             for (i = 0; i < arr2.length; i++) {
+
                 if (arr1.indexOf(arr2[i]) == -1) {
                     element.className += " " + arr2[i];
                 }
             }
+
         }
 
         // Hide elements that are not selected
@@ -229,5 +226,12 @@
         }
 
     </script>
+</main>
+
+
+@endsection
+
+@section('scripts')
+
 
 @endsection

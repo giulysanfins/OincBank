@@ -8,7 +8,7 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
         <title>OincBank {{$title ?? ''}}</title>
         <!-- styles-->
-        {{-- <link rel="stylesheet" href="{{asset('helpo-theme')}}/css/styles.min.css"/> --}}
+        <link rel="stylesheet" href="{{asset('helpo-theme')}}/css/styles.min.css"/>
          <link rel="stylesheet" href="{{asset('helpo-theme')}}/css/styles.css"/>
         <link rel="stylesheet" href="{{asset('vendors')}}/fontawesome/css/all.min.css"/>
         <link rel="apple-touch-icon" sizes="57x57" href="{{asset('img')}}/icons/apple-icon-57x57.png">
@@ -39,7 +39,7 @@
 
             @include('layouts.site.components.footer')
 			<!-- footer end-->
-				
+
         </div>
         <!-- libs-->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>

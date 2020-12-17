@@ -28,7 +28,7 @@
             </div>
             <div class="col-sm-6 col-lg-4" style="nav-right: auto ">
                 <h4 class="footer__title">Ajude</h4>
-                <p>Nos ajude mudar as vidas no mundo!</p><a class="button footer__button button--filled" href="{{route('website.campanhas')}}">Ver Cofrinhos</a>
+                <p>Nos ajude mudar vidas no mundo!</p><a class="button footer__button button--filled" href="{{route('website.campanhas')}}">Ver Cofrinhos</a>
             </div>
         </div>
         <div class="row align-items-baseline">
