@@ -44,7 +44,13 @@ class CheckPagamento extends Command
         {
             if($pagamento->pagamento_id != null)
             {
-                $auth_id = "APP_USR-3909980958286743-112018-30608f8141126d95d48219543b6ada80-41701013";
+                if(env('APP_ENV') == 'production')
+                {
+                    $auth_id = "APP_USR-4344514941698315-121600-986ff558dea244808ea6fad7407436b3-671093218";
+                } else {
+                    $auth_id = "APP_USR-3909980958286743-112018-30608f8141126d95d48219543b6ada80-41701013";
+                }
+
                 $code = "Bearer ".$auth_id;
                 $url = "https://api.mercadopago.com/v1/payments/".$pagamento->pagamento_id;
         
