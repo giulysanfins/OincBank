@@ -26,7 +26,7 @@ class UserRepository
      */
     public function getAll()
     {
-        return $this->model->get();
+        return $this->model->where('status',"!=",0)->get();
     }
 
     /**

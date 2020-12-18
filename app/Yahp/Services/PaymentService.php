@@ -58,6 +58,15 @@ class PaymentService implements ServiceContract
 
     /**
      * @param $id
+     * @return mixed
+     */
+    public function renderByStatus($status_id)
+    {
+        return $this->repository->getByStatus($status_id);
+    }
+
+    /**
+     * @param $id
      * @param $data
      * @return mixed
      */
