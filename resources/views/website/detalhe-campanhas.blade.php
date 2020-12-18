@@ -59,11 +59,17 @@
                                 @method('post')
                                 <div class="row align-items-baseline margin-bottom">
                                     <div class="col-lg-3 col-xl-4">
-                                        {{-- @dd($minValue) --}}
-                                        {{-- <label style="width: 55%">Valor Mínimo R$:{{number_format($minValue->valor,2,",",".")}}. Valor Máximo R$:{{number_format($maxValue->valor,2,",",".")}}.</label> --}}
                                         <label class="form__label"><span class="form__icon">R$</span>
-                                            <input type="number" oninvalid='setCustomValidity("Coloque um valor entre R$:{{number_format($minValue->valor,2,",",".")}} e R$:{{number_format($maxValue->valor,2,",",".")}} ")' class="form__field form__input-number money" title='Valor Mínimo R$:{{number_format($minValue->valor,2,",",".")}}. Valor Máximo R$:{{number_format($maxValue->valor,2,",",".")}}' min="{{$minValue->valor}}" max="{{$maxValue->valor}}" name='valor_manual' value="{{old('valor_manual')}}" type="text">
+                                            <input type="text" min="{{$minValue->valor}}"  maxlength = "20" class="form__field form__input-number money" name='valor_manual' value="{{old('valor_manual')}}" id="dinheiro"
+                                            title="O valor deve ser entre R$:{{number_format($minValue->valor,2,",",".")}} até R$:{{number_format($maxValue->valor,2,",",".")}}" onfocusout="validar()"
+                                            >
                                         </label>
+                                        <br>
+
+                                        <div class="" id="erro">
+
+
+                                        </div>
                                     </div>
                                     <div class="col-lg-9 col-xl-8 text-lg-right">
                                         <label class="form__radio-label"><span class="form__label-text">R$ {{ number_format('100',2,",",".") }}</span>
@@ -106,7 +112,7 @@
 
                                     <div class="col-lg-4">
                                         @if (Auth::check())
-                                            <button class="form__submit" type="submit">+ Doar</button>
+                                            <button class="form__submit" id="btnSubmit" type="submit">+ Doar</button>
                                         @else
                                             <a class="form__submit" href="{{route('login',['campanha' => $campanha->id])}}" >Login</a>
                                         @endif
@@ -208,10 +214,41 @@
 @endsection
 
 @section('scripts')
-
 <script>
+    function validar(){
+        var input = document.getElementById('dinheiro').value;
+        if(input < {{$minValue->valor}} || input > {{$maxValue->valor}}){
+            document.getElementById("erro").className += "alert alert-warning alert-dismissible fade show";
+            document.getElementById('erro').innerHTML = 'O valor deve ser entre R$:{{number_format($minValue->valor,2,",",".")}} até R$:{{number_format($maxValue->valor,2,",",".")}}.';
+            $("#btnSubmit").attr("disabled", true);
+                var elem = document.getElementById('btnSubmit');
+
+        }
+        else{
+            document.getElementById("erro").className = "";
+            document.getElementById('erro').innerHTML = '';
+            $("#btnSubmit").attr("disabled", false);
+
+        }
+
+
+    }
     $(document).ready(function(){
         $('.money').mask("#.##0,00", {reverse: true});
+        var input = document.getElementById('dinheiro').value;
+        if(input < {{$minValue->valor}} || input > {{$maxValue->valor}}){
+            document.getElementById("erro").className += "alert alert-warning alert-dismissible fade show";
+            document.getElementById('erro').innerHTML = 'O valor deve ser entre R$:{{number_format($minValue->valor,2,",",".")}} até R$:{{number_format($maxValue->valor,2,",",".")}}.';
+            $("#btnSubmit").attr("disabled", true);
+                var elem = document.getElementById('btnSubmit');
+
+        }
+        else{
+            document.getElementById("erro").className = "";
+            document.getElementById('erro').innerHTML = '';
+            $("#btnSubmit").attr("disabled", false);
+
+        }
     });
 </script>
 @endsection

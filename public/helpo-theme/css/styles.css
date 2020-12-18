@@ -14528,7 +14528,7 @@ section.section {
 .form__input-number {
     border: none;
     background: #f9f7f6;
-    width: 300px;
+    width: 330px;
     font-size: 16px;
     text-align: center;
     padding: 0 80px;
@@ -17039,7 +17039,7 @@ header.header--intro .button {
 }
 .promo-slider__item--style-1 {
     text-align: center;
-    
+
 }
 
 .promo-slider__item--style-1 .promo-slider__title span:first-of-type {
@@ -22707,7 +22707,7 @@ section.shop {
     line-height: 1.2;
 }
 
-.alert-policy 
+.alert-policy
 {
     background-color: #fdcfdf;
     position:fixed;
@@ -22727,5 +22727,53 @@ section.shop {
     border: 2px solid #643348;
     color: #643348;
 }
+
+#btnSubmit:disabled{
+    opacity: 0.4;
+
+}
+
+.column {
+    float: left;
+    width: 33.33%;
+    display: none; /* Hide columns by default */
+  }
+
+  /* Clear floats after rows */
+  /* .row:after {
+    content: "";
+    display: table;
+    clear: both;
+  } */
+
+  /* Content */
+  .content {
+    background-color: white;
+    padding: 10px;
+  }
+
+  /* The "show" class is added to the filtered elements */
+  .show {
+    display: block;
+  }
+
+  /* Style the buttons */
+  .btn {
+    border: none;
+    outline: none;
+    padding: 12px 16px;
+    cursor: pointer;
+  }
+
+  /* Add a grey background color on mouse-over */
+  .btn:hover {
+    background-color: #FBD574;
+  }
+
+  /* Add a dark background color to the active button */
+  .btn.active {
+    background-color: #666;
+     color: white;
+  }
 
 /*# sourceMappingURL=styles.min.css.map */
