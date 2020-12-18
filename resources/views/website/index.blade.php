@@ -98,14 +98,14 @@
             </div>
             <!-- promo socials start-->
             <ul class="promo-socials">
-                <li class="promo-socials__item"><a class="promo-socials__link" href="#"><i class="fab fa-instagram"
+                <li class="promo-socials__item"><a class="promo-socials__link" target="_blank" href="https://www.instagram.com/oincbank/"><i class="fab fa-instagram"
                             aria-hidden="true"></i></a></li>
-                <li class="promo-socials__item"><a class="promo-socials__link" href="#"><i class="fab fa-google-plus"
+                {{-- <li class="promo-socials__item"><a class="promo-socials__link" href="#"><i class="fab fa-google-plus"
                             aria-hidden="true"></i></a></li>
                 <li class="promo-socials__item"><a class="promo-socials__link" href="#"><i class="fab fa-twitter"
                             aria-hidden="true"></i></a></li>
                 <li class="promo-socials__item"><a class="promo-socials__link" href="#"><i class="fab fa-facebook"
-                            aria-hidden="true"></i></a></li>
+                            aria-hidden="true"></i></a></li> --}}
             </ul>
             <!-- promo socials end-->
             <!-- promo pannel start-->

@@ -23,5 +23,19 @@ class ParameterSeeder extends Seeder
             'area' => 'geral',
             'valor' => '2',
         ]);
+
+        DB::table('parameters')->insert([
+            'nome' => 'Valor Min doação',
+            'slug' => 'campanhas.min',
+            'area' => 'geral',
+            'valor' => '10',
+        ]);
+
+        DB::table('parameters')->insert([
+            'nome' => 'Valor Max doação',
+            'slug' => 'campanhas.max',
+            'area' => 'geral',
+            'valor' => '50000',
+        ]);
     }
 }
