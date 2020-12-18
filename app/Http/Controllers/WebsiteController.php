@@ -78,8 +78,12 @@ class WebsiteController extends Controller
         $data = [
             'campanha' => $this->campanhaService->renderEdit($id),
             'arrecadado' => $valorTotal,
-            'perc' => (($valorTotal*100)/$campanha->valor)
+            'perc' => (($valorTotal*100)/$campanha->valor),
+            'minValue' => $this->parameterService->renderBySlug('campanhas.min'),
+            'maxValue' => $this->parameterService->renderBySlug('campanhas.max'),
         ];
+
+        // dd($data);
 
         return view('website.detalhe-campanhas',$data);
     }
@@ -110,7 +114,7 @@ class WebsiteController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function payment($id, Request $request) 
+    public function payment($id, Request $request)
     {
         try {
 
@@ -146,7 +150,7 @@ class WebsiteController extends Controller
         if(env('APP_ENV') == 'production')
         {
             \MercadoPago\SDK::setAccessToken('APP_USR-3909980958286743-112018-30608f8141126d95d48219543b6ada80-41701013');
-        } else 
+        } else
         {
             \MercadoPago\SDK::setAccessToken('TEST-3909980958286743-112018-c6a4d0c6de187c2bfd0897f4169cf7cf-41701013');
         }

@@ -11,7 +11,7 @@
                 <ul class="footer-socials">
                     {{-- <li class="footer-socials__item"><a class="footer-socials__link" href="#"><i class="fab fa-2x fa-facebook" aria-hidden="true"></i></a></li>
                     <li class="footer-socials__item"><a class="footer-socials__link" href="#"><i class="fab fa-2x fa-twitter" aria-hidden="true"></i></a></li> --}}
-                    <li class="footer-socials__item"><a class="footer-socials__link" href="https://www.instagram.com/oincbank/"><i class="fab fa-2x fa-instagram" aria-hidden="true"></i></a></li>
+                    <li class="footer-socials__item"><a class="footer-socials__link" target="_blank" href="https://www.instagram.com/oincbank/"><i class="fab fa-2x fa-instagram" aria-hidden="true"></i></a></li>
                 </ul>
                 <!-- footer socials end-->
             </div>
@@ -33,7 +33,7 @@
         </div>
         <div class="row align-items-baseline">
             <div class="col-md-6">
-                <p class="footer-copyright">Desenvolvido pela <a href="https://yahp.com.br/"> <img src="https://yahp.com.br/website/img/logos/yahp-orange_pq.png" alt="logo" style="width: 5%"></a>. Todos os direitos reservados.© 2020 OincBank.</p>
+                <p class="footer-copyright">Desenvolvido pela <a href="https://yahp.com.br/" target="_blank"> <img src="https://yahp.com.br/website/img/logos/yahp-orange_pq.png" alt="logo" style="width: 5%"></a>. Todos os direitos reservados.© 2020 OincBank.</p>
             </div>
             <div class="col-md-6">
                 <div class="footer-privacy"><a class="footer-privacy__link" href="/politica-de-privacidade">Política de Privacidade</a><span class="footer-privacy__divider">|</span><a class="footer-privacy__link" href="/termos-e-condicoes">Termos e Condições</a></div>

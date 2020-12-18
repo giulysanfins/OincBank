@@ -59,8 +59,10 @@
                                 @method('post')
                                 <div class="row align-items-baseline margin-bottom">
                                     <div class="col-lg-3 col-xl-4">
+                                        {{-- @dd($minValue) --}}
+                                        {{-- <label style="width: 55%">Valor Mínimo R$:{{number_format($minValue->valor,2,",",".")}}. Valor Máximo R$:{{number_format($maxValue->valor,2,",",".")}}.</label> --}}
                                         <label class="form__label"><span class="form__icon">R$</span>
-                                            <input class="form__field form__input-number money" name='valor_manual' value="{{old('valor_manual')}}" type="text">
+                                            <input type="number" oninvalid='setCustomValidity("Coloque um valor entre R$:{{number_format($minValue->valor,2,",",".")}} e R$:{{number_format($maxValue->valor,2,",",".")}} ")' class="form__field form__input-number money" title='Valor Mínimo R$:{{number_format($minValue->valor,2,",",".")}}. Valor Máximo R$:{{number_format($maxValue->valor,2,",",".")}}' min="{{$minValue->valor}}" max="{{$maxValue->valor}}" name='valor_manual' value="{{old('valor_manual')}}" type="text">
                                         </label>
                                     </div>
                                     <div class="col-lg-9 col-xl-8 text-lg-right">
@@ -139,7 +141,7 @@
                             <div class="horizontal-tabs__item r-tabs-panel r-tabs-state-active" id="horizontal-tabs__item-1" style="display: block;">
                                 <p >{!!nl2br($campanha->descricao)!!}</p>
                             </div>
-                            
+
                             {{-- <div class="r-tabs-accordion-title">
                                 <a href="#horizontal-tabs__item-2" class="r-tabs-anchor"><span>Donors</span></a>
                             </div> --}}
@@ -191,7 +193,7 @@
                                                 <img class="img--bg" src="{{asset('helpo-theme')}}/img/ig_1.jpg" alt="img">
                                             </a>
                                         </div>
-                                    
+
                                     </div>
                                 </div>
                             </div>
@@ -206,6 +208,7 @@
 @endsection
 
 @section('scripts')
+
 <script>
     $(document).ready(function(){
         $('.money').mask("#.##0,00", {reverse: true});
