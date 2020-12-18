@@ -151,7 +151,7 @@ class WebsiteController extends Controller
         {
 
             \MercadoPago\SDK::setAccessToken('APP_USR-4344514941698315-121600-986ff558dea244808ea6fad7407436b3-671093218');
-        } else 
+        } else
         {
             \MercadoPago\SDK::setAccessToken('TEST-3909980958286743-112018-c6a4d0c6de187c2bfd0897f4169cf7cf-41701013');
         }
@@ -221,7 +221,7 @@ class WebsiteController extends Controller
     }
 
     public function pending(Request $request,$id)
-    {   
+    {
         try {
             // http://localhost:8000/pagamento/pendente/2
             if (count($request->all()) == 0)

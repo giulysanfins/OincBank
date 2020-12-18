@@ -61,7 +61,7 @@
                                     <div class="col-lg-3 col-xl-4">
                                         <label class="form__label"><span class="form__icon">R$</span>
                                             <input type="text" min="{{$minValue->valor}}"  maxlength = "20" class="form__field form__input-number money" name='valor_manual' value="{{old('valor_manual')}}" id="dinheiro"
-                                            title="O valor deve ser entre R$:{{number_format($minValue->valor,2,",",".")}} até R$:{{number_format($maxValue->valor,2,",",".")}}" onfocusout="validar()"
+                                            title="O valor deve ser entre R$ {{number_format($minValue->valor,2,",",".")}} até R$ {{number_format($maxValue->valor,2,",",".")}}" required
                                             >
                                         </label>
                                         <br>
@@ -216,15 +216,24 @@
 @section('scripts')
 <script>
     function validar(){
-        var input = document.getElementById('dinheiro').value;
-        if(input < {{$minValue->valor}} || input > {{$maxValue->valor}}){
+        let val1 =  input.value.replace(".", "");
+        let val2 = val1.replace(",",".");
+
+        console.log('teste: ' + val2);
+        console.log('min: ' + parseFloat({{$minValue->valor}}));
+        if(val2 < parseFloat({{$minValue->valor}}) || val2 > parseFloat({{$maxValue->valor}}))
+        {
+            console.log({{$minValue->valor}});
+            console.log({{$maxValue->valor}});
             document.getElementById("erro").className += "alert alert-warning alert-dismissible fade show";
             document.getElementById('erro').innerHTML = 'O valor deve ser entre R$:{{number_format($minValue->valor,2,",",".")}} até R$:{{number_format($maxValue->valor,2,",",".")}}.';
             $("#btnSubmit").attr("disabled", true);
                 var elem = document.getElementById('btnSubmit');
 
+
         }
-        else{
+        else
+        {
             document.getElementById("erro").className = "";
             document.getElementById('erro').innerHTML = '';
             $("#btnSubmit").attr("disabled", false);
@@ -233,22 +242,14 @@
 
 
     }
+    var input = document.getElementById('dinheiro');
+
+    input.addEventListener("change", validar,false);
+    document.addEventListener("DOMContentLoaded", validar,false);
     $(document).ready(function(){
         $('.money').mask("#.##0,00", {reverse: true});
-        var input = document.getElementById('dinheiro').value;
-        if(input < {{$minValue->valor}} || input > {{$maxValue->valor}}){
-            document.getElementById("erro").className += "alert alert-warning alert-dismissible fade show";
-            document.getElementById('erro').innerHTML = 'O valor deve ser entre R$:{{number_format($minValue->valor,2,",",".")}} até R$:{{number_format($maxValue->valor,2,",",".")}}.';
-            $("#btnSubmit").attr("disabled", true);
-                var elem = document.getElementById('btnSubmit');
 
-        }
-        else{
-            document.getElementById("erro").className = "";
-            document.getElementById('erro').innerHTML = '';
-            $("#btnSubmit").attr("disabled", false);
 
-        }
     });
 </script>
 @endsection
