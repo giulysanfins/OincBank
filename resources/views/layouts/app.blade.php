@@ -59,7 +59,7 @@
         src="https://code.jquery.com/jquery-3.5.1.js"
         integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
         crossorigin="anonymous"></script>
-    
+
     <script src="{{ asset('light-bootstrap/js/core/popper.min.js') }}" type="text/javascript"></script>
     <script src="{{ asset('light-bootstrap/js/core/bootstrap.min.js') }}" type="text/javascript"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.12/jquery.mask.js"></script>
@@ -84,7 +84,7 @@
     {{-- Uso para SweetAlert no JS --}}
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
-    
+
     @include('sweetalert::alert')
 
     @yield('scripts')
