@@ -42,6 +42,15 @@ class PaymentRepository
      * @param $id
      * @return mixed
      */
+    public function getByStatus($status_id)
+    {
+        return $this->model->where('status',$status_id)->get();
+    }
+
+    /**
+     * @param $id
+     * @return mixed
+     */
     public function getByCampanha($campanha_id)
     {
         return $this->model->where('campanha_id',$campanha_id)->get();

@@ -87,6 +87,7 @@ class RegisterController extends Controller
             'telefone' => $data['telefone'],
             'termos_condicoes' => \Carbon\Carbon::now(),
             'tipo' => $data['tipo'],
+            'status' => 1,
         ]);
     }
 }
