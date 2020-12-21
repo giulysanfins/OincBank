@@ -9,13 +9,13 @@
                     </span>
                 </li>
             @else
-                <li class="pagination__item pagination__item--prev">
-                    <a href="{{ $paginator->previousPageUrl() }}" rel="prev" aria-label="@lang('pagination.previous')">
-                        <span aria-hidden="true">
-                            <i class="fa fa-angle-left" aria-hidden="true"></i>
-                        </span>
-                    </a>
-                </li>
+                <a href="{{ $paginator->previousPageUrl() }}" rel="prev" aria-label="@lang('pagination.previous')">
+                    <li class="pagination__item pagination__item--prev">
+                            <span aria-hidden="true">
+                                <i class="fa fa-angle-left" aria-hidden="true"></i>
+                            </span>
+                    </li>
+                </a>
             @endif
             
             {{-- Pagination Elements --}}
@@ -31,7 +31,7 @@
                         @if ($page == $paginator->currentPage())
                             <li class="pagination__item pagination__item--active" aria-current="page"><span>{{ $page }}</span></li>
                         @else
-                            <li class="pagination__item d-none d-md-block"><span><a  href="{{ $url }}">{{ $page }}</a></span></li>
+                            <a  href="{{ $url }}"><li class="pagination__item d-none d-md-block"><span>{{ $page }}</span></li></a>
                         @endif
                     @endforeach
                 @endif
@@ -39,13 +39,13 @@
 
             {{-- Next Page Link --}}
             @if ($paginator->hasMorePages())
-                <li class="pagination__item pagination__item--next">
-                    <a class="w" href="{{ $paginator->nextPageUrl() }}" rel="next" aria-label="@lang('pagination.next')">
+                <a class="w" href="{{ $paginator->nextPageUrl() }}" rel="next" aria-label="@lang('pagination.next')">
+                    <li class="pagination__item pagination__item--next">
                         <span>
                             <i class="fa fa-angle-right" aria-hidden="true"></i>
                         </span>
-                    </a>
-                </li>
+                    </li>
+                </a>
             @else
                 <li class="pagination__item pagination__item--next">
                     <span>
