@@ -22733,6 +22733,16 @@ section.shop {
 
 }
 
+#defaultCheck1:disabled{
+
+    opacity: 0.4;
+}
+
+
+#defaultCheck2:disabled{
+    opacity: 0.4;
+}
+
 .column {
     float: left;
     width: 33.33%;

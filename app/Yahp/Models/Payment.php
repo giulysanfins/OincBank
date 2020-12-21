@@ -9,7 +9,7 @@ class Payment extends Model
     protected $table = 'payments';
     protected $fillable = [
        'user_id','campanha_id','valor','status','pagamento_id','pagamento_tipo','preference_id',
-       'status','documento', 'bank_id','agencia','conta_corrente','tipo','data_pagamento','motivo_negado'
+       'status','documento', 'bank_id','agencia','conta_corrente','tipo','data_pagamento','motivo_negado','anonimo'
     ];
     protected $dates = ['data_pagamento'];
 

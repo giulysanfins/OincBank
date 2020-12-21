@@ -237,7 +237,7 @@
                                             <div class="causes-item__lower">
                                                 <div class="progress-bar" style="width: 100%">
                                                     <div class="progress-bar__inner" style="width: {{($perc >= 100)?'100':$perc}}%;">
-                                                        <div class="progress-bar__value">{{$perc}}%</div>
+                                                        <div class="progress-bar__value">{{number_format($perc,2,".",".")}}%</div>
                                                     </div>
                                                 </div>
                                                 <div class="causes-item__details-holder">

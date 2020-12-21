@@ -131,6 +131,7 @@ class WebsiteController extends Controller
                 'valor' => str_replace(',','.',str_replace('.','',$valor)),
                 'status' => 1,
                 'tipo' => 1,
+                'anonimo' => $request->anonimo
             ]);
 
             return redirect()->route('website.payment.checkout',$insert->id);

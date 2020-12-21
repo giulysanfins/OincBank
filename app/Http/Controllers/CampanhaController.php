@@ -295,7 +295,7 @@ class CampanhaController extends Controller
      public function desativar(Request $request, $id)
      {
          try {
-            $escolha = 'Escolha do Usuário';
+            $escolha = $request->motivo_deletado;
             $update = $this->campanhaService->buildUpdate($id,[
                 'status' => 4,
                 'motivo_deletado' => $escolha
