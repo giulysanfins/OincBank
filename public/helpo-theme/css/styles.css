@@ -19353,18 +19353,7 @@ footer.footer--front_3 .footer__lower {
         min-width: 50px;
     }
 }
-.pagination__item:nth-of-type(4),
-.pagination__item:nth-of-type(5),
-.pagination__item:nth-of-type(6) {
-    display: none;
-}
-@media only screen and (min-width: 768px) {
-    .pagination__item:nth-of-type(4),
-    .pagination__item:nth-of-type(5),
-    .pagination__item:nth-of-type(6) {
-        display: initial;
-    }
-}
+
 .pagination__item--active,
 .pagination__item:hover {
     background: #fdcfdf;
@@ -19427,16 +19416,7 @@ footer.footer--front_3 .footer__lower {
         line-height: 46px;
     }
 }
-.pagination__item--next span,
-.pagination__item--prev span {
-    display: none;
-}
-@media only screen and (min-width: 768px) {
-    .pagination__item--next span,
-    .pagination__item--prev span {
-        display: initial;
-    }
-}
+
 .donation {
     overflow: hidden;
     background-color: #f9f7f6;

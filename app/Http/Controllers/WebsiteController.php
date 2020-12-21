@@ -47,10 +47,11 @@ class WebsiteController extends Controller
     public function campanhas()
     {
         $data = [
-            'campanhas' => $this->campanhaService->renderByStatus(2),
+            'campanhas' => $this->campanhaService->renderByPaginate(2),
             'categorias' => $this->categoryService->renderByStatus(1),
             'minpay' => $this->parameterService->renderBySlug('campanha.num'),
         ];
+        // dd($data['campanhas']);
 
         return view('website.campanhas',$data);
     }
