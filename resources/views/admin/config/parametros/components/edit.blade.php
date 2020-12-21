@@ -24,6 +24,12 @@
                                 <label for="valor">Valor</label>
                                 <input type="number" step='1' min='0' class="form-control" id="valor" name="valor" value="{{$parametro->valor}}">
                             </div>
+                        @elseif (in_array($parametro->slug,['campanhas.min']))
+                        <label for="valor">Valor Mínimo</label>
+                        <input type="number" step='1' min='0' class="form-control" id="valor" name="valor" value="{{$parametro->valor}}">
+                        @elseif (in_array($parametro->slug,['campanhas.max']))
+                        <label for="valor">Valor Máximo</label>
+                        <input type="number" step='1' min='0' class="form-control" id="valor" name="valor" value="{{$parametro->valor}}">
                         @endif
 
                     </div>

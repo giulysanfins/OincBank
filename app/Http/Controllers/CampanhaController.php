@@ -7,6 +7,7 @@ use App\Yahp\Services\CampanhaService;
 use App\Yahp\Services\PhotoService;
 use App\Mail\newLaravelTips;
 use Illuminate\Support\Facades\Mail;
+use Intervention\Image\Facades\Image;
 
 use Illuminate\Http\Request;
 use Storage;
@@ -134,16 +135,11 @@ class CampanhaController extends Controller
         try
         {
             $user_id = auth()->user()->id;
-            // dd($request->all());
             //  if($request->file('photo_perfil'))
-            //  {
 
 
 
                 //process the file
-
-
-
 
                 $ext = $request->file('photo_perfil')->extension();
                 $ts = Carbon::now()->timestamp;
@@ -158,8 +154,6 @@ class CampanhaController extends Controller
                 ])->all());
                 alert()->success('Sucesso','Cofrinho adicionado com sucesso.')->persistent('Fechar');
 
-
-            //  dd($data);
              return redirect()->route('campanha.index',$data);
 
         } catch (\Exception $e) {
@@ -243,19 +237,29 @@ class CampanhaController extends Controller
      public function update(Request $request, $id)
      {
          try {
+            $user_id = auth()->user()->id;
             if($request->file('photo_perfil'))
               {
-
-            $this->validate($request, [
-
-                'photo_perfil' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-            ]);
+                $ext = $request->file('photo_perfil')->extension();
+                $ts = Carbon::now()->timestamp;
+                $filename = $ts."_".$user_id.".".$ext;
+                $upload = Storage::putFileAs('public/images', $request->file('photo_perfil'),$filename);
+                $update = $this->campanhaService->buildUpdate($id,$request->merge([
+                    'valor' => str_replace(',','.',str_replace('.','',$request->valor)),
+                    'profile_image' => $filename
+                 ])->all());
+                 alert()->success('Sucesso','Cofrinho alterado com sucesso.')->persistent('Fechar');
+                 return redirect()->route('campanha.index',$id);
               }
-             $update = $this->campanhaService->buildUpdate($id,$request->merge([
-                'valor' => str_replace(',','.',str_replace('.','',$request->valor))
-             ])->all());
-             alert()->success('Sucesso','Cofrinho alterado com sucesso.')->persistent('Fechar');
-             return redirect()->route('campanha.index',$id);
+              else{
+                $update = $this->campanhaService->buildUpdate($id,$request->merge([
+                    'valor' => str_replace(',','.',str_replace('.','',$request->valor))
+
+                 ])->all());
+                 alert()->success('Sucesso','Cofrinho alterado com sucesso.')->persistent('Fechar');
+                 return redirect()->route('campanha.index',$id);
+              }
+
 
          } catch (\Exception $e) {
              \Log::error($e->getFile() . "\n" . $e->getLine() . "\n" . $e->getMessage());

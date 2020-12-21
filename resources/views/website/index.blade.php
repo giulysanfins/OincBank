@@ -24,7 +24,7 @@
                                         </div>
                                         <div class="promo-slider__wrapper-2">
                                             <p class="promo-slider__subtitle " style="margin-top: 3%">
-                                                A vaca foi brejo, mas chamou o Oinc para te ajudar a juntar um dindin que você precisa para a sua causa.
+                                                A vaca foi para o brejo, mas chamou o Oinc para te ajudar a juntar um dindin que você precisa para a sua causa.
                                             </p>
                                         </div>
                                         <div class="promo-slider__wrapper-3">
@@ -98,14 +98,14 @@
             </div>
             <!-- promo socials start-->
             <ul class="promo-socials">
-                <li class="promo-socials__item"><a class="promo-socials__link" href="#"><i class="fab fa-instagram"
+                <li class="promo-socials__item"><a class="promo-socials__link" target="_blank" href="https://www.instagram.com/oincbank/"><i class="fab fa-instagram"
                             aria-hidden="true"></i></a></li>
-                <li class="promo-socials__item"><a class="promo-socials__link" href="#"><i class="fab fa-google-plus"
+                {{-- <li class="promo-socials__item"><a class="promo-socials__link" href="#"><i class="fab fa-google-plus"
                             aria-hidden="true"></i></a></li>
                 <li class="promo-socials__item"><a class="promo-socials__link" href="#"><i class="fab fa-twitter"
                             aria-hidden="true"></i></a></li>
                 <li class="promo-socials__item"><a class="promo-socials__link" href="#"><i class="fab fa-facebook"
-                            aria-hidden="true"></i></a></li>
+                            aria-hidden="true"></i></a></li> --}}
             </ul>
             <!-- promo socials end-->
             <!-- promo pannel start-->
@@ -272,11 +272,11 @@
         <!-- causes end-->
 
         <section class="section faq">
-            <div class="container" style="margin-right: 60px">
+            <div class="container">
                 <div class="row margin-bottom">
                     <div class="col-12">
                         <div class="heading heading--primary"><span class="heading__pre-title"></span>
-                            <h2 class="heading__title no-margin-bottom"><span>Perguntas</span> <span>Frequentes</span></h2>
+                            <h2 class="heading__title no-margin-bottom"><span>Dúvidas</span> <span>Frequentes</span></h2>
                         </div>
                     </div>
                 </div>
@@ -289,7 +289,7 @@
 
     <div class="alert alert-dark alert-dismissible fade show alert-policy" role="alert">
         A gente guarda estatísticas de visitas para melhorar sua experiência de navegação.
-        Ao continuar, você concorda com a nossa Politica de Privacidade.
+        Ao continuar, você concorda com a nossa <a href="" target="_blank"> Politica de Privacidade</a>.
         <button type="button" class="btn button--primary" data-dismiss="alert" aria-label="Close">
             Continuar e Fechar
         </button>

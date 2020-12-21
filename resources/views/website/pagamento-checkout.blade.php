@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="main">
-    
+
     <section class="promo-primary promo-primary--shop">
         <picture>
             <source srcset="{{asset('helpo-theme')}}/img/shop.jpg" media="(min-width: 992px)"><img class="img--bg" src="{{asset('helpo-theme')}}/img/shop.jpg" alt="img">
@@ -25,12 +25,12 @@
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                   
+
                     <div class="row">
                        <div class="col-12">
                             <div class="form__fieldset">
                                 <h6 class="form__title">Resumo da doação:</h6>
-            
+
                                 <div class="row no-gutters align-items-center">
                                     <div class="col-4 col-sm-3 col-md-2 col-lg-4">
                                         <div class="order-item__img"><img class="img--contain" src="{{asset('storage')}}/images/{{$pagamento->campanha->profile_image}}" alt="img"></div>
@@ -43,7 +43,7 @@
                                     </div>
                                     <div class="col-3 text-center"><span class="order-item__price">R$ {{ number_format($pagamento->valor,2,",",".") }}</span></div>
                                 </div>
-												
+
                             </div>
 
                             <div class="form__fieldset">
@@ -56,7 +56,7 @@
 
                                 </div>
                             </div>
-                            
+
                         </div>
                         <div class="col-12 text-right mt-3">
                             <p></p>

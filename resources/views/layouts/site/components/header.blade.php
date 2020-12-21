@@ -17,14 +17,14 @@
                 <li class="aside-menu__item"><a class="aside-menu__link" href="{{route('login')}}"><span>Login / Cadastro</span></a></li>
                 @endif
             </ul>
-            
+
         </div>
         <div class="aside-dropdown__item">
             <!-- aside menu start-->
             <a class="header-logo__link d-lg-block d-none" href="{{route('website.index')}}">
                 <img class="header-logo__img logo--light" src="{{asset('img')}}/logos/porquim-com-nome-crop.png" alt="logo"/>
             </a>
-            
+
             <ul class="aside-menu">
 
             </ul>
@@ -48,7 +48,7 @@
 {{-- Header Mobile END --}}
 
 {{-- <!-- header website start--> --}}
-<header class="header header--front">
+<header class="header header--inner">
     <div class="container-fluid">
         <div class="row no-gutters justify-content-between">
             <div class="col-auto d-flex align-items-center">
@@ -58,7 +58,6 @@
                 <div class="header-logo">
                     <a class="header-logo__link" href="{{route('website.index')}}">
                         <img class="header-logo__img logo--light" src="{{asset('img')}}/logos/porquim-com-nome-crop.png" alt="logo"/>
-                        <img class="header-logo__img logo--dark" src="{{asset('img')}}/logos/porquim-com-nome-crop.png" alt="logo"/>
                     </a>
                 </div>
             </div>
