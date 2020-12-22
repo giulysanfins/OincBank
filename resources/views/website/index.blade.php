@@ -125,7 +125,7 @@
             </div> --}}
             <!-- promo pannel end-->
             <!-- slider nav start-->
-            <div class="slider__nav slider__nav--promo">
+            {{-- <div class="slider__nav slider__nav--promo">
                 <div class="promo-slider__count"></div>
                 <div class="slider__arrows">
                     <div class="slider__prev"><i class="fa fa-chevron-left" aria-hidden="true"></i>
@@ -133,7 +133,7 @@
                     <div class="slider__next"><i class="fa fa-chevron-right" aria-hidden="true"></i>
                     </div>
                 </div>
-            </div>
+            </div> --}}
             <!-- slider nav end-->
         </section>
         <section class="section causes"><img class="causes__bg" src="{{ asset('helpo-theme') }}/img/causes_img.png"

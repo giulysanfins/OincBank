@@ -54,7 +54,11 @@ class RegisterController extends Controller
         {
             return Validator::make($data, [
                 'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-                'password' => ['required', 'string', 'min:8', 'confirmed'],
+                'password' => ['required',
+                'min:8',
+                'regex:"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$"',
+                'confirmed'],
+
                 'documento_cpf' => ['required','cpf','unique:users,documento'],
                 'agree' => ['required']
             ]);
@@ -63,7 +67,10 @@ class RegisterController extends Controller
         {
             return Validator::make($data, [
                 'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-                'password' => ['required', 'string', 'min:8', 'confirmed'],
+                'password' => ['required',
+                'min:8',
+                'regex:/"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$"/',
+                'confirmed'],
                 'documento_cnpj' => ['required', 'cnpj', 'unique:users,documento'],
                 'agree' => ['required']
             ]);

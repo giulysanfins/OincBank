@@ -5,7 +5,7 @@
     <div class="content pt-5">
         <div class="container mt-5">
             <div class="col-md-5 col-sm-12 ml-auto mr-auto">
-                <a class="btn btn-oinc-white" href="{{url()->previous()}}">Voltar</a>
+                <a class="btn btn-oinc-white" href="{{route('website.index')}}">Voltar</a>
                 <form class="form" method="POST" action="{{ route('register') }}">
                     @csrf
                     @method('post')
@@ -32,7 +32,7 @@
 
                                             <div class="form-group" id="gr-cpf">
                                                 <label>CPF</label>
-                                                <input type="text" name="documento_cpf" id="documento_cpf" class="form-control cpf" placeholder="CPF" value="{{ old('documento') }}" required autofocus >
+                                                <input type="text" name="documento_cpf" id="documento_cpf" class="form-control cpf"  value="{{ old('documento') }}" required autofocus >
                                                 <small id="passwordHelp" class="text-danger">
 
                                                   </small>
@@ -40,7 +40,7 @@
 
                                             <div class="form-group" id="gr-nome_pessoa">
                                                 <label>Nome Completo</label>
-                                                <input type="text" name="name_pessoa" id="name_pessoa" class="form-control" placeholder="Nome Completo" value="{{ old('name') }}" required>
+                                                <input type="text" name="name_pessoa" id="name_pessoa" class="form-control"  value="{{ old('name') }}" required>
                                             </div>
 
                                             <div class="form-group" id="gr-nascimento">
@@ -55,41 +55,41 @@
 
                                             <div class="form-group" id="gr-cnpj" style="display: none">
                                                 <label>CNPJ</label>
-                                                <input type="text" name="documento_cnpj" id="documento_cnpj" class="form-control cnpj" placeholder="CNPJ" value="{{ old('documento') }}">
+                                                <input type="text" name="documento_cnpj" id="documento_cnpj" class="form-control cnpj"  value="{{ old('documento') }}">
                                             </div>
 
                                             <div class="form-group" id="gr-name_empresa" style="display: none">
                                                 <label>Nome da Empresa</label>
-                                                <input type="text" name="name_empresa" id="name_empresa" class="form-control" placeholder="Nome Completo" value="{{ old('name') }}" >
+                                                <input type="text" name="name_empresa" id="name_empresa" class="form-control"  value="{{ old('name') }}" >
                                             </div>
 
                                             <div class="form-group" id="gr-inscricao" style="display: none">
                                                 <label>Inscricao Estadual</label>
-                                                <input type="text" name="inscricao_estadual" id="inscricao_estadual" class="form-control" placeholder="Inscricao Estadual" value="{{ old('name') }}">
+                                                <input type="text" name="inscricao_estadual" id="inscricao_estadual" class="form-control"  value="{{ old('name') }}">
                                             </div>
 
                                             <div class="form-group">
                                                 <label>Entre com seu email</label>
-                                                <input type="email" id="email" name="email" value="{{ old('email') }}" placeholder="Entre com seu email" class="form-control" required>
+                                                <input type="email" id="email" name="email" value="{{ old('email') }}"  class="form-control" required>
                                             </div>
 
                                             <div class="form-group">
                                                 <label>Insira novamente seu e-mail</label>
-                                                <input type="email" id="confirm_email" name="email" value="{{ old('email') }}" placeholder="Insira novamente seu e-mail" class="form-control" required>
+                                                <input type="email" id="confirm_email" name="email" value="{{ old('email') }}"  class="form-control" required>
                                             </div>
 
                                             <div class="form-group">
                                                 <label>Telefone</label>
-                                                <input type="text" id="telefone" class="form-control telefone" name="telefone" value="{{ old('telefone') }}" placeholder="Insira seu telefone"  required>
+                                                <input type="text" id="telefone" class="form-control telefone" name="telefone" value="{{ old('telefone') }}"  required>
                                             </div>
 
                                             <div class="form-group">
                                                 <label>Digite sua senha</label>
-                                                <input type="password" name="password" id="password" placeholder="Digite sua senha" class="form-control" required >
+                                                <input type="password" name="password" id="password"  class="form-control" required >
                                             </div>
                                             <div class="form-group">
                                                 <label>Insira novamente sua Senha</label>
-                                                <input type="password" name="password_confirmation" id="password_confirmation" placeholder="Insira novamente sua Senha" class="form-control" required>
+                                                <input type="password" name="password_confirmation" id="password_confirmation"  class="form-control" required>
                                                 <span id="error_confirmation" style="display: none; color: red"> Senhas não são iguais</span>
                                             </div>
 

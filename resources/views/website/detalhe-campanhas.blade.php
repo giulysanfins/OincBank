@@ -60,7 +60,7 @@
                                 <div class="row align-items-baseline margin-bottom">
                                     <div class="col-lg-3 col-xl-4">
                                         <label class="form__label"><span class="form__icon">R$</span>
-                                            <input type="text" min="{{$minValue->valor}}"  maxlength = "20" class="form__field form__input-number money" name='valor_manual' value="{{old('valor_manual')}}" id="dinheiro"
+                                            <input type="text" min="{{$minValue->valor}}"  maxlength = "10" class="form__field form__input-number money" name='valor_manual' value="{{old('valor_manual')}}" id="dinheiro"
                                             title="O valor deve ser entre R$ {{number_format($minValue->valor,2,",",".")}} até R$ {{number_format($maxValue->valor,2,",",".")}}" required
                                             >
                                         </label>
@@ -71,7 +71,7 @@
 
                                         </div>
                                     </div>
-                                    <div class="col-lg-9 col-xl-8 text-lg-right">
+                                    {{-- <div class="col-lg-9 col-xl-8 text-lg-right">
                                         <label class="form__radio-label"><span class="form__label-text">R$ {{ number_format('100',2,",",".") }}</span>
                                             <input class="form__input-radio" type="radio" name="valor_auto" value="100" checked="checked"><span class="form__radio-mask form__radio-mask"></span>
                                         </label>
@@ -84,7 +84,7 @@
                                         <label class="form__radio-label"><span class="form__label-text">R$ {{ number_format('1000',2,",",".") }}</span>
                                             <input class="form__input-radio" type="radio" name="valor_auto" value="1000"><span class="form__radio-mask form__radio-mask"></span>
                                         </label>
-                                    </div>
+                                    </div> --}}
                                 </div>
                                 <div class="row margin-bottom">
                                     <div class="col-12">
