@@ -43,7 +43,7 @@
                                 <div class="col-lg-6">
                                     <div class="progress-bar">
                                         <div class="progress-bar__inner" style="width: {{($perc >= 100)?'100':$perc}}%;">
-                                            <div class="progress-bar__value">{{$perc}}%</div>
+                                            <div class="progress-bar__value">{{number_format($perc,2,".",".")}}%</div>
                                         </div>
                                     </div>
                                 </div>
@@ -60,7 +60,7 @@
                                 <div class="row align-items-baseline margin-bottom">
                                     <div class="col-lg-3 col-xl-4">
                                         <label class="form__label"><span class="form__icon">R$</span>
-                                            <input type="text" min="{{$minValue->valor}}"  maxlength = "20" class="form__field form__input-number money" name='valor_manual' value="{{old('valor_manual')}}" id="dinheiro"
+                                            <input type="text" min="{{$minValue->valor}}"  maxlength = "10" class="form__field form__input-number money" name='valor_manual' value="{{old('valor_manual')}}" id="dinheiro"
                                             title="O valor deve ser entre R$ {{number_format($minValue->valor,2,",",".")}} até R$ {{number_format($maxValue->valor,2,",",".")}}" required
                                             >
                                         </label>
@@ -71,7 +71,7 @@
 
                                         </div>
                                     </div>
-                                    <div class="col-lg-9 col-xl-8 text-lg-right">
+                                    {{-- <div class="col-lg-9 col-xl-8 text-lg-right">
                                         <label class="form__radio-label"><span class="form__label-text">R$ {{ number_format('100',2,",",".") }}</span>
                                             <input class="form__input-radio" type="radio" name="valor_auto" value="100" checked="checked"><span class="form__radio-mask form__radio-mask"></span>
                                         </label>
@@ -84,7 +84,7 @@
                                         <label class="form__radio-label"><span class="form__label-text">R$ {{ number_format('1000',2,",",".") }}</span>
                                             <input class="form__input-radio" type="radio" name="valor_auto" value="1000"><span class="form__radio-mask form__radio-mask"></span>
                                         </label>
-                                    </div>
+                                    </div> --}}
                                 </div>
                                 <div class="row margin-bottom">
                                     <div class="col-12">
@@ -103,7 +103,22 @@
                                     </div>
                                     <div class="col-lg-4 margin-30">
                                         @if (Auth::check())
-                                            <p> Doar como: <b>{{auth()->user()->name}}</b></p>
+                                        <div class="form-check" id="opacidade1">
+                                            <input class="form-check-input" type="checkbox" value="1" name="anonimo"
+                                            id="defaultCheck1" style=" -webkit-appearance:checkbox;" onclick="ckChange(this)">
+                                            <label class="form-check-label teste" for="defaultCheck1">
+                                              <p> Doar como: <b>Anônimo</b>.</p>
+                                            </label>
+
+                                        </div>
+                                        <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="0" name="anonimo"
+                                        id="defaultCheck2" style="-webkit-appearance:checkbox;" onclick="ckChange(this)">
+                                        <label class="form-check-label" for="defaultCheck2">
+                                            <p> Doar como: <b>{{auth()->user()->name}}</b>.</p>
+                                        </label>
+                                        </div>
+
                                         @else
                                             {{-- <p> Para doar, <a href="{{route('login')}}" target="_blank">faça o login</a></p> --}}
                                             <p>Para doar, faça login.</p>
@@ -112,6 +127,7 @@
 
                                     <div class="col-lg-4">
                                         @if (Auth::check())
+                                        <br><br>
                                             <button class="form__submit" id="btnSubmit" type="submit">+ Doar</button>
                                         @else
                                             <a class="form__submit" href="{{route('login',['campanha' => $campanha->id])}}" >Login</a>
@@ -147,37 +163,6 @@
                             <div class="horizontal-tabs__item r-tabs-panel r-tabs-state-active" id="horizontal-tabs__item-1" style="display: block;">
                                 <p >{!!nl2br($campanha->descricao)!!}</p>
                             </div>
-
-                            {{-- <div class="r-tabs-accordion-title">
-                                <a href="#horizontal-tabs__item-2" class="r-tabs-anchor"><span>Donors</span></a>
-                            </div> --}}
-
-                            {{-- <div class="horizontal-tabs__item r-tabs-state-default r-tabs-panel" id="horizontal-tabs__item-2">
-                                <div class="row offset-30">
-
-                                    <div class="col-md-6 col-xl-4">
-                                        <!-- item start-->
-                                        <div class="donor-item">
-                                            <div class="row align-items-center">
-                                                <div class="col-lg-7">
-                                                    <div class="donor-item__info">
-                                                        <div class="donor-item__img"><img class="img--bg" src="img/face_1.jpg" alt="face"></div>
-                                                        <div class="donor-item__description">
-                                                            <div class="donor-item__name">Chris Patt</div>
-                                                            <div class="donor-item__date">23 Jan'19</div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-5">
-                                                    <h5 class="donor-item__value">$ 200.00</h5>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- item end-->
-                                    </div>
-
-                                </div>
-                            </div> --}}
 
                             @if ($campanha->video != null)
                             <div class="r-tabs-accordion-title"><a href="#horizontal-tabs__item-3" class="r-tabs-anchor"><span>Video</span></a></div><div class="horizontal-tabs__item r-tabs-state-default r-tabs-panel" id="horizontal-tabs__item-3">
@@ -215,16 +200,21 @@
 
 @section('scripts')
 <script>
+    function ckChange(el)
+    {
+        var ckName = document.getElementsByName(el.name);
+        for (var i = 0, c; c = ckName[i]; i++)
+        {
+        c.disabled = !(!el.checked || c === el);
+        }
+    }
+</script>
+<script>
     function validar(){
         let val1 =  input.value.replace(".", "");
         let val2 = val1.replace(",",".");
-
-        console.log('teste: ' + val2);
-        console.log('min: ' + parseFloat({{$minValue->valor}}));
         if(val2 < parseFloat({{$minValue->valor}}) || val2 > parseFloat({{$maxValue->valor}}))
         {
-            console.log({{$minValue->valor}});
-            console.log({{$maxValue->valor}});
             document.getElementById("erro").className += "alert alert-warning alert-dismissible fade show";
             document.getElementById('erro').innerHTML = 'O valor deve ser entre R$:{{number_format($minValue->valor,2,",",".")}} até R$:{{number_format($maxValue->valor,2,",",".")}}.';
             $("#btnSubmit").attr("disabled", true);

@@ -1,33 +1,22 @@
-@component('mail::layout')
+    @component('mail::layout')
     {{-- Header --}}
     @slot('header')
         @component('mail::header', ['url' => config('app.url')])
-            <img src="https://imgur.com/RPxMcrE.png" class="logo" style="height:100px !important;width:180px !important;"
-                alt="OincBank">
+            <img src="https://imgur.com/RPxMcrE.png" class="logo" style="height:100px !important;width:180px !important;" alt="OincBank">
         @endcomponent
     @endslot
 
     {{-- Body --}}
-    <p>Olá {{ auth()->user()->name }}. <br> Recebemos um pedido de saque de uma de suas campanhas do OincBank. <br>
+    Olá <b>{{ auth()->user()->name }}</b>. <br> Recebemos um pedido de saque de uma de suas campanhas do OincBank.</b>
 
-    </p>
+    Campanha:
 
-    <p>
-        Campanha:
-    </p>
-    <br>
-    <p>
-        {{ $payment->campanha->titulo }} - {{ auth()->user()->name }}
-    </p>
-    <br>
-    <p>
-        Conta: {{ $payment->conta_corrente }}. Agência: {{ $payment->agencia }}
-    </p>
-    <br>
-    <p>
-        Valor solicitado do saque: R$:{{ $payment->valor }}
-    </p>
-    <br>
+    {{ $payment->campanha->titulo }} - {{ $payment->user->name }}
+
+    Dados informados:
+    Conta: {{ $payment->conta_corrente }}. Agência: {{ $payment->agencia }}
+
+    Valor solicitado do saque: R$:{{ $payment->valor }}
 
 
 

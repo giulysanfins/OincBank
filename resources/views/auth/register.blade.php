@@ -5,7 +5,7 @@
     <div class="content pt-5">
         <div class="container mt-5">
             <div class="col-md-5 col-sm-12 ml-auto mr-auto">
-                <a class="btn btn-oinc-white" href="{{url()->previous()}}">Voltar</a>
+                <a class="btn btn-oinc-white" href="{{route('website.index')}}">Voltar</a>
                 <form class="form" method="POST" action="{{ route('register') }}">
                     @csrf
                     @method('post')
@@ -32,58 +32,64 @@
 
                                             <div class="form-group" id="gr-cpf">
                                                 <label>CPF</label>
-                                                <input type="text" name="documento_cpf" id="documento_cpf" class="form-control cpf" placeholder="CPF" value="{{ old('documento') }}" required autofocus>
+                                                <input type="text" name="documento_cpf" id="documento_cpf" class="form-control cpf"  value="{{ old('documento') }}" required autofocus >
+                                                <small id="passwordHelp" class="text-danger">
+
+                                                  </small>
                                             </div>
 
                                             <div class="form-group" id="gr-nome_pessoa">
                                                 <label>Nome Completo</label>
-                                                <input type="text" name="name_pessoa" id="name_pessoa" class="form-control" placeholder="Nome Completo" value="{{ old('name') }}" required>
+                                                <input type="text" name="name_pessoa" id="name_pessoa" class="form-control"  value="{{ old('name') }}" required>
                                             </div>
 
                                             <div class="form-group" id="gr-nascimento">
                                                 <label>Data de Nascimento</label>
-                                                <input type="date" name="data_nascimento" id="data_nascimento" class="form-control" placeholder="Data de Nascimento" value="{{ old('name') }}" required>
+                                                <input type="date" name="data_nascimento" id="data_nascimento" class="form-control" max="{{ \Carbon\Carbon::today()->format('Y-m-d') }}"
+                                                min="1900-12-31" class="form-control" placeholder="Data de Nascimento" value="{{ old('name') }}" required>
+
                                             </div>
+
 
                                             {{-- Pessoa juridica --}}
 
                                             <div class="form-group" id="gr-cnpj" style="display: none">
                                                 <label>CNPJ</label>
-                                                <input type="text" name="documento_cnpj" id="documento_cnpj" class="form-control cnpj" placeholder="CNPJ" value="{{ old('documento') }}">
+                                                <input type="text" name="documento_cnpj" id="documento_cnpj" class="form-control cnpj"  value="{{ old('documento') }}">
                                             </div>
 
                                             <div class="form-group" id="gr-name_empresa" style="display: none">
                                                 <label>Nome da Empresa</label>
-                                                <input type="text" name="name_empresa" id="name_empresa" class="form-control" placeholder="Nome Completo" value="{{ old('name') }}" >
+                                                <input type="text" name="name_empresa" id="name_empresa" class="form-control"  value="{{ old('name') }}" >
                                             </div>
 
                                             <div class="form-group" id="gr-inscricao" style="display: none">
                                                 <label>Inscricao Estadual</label>
-                                                <input type="text" name="inscricao_estadual" id="inscricao_estadual" class="form-control" placeholder="Inscricao Estadual" value="{{ old('name') }}">
+                                                <input type="text" name="inscricao_estadual" id="inscricao_estadual" class="form-control"  value="{{ old('name') }}">
                                             </div>
 
-                                            <div class="form-group">  
+                                            <div class="form-group">
                                                 <label>Entre com seu email</label>
-                                                <input type="email" id="email" name="email" value="{{ old('email') }}" placeholder="Entre com seu email" class="form-control" required>
+                                                <input type="email" id="email" name="email" value="{{ old('email') }}"  class="form-control" required>
                                             </div>
 
                                             <div class="form-group">
                                                 <label>Insira novamente seu e-mail</label>
-                                                <input type="email" id="confirm_email" name="email" value="{{ old('email') }}" placeholder="Insira novamente seu e-mail" class="form-control" required>
+                                                <input type="email" id="confirm_email" name="email" value="{{ old('email') }}"  class="form-control" required>
                                             </div>
 
                                             <div class="form-group">
                                                 <label>Telefone</label>
-                                                <input type="text" id="telefone" class="form-control telefone" name="telefone" value="{{ old('telefone') }}" placeholder="Insira seu telefone"  required>
+                                                <input type="text" id="telefone" class="form-control telefone" name="telefone" value="{{ old('telefone') }}"  required>
                                             </div>
 
                                             <div class="form-group">
                                                 <label>Digite sua senha</label>
-                                                <input type="password" name="password" id="password" placeholder="Digite sua senha" class="form-control" required >
+                                                <input type="password" name="password" id="password"  class="form-control" required >
                                             </div>
                                             <div class="form-group">
                                                 <label>Insira novamente sua Senha</label>
-                                                <input type="password" name="password_confirmation" id="password_confirmation" placeholder="Insira novamente sua Senha" class="form-control" required>
+                                                <input type="password" name="password_confirmation" id="password_confirmation"  class="form-control" required>
                                                 <span id="error_confirmation" style="display: none; color: red"> Senhas não são iguais</span>
                                             </div>
 
@@ -93,8 +99,8 @@
                                                         <input class="form-check-input" name="agree" type="checkbox" required >
                                                         <span class="form-check-sign"></span>
 
-                                                        <b style="color: grey">{{ __('Concordo com os Termos de Serviços') }}</b>
-                                                        
+                                                        <b style="color: grey">Concordo com os  <a href="https://oincbank.com.br/termos-e-condicoes" target="_blank">Termos e Condições</a>.</b>
+
                                                     </label>
                                                 </div>
                                                 <input type="hidden" name="tipo" id="tipo" value="1">
@@ -132,7 +138,7 @@
 <script>
     $('.cpf').mask('000.000.000-00', {reverse: true});
     $('.cnpj').mask('00.000.000/0000-00', {reverse: true});
-    $('.telefone').mask('(00) 0000-0000');
+    $('.telefone').mask('(00) 00000-0000');
 </script>
 <script>
     var cpf = document.getElementById('gr-cpf');
@@ -142,7 +148,7 @@
     var cnpj = document.getElementById('gr-cnpj');
     var name_empresa = document.getElementById('gr-name_empresa');
     var inscricao = document.getElementById('gr-inscricao');
-    
+
     var inp_documento_cpf = document.getElementById('documento_cpf');
     var inp_name_pessoa = document.getElementById('name_pessoa');
     var inp_data_nascimento = document.getElementById('data_nascimento');
@@ -153,11 +159,13 @@
 
     var btn_pessoa = document.getElementById('btn_pessoa');
     var btn_empresa = document.getElementById('btn_empresa');
-    
+
     var input_cp = document.getElementById('password_confirmation');
     var input_ps = document.getElementById('password');
     var span_cp = document.getElementById('error_confirmation');
-    
+    console.log(inp_documento_cpf);
+
+
     input_cp.addEventListener("focusout", function(){
         if(input_cp.value === input_ps.value)
         {

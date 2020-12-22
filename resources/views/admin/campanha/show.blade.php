@@ -131,9 +131,9 @@
                                     <thead>
                                         <tr>
                                             <th>#</th>
-                                            @if (auth()->user()->role == 1)
+
                                                 <th>Doador Por:</th>
-                                            @endif
+
                                             <th>Valor</th>
                                             <th>Status</th>
                                         </tr>
@@ -142,11 +142,18 @@
                                         @php
                                             $valorTotal = 0;
                                         @endphp
-                                        @foreach ($pagamentos as $pagamento) 
+                                        @foreach ($pagamentos as $pagamento)
                                             <tr>
                                                 <td>{{$pagamento->id}}</td>
                                                 @if (auth()->user()->role == 1)
                                                     <td>{{$pagamento->user->name}}</td>
+
+                                                @else
+                                                    @if($pagamento->anonimo == 0)
+                                                    <td>{{$pagamento->user->name}}</td>
+                                                    @else
+                                                    <td>Doação Anônima</td>
+                                                    @endif
                                                 @endif
 
                                                 <td class="{{($pagamento->tipo == 2?'text-danger':'')}}"> {{($pagamento->tipo == 2?'-':'')}} R$ {{number_format($pagamento->valor ,2,",",".")}}</td>

@@ -52,10 +52,10 @@
     <div class="container-fluid">
         <div class="row no-gutters justify-content-between">
             <div class="col-auto d-flex align-items-center">
-                <div class="dropdown-trigger d-none d-sm-block">
+                {{-- <div class="dropdown-trigger d-none d-sm-block">
                     <div class="dropdown-trigger__item"></div>
-                </div>
-                <div class="header-logo">
+                </div> --}}
+                <div class="header-logo" style="margin-left: 50%">
                     <a class="header-logo__link" href="{{route('website.index')}}">
                         <img class="header-logo__img logo--light" src="{{asset('img')}}/logos/porquim-com-nome-crop.png" alt="logo"/>
                     </a>

@@ -20,7 +20,6 @@
                 <h4 class="footer__title">Links</h4>
                 <!-- footer nav start-->
                 <ul class="" style="padding-left: 8px">
-                    <li class="footer-menu__item footer-menu__item"><a class="footer-menu__link" href="{{route('website.index')}}">Home</a></li>
                     <li class="footer-menu__item"><a class="footer-menu__link" href="{{route('website.sobre')}}">Sobre a OincBank</a></li>
                     <li class="footer-menu__item"><a class="footer-menu__link" href="{{route('website.faq')}}">Dúvidas Frequentes</a></li>
                 </ul>
@@ -33,7 +32,7 @@
         </div>
         <div class="row align-items-baseline">
             <div class="col-md-6">
-                <p class="footer-copyright">Desenvolvido pela <a href="https://yahp.com.br/" target="_blank"> <img src="https://yahp.com.br/website/img/logos/yahp-orange_pq.png" alt="logo" style="width: 5%"></a>. Todos os direitos reservados.© 2020 OincBank.</p>
+                <p class="footer-copyright"> Todos os direitos reservados.© 2020 OincBank.</p>
             </div>
             <div class="col-md-6">
                 <div class="footer-privacy"><a class="footer-privacy__link" href="/politica-de-privacidade">Política de Privacidade</a><span class="footer-privacy__divider">|</span><a class="footer-privacy__link" href="/termos-e-condicoes">Termos e Condições</a></div>
