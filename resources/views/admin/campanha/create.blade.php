@@ -104,14 +104,36 @@
                                     <br>
 
                                     <div class="input-group">
-                                        <input type="text" class="form-control" id="video" name="video"
-                                            placeholder="Ex: Coloque seu URL">
-                                        <span class="input-group-btn">
+                                        <input type="text" class="form-control" id="video" name="video" placeholder="Ex: Coloque seu URL">
+                                            <a href="#dica" class="edit" data-toggle="modal"><i class="fas fa-2x fa-question" style="color: black"></i></a>
+                                            <div id="dica" class="modal fade">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+
+                                                            <div class="modal-header">
+                                                                <h4 class="modal-title">Dica Vídeo</h4>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <p>
+                                                                    Coloque seu vídeo no youtube ou alguma plataforma de hospedagem e cole o URL aqui.
+
+
+                                                                </p>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <input type="button" class="btn btn-danger" data-dismiss="modal" value="Sair">
+                                                            </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {{-- <span class="input-group-btn">
                                             <button type="button" class="btn btn-secondary" data-toggle="tooltip"
                                                 data-placement="left" title="Coloque seu vídeo no youtube">
                                                 Dica
                                             </button>
-                                        </span>
+                                        </span> --}}
 
 
                                     </div>

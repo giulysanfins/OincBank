@@ -299,6 +299,7 @@
                                                                     <td>{{$campanha->categoria->name}}</td>
                                                                     <td>{{$campanha->created_at->format('d/m/Y h:i:s')}}</td>
                                                                     <td>
+
                                                                         <div class="btn-group float-right" role="group" aria-label="Botões de Ação - Clientes">
                                                                             @if (auth()->user()->role == 2)
                                                                             <a href="{{route('campanha.edit',$campanha->id)}}" class="btn btn-info">Editar</a>
@@ -308,6 +309,34 @@
                                                                             <button type="button" class="btn btn-success" data-toggle="modal" data-target="#sacar{{$campanha->id}}">Sacar valor</button>
                                                                             @endif
                                                                             <a href="{{route('campanha.ativar',$campanha->id)}}" class="btn btn-primary">Ativar</a>
+
+
+                                                                        </div>
+                                                                        <a href="#{{$campanha->id}}" class="edit" data-toggle="modal"><i class="fas fa-question" style="color: black"></i></a>
+                                                                        <div id="{{$campanha->id}}" class="modal fade">
+                                                                            <div class="modal-dialog">
+                                                                                <div class="modal-content">
+
+                                                                                        <div class="modal-header">
+                                                                                            <h4 class="modal-title">Motivo Desativado</h4>
+                                                                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                                                                        </div>
+                                                                                        <div class="modal-body">
+                                                                                            <p>
+                                                                                                @if($campanha->motivo_deletado)
+                                                                                                {{$campanha->motivo_deletado}}
+                                                                                                @else
+                                                                                                Motivo: não informado.
+                                                                                                @endif
+
+                                                                                            </p>
+                                                                                        </div>
+                                                                                        <div class="modal-footer">
+                                                                                            <input type="button" class="btn btn-danger" data-dismiss="modal" value="Sair">
+                                                                                        </div>
+
+                                                                                </div>
+                                                                            </div>
                                                                         </div>
                                                                     </td>
                                                                 </tr>
