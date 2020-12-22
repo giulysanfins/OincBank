@@ -27,10 +27,10 @@
                                                 A vaca foi para o brejo, mas chamou o Oinc para te ajudar a juntar um dindin que você precisa para a sua causa.
                                             </p>
                                         </div>
-                                        <div class="promo-slider__wrapper-3">
+                                        {{-- <div class="promo-slider__wrapper-3">
                                             <a class="button promo-slider__button button--primary" href="{{route('website.campanhas')}}">Descubra Causas</a>
                                             <a class="button promo-slider__button button--primary" href="{{route('register')}}">Registre seu cofrinho</a>
-                                        </div>
+                                        </div> --}}
                                     </div>
                                 </div>
                             </div>
