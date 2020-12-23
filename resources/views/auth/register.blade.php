@@ -3,8 +3,8 @@
 @section('content')
 <div class="full-page section-image" data-color="pink" data-image="{{ asset('charity.jpg') }}">
     <div class="content pt-5">
-        <div class="container mt-5">
-            <div class="col-md-5 col-sm-12 ml-auto mr-auto">
+        <div class="container">
+            <div class="col-md-10 ml-auto mr-auto">
                 <a class="btn btn-oinc-white" href="{{route('website.index')}}">Voltar</a>
                 <form class="form" method="POST" action="{{ route('register') }}">
                     @csrf
@@ -14,107 +14,129 @@
                         <div class="card-header ">
                             <h3 class="header text-center">Crie Sua Conta</h3>
                         </div>
-                        <div class="card-body ">
-                            <div class="card-body">
+                        <div class="card-body">
 
-                                <div class="form-group">
-                                        <div class="content">
-
-                                            <div class="btn-group d-flex justify-content-center " data-toggle="buttons">
-                                                <button class="btn btn-oinc-primary active" id="btn_pessoa">
-                                                  Sou uma pessoa
-                                                </button>
-                                                <button class="btn btn-oinc-primary" id="btn_empresa">
-                                                  Sou uma empresa
-                                                </label>
-                                            </div>
-                                            {{-- Pessoa fisica --}}
-
-                                            <div class="form-group" id="gr-cpf">
-                                                <label>CPF</label>
-                                                <input type="text" name="documento_cpf" id="documento_cpf" class="form-control cpf"  value="{{ old('documento') }}" required autofocus >
-                                                <small id="passwordHelp" class="text-danger">
-
-                                                  </small>
-                                            </div>
-
-                                            <div class="form-group" id="gr-nome_pessoa">
-                                                <label>Nome Completo</label>
-                                                <input type="text" name="name_pessoa" id="name_pessoa" class="form-control"  value="{{ old('name') }}" required>
-                                            </div>
-
-                                            <div class="form-group" id="gr-nascimento">
-                                                <label>Data de Nascimento</label>
-                                                <input type="date" name="data_nascimento" id="data_nascimento" class="form-control" max="{{ \Carbon\Carbon::today()->format('Y-m-d') }}"
-                                                min="1900-12-31" class="form-control" placeholder="Data de Nascimento" value="{{ old('name') }}" required>
-
-                                            </div>
-
-
-                                            {{-- Pessoa juridica --}}
-
-                                            <div class="form-group" id="gr-cnpj" style="display: none">
-                                                <label>CNPJ</label>
-                                                <input type="text" name="documento_cnpj" id="documento_cnpj" class="form-control cnpj"  value="{{ old('documento') }}">
-                                            </div>
-
-                                            <div class="form-group" id="gr-name_empresa" style="display: none">
-                                                <label>Nome da Empresa</label>
-                                                <input type="text" name="name_empresa" id="name_empresa" class="form-control"  value="{{ old('name') }}" >
-                                            </div>
-
-                                            <div class="form-group" id="gr-inscricao" style="display: none">
-                                                <label>Inscricao Estadual</label>
-                                                <input type="text" name="inscricao_estadual" id="inscricao_estadual" class="form-control"  value="{{ old('name') }}">
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label>Entre com seu email</label>
-                                                <input type="email" id="email" name="email" value="{{ old('email') }}"  class="form-control" required>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label>Insira novamente seu e-mail</label>
-                                                <input type="email" id="confirm_email" name="email" value="{{ old('email') }}"  class="form-control" required>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label>Telefone</label>
-                                                <input type="text" id="telefone" class="form-control telefone" name="telefone" value="{{ old('telefone') }}"  required>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label>Digite sua senha</label>
-                                                <input type="password" name="password" id="password"  class="form-control" required >
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Insira novamente sua Senha</label>
-                                                <input type="password" name="password_confirmation" id="password_confirmation"  class="form-control" required>
-                                                <span id="error_confirmation" style="display: none; color: red"> Senhas não são iguais</span>
-                                            </div>
-
-                                            <div class="form-group d-flex justify-content-center">
-                                                <div class="form-check rounded col-md-12 text-left">
-                                                    <label class="form-check-label text-white d-flex align-items-center">
-                                                        <input class="form-check-input" name="agree" type="checkbox" required >
-                                                        <span class="form-check-sign"></span>
-
-                                                        <b style="color: grey">Concordo com os  <a href="https://oincbank.com.br/termos-e-condicoes" target="_blank">Termos e Condições</a>.</b>
-
-                                                    </label>
+                            <div class="form-group">
+                                    <div class="content">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="btn-group d-flex justify-content-center " data-toggle="buttons">
+                                                    <button class="btn btn-oinc-primary active" id="btn_pessoa">
+                                                        Sou uma pessoa
+                                                    </button>
+                                                    <button class="btn btn-oinc-primary" id="btn_empresa">
+                                                        Sou uma empresa
+                                                    </button>
                                                 </div>
-                                                <input type="hidden" name="tipo" id="tipo" value="1">
                                             </div>
-
+                                        </div>
+                                        <div class="row mt-4">
+                                            <div class="col-12 col-md-4">
+                                                {{-- Pessoa fisica --}}
+                                                <div class="form-group" id="gr-cpf">
+                                                    <label>CPF</label>
+                                                    <input type="text" name="documento_cpf" id="documento_cpf" class="form-control cpf"  value="{{ old('documento') }}" required autofocus >
+                                                    <small id="passwordHelp" class="text-danger">
+                                                    </small>
+                                                </div>
+                                                {{-- Pessoa juridica --}}
+                                                <div class="form-group" id="gr-cnpj" style="display: none">
+                                                    <label>CNPJ</label>
+                                                    <input type="text" name="documento_cnpj" id="documento_cnpj" class="form-control cnpj"  value="{{ old('documento') }}">
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-md-8">
+                                                {{-- Pessoa fisica --}}
+                                                <div class="form-group" id="gr-nome_pessoa">
+                                                    <label>Nome Completo</label>
+                                                    <input type="text" name="name_pessoa" id="name_pessoa" class="form-control"  value="{{ old('name') }}" required>
+                                                </div>
+                                                {{-- Pessoa juridica --}}
+                                                <div class="form-group" id="gr-name_empresa" style="display: none">
+                                                    <label>Nome da Empresa</label>
+                                                    <input type="text" name="name_empresa" id="name_empresa" class="form-control"  value="{{ old('name') }}" >
+                                                </div>
+                                            </div>
                                         </div>
 
-                                        <div class="footer text-center">
-                                            <button type="submit" class="btn btn-oinc-primary btn-wd">Crie Sua Conta</button>
+                                        <div class="row">
+                                            <div class="col-12 col-md-6">
+                                                {{-- Pessoa fisica --}}
+                                                <div class="form-group" id="gr-nascimento">
+                                                    <label>Data de Nascimento</label>
+                                                    <input type="date" name="data_nascimento" id="data_nascimento" class="form-control" max="{{ \Carbon\Carbon::today()->format('Y-m-d') }}"
+                                                    min="1900-12-31" class="form-control" placeholder="Data de Nascimento" value="{{ old('name') }}" required>
+                                                </div> 
+                                                {{-- Pessoa juridica --}}
+                                                <div class="form-group" id="gr-inscricao" style="display: none">
+                                                    <label>Inscricao Estadual</label>
+                                                    <input type="text" name="inscricao_estadual" id="inscricao_estadual" class="form-control"  value="{{ old('name') }}">
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-md-6">
+                                                <div class="form-group">
+                                                    <label>Telefone</label>
+                                                    <input type="text" id="telefone" class="form-control telefone" name="telefone" value="{{ old('telefone') }}"  required>
+                                                </div>
+                                            </div>
                                         </div>
+
+                                        <div class="row">
+                                            <div class="col-12 col-md-6">
+                                                <div class="form-group">
+                                                    <label>Entre com seu email</label>
+                                                    <input type="email" id="email" name="email" value="{{ old('email') }}"  class="form-control" required>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-md-6">
+                                                <div class="form-group">
+                                                    <label>Insira novamente seu e-mail</label>
+                                                    <input type="email" id="confirm_email" name="email" value="{{ old('email') }}"  class="form-control" required>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-12 col-md-6">
+                                                <div class="form-group">
+                                                    <label>Digite sua senha</label>
+                                                    <input type="password" name="password" id="password"  class="form-control" required >
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-md-6">
+                                                <div class="form-group">
+                                                    <label>Insira novamente sua Senha</label>
+                                                    <input type="password" name="password_confirmation" id="password_confirmation"  class="form-control" required>
+                                                    <span id="error_confirmation" style="display: none; color: red"> Senhas não são iguais</span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="form-group d-flex justify-content-center">
+                                                    <div class="form-check rounded col-md-12 text-left">
+                                                        <label class="form-check-label text-white d-flex align-items-center">
+                                                            <input class="form-check-input" name="agree" type="checkbox" required >
+                                                            <span class="form-check-sign"></span>
+        
+                                                            <b style="color: grey">Concordo com os  <a href="https://oincbank.com.br/termos-e-condicoes" target="_blank">Termos e Condições</a>.</b>
+        
+                                                        </label>
+                                                    </div>
+                                                    <input type="hidden" name="tipo" id="tipo" value="1">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="footer text-center">
+                                        <button type="submit" class="btn btn-oinc-primary btn-wd">Crie Sua Conta</button>
                                     </div>
                                 </div>
-
                             </div>
+
                         </div>
                     </div>
                     {{-- acaba aqui --}}
