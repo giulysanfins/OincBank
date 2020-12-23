@@ -27,10 +27,10 @@
                                                 A vaca foi para o brejo, mas chamou o Oinc para te ajudar a juntar um dindin que você precisa para a sua causa.
                                             </p>
                                         </div>
-                                        <div class="promo-slider__wrapper-3">
+                                        {{-- <div class="promo-slider__wrapper-3">
                                             <a class="button promo-slider__button button--primary" href="{{route('website.campanhas')}}">Descubra Causas</a>
                                             <a class="button promo-slider__button button--primary" href="{{route('register')}}">Registre seu cofrinho</a>
-                                        </div>
+                                        </div> --}}
                                     </div>
                                 </div>
                             </div>
@@ -125,7 +125,7 @@
             </div> --}}
             <!-- promo pannel end-->
             <!-- slider nav start-->
-            <div class="slider__nav slider__nav--promo">
+            {{-- <div class="slider__nav slider__nav--promo">
                 <div class="promo-slider__count"></div>
                 <div class="slider__arrows">
                     <div class="slider__prev"><i class="fa fa-chevron-left" aria-hidden="true"></i>
@@ -133,7 +133,7 @@
                     <div class="slider__next"><i class="fa fa-chevron-right" aria-hidden="true"></i>
                     </div>
                 </div>
-            </div>
+            </div> --}}
             <!-- slider nav end-->
         </section>
         <section class="section causes"><img class="causes__bg" src="{{ asset('helpo-theme') }}/img/causes_img.png"
@@ -237,7 +237,7 @@
                                             <div class="causes-item__lower">
                                                 <div class="progress-bar" style="width: 100%">
                                                     <div class="progress-bar__inner" style="width: {{($perc >= 100)?'100':$perc}}%;">
-                                                        <div class="progress-bar__value">{{$perc}}%</div>
+                                                        <div class="progress-bar__value">{{number_format($perc,2,".",".")}}%</div>
                                                     </div>
                                                 </div>
                                                 <div class="causes-item__details-holder">

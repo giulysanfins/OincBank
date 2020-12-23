@@ -22,18 +22,20 @@ use Illuminate\Support\Facades\Hash;
 use App\Yahp\Services\CategoryService;
 use App\Yahp\Services\PaymentService;
 use App\Yahp\Services\BankService;
+use App\Yahp\Services\UserService;
 
 
 class CampanhaController extends Controller
 {
 
-    public function __construct(CampanhaService $campanhaService,CategoryService $categoryService,PaymentService $paymentService, BankService $bankService)
+    public function __construct(CampanhaService $campanhaService,CategoryService $categoryService,PaymentService $paymentService, BankService $bankService, UserService $userService)
     {
         $this->middleware('auth');
         $this->campanhaService = $campanhaService;
         $this->categoryService = $categoryService;
         $this->paymentService = $paymentService;
         $this->bankService = $bankService;
+        $this->userService = $userService;
     }
 
      /**
@@ -55,6 +57,7 @@ class CampanhaController extends Controller
                 'campanhas_expiradas' => $this->campanhaService->renderByStatus(5),
                 'campanhas_excluidas' => $this->campanhaService->renderByStatus(0),
                 'categorias' => $this->categoryService->renderByStatus(1),
+                'pagamentos' => $this->paymentService->renderList(),
             ];
 
          } elseif (auth()->user()->role == 2) {
@@ -67,6 +70,7 @@ class CampanhaController extends Controller
                 'campanhas_expiradas' => $this->campanhaService->renderByStatusUser(5,auth()->user()->id),
                 'categorias' => $this->categoryService->renderByStatus(1),
                 'bancos' => $this->bankService->renderList(),
+                'pagamentos' => $this->paymentService->renderByUser(auth()->user()->id),
             ];
         }
 
@@ -212,6 +216,7 @@ class CampanhaController extends Controller
             'bancos' => $this->bankService->renderList(),
             'balanco' => $balanco,
             'perc' => (($valorTotal*100)/$campanha->valor),
+            'clientes' => $this->userService->renderList(),
         ];
 
         return view('admin.campanha.show',$data);
@@ -302,7 +307,7 @@ class CampanhaController extends Controller
      public function desativar(Request $request, $id)
      {
          try {
-            $escolha = 'Escolha do Usuário';
+            $escolha = $request->motivo_deletado;
             $update = $this->campanhaService->buildUpdate($id,[
                 'status' => 4,
                 'motivo_deletado' => $escolha

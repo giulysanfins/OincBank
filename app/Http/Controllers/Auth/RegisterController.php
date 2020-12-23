@@ -50,11 +50,32 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-        return Validator::make($data, [
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],  
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'agree' => ['required']
-        ]);
+        if($data['documento_cpf'] != null)
+        {
+            return Validator::make($data, [
+                'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+                'password' => ['required',
+                'min:8',
+                'regex:"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$"',
+                'confirmed'],
+
+                'documento_cpf' => ['required','cpf','unique:users,documento'],
+                'agree' => ['required']
+            ]);
+
+        } elseif ($data['documento_cnpj'] != null)
+        {
+            return Validator::make($data, [
+                'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+                'password' => ['required',
+                'min:8',
+                'regex:/"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$"/',
+                'confirmed'],
+                'documento_cnpj' => ['required', 'cnpj', 'unique:users,documento'],
+                'agree' => ['required']
+            ]);
+        }
+
     }
 
     /**
@@ -65,7 +86,8 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        
+
+
         if($data['documento_cpf'] != null)
         {
             $nome = $data['name_pessoa'];
@@ -76,6 +98,8 @@ class RegisterController extends Controller
             $nome = $data['name_empresa'];
             $documento = $data['documento_cnpj'];
         }
+
+
 
         return User::create([
             'name' => $nome,
