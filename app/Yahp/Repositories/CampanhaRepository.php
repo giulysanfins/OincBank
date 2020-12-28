@@ -59,7 +59,7 @@ class CampanhaRepository
         $dateToday = Carbon::now()->format('Y-m-d');
         if($status == 5)
         {
-            return $this->model->where('status',2)->where('data_encerramento','<',$dateToday)->paginate(6);
+            return $this->model->where('status',2)->where('data_encerramento','<',$dateToday)->paginate(1);
         } else {
             return $this->model->where('status',$status)->paginate(6);
         }
