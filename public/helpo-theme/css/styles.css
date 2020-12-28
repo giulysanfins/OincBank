@@ -19610,7 +19610,7 @@ footer.footer--front_3 .footer__lower {
     padding-top: 100%;
 }
 .gallery-simple__item:hover {
-    background: rgba(53, 57, 118, 0.7);
+    background: rgba(253, 207, 223, 0.7);
 }
 .gallery-simple .img--bg {
     z-index: -1;
@@ -22376,7 +22376,7 @@ section.shop {
 }
 @media only screen and (min-width: 769px) {
     .horizontal-tabs .r-tabs-panel {
-        padding: 50px 0 0 0;
+        padding: 30px 0 0 0;
     }
 }
 .vertical-tabs {

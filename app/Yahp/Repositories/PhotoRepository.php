@@ -42,9 +42,18 @@ class PhotoRepository
      * @param $id
      * @return mixed
      */
-    public function getByPhoto($area,$area_id)
+    public function firstByPhoto($area,$area_id)
     {
         return $this->model->where('area',$area)->where('area_id',$area_id)->orderBy('created_at','desc')->first();
+    }
+    
+    /**
+     * @param $id
+     * @return mixed
+     */
+    public function getByPhoto($area,$area_id)
+    {
+        return $this->model->where('area',$area)->where('area_id',$area_id)->orderBy('created_at','desc')->get();
     }
     
 

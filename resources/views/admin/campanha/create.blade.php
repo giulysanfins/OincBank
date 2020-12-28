@@ -83,21 +83,28 @@
 
                                 {{-- img upload --}}
                                 <div class="col-md-2">
-
-                                    <label class="form-control-label" for="input-photo_perfil"> Foto Cofrinho*</label>
+                                    <label class="form-control-label" for="input-photo_perfil"> Foto Principal Cofrinho*</label>
                                     <br />
                                     <label for="photo_perfil" class="btn btn-info">Selecionar Imagem</label>
                                     <input id="photo_perfil" required onchange="return fileValidation()"
-                                        style="display: none;" type="file" name="photo_perfil" multiple>
+                                        style="display: none;" type="file" name="photo_perfil" accept="image/*" >
                                     {{-- usei https://sweetalert.js.org/docs/#configuration
                                     --}}
                                     <!-- Image preview -->
                                     <div id="imagePreview"></div>
                                 </div>
 
+                                <div class="col-md-2">
+                                    <label class="form-control-label" for="input-photo_perfil">Outras Fotos do Cofrinho</label>
+                                    <div class="input-group">
+                                        <div class="custom-file">
+                                          <input type="file" class="custom-file-input d-none" name="fotos[]" id="fotos" multiple accept="image/*">
+                                          <label class="custom-file-label btn btn-info" for="fotos">Selecionar imagens</label>
+                                        </div>
+                                    </div>
+                                </div>
 
-
-                                <div class="col-md-10">
+                                <div class="col-md-8">
                                     <label for="data_encerramento">Vídeo
                                     </label>
 
@@ -177,7 +184,7 @@
 
                 // Allowing file type
                 var allowedExtensions =
-                    /(\.jpg|\.jpeg|\.png|\.gif)$/i;
+                    /(\.jpg|\.jpeg|\.png|\.gif|\.webp)$/i;
 
                 if (!allowedExtensions.exec(filePath)) {
                     swal("Oops", "Não aceitamos essa extensão. Por favor tente novamente!", "error");
@@ -193,8 +200,6 @@
                                     'imagePreview').innerHTML =
                                 '<img class="img-thumbnail border-gray" src="' + e.target.result +
                                 '"/>';
-
-
                         };
 
                         reader.readAsDataURL(fileInput.files[0]);

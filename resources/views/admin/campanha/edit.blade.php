@@ -65,23 +65,31 @@
                                     </div>
                                 </div>
 
+                                <div class="col-12 text-right">
+                                    <button type="submit" class="btn btn-success">Alterar</button>
+                                    </form>
+                                </div>
+
                                 <div class="col-12">
                                     <hr />
                                     <h4>Mídia</h4>
+                                    <form method="POST" action="{{route('foto.principal',$campanha->id)}}" enctype="multipart/form-data">
+                                        @csrf
+                                        @method('put')
                                 </div>
 
                                 {{-- img upload --}}
-                                <div class="col-md-2">
+                                <div class="col-md-3">
                                     {{-- @include('pages.campanha.imageUpload') --}}
-                                    <label class="form-control-label" for="input-photo_perfil">Foto Cofrinho</label>
+                                    <label class="form-control-label" for="input-photo_perfil">Foto Principal Cofrinho</label>
                                     <br />
                                     <label for="photo_perfil" class="btn btn-info">Selecionar Imagem</label>
-                                    <input id="photo_perfil" style="display: none;" required onchange="return fileValidation()" type="file" name="photo_perfil">
+                                    <input id="photo_perfil" style="display: none;" onchange="return fileValidation()" type="file" name="photo_perfil">
                                     <img class="img-thumbnail border-gray" src="{{asset('storage')}}/images/{{$campanha->profile_image}}" alt="foto_{{$campanha->titulo}}" id="foto_antiga">
                                     <div id="imagePreview"></div>
                                 </div>
 
-                                <div class="col-md-10" >
+                                <div class="col-md-9">
                                     <label for="data_encerramento">Vídeo*(url)</label>
                                     <br>
                                     <div class="form-group">
@@ -89,15 +97,51 @@
                                     </div>
                                 </div>
 
+                                <div class="col-12 text-right">
+                                    <button type="submit" class="btn btn-success">Alterar</button>
+                                    <hr />
+                                    </form>
+                                </div>
+
+                                {{-- outras img upload --}}
+                                <div class="col-md-12 mt-3">
+                                    <label class="form-control-label" for="input-photo_perfil">Outras Fotos do Cofrinho</label>
+                                    <form method="POST" action="{{route('foto.insert')}}" enctype="multipart/form-data">
+                                        @csrf
+                                        @method('post')
+                                        <input type="hidden" name="cofrinho_id" value="{{$campanha->id}}">
+                                    <div class="input-group">
+                                        <div class="custom-file">
+                                          <input type="file" class="custom-file-input d-none" name="fotos[]" id="fotos" multiple accept="image/*">
+                                          <label class="custom-file-label btn btn-info" for="fotos">Selecionar imagens</label>
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="btn btn-success">Alterar</button>
+
+                                    </form>
+                                </div>
+
+                                @foreach ($photos as $photo)
+                                    <div class="col-12 col-md-2">
+                                        <button type="button" class="btn-remove" data-toggle="modal" data-target="#deleteFoto-{{$photo->id}}">
+                                            <i class="far fa-trash-alt"></i>
+                                        </button>
+                                        <img class="img-thumbnail border-gray" src="{{asset('storage')}}/images/{{$photo->path}}" alt="foto_{{$photo->titulo}}" id="">
+                                    </div>
+
+                                    @component('admin.campanha.components.delete-foto',[
+                                        'foto' => $photo
+                                    ])@endcomponent
+                                @endforeach
+
+
                             </div>
                         </div>
 
-                        <div class="card-footer text-right">
-                            <button type="submit" class="btn btn-success">Alterar</button>
-                        </div>
+
                     </div>
 
-                </form>
+
 
             </div>
 
@@ -122,7 +166,7 @@
 
         // Allowing file type
         var allowedExtensions =
-            /(\.jpg|\.jpeg|\.png|\.gif)$/i;
+            /(\.jpg|\.jpeg|\.png|\.gif|\.webp)$/i;
 
         if (!allowedExtensions.exec(filePath)) {
             swal("Oops", "Não aceitamos essa extensão. Por favor tente novamente!", "error");
@@ -140,8 +184,6 @@
                             'imagePreview').innerHTML =
                         '<img class="img-thumbnail border-gray" src="' + e.target.result +
                         '"/>';
-
-
                 };
 
                 reader.readAsDataURL(fileInput.files[0]);

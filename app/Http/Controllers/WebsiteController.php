@@ -7,6 +7,7 @@ use App\Yahp\Services\CampanhaService;
 use App\Yahp\Services\CategoryService;
 use App\Yahp\Services\PaymentService;
 use App\Yahp\Services\ParameterService;
+use App\Yahp\Services\PhotoService;
 use Illuminate\Support\Facades\Input;
 
 class WebsiteController extends Controller
@@ -16,12 +17,19 @@ class WebsiteController extends Controller
      *
      * @return void
      */
-    public function __construct(CampanhaService $campanhaService, PaymentService $paymentService, ParameterService $parameterService, CategoryService $categoryService)
+    public function __construct(
+        CampanhaService $campanhaService, 
+        PaymentService $paymentService, 
+        ParameterService $parameterService, 
+        CategoryService $categoryService,
+        PhotoService $photoService
+        )
     {
         $this->campanhaService = $campanhaService;
         $this->categoryService = $categoryService;
         $this->paymentService = $paymentService;
         $this->parameterService = $parameterService;
+        $this->photoService = $photoService;
     }
 
     /**
@@ -81,6 +89,7 @@ class WebsiteController extends Controller
             'perc' => (($valorTotal*100)/$campanha->valor),
             'minValue' => $this->parameterService->renderBySlug('campanhas.min'),
             'maxValue' => $this->parameterService->renderBySlug('campanhas.max'),
+            'fotos' => $this->photoService->renderByCampanha($id)
         ];
 
         // dd($data);
