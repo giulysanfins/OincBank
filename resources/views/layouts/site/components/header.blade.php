@@ -14,7 +14,7 @@
                 @if (Auth::check())
                 <li class="aside-menu__item"><a class="aside-menu__link" href="{{route('login')}}"><span>Olá, {{auth()->user()->name}}</span></a></li>
                 @else
-                <li class="aside-menu__item"><a class="aside-menu__link" href="{{route('login')}}"><span>Login / Cadastro</span></a></li>
+                <li class="aside-menu__item"><a class="aside-menu__link" href="{{route('login')}}"><span>Entrar</span></a></li>
                 @endif
             </ul>
 
@@ -70,7 +70,7 @@
                         @if (Auth::check())
                         <li class="main-menu__item"><a class="main-menu__link" href="{{route('profile.edit')}}"><span>Olá, {{auth()->user()->name}}</span></a></li>
                         @else
-                        <li class="main-menu__item"><a class="main-menu__link" href="{{route('login')}}"><span>Login / Cadastro</span></a></li>
+                        <li class="main-menu__item"><a class="main-menu__link" href="{{route('login')}}"><span>Entrar</span></a></li>
                         @endif
                     </ul>
                 </nav>
