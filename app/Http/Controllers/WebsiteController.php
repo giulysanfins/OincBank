@@ -47,10 +47,11 @@ class WebsiteController extends Controller
     public function campanhas()
     {
         $data = [
-            'campanhas' => $this->campanhaService->renderByStatus(2),
+            'campanhas' => $this->campanhaService->renderByPaginate(2),
             'categorias' => $this->categoryService->renderByStatus(1),
             'minpay' => $this->parameterService->renderBySlug('campanha.num'),
         ];
+        // dd($data['campanhas']);
 
         return view('website.campanhas',$data);
     }
@@ -300,30 +301,23 @@ class WebsiteController extends Controller
         if($request->q != ''){
 
              $campanha = $this->campanhaService->renderBySearch($request->q);
-            // dd($campanha);
+             //dd($campanha);
              if(count($campanha) > 0)
              {
                  $data = [
-                     'campanhas' => $campanha,
-                     'pageTitle' => 'Campanha',
-                     'query' => $request->q,
+                    'campanhas' => $campanha,
+                    'pageTitle' => 'Campanha',
+                    'query' => $request->q,
                  ];
                 //  dd($data);
                  return view('website.search',$data);
              }
              else{
-
-                 $data = [
-                     'campanha' => $this->campanhaService->renderList(),
-                     'pageTitle' => 'Campanha'
-                 ];
-
-                 //mudar para rota
-                 alert()->warning("Dados não encontrados");
-                 return view('website.campanhas',$data);
+                alert()->warning("Dados não encontrados");
+                return redirect()->route('website.campanhas');
              }
         }
-        return view('website.index')->withMessage("Nada encontrado 2");
+        return view('website.index')->withMessage("Nada encontrado");
      }
 
          /**

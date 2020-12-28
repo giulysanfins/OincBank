@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Mail;
 use Intervention\Image\Facades\Image;
 
 use Illuminate\Http\Request;
-use Storage;
+use Illuminate\Support\Facades\Storage;
 use Validator;
 use Carbon\Carbon;
 
@@ -145,10 +145,17 @@ class CampanhaController extends Controller
 
                 //process the file
 
+                $file = $request->file('photo_perfil');
+                $image = Image::make($file);
+                $image->orientate();
                 $ext = $request->file('photo_perfil')->extension();
                 $ts = Carbon::now()->timestamp;
                 $filename = $ts."_".$user_id.".".$ext;
-                $upload = Storage::putFileAs('public/images', $request->file('photo_perfil'),$filename);
+
+                $image->save(storage_path('app/public/images/') . $filename);
+
+                // $upload = Storage::putFileAs('public/images', $image, $filename);
+
 
                 $data = $this->campanhaService->buildInsert($request->merge([
                     'profile_image' => $filename,
