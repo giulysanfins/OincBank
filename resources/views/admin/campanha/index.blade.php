@@ -107,6 +107,7 @@
                                                                 <th scope="col">Categoria</th>
                                                                 <th scope="col">Valores</th>
                                                                 <th scope="col">Data Criacao</th>
+                                                                <th scope="col">Dono</th>
                                                                 <th scope="col"></th>
                                                             </tr>
                                                         </thead>
@@ -120,6 +121,9 @@
 
                                                                     </td>
                                                                     <td>{{$campanha->created_at->format('d/m/Y h:i:s')}}</td>
+                                                                    <td>
+                                                                        {{$campanha->user->name}}
+                                                                    </td>
                                                                     <td>
                                                                         <div class="btn-group float-right" role="group" aria-label="Botões de Ação - Clientes">
                                                                             @if (auth()->user()->role == 2)
@@ -168,6 +172,7 @@
                                                             <th scope="col">Categoria</th>
                                                             <th scope="col">Arrecadação</th>
                                                             <th scope="col">Data Criacao</th>
+                                                            <th scope="col">Dono</th>
                                                             <th scope="col"></th>
                                                         </tr>
                                                     </thead>
@@ -191,6 +196,9 @@
                                                                 <td><b>R$ {{number_format($total,2,",",".")}}</b> / R$ {{number_format($campanha->valor,2,",",".")}}</td>
 
                                                                 <td>{{$campanha->created_at->format('d/m/Y h:i:s')}}</td>
+                                                                <td>
+                                                                    {{$campanha->user->name}}
+                                                                </td>
                                                                 <td>
                                                                     <div class="btn-group float-right" role="group" aria-label="Botões de Ação - Clientes">
 
@@ -251,6 +259,7 @@
 
                                                                     </div>
                                                                 </td>
+
                                                             </tr>
                                                             @if (auth()->user()->role == 2)
                                                             @component('admin.campanha.components.solicitar',[
@@ -288,6 +297,7 @@
                                                                 <th scope="col">Titulo</th>
                                                                 <th scope="col">Categoria</th>
                                                                 <th scope="col">Data Criacao</th>
+                                                                <th scope="col">Dono</th>
                                                                 <th scope="col"></th>
                                                             </tr>
                                                         </thead>
@@ -298,6 +308,9 @@
                                                                     <td>{{$campanha->titulo}}</td>
                                                                     <td>{{$campanha->categoria->name}}</td>
                                                                     <td>{{$campanha->created_at->format('d/m/Y h:i:s')}}</td>
+                                                                    <td>
+                                                                        {{$campanha->user->name}}
+                                                                    </td>
                                                                     <td>
 
                                                                         <div class="btn-group float-right" role="group" aria-label="Botões de Ação - Clientes">
@@ -376,6 +389,7 @@
                                                                     <th scope="col">Titulo</th>
                                                                     <th scope="col">Categoria</th>
                                                                     <th scope="col">Data Criacao</th>
+                                                                    <th scope="col">Dono</th>
                                                                     <th scope="col"></th>
                                                                 </tr>
                                                             </thead>
@@ -386,6 +400,9 @@
                                                                         <td>{{$campanha->titulo}}</td>
                                                                         <td>{{$campanha->categoria->name}}</td>
                                                                         <td>{{$campanha->created_at->format('d/m/Y h:i:s')}}</td>
+                                                                        <td>
+                                                                            {{$campanha->user->name}}
+                                                                        </td>
                                                                         <td>
                                                                             <div class="btn-group float-right" role="group" aria-label="Botões de Ação - Clientes">
                                                                                 @if (auth()->user()->role == 2)

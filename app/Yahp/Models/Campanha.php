@@ -26,9 +26,10 @@ class Campanha extends Model
         return $this->hasMany(Payment::class, 'campanha_id', 'id');
     }
 
-        // pagamentos
-        public function user()
-        {
-            return $this->hasOne(User::class, 'id', 'user_id');
-        }
+    // user
+    public function user()
+    {
+        return $this->hasOne(User::class, 'id', 'user_id');
+    }
+
 }
