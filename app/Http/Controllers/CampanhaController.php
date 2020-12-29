@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Mail;
 use Intervention\Image\Facades\Image;
 
 use Illuminate\Http\Request;
-use Storage;
+use Illuminate\Support\Facades\Storage;
 use Validator;
 use Carbon\Carbon;
 
@@ -28,7 +28,7 @@ use App\Yahp\Services\UserService;
 class CampanhaController extends Controller
 {
 
-    public function __construct(CampanhaService $campanhaService,CategoryService $categoryService,PaymentService $paymentService, BankService $bankService, UserService $userService)
+    public function __construct(CampanhaService $campanhaService,CategoryService $categoryService,PaymentService $paymentService, BankService $bankService, UserService $userService, PhotoService $photoService)
     {
         $this->middleware('auth');
         $this->campanhaService = $campanhaService;
@@ -36,6 +36,7 @@ class CampanhaController extends Controller
         $this->paymentService = $paymentService;
         $this->bankService = $bankService;
         $this->userService = $userService;
+        $this->photoService = $photoService;
     }
 
      /**
@@ -102,16 +103,6 @@ class CampanhaController extends Controller
         return view('admin.campanha.desativar',$data);
      }
 
-     public function mostrar($id)
-     {
-         $data = [
-            'campanhas' => $this->campanhaService->renderEdit($id),
-            'pageTitle' => 'Cofrinho',
-            'photo' => $this->photoService->renderPhotoUser('users',auth()->user()->id)
-         ];
-
-         return view('pages.campanha.show',$data);
-     }
 
      /**
       * Show the form for creating a new resource.
@@ -145,10 +136,17 @@ class CampanhaController extends Controller
 
                 //process the file
 
+                $file = $request->file('photo_perfil');
+                $image = Image::make($file);
+                $image->orientate();
                 $ext = $request->file('photo_perfil')->extension();
                 $ts = Carbon::now()->timestamp;
                 $filename = $ts."_".$user_id.".".$ext;
-                $upload = Storage::putFileAs('public/images', $request->file('photo_perfil'),$filename);
+
+                $image->save(storage_path('app/public/images/') . $filename);
+
+                // $upload = Storage::putFileAs('public/images', $image, $filename);
+
 
                 $data = $this->campanhaService->buildInsert($request->merge([
                     'profile_image' => $filename,
@@ -202,6 +200,7 @@ class CampanhaController extends Controller
         }
 
         $data = [
+            'ownerPhoto' => $this->photoService->renderPhotoUser('users', $campanha->user_id),
             'campanha' => $this->campanhaService->renderEdit($id),
             'pageTitle' => 'Visualizar Cofrinho',
             'pagamentos' => $this->paymentService->renderByCampanha($id),
@@ -211,6 +210,7 @@ class CampanhaController extends Controller
             'perc' => (($valorTotal*100)/$campanha->valor),
             'clientes' => $this->userService->renderList(),
         ];
+
 
         return view('admin.campanha.show',$data);
     }

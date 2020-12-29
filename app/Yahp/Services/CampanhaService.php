@@ -48,6 +48,16 @@ class CampanhaService implements ServiceContract
         return $this->repository->getByStatus($status);
     }
 
+        /**
+     * @param $status
+     * @return mixed
+     */
+    public function renderByPaginate($status)
+    {
+        return $this->repository->getByPaginate($status);
+    }
+
+
     /**
      * @param $user_id
      * @return mixed
