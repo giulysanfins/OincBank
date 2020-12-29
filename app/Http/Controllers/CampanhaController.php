@@ -157,7 +157,8 @@ class CampanhaController extends Controller
                 'profile_image' => $filename,
                 'user_id' => auth()->user()->id,
                 'status' => 2,
-                'valor' => str_replace(',','.',str_replace('.','',$request->valor))
+                'valor' => str_replace(',','.',str_replace('.','',$request->valor)),
+                'data_encerramento' => Carbon::createFromFormat('d/m/Y', $request->data_encerramento),
             ])->all());
 
             if($request->file('fotos') != null)
@@ -271,15 +272,16 @@ class CampanhaController extends Controller
                 $upload = Storage::putFileAs('public/images', $request->file('photo_perfil'),$filename);
                 $update = $this->campanhaService->buildUpdate($id,$request->merge([
                     'valor' => str_replace(',','.',str_replace('.','',$request->valor)),
-                    'profile_image' => $filename
+                    'profile_image' => $filename,
+                    'data_encerramento' => Carbon::createFromFormat('d/m/Y', $request->data_encerramento),
                  ])->all());
                  alert()->success('Sucesso','Cofrinho alterado com sucesso.')->persistent('Fechar');
                  return redirect()->route('campanha.index',$id);
               }
               else{
                 $update = $this->campanhaService->buildUpdate($id,$request->merge([
-                    'valor' => str_replace(',','.',str_replace('.','',$request->valor))
-
+                    'valor' => str_replace(',','.',str_replace('.','',$request->valor)),
+                    'data_encerramento' => Carbon::createFromFormat('d/m/Y', $request->data_encerramento),
                  ])->all());
                  alert()->success('Sucesso','Cofrinho alterado com sucesso.')->persistent('Fechar');
                  return redirect()->route('campanha.edit',$id);

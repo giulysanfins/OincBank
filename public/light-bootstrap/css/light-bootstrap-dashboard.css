@@ -2732,7 +2732,7 @@ Copyright (c) 2015 Daniel Eden
     animation-name: fadeOutUp;
 }
 
-.dropdown-menu {
+.dropdown-menu-theme {
     visibility: hidden;
     margin: 0;
     padding: 0;
@@ -2746,13 +2746,13 @@ Copyright (c) 2015 Daniel Eden
     box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.125);
 }
 
-.show .dropdown-menu {
+.show .dropdown-menu-theme {
     opacity: 1;
     filter: alpha(opacity=100);
     visibility: visible;
 }
 
-.select .dropdown-menu {
+.select .dropdown-menu-theme {
     border-radius: 0 0 10px 10px;
     -webkit-box-shadow: none;
     box-shadow: none;
@@ -2774,76 +2774,76 @@ Copyright (c) 2015 Daniel Eden
     margin-top: -20px;
 }
 
-.select.show .dropdown-menu {
+.select.show .dropdown-menu-theme  {
     margin-top: -1px;
 }
 
-.dropdown-menu .dropdown-item {
+.dropdown-menu-theme  .dropdown-item {
     padding: 8px 16px;
     color: #333333;
 }
 
-.dropdown-menu .dropdown-item img {
+.dropdown-menu-theme  .dropdown-item img {
     margin-top: -3px;
 }
 
-.dropdown-menu .dropdown-item:focus {
+.dropdown-menu-theme  .dropdown-item:focus {
     outline: 0 !important;
 }
 
-.btn-group.select .dropdown-menu {
+.btn-group.select .dropdown-menu-theme  {
     min-width: 100%;
 }
 
-.dropdown-menu>li:first-child>a {
+.dropdown-menu-theme >li:first-child>a {
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
 }
 
-.dropdown-menu>li:last-child>a {
+.dropdown-menu-theme >li:last-child>a {
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
 }
 
-.select .dropdown-menu>li:first-child>a {
+.select .dropdown-menu-theme >li:first-child>a {
     border-radius: 0;
     border-bottom: 0 none;
 }
 
-.dropdown-menu .dropdown-item:hover,
-.dropdown-menu .dropdown-item:focus {
+.dropdown-menu-theme  .dropdown-item:hover,
+.dropdown-menu-theme  .dropdown-item:focus {
     background-color: #F5F5F5;
     color: #333333;
     opacity: 1;
     text-decoration: none;
 }
 
-.dropdown-menu.dropdown-blue>li>a:hover,
-.dropdown-menu.dropdown-blue>li>a:focus {
+.dropdown-menu-theme .dropdown-blue>li>a:hover,
+.dropdown-menu-theme .dropdown-blue>li>a:focus {
     background-color: rgba(52, 114, 247, 0.2);
 }
 
-.dropdown-menu.dropdown-azure>li>a:hover,
-.dropdown-menu.dropdown-azure>li>a:focus {
+.dropdown-menu-theme .dropdown-azure>li>a:hover,
+.dropdown-menu-theme .dropdown-azure>li>a:focus {
     background-color: rgba(29, 199, 234, 0.2);
 }
 
-.dropdown-menu.ct-green>li>a:hover,
-.dropdown-menu.ct-green>li>a:focus {
+.dropdown-menu-theme .ct-green>li>a:hover,
+.dropdown-menu-theme .ct-green>li>a:focus {
     background-color: rgba(135, 203, 22, 0.2);
 }
 
-.dropdown-menu.dropdown-orange>li>a:hover,
-.dropdown-menu.dropdown-orange>li>a:focus {
+.dropdown-menu-theme .dropdown-orange>li>a:hover,
+.dropdown-menu-theme .dropdown-orange>li>a:focus {
     background-color: rgba(255, 149, 0, 0.2);
 }
 
-.dropdown-menu.dropdown-red>li>a:hover,
-.dropdown-menu.dropdown-red>li>a:focus {
+.dropdown-menu-theme .dropdown-red>li>a:hover,
+.dropdown-menu-theme .dropdown-red>li>a:focus {
     background-color: rgba(255, 74, 85, 0.2);
 }
 
-.dropdown-menu .dropdown-item i[class*="nc-icon"] {
+.dropdown-menu-theme  .dropdown-item i[class*="nc-icon"] {
     font-size: 18px;
     text-align: center;
     line-height: 25px;

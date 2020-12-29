@@ -60,7 +60,9 @@ class ProfileController extends Controller
                 ]);
             }
 
-            auth()->user()->update($request->all());
+            auth()->user()->update($request->merge([
+                'data_nascimento' => Carbon::createFromFormat('d/m/Y', $request->data_nascimento),
+            ])->all());
             alert()->success('Sucesso','Perfil atualizado com sucesso.')->persistent('Fechar');
             return redirect()->route('profile.edit');
         }

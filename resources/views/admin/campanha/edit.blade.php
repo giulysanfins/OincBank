@@ -38,7 +38,7 @@
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="apelido">Valor*<small>(em Real)</small></label>
-                                        <input type="text" class="form-control" id="valor" name="valor" placeholder="EX: 100.000,00"   value="{{old('valor',$campanha->valor)}}"   oninvalid="this.setCustomValidity('Por favor preencha o valor.')"
+                                        <input type="text" class="form-control" id="valor" name="valor" placeholder="EX: 100.000,00" value="{{old('valor',$campanha->valor)}}" oninvalid="this.setCustomValidity('Por favor preencha o valor.')"
                                         oninput="this.setCustomValidity('')">
                                     </div>
                                 </div>
@@ -47,11 +47,13 @@
                                     <label for="data_encerramento">Que data o cofrinho deve encerrar?*</label>
                                     <br>
                                     <div class="form-group">
-
-                                        <input type="date" name="data_encerramento" max="3000-12-31"
-                                        min="{{\Carbon\Carbon::today()->format('Y-m-d')}}" class="form-control"  value="{{(old('data_encerramento',$campanha->data_encerramento->format('Y-m-d')))}}"  required
+                                        <input  class="form-control data_encerramento" type="text" id="data_encerramento"
+                                        name="data_encerramento" 
+                                        value="{{(old('data_encerramento',$campanha->data_encerramento->format('d/m/Y')))}}"
+                                        required
                                         oninvalid="this.setCustomValidity('Por favor preencha a data.')"
                                         oninput="this.setCustomValidity('')">
+                                        <small id="erro_encerramento" class="text-danger d-none">Data de encerramento inválida.</small>
                                     </div>
                                 </div>
 
@@ -151,9 +153,12 @@
 @endsection
 
 @section('scripts')
+<script src="{{ asset('light-bootstrap') }}/js/cofrinho.js"></script>
+
 <script>
     $(document).ready(function(){
         $('#valor').mask("#.##0,00", {reverse: true});
+        $('.data_encerramento').mask('00/00/0000');
     });
 
 </script>

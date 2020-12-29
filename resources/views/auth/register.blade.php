@@ -1,10 +1,18 @@
 @extends('layouts.app', ['activePage' => 'register', 'title' => 'Cadstre um novo Usúario'])
 
 @section('content')
-    <div class="full-page section-image" data-color="pink" data-image="{{ asset('charity.jpg') }}">
+    <div class="full-page section-image" data-color="pink" data-image="{{ asset('img/charity.jpg') }}">
         <div class="content pt-5">
             <div class="container mt-5">
                 <div class="col-md-5 col-sm-12 ml-auto mr-auto">
+
+                    @foreach ($errors->all() as $error)
+                        <div class="alert alert-warning alert-dismissible fade show" style="color: black;">
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close"> &times;</a>
+                            {{ $error }}
+                        </div>
+                    @endforeach
+
                     <a class="btn btn-oinc-white" href="{{ route('website.index') }}">Voltar</a>
                     <form class="form" name="myForm" method="POST" action="{{ route('register') }}">
                         @csrf
@@ -14,158 +22,145 @@
                             <div class="card-header ">
                                 <h3 class="header text-center">Crie Sua Conta</h3>
                             </div>
-                            <div class="card-body ">
-                                <div class="card-body">
+                            <div class="card-body">
 
-                                    <div class="form-group">
-                                        <div class="content">
+                               
 
-                                            <div class="btn-group d-flex justify-content-center " data-toggle="buttons">
-                                                <button class="btn btn-oinc-primary active" id="btn_pessoa">
-                                                    Sou uma pessoa
-                                                </button>
-                                                <button class="btn btn-oinc-primary" id="btn_empresa">
-                                                    Sou uma empresa
-                                                    </label>
-                                            </div>
-                                            {{-- Pessoa fisica
-                                            --}}
+                                <div class="form-group">
+                                    <div class="content">
 
-                                            <div class="form-group" id="gr-cpf">
-                                                <label>CPF</label>
-                                                <input type="text" name="documento_cpf" id="documento_cpf"
-                                                    class="form-control cpf" value="{{ old('documento') }}"
-                                                    onchange="return validateCPF()" required autofocus>
-                                                <small id="passwordHelp" class="text-danger">
+                                        <div class="btn-group d-flex justify-content-center " data-toggle="buttons">
+                                            <button class="btn btn-oinc-primary active" id="btn_pessoa">
+                                                Sou uma pessoa
+                                            </button>
+                                            <button class="btn btn-oinc-primary" id="btn_empresa">
+                                                Sou uma empresa
+                                                </label>
+                                        </div>
+                                        {{-- Pessoa fisica
+                                        --}}
 
-                                                </small>
-                                            </div>
+                                        <div class="form-group" id="gr-cpf">
+                                            <label>CPF</label>
+                                            <input type="text" name="documento_cpf" id="documento_cpf"
+                                                class="form-control cpf" value="{{ old('documento_cpf') }}"
+                                                onchange="return validateCPF()" required autofocus>
+                                            <small id="passwordHelp" class="text-danger">
 
-                                            <div class="form-group" id="gr-nome_pessoa">
-                                                <label>Nome Completo</label>
-                                                <input type="text" name="name_pessoa" id="name_pessoa" class="form-control"
-                                                    value="{{ old('name') }}" required>
-                                            </div>
+                                            </small>
+                                        </div>
 
-                                            <div class="form-group" id="gr-nascimento">
-                                                <label>Data de Nascimento</label>
-                                                <input type="date" name="data_nascimento" id="data_nascimento"
-                                                    class="form-control"
-                                                    max="{{ \Carbon\Carbon::today()->format('Y-m-d') }}" min="1900-12-31"
-                                                    class="form-control" placeholder="Data de Nascimento"
-                                                    value="{{ old('name') }}" required>
+                                        <div class="form-group" id="gr-nome_pessoa">
+                                            <label>Nome Completo</label>
+                                            <input type="text" name="name_pessoa" id="name_pessoa" class="form-control"
+                                                value="{{ old('name_pessoa') }}" required>
+                                        </div>
 
-                                            </div>
+                                        <div class="form-group" id="gr-nascimento">
+                                            <label>Data de Nascimento</label>
+                                            <input type="text" name="data_nascimento" id="data_nascimento" class="form-control data_nascimento" value="{{ old('data_nascimento') }}" required>
+                                            <small id="erro_nascimento" class="text-danger d-none">Data de nascimento inválida.</small>
+                                        </div>
 
+                                        {{-- Pessoa juridica
+                                        --}}
 
-                                            {{-- Pessoa juridica
-                                            --}}
-
-                                            <div class="form-group" id="gr-cnpj" style="display: none">
-                                                <label>CNPJ</label>
-                                                <input type="text" name="documento_cnpj" id="documento_cnpj"
-                                                    class="form-control cnpj" value="{{ old('documento') }}"
-                                                    onchange="return validateCNPJ()" required autofocus>
-                                                    <small id="validarCNPJ" class="text-danger">
-
-                                                    </small>
-                                            </div>
-
-                                            <div class="form-group" id="gr-name_empresa" style="display: none">
-                                                <label>Nome da Empresa</label>
-                                                <input type="text" name="name_empresa" id="name_empresa"
-                                                    class="form-control" value="{{ old('name') }}">
-                                            </div>
-
-                                            <div class="form-group" id="gr-inscricao" style="display: none">
-                                                <label>Inscricao Estadual</label>
-                                                <input type="text" name="inscricao_estadual" id="inscricao_estadual"
-                                                    class="form-control" value="{{ old('name') }}">
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label>Entre com seu email</label>
-                                                <input type="email" id="email" name="email" value="{{ old('email') }}"
-                                                    class="form-control" onchange="validateEmail1()" required>
-                                                <small id="emailValidate" class="text-danger">
+                                        <div class="form-group" id="gr-cnpj" style="display: none">
+                                            <label>CNPJ</label>
+                                            <input type="text" name="documento_cnpj" id="documento_cnpj"
+                                                class="form-control cnpj" value="{{ old('documento_cnpj') }}"
+                                                onchange="return validateCNPJ()" autofocus>
+                                                <small id="validarCNPJ" class="text-danger">
 
                                                 </small>
-                                            </div>
+                                        </div>
 
-                                            <div class="form-group">
-                                                <label>Insira novamente seu e-mail</label>
-                                                <input type="email" id="confirm_email" name="email"
-                                                    value="{{ old('email') }}" class="form-control"
-                                                    onchange="validateEmail1()" required>
-                                                <small id="emailValidate2" class="text-danger">
+                                        <div class="form-group" id="gr-name_empresa" style="display: none">
+                                            <label>Nome da Empresa</label>
+                                            <input type="text" name="name_empresa" id="name_empresa"
+                                                class="form-control" value="{{ old('name_empresa') }}">
+                                        </div>
 
-                                                </small>
-                                            </div>
+                                        <div class="form-group" id="gr-inscricao" style="display: none">
+                                            <label>Inscricao Estadual</label>
+                                            <input type="text" name="inscricao_estadual" id="inscricao_estadual"
+                                                class="form-control" value="{{ old('inscricao_estadual') }}">
+                                        </div>
 
-                                            <div class="form-group">
-                                                <label>Telefone</label>
-                                                <input type="text" id="telefone" class="form-control telefone"
-                                                    name="telefone" value="{{ old('telefone') }}" required>
-                                            </div>
+                                        <div class="form-group">
+                                            <label>Entre com seu email</label>
+                                            <input type="email" id="email" name="email" value="{{ old('email') }}"
+                                                class="form-control" onchange="validateEmail1()" required>
+                                            <small id="emailValidate" class="text-danger">
 
-                                            <div class="form-group">
-                                                <label>Digite sua senha</label>
-                                                <input type="password" name="password" id="password" class="form-control"
-                                                    onchange="passwordValid()" required>
-                                                <small id="passwordValidate" class="text-danger">
+                                            </small>
+                                        </div>
 
-                                                </small>
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Insira novamente sua Senha</label>
-                                                <input type="password" name="password_confirmation"
-                                                    id="password_confirmation" class="form-control"
-                                                    onchange="passwordValid()" required>
-                                                <small id="passwordValidate2" class="text-danger">
+                                        <div class="form-group">
+                                            <label>Insira novamente seu e-mail</label>
+                                            <input type="email" id="confirm_email" name="email"
+                                                value="{{ old('email') }}" class="form-control"
+                                                onchange="validateEmail1()" required>
+                                            <small id="emailValidate2" class="text-danger">
 
-                                                </small>
+                                            </small>
+                                        </div>
 
-                                            </div>
+                                        <div class="form-group">
+                                            <label>Telefone</label>
+                                            <input type="text" id="telefone" class="form-control telefone"
+                                                name="telefone" value="{{ old('telefone') }}" required>
+                                        </div>
 
-                                            <div class="form-group d-flex justify-content-center">
-                                                <div class="form-check rounded col-md-12 text-left">
-                                                    <label class="form-check-label text-white d-flex align-items-center">
-                                                        <input class="form-check-input" name="agree" type="checkbox"
-                                                            required>
-                                                        <span class="form-check-sign"></span>
+                                        <div class="form-group">
+                                            <label>Digite sua senha</label>
+                                            <input type="password" name="password" id="password" class="form-control"
+                                                onchange="passwordValid()" required>
+                                            <small id="passwordValidate" class="text-danger">
 
-                                                        <b style="color: grey">Concordo com os <a
-                                                                href="https://oincbank.com.br/termos-e-condicoes"
-                                                                target="_blank">Termos e Condições</a>.</b>
+                                            </small>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Insira novamente sua Senha</label>
+                                            <input type="password" name="password_confirmation"
+                                                id="password_confirmation" class="form-control"
+                                                onchange="passwordValid()" required>
+                                            <small id="passwordValidate2" class="text-danger">
 
-                                                    </label>
-                                                </div>
-                                                <input type="hidden" name="tipo" id="tipo" value="1">
-                                            </div>
+                                            </small>
 
                                         </div>
 
-                                        <div class="footer text-center">
-                                            <button type="submit" class="btn btn-oinc-primary btn-wd">Crie Sua
-                                                Conta</button>
+                                        <div class="form-group d-flex justify-content-center">
+                                            <div class="form-check rounded col-md-12 text-left">
+                                                <label class="form-check-label text-white d-flex align-items-center">
+                                                    <input class="form-check-input" name="agree" type="checkbox"
+                                                        required>
+                                                    <span class="form-check-sign"></span>
+
+                                                    <b style="color: grey">Concordo com os <a
+                                                            href="https://oincbank.com.br/termos-e-condicoes"
+                                                            target="_blank">Termos e Condições</a>.</b>
+
+                                                </label>
+                                            </div>
+                                            <input type="hidden" name="tipo" id="tipo" value="1">
                                         </div>
+
+                                    </div>
+
+                                    <div class="footer text-center">
+                                        <button type="submit" class="btn btn-oinc-primary btn-wd">Crie Sua
+                                            Conta</button>
                                     </div>
                                 </div>
-
                             </div>
                         </div>
                 </div>
                 {{-- acaba aqui --}}
                 </form>
 
-                <div class="col">
-                    @foreach ($errors->all() as $error)
-                        <div class="alert alert-warning alert-dismissible fade show">
-                            <a href="#" class="close" data-dismiss="alert" aria-label="close"> &times;</a>
-                            {{ $error }}
-                        </div>
-                    @endforeach
-                </div>
+               
             </div>
         </div>
     </div>
@@ -175,15 +170,18 @@
 @endsection
 
 @section('scripts')
+    <script src="{{ asset('light-bootstrap') }}/js/register.js"></script>
+
     <script>
         $('.cpf').mask('000.000.000-00', {
             reverse: true
         });
+
         $('.cnpj').mask('00.000.000/0000-00', {
             reverse: true
         });
-        $('.telefone').mask('(00) 00000-0000');
 
+        $('.telefone').mask('(00) 00000-0000');
     </script>
     <script>
         var cpf = document.getElementById('gr-cpf');
@@ -208,7 +206,6 @@
         var input_cp = document.getElementById('password_confirmation');
         var input_ps = document.getElementById('password');
         var span_cp = document.getElementById('error_confirmation');
-        console.log(inp_documento_cpf);
 
         function validateCPF() {
             var input = document.getElementById('documento_cpf').value;
@@ -218,7 +215,6 @@
             } else {
                 document.getElementById("passwordHelp").innerHTML = '';
             }
-
         }
 
         function validateCNPJ() {
@@ -258,7 +254,6 @@
             }
         }
 
-
         function passwordValid() {
             var minMaxLength = /^[\s\S]{8,32}$/,
                 upper = /[A-Z]/,
@@ -268,17 +263,15 @@
             var password_confirmation = document.getElementById('password_confirmation').value;
             if ((minMaxLength.test(password) && upper.test(password) && lower.test(password) && number.test(password)) ==
                 false) {
-                console.log('min ' + minMaxLength.test(password));
-                console.log('maiscula ' + upper.test(password));
-                console.log('minusc ' + lower.test(password));
-                console.log('numero ' + number.test(password));
+                // console.log('min ' + minMaxLength.test(password));
+                // console.log('maiscula ' + upper.test(password));
+                // console.log('minusc ' + lower.test(password));
+                // console.log('numero ' + number.test(password));
                 document.getElementById("passwordValidate").innerHTML =
                     'Senha deve conter ao menos 1 número, 1 letra maiúscula, 1 letra minúscula e no mínimo 8 caracteres.';
 
-            } else if ((minMaxLength.test(password) && upper.test(password) && lower.test(password) && number.test(
-                    password)) == true) {
+            } else if ((minMaxLength.test(password) && upper.test(password) && lower.test(password) && number.test(password)) == true) {
                 document.getElementById("passwordValidate").innerHTML = '';
-
 
                 if (password == '') {
                     document.getElementById("passwordValidate").innerHTML = 'Por favor preencha sua senha.';
@@ -295,8 +288,6 @@
             }
 
         }
-
-
 
         btn_empresa.addEventListener("click", function() {
             btn_pessoa.classList.remove('active')

@@ -57,12 +57,14 @@
                                     <label for="data_encerramento"></i> Que data a campanha deve encerrar?*</label>
                                     <br>
                                     <div class="form-group">
-                                        <input type="date" name="data_encerramento" max="3000-12-31"
-                                            min="{{ \Carbon\Carbon::today()->format('Y-m-d') }}" class="form-control"
+                                        <input type="text" name="data_encerramento" 
+                                            class="form-control data_encerramento"
+                                            id="data_encerramento"
                                             required
                                             oninvalid="this.setCustomValidity('Por favor preencha a data.')"
                                             oninput="this.setCustomValidity('')">
                                     </div>
+                                    <small id="erro_encerramento" class="text-danger d-none">Data de encerramento inválida.</small>
                                 </div>
 
 
@@ -165,6 +167,7 @@
 @endsection
 
 @section('scripts')
+<script src="{{ asset('light-bootstrap') }}/js/cofrinho.js"></script>
 
     <script>
         $(document).ready(function() {

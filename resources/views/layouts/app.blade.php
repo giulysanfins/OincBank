@@ -29,14 +29,13 @@
 
         <!-- CSS Files -->
         <link href="{{ asset('light-bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" />
+        <link href="{{ asset('vendor') }}/bootstrap-datepicker/css/bootstrap-datepicker.standalone.css" rel="stylesheet" />
         <link href="{{ asset('light-bootstrap/css/light-bootstrap-dashboard.css') }} " rel="stylesheet" />
         <!-- CSS Just for demo purpose, don't include it in your project -->
         <link href="{{ asset('light-bootstrap/css/demo.css') }}" rel="stylesheet" />
         <link href="{{ asset('vendors') }}/fontawesome/css/all.min.css" rel="stylesheet" />
         <link href="{{ asset('vendors') }}/datatables/datatables.min.css" rel="stylesheet" />
         <link href="{{ asset('light-bootstrap') }}/css/app.css" rel="stylesheet" />
-
-
     </head>
 
     <body >
@@ -55,15 +54,13 @@
         </div>
     </body>
         <!--   Core JS Files   -->
-        <script
-        src="https://code.jquery.com/jquery-3.5.1.js"
-        integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
-        crossorigin="anonymous"></script>
+    <script
+    src="https://code.jquery.com/jquery-3.5.1.js"
+    integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+    crossorigin="anonymous"></script>
 
     <script src="{{ asset('light-bootstrap/js/core/popper.min.js') }}" type="text/javascript"></script>
     <script src="{{ asset('light-bootstrap/js/core/bootstrap.min.js') }}" type="text/javascript"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.12/jquery.mask.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.12/jquery.mask.min.js"></script>
     <!--  Plugin for Switches, full documentation here: http://www.jque.re/plugins/version3/bootstrap.switch/ -->
     <script src="{{ asset('light-bootstrap/js/plugins/bootstrap-switch.js') }}"></script>
     <!--  Chartist Plugin  -->
@@ -76,16 +73,16 @@
     <script src="{{ asset('vendors') }}/fontawesome/js/all.min.js"></script>
     <script src="{{ asset('vendors') }}/datatables/datatables.min.js"></script>
     <script src="{{ asset('light-bootstrap/js/demo.js') }}"></script>
-
-
-
+    
     {{-- Jquery mask --}}
     <script text="type=text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
     {{-- Uso para SweetAlert no JS --}}
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
-
     @include('sweetalert::alert')
+
+    <script src="{{ asset('vendor') }}/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+    <script src="{{ asset('vendor') }}/bootstrap-datepicker/locales/bootstrap-datepicker.pt-BR.min.js"></script>
 
     @yield('scripts')
 </html>

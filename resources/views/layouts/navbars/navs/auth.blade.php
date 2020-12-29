@@ -14,7 +14,7 @@
                         <span class="notification d-none d-lg-block">5</span>
                         <span class="d-lg-none pl-2"> 5 Notificações</span>
                     </a>
-                    <ul class="dropdown-menu">
+                    <ul class="dropdown-menu-theme">
                         <a class="dropdown-item" href="#">{{ __('Notification 1') }}</a>
                         <a class="dropdown-item" href="#">{{ __('Notification 2') }}</a>
                         <a class="dropdown-item" href="#">{{ __('Notification 3') }}3</a>

@@ -22786,4 +22786,9 @@ section.shop {
      color: white;
   }
 
+  .alert.alert-sm 
+  {
+      padding: 20px 20px !important;
+  }
+
 /*# sourceMappingURL=styles.min.css.map */

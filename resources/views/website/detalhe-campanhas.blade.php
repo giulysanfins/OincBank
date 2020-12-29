@@ -71,8 +71,6 @@
                                         <br>
 
                                         <div class="" id="erro">
-
-
                                         </div>
                                     </div>
                                     {{-- <div class="col-lg-9 col-xl-8 text-lg-right">
@@ -222,8 +220,8 @@
         let val2 = val1.replace(",",".");
         if(val2 < parseFloat({{$minValue->valor}}) || val2 > parseFloat({{$maxValue->valor}}))
         {
-            document.getElementById("erro").className += "alert alert-warning alert-dismissible fade show";
-            document.getElementById('erro').innerHTML = 'O valor deve ser entre R$:{{number_format($minValue->valor,2,",",".")}} até R$:{{number_format($maxValue->valor,2,",",".")}}.';
+            document.getElementById("erro").className += "alert alert-warning alert-sm alert-dismissible fade show mt-2 text-center";
+            document.getElementById('erro').innerHTML = 'O valor deve ser entre R$ {{number_format($minValue->valor,2,",",".")}} até R$ {{number_format($maxValue->valor,2,",",".")}}.';
             $("#btnSubmit").attr("disabled", true);
             var elem = document.getElementById('btnSubmit');
         }

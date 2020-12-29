@@ -58,7 +58,6 @@ class RegisterController extends Controller
                 'min:8',
                 'regex:"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$"',
                 'confirmed'],
-
                 'documento_cpf' => ['required','cpf','unique:users,documento'],
                 'agree' => ['required']
             ]);
@@ -86,8 +85,6 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-
-
         if($data['documento_cpf'] != null)
         {
             $nome = $data['name_pessoa'];
@@ -99,14 +96,12 @@ class RegisterController extends Controller
             $documento = $data['documento_cnpj'];
         }
 
-
-
         return User::create([
             'name' => $nome,
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'documento' => $documento,
-            'data_nascimento' => $data['data_nascimento'],
+            'data_nascimento' => Carbon::createFromFormat('d/m/Y', $data['data_nascimento']),
             'inscricao_estadual' => $data['inscricao_estadual'],
             'telefone' => $data['telefone'],
             'termos_condicoes' => \Carbon\Carbon::now(),
