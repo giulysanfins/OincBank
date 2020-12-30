@@ -37,6 +37,7 @@
                                         <div class="row mt-4">
                                             <div class="col-12 col-md-4">
                                                 {{-- Pessoa fisica --}}
+
                                                 <div class="form-group" id="gr-cpf">
                                                     <label>CPF</label>
                                                     <input type="text" name="documento_cpf" id="documento_cpf" class="form-control cpf"  value="{{ old('documento') }}"

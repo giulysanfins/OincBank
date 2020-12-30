@@ -448,7 +448,7 @@
 @section('scripts')
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.9/sweetalert2.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.9/sweetalert2.min.js"></script>
-  <script>
+<script>
 
     function validate() {
       event.preventDefault(); // prevent form submit
@@ -471,7 +471,7 @@
            }
         });
     }
-    </script>
+</script>
 
 <script>
     $(".agencia").mask("0000");
@@ -491,16 +491,26 @@ $("#documento").keydown(function(){
         $(".documento").mask("99.999.999/9999-99");
     }
 
-    // ajustando foco
-    var elem = this;
-    setTimeout(function(){
-        // mudo a posição do seletor
-        elem.selectionStart = elem.selectionEnd = 10000;
-    }, 0);
-    // reaplico o valor para mudar o foco
-    var currentValue = $(this).val();
-    $(this).val('');
-    $(this).val(currentValue);
+
 });
+
+$(function(){
+  $('#cpf').mask('999.999.999-99');
+  $('#cnpj').mask('99.999.999/9999-99');
+
+  $('#myInput').keyup(function(){
+    const val = $(this).val().replace(/[^0-9]/g, '');
+    if (val.length <= 11) {
+      $('#cpf').val(val);
+      $(this).val($('#cpf').masked());
+      $('#documento').text('CPF');
+    } else {
+      $('#cnpj').val(val);
+      $(this).val($('#cnpj').masked());
+      $('#documento').text('CNPJ');
+    }
+  });
+});
+
 </script>
 @endsection
