@@ -174,7 +174,8 @@
                 </div>
 
                 <div class="row align-items-end margin-bottom">
-                    <div class="col-sm-6"><a class="button button--primary" href="{{route('campanha.index')}}">+ Cofrinhos</a></div>
+
+                    @if($campanhas->count() != 0)
                     <div class="col-sm-6 d-flex justify-content-sm-end">
                         <!-- slider nav start-->
                         <div class="slider__nav causes-slider__nav">
@@ -187,8 +188,21 @@
                         </div>
                         <!-- slider nav end-->
                     </div>
-                </div>
+                    @else
+                        <div class="d-flex col-sm-6 align-items-center">
+                            <i class="far fa-sad-cry mr-4" style="width:100px; height: 100px; color: #643348;"></i>
+                            <strong>
+                                Infelizmente não temos nenhum cofrinho no momento!!! 
+                            </strong>
+                        </div>
+                    @endif
 
+                </div>
+                @if($campanhas->count() != 0)
+                <div class="row">
+                    <div class="col-sm-6"><a class="button button--primary" href="{{route('campanha.index')}}">+ Cofrinhos</a></div>
+                </div>
+                @endif
             </div>
 
             <div class="causes-holder offset-margin">
@@ -212,6 +226,15 @@
                                                 <h6 class="causes-item__title">
                                                     <a href="{{ route('website.campanhas.detalhes', $campanha->id) }}">{{ $campanha->titulo }}</a>
                                                 </h6>
+                                                <div class="d-flex align-items-center">
+                                                    @if($campanha->photo)
+                                                        <img class="mr-4 rounded-circle shadow" style="width: 60px; height:60px;" src="{{ asset('/storage/profile/' . $campanha->photo->path) }}" alt="">
+                                                    @else
+                                                        <img class="mr-4 rounded-circle shadow" style="width: 60px; height:60px;" src="{{ asset('pig-pork.jpg') }}" alt="">
+                                                    @endif
+                                                    <strong>{{ $campanha->user->name }}</strong>
+                                                </div>
+                                                <hr/>
                                                 <p>
                                                     @if (strlen($campanha->descricao) > 35)
                                                         @php
