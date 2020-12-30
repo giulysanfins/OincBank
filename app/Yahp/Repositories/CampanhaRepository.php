@@ -54,6 +54,17 @@ class CampanhaRepository
         }
     }
 
+    public function getByPaginate($status)
+    {
+        $dateToday = Carbon::now()->format('Y-m-d');
+        if($status == 5)
+        {
+            return $this->model->where('status',2)->where('data_encerramento','<',$dateToday)->paginate(1);
+        } else {
+            return $this->model->where('status',$status)->paginate(6);
+        }
+    }
+
     /**
      * @param $id
      * @return mixed

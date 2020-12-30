@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
 use App\Yahp\Services\ModuleService;
 use Route;
@@ -52,5 +53,7 @@ class AppServiceProvider extends ServiceProvider
                 $view->with('modules', $modulos);
             }
         });
+
+        Paginator::useBootstrap();
     }
 }
