@@ -212,6 +212,15 @@
                                                 <h6 class="causes-item__title">
                                                     <a href="{{ route('website.campanhas.detalhes', $campanha->id) }}">{{ $campanha->titulo }}</a>
                                                 </h6>
+                                                <div class="d-flex align-items-center">
+                                                    @if($campanha->photo)
+                                                        <img class="mr-4 rounded-circle shadow" style="width: 60px; height:60px;" src="{{ asset('/storage/profile/' . $campanha->photo->path) }}" alt="">
+                                                    @else
+                                                        <img class="mr-4 rounded-circle shadow" style="width: 60px; height:60px;" src="{{ asset('pig-pork.jpg') }}" alt="">
+                                                    @endif
+                                                    <strong>{{ $campanha->user->name }}</strong>
+                                                </div>
+                                                <hr/>
                                                 <p>
                                                     @if (strlen($campanha->descricao) > 35)
                                                         @php
