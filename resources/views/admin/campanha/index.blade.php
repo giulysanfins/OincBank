@@ -12,7 +12,8 @@
                         </div>
                         <div class="card-body text-center">
                             <h2>
-                                {{$campanhas_expiradas->count()}}<br />
+                                {{-- @dd($campanhas_expiradas->count()) --}}
+                                {{$campanhas_expiradas->count()}}<br>
                                 <small>Cofrinhos</small>
                             </h2>
                         </div>
@@ -28,7 +29,7 @@
                         </div>
                         <div class="card-body text-center">
                             <h2>
-                                {{$campanhas_aprovadas->count()}}<br />
+                                {{$campanhas_aprovadas->count()}}<br>
                                 <small>Cofrinhos</small>
                             </h2>
                         </div>
@@ -44,7 +45,7 @@
                         </div>
                         <div class="card-body text-center">
                             <h2>
-                                {{$campanhas_desativadas->count()}}<br />
+                                {{$campanhas_desativadas->count()}}<br>
                                 <small>Cofrinhos</small>
                             </h2>
                         </div>
@@ -97,7 +98,7 @@
 
                                         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
                                             <div class="card-body">
-                                                @if($campanhas_expiradas->count() >0)
+                                                @if($campanhas_expiradas->count() > 0)
 
                                                     <table class="table">
                                                         <thead>
@@ -105,7 +106,7 @@
                                                                 <th scope="col">#</th>
                                                                 <th scope="col">Titulo</th>
                                                                 <th scope="col">Categoria</th>
-                                                                <th scope="col">Valores</th>
+                                                                <th scope="col">Arrecadação</th>
                                                                 <th scope="col">Data Criacao</th>
                                                                 <th scope="col">Dono</th>
                                                                 <th scope="col"></th>
@@ -113,36 +114,99 @@
                                                         </thead>
                                                         <tbody>
                                                             @foreach ($campanhas_expiradas as $campanha)
+                                                                @php
+                                                                    $total = 0;
+
+                                                                    foreach($campanha->payments as $pag)
+                                                                    {
+                                                                        if($pag->tipo == 1 && $pag->status == 2){
+                                                                             $total = $total + $pag->valor;
+                                                                        }
+                                                                    }
+
+                                                                @endphp
                                                                 <tr>
                                                                     <th scope="row">{{$campanha->id}}</th>
                                                                     <td>{{$campanha->titulo}}</td>
                                                                     <td>{{$campanha->categoria->name}}</td>
-                                                                    <td>
+                                                                    <td><b>R$ {{number_format($total,2,",",".")}}</b> / R$ {{number_format($campanha->valor,2,",",".")}}</td>
 
-                                                                    </td>
                                                                     <td>{{$campanha->created_at->format('d/m/Y h:i:s')}}</td>
                                                                     <td>
                                                                         {{$campanha->user->name}}
                                                                     </td>
                                                                     <td>
                                                                         <div class="btn-group float-right" role="group" aria-label="Botões de Ação - Clientes">
-                                                                            @if (auth()->user()->role == 2)
-                                                                            <a href="{{route('campanha.edit',$campanha->id)}}" class="btn btn-info">Editar</a>
-                                                                            @endif
-                                                                            <a href="{{route('campanha.show',$campanha->id)}}" class="btn btn-secondary">Visualizar</a>
-                                                                            @if (auth()->user()->role == 2)
-                                                                            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#sacar{{$campanha->id}}">Sacar valor</button>
-                                                                            @endif
-                                                                            {{-- <button type="button" class="btn btn-danger">Deletar</button> --}}
+
+                                                                                @if (auth()->user()->role == 2)
+                                                                                      <a href="{{route('campanha.edit',$campanha->id)}}" class="btn btn-info">Editar</a>
+                                                                                @endif
+                                                                                     <a href="{{route('campanha.show',$campanha->id)}}" class="btn btn-secondary">Visualizar</a>
+                                                                                @if (auth()->user()->role == 2)
+                                                                                     <button type="button" class="btn btn-success" data-toggle="modal" data-target="#sacar{{$campanha->id}}">Sacar valor</button>
+                                                                                @endif
+                                                                                    {{-- <a href="{{route('campanha.desativar',$campanha->id)}}" onclick="validate()" class="btn btn-danger">Desativar</a> --}}
+                                                                                    <button type="button" class="btn btn-danger" data-toggle="modal"
+                                                                                    data-target="#editDelete{{ $campanha->id }}">Desativar</button>
+
+
+                                                                            <div class="modal fade" id="editDelete{{ $campanha->id }}" tabindex="-1"
+                                                                                role="dialog" aria-labelledby="editDelete{{ $campanha->id }}"
+                                                                                aria-hidden="true">
+                                                                                <div class="modal-dialog" role="document">
+                                                                                    <div class="modal-content">
+                                                                                        <div class="modal-header">
+                                                                                            <h5 class="modal-title" id="exampleModalLabel">Deletar Cofrinho</h5>
+                                                                                            <button type="button" class="close" data-dismiss="modal"
+                                                                                                aria-label="Fechar">
+                                                                                                <span aria-hidden="true">&times;</span>
+                                                                                            </button>
+                                                                                        </div>
+                                                                                        <div class="modal-body">
+                                                                                            <form action="{{ route('campanha.desativar', $campanha->id) }}">
+                                                                                                @csrf
+
+
+                                                                                                <div class="row">
+
+                                                                                                    <div class="col-12">
+                                                                                                        <div class="form-group text-left">
+                                                                                                            <label for="motivo_deletado">Digite o Motivo da
+                                                                                                                Deleção</label>
+                                                                                                            <textarea rows="6" name="motivo_deletado"
+                                                                                                                id="motivo_deletado"
+                                                                                                                class="form-control form-control-textarea"
+                                                                                                                placeholder="Digite o motivo de deleção"></textarea>
+                                                                                                        </div>
+                                                                                                    </div>
+
+                                                                                                </div>
+                                                                                        </div>
+                                                                                        <div class="modal-footer">
+                                                                                            <button type="button" class="btn btn-secondary"
+                                                                                                data-dismiss="modal">Fechar</button>
+                                                                                            <button type="submit" class="btn btn-danger">Deletar</button>
+                                                                                            </form>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+
+
                                                                         </div>
                                                                     </td>
+
                                                                 </tr>
                                                                 @if (auth()->user()->role == 2)
                                                                 @component('admin.campanha.components.solicitar',[
+                                                                    'campanha' => $campanha,
+                                                                    'bancos' => $bancos
+                                                                ])@endcomponent
+                                                                @else
+                                                                @component('admin.campanha.components.desativar',[
                                                                     'campanha' => $campanha
                                                                 ])@endcomponent
                                                                 @endif
-
                                                             @endforeach
                                                         </tbody>
                                                     </table>
