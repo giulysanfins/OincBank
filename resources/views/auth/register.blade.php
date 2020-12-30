@@ -1,12 +1,16 @@
 @extends('layouts.app', ['activePage' => 'register', 'title' => 'Cadstre um novo Usúario'])
-
 @section('content')
+
+ <head>
+        <meta name="grecaptcha-key" content="{{ config('recaptcha.v3.public_key') }}">
+        <script src="https://www.google.com/recaptcha/api.js?render={{ config('recaptcha.v3.public_key') }}"></script>
+    </head>
 <div class="full-page section-image" data-color="pink" data-image="{{ asset('charity.jpg') }}">
     <div class="content pt-5">
         <div class="container">
             <div class="col-md-10 ml-auto mr-auto">
                 <a class="btn btn-oinc-white" href="{{route('website.index')}}">Voltar</a>
-                <form class="form" method="POST" action="{{ route('register') }}">
+                <form class="form" method="POST" action="{{ route('register') }}" data-grecaptcha-action="message">
                     @csrf
                     @method('post')
 
@@ -69,7 +73,7 @@
                                                     <label>Data de Nascimento</label>
                                                     <input type="date" name="data_nascimento" id="data_nascimento" class="form-control" max="{{ \Carbon\Carbon::today()->format('Y-m-d') }}"
                                                     min="1900-12-31" class="form-control" placeholder="Data de Nascimento" value="{{ old('name') }}" required>
-                                                </div> 
+                                                </div>
                                                 {{-- Pessoa juridica --}}
                                                 <div class="form-group" id="gr-inscricao" style="display: none">
                                                     <label>Inscricao Estadual</label>
@@ -123,11 +127,28 @@
                                                         onchange="passowordValid()" required>
                                                     <small id="passwordValidate2" class="text-danger">
 
+
                                                     </small>
                                                 </div>
                                             </div>
                                         </div>
 
+
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="form-group d-flex justify-content-center">
+                                                <div class="form-check rounded col-md-12 text-left">
+                                                    <small style="color: grey">
+                                                        Esse site é protegido pelo reCAPTCHA e Google.
+                                                        <a href="https://policies.google.com/privacy">Política de Privacidade</a> e
+                                                        <a href="https://policies.google.com/terms">Termos de Condições</a> são aplicados.
+                                                </small>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
                                         <div class="row">
                                             <div class="col-12">
                                                 <div class="form-group d-flex justify-content-center">
@@ -135,15 +156,17 @@
                                                         <label class="form-check-label text-white d-flex align-items-center">
                                                             <input class="form-check-input" name="agree" type="checkbox" required >
                                                             <span class="form-check-sign"></span>
-        
+
                                                             <b style="color: grey">Concordo com os  <a href="https://oincbank.com.br/termos-e-condicoes" target="_blank">Termos e Condições</a>.</b>
-        
+
                                                         </label>
                                                     </div>
                                                     <input type="hidden" name="tipo" id="tipo" value="1">
                                                 </div>
+
                                             </div>
                                         </div>
+
 
                                     </div>
 
@@ -170,6 +193,7 @@
         </div>
     </div>
     </div>
+
 
 
 @endsection
@@ -233,7 +257,8 @@
         }
 
         function validateEmail1() {
-            var reg = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            var reg =
+                /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
             var email_valida = document.getElementById('email').value;
             var email_confirma = document.getElementById('confirm_email').value;
             if (reg.test(email_valida) == false) {

@@ -46,7 +46,8 @@
                         {{-- botão procura cofrinho --}}
                         {{-- <label for="text">Procure por cofrinho</label> --}}
                         <div class="input-group-prepend">
-                            <input type="search" name="q" class="form-control-lg" placeholder="Procure por cofrinho" required>
+                            <input type="search" name="q" class="form-control-lg" placeholder="Procure por cofrinho" required oninvalid="this.setCustomValidity('Por favor, preencha esse campo.')"
+                            oninput="this.setCustomValidity('')">
                             <button type="submit" class="btn btn-secondary" >Pesquisar</button>
                         </div>
                     </form>
