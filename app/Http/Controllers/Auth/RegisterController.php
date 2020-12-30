@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
+use App\Rules\ReCAPTCHAv3;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -60,7 +61,8 @@ class RegisterController extends Controller
                 'confirmed'],
 
                 'documento_cpf' => ['required','cpf','unique:users,documento'],
-                'agree' => ['required']
+                'agree' => ['required'],
+                'grecaptcha' => ['required', new ReCAPTCHAv3]
             ]);
 
         } elseif ($data['documento_cnpj'] != null)
@@ -72,7 +74,8 @@ class RegisterController extends Controller
                 'regex:/"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$"/',
                 'confirmed'],
                 'documento_cnpj' => ['required', 'cnpj', 'unique:users,documento'],
-                'agree' => ['required']
+                'agree' => ['required'],
+                'grecaptcha' => ['required', new ReCAPTCHAv3]
             ]);
         }
 

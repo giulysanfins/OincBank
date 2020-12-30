@@ -1,12 +1,18 @@
 @extends('layouts.app', ['activePage' => 'register', 'title' => 'Cadstre um novo Usúario'])
 
 @section('content')
+
+    <head>
+        <meta name="grecaptcha-key" content="{{ config('recaptcha.v3.public_key') }}">
+        <script src="https://www.google.com/recaptcha/api.js?render={{ config('recaptcha.v3.public_key') }}"></script>
+    </head>
     <div class="full-page section-image" data-color="pink" data-image="{{ asset('charity.jpg') }}">
         <div class="content pt-5">
             <div class="container mt-5">
                 <div class="col-md-5 col-sm-12 ml-auto mr-auto">
                     <a class="btn btn-oinc-white" href="{{ route('website.index') }}">Voltar</a>
-                    <form class="form" name="myForm" method="POST" action="{{ route('register') }}">
+                    <form class="form" name="myForm" method="POST" action="{{ route('register') }}"
+                        data-grecaptcha-action="message">
                         @csrf
                         @method('post')
 
@@ -66,9 +72,9 @@
                                                 <input type="text" name="documento_cnpj" id="documento_cnpj"
                                                     class="form-control cnpj" value="{{ old('documento') }}"
                                                     onchange="return validateCNPJ()" required autofocus>
-                                                    <small id="validarCNPJ" class="text-danger">
+                                                <small id="validarCNPJ" class="text-danger">
 
-                                                    </small>
+                                                </small>
                                             </div>
 
                                             <div class="form-group" id="gr-name_empresa" style="display: none">
@@ -125,6 +131,7 @@
 
                                                 </small>
 
+
                                             </div>
 
                                             <div class="form-group d-flex justify-content-center">
@@ -140,11 +147,18 @@
 
                                                     </label>
                                                 </div>
+
                                                 <input type="hidden" name="tipo" id="tipo" value="1">
+
                                             </div>
 
+                                            <small style="color: grey">
+                                                    Esse site é protegido pelo reCAPTCHA e Google.
+                                                    <a href="https://policies.google.com/privacy">Política de Privacidade</a> e
+                                                    <a href="https://policies.google.com/terms">Termos de Condições</a> são aplicados.
+                                            </small>
                                         </div>
-
+<br>
                                         <div class="footer text-center">
                                             <button type="submit" class="btn btn-oinc-primary btn-wd">Crie Sua
                                                 Conta</button>
@@ -170,6 +184,7 @@
         </div>
     </div>
     </div>
+
 
 
 @endsection
@@ -233,7 +248,8 @@
         }
 
         function validateEmail1() {
-            var reg = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            var reg =
+                /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
             var email_valida = document.getElementById('email').value;
             var email_confirma = document.getElementById('confirm_email').value;
             if (reg.test(email_valida) == false) {
