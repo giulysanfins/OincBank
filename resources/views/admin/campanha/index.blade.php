@@ -342,7 +342,8 @@
                                                                     </tr>
                                                                     @if (auth()->user()->role == 2)
                                                                     @component('admin.campanha.components.solicitar',[
-                                                                        'campanha' => $campanha
+                                                                        'campanha' => $campanha,
+                                                                        'bancos' => $bancos
                                                                     ])@endcomponent
                                                                     @endif
 
@@ -625,7 +626,8 @@
                                                                         </tr>
                                                                         @if (auth()->user()->role == 2)
                                                                             @component('admin.campanha.components.solicitar',[
-                                                                                'campanha' => $campanha
+                                                                                'campanha' => $campanha,
+                                                                                'bancos' => $bancos
                                                                             ])@endcomponent
                                                                         @endif
                                                                     @endforeach
