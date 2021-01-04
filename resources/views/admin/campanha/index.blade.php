@@ -203,7 +203,6 @@
                                                                     @else
                                                                         @component('admin.campanha.components.desativar', [
                                                                             'campanha' => $campanha,
-                                                                            'bancos' => $bancos,
                                                                         ])@endcomponent
                                                                     @endif
                                                                 @endforeach
@@ -310,7 +309,6 @@
                                                                     @endif
                                                                     @component('admin.campanha.components.desativar', [
                                                                         'campanha' => $campanha,
-                                                                        'bancos' => $bancos,
                                                                     ])@endcomponent
 
                                                                 @endforeach

@@ -61,7 +61,7 @@ class RegisterController extends Controller
                 'confirmed'],
                 'documento_cpf' => ['required','cpf','unique:users,documento'],
                 'agree' => ['required'],
-                'grecaptcha' => ['required', new ReCAPTCHAv3]
+                // 'grecaptcha' => ['required', new ReCAPTCHAv3]
             ]);
 
         } elseif ($data['documento_cnpj'] != null)
@@ -74,7 +74,7 @@ class RegisterController extends Controller
                 'confirmed'],
                 'documento_cnpj' => ['required', 'cnpj', 'unique:users,documento'],
                 'agree' => ['required'],
-                'grecaptcha' => ['required', new ReCAPTCHAv3]
+                // 'grecaptcha' => ['required', new ReCAPTCHAv3]
             ]);
         }
 
