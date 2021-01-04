@@ -52,7 +52,7 @@
 
                 <div class="alert alert-dark alert-dismissible fade show alert-policy" role="alert">
                     A gente guarda estatísticas de visitas para melhorar sua experiência de navegação.
-                    Ao continuar, você concorda com a nossa <a href="" target="_blank"> Politica de Privacidade</a>.
+                    Ao continuar, você concorda com a nossa <a href="{{route('website.politica')}}" target="_blank"> Politica de Privacidade</a>.
                     <button onclick="setPrivacityCookie()" type="button" class="btn button--primary" data-dismiss="alert" aria-label="Close">
                         Continuar e Fechar
                     </button>
@@ -87,7 +87,7 @@
                 var expires =  d.toUTCString();
                 document.cookie = `${cname}=${cvalue};expires=${expires};path=/;SameSite=Lax;`
             }
-    
+
         </script>
     </body>
 </html>
