@@ -26,6 +26,7 @@ class UsersTableSeeder extends Seeder
             'tipo' => 1,
             'created_at' => now(),
             'updated_at' => now(),
+            'data_nascimento' => now(),
         ]);
 
         DB::table('users')->insert([
@@ -41,6 +42,7 @@ class UsersTableSeeder extends Seeder
 
             'created_at' => now(),
             'updated_at' => now(),
+            'data_nascimento' => now(),
         ]);
     }
 }

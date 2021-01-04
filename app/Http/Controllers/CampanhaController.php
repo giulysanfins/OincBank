@@ -222,6 +222,7 @@ class CampanhaController extends Controller
             'balanco' => $balanco,
             'perc' => (($valorTotal*100)/$campanha->valor),
             'clientes' => $this->userService->renderList(),
+            'photos' => $this->photoService->renderByCampanha($id)
         ];
 
 
@@ -397,7 +398,7 @@ class CampanhaController extends Controller
             $photo = $this->photoService->renderEdit($id);
             Storage::delete('public/images/'.$photo->path);
             $deletePhoto = $this->photoService->buildDelete($photo->id);
-            alert()->success('Sucesso','Foto excluido com sucesso.')->persistent('Fechar');
+            alert()->success('Sucesso','Foto excluida com sucesso.')->persistent('Fechar');
             return redirect()->route('campanha.edit',$request->cofrinho_id);
         } catch (\Exception $e) {
             \Log::error($e->getFile() . "\n" . $e->getLine() . "\n" . $e->getMessage());
@@ -434,7 +435,7 @@ class CampanhaController extends Controller
             return redirect()->route('campanha.edit',$id)->withInput();
         }
      }
-     
+
 
 
  }

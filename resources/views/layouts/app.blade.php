@@ -31,6 +31,8 @@
         <link href="{{ asset('light-bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" />
         <link href="{{ asset('vendor') }}/bootstrap-datepicker/css/bootstrap-datepicker.standalone.css" rel="stylesheet" />
         <link href="{{ asset('light-bootstrap/css/light-bootstrap-dashboard.css') }} " rel="stylesheet" />
+        <link href="{{ asset('vendor') }}/ekko-lightroom/ekko-lightbox.css" rel="stylesheet" />
+
         <!-- CSS Just for demo purpose, don't include it in your project -->
         <link href="{{ asset('light-bootstrap/css/demo.css') }}" rel="stylesheet" />
         <link href="{{ asset('vendors') }}/fontawesome/css/all.min.css" rel="stylesheet" />
@@ -73,7 +75,7 @@
     <script src="{{ asset('vendors') }}/fontawesome/js/all.min.js"></script>
     <script src="{{ asset('vendors') }}/datatables/datatables.min.js"></script>
     <script src="{{ asset('light-bootstrap/js/demo.js') }}"></script>
-    
+
     {{-- Jquery mask --}}
     <script text="type=text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
     {{-- Uso para SweetAlert no JS --}}
@@ -83,6 +85,7 @@
 
     <script src="{{ asset('vendor') }}/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
     <script src="{{ asset('vendor') }}/bootstrap-datepicker/locales/bootstrap-datepicker.pt-BR.min.js"></script>
+    <script src="{{ asset('vendor')}}/ekko-lightroom/ekko-lightbox.min.js"></script>
 
     @yield('scripts')
 </html>
