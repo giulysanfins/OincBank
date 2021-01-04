@@ -2,52 +2,71 @@
 <div class="aside-dropdown">
     <div class="aside-dropdown__inner">
         <div class="aside-dropdown__item d-lg-none d-block text-center ">
-            <a class="header-logo__link " href="{{route('website.index')}}">
-                <img class="header-logo__img logo--light" src="{{asset('img')}}/logos/porquim-com-nome-crop.png" alt="logo"/>
+            <a class="header-logo__link " href="{{ route('website.index') }}">
+                <img class="header-logo__img logo--light" src="{{ asset('img') }}/logos/porquim-com-nome-crop.png"
+                    alt="logo" />
             </a>
         </div>
         <div class="aside-dropdown__item d-lg-none d-block">
 
             <ul class="aside-menu">
-                <li class="aside-menu__item"><a class="aside-menu__link" href="{{route('website.campanhas')}}"><span>Campanhas</span></a></li>
-                <li class="aside-menu__item"><a class="aside-menu__link" href="{{route('website.faq')}}"><span>FAQ</span></a></li>
+                <li class="aside-menu__item"><a class="aside-menu__link"
+                        href="{{ route('website.campanhas') }}"><span>Campanhas</span></a></li>
+                <li class="aside-menu__item"><a class="aside-menu__link"
+                        href="{{ route('website.faq') }}"><span>FAQ</span></a></li>
                 @if (Auth::check())
-                <li class="aside-menu__item"><a class="aside-menu__link" href="{{route('login')}}"><span>Olá, {{auth()->user()->name}}</span></a></li>
+                    <li class="aside-menu__item"><a class="aside-menu__link" href="{{ route('login') }}"><span>Olá,
+                                {{ auth()->user()->name }}</span></a></li>
                 @else
+
                 <li class="aside-menu__item"><a class="aside-menu__link" href="{{route('login')}}"><span>Entrar</span></a></li>
+
                 @endif
             </ul>
 
         </div>
         <div class="aside-dropdown__item">
             <!-- aside menu start-->
-            <a class="header-logo__link d-lg-block d-none" href="{{route('website.index')}}">
-                <img class="header-logo__img logo--light" src="{{asset('img')}}/logos/porquim-com-nome-crop.png" alt="logo"/>
+            <a class="header-logo__link d-lg-block d-none" href="{{ route('website.index') }}">
+                <img class="header-logo__img logo--light" src="{{ asset('img') }}/logos/porquim-com-nome-crop.png"
+                    alt="logo" />
             </a>
 
             <ul class="aside-menu">
 
             </ul>
             <!-- aside menu end-->
-            <div class="aside-inner"><span class="aside-inner__title">Email</span><a class="aside-inner__link" href="mailto:suporte@oincbank.com.br">suporte@oincbank.com.br</a></div>
-            {{-- <div class="aside-inner"><span class="aside-inner__title">Phone numbers</span><a class="aside-inner__link" href="tel:+180012345678">+ 1800 - 123 456 78</a><a class="aside-inner__link" href="tel:+18009756511">+ 1800 - 975 65 11</a></div> --}}
+            <div class="aside-inner"><span class="aside-inner__title">Email</span><a class="aside-inner__link"
+                    href="mailto:suporte@oincbank.com.br">suporte@oincbank.com.br</a></div>
+            {{-- <div class="aside-inner"><span class="aside-inner__title">Phone
+                    numbers</span><a class="aside-inner__link" href="tel:+180012345678">+ 1800 - 123 456 78</a><a
+                    class="aside-inner__link" href="tel:+18009756511">+ 1800 - 975 65 11</a></div>
+            --}}
             <ul class="aside-socials">
-                <li class="aside-socials__item"><a class="aside-socials__link" href="https://www.instagram.com/oincbank/"><i class="fab fa-instagram" aria-hidden="true"></i></a></li>
-                {{-- <li class="aside-socials__item"><a class="aside-socials__link" href="#"><i class="fab fa-google-plus" aria-hidden="true"></i></a></li>
-                <li class="aside-socials__item"><a class="aside-socials__link aside-socials__link--active" href="#"><i class="fab fa-twitter" aria-hidden="true"></i></a></li>
-                <li class="aside-socials__item"><a class="aside-socials__link" href="#"><i class="fab fa-facebook" aria-hidden="true"></i></a></li> --}}
+                <li class="aside-socials__item"><a class="aside-socials__link"
+                        href="https://www.instagram.com/oincbank/"><i class="fab fa-instagram"
+                            aria-hidden="true"></i></a></li>
+                {{-- <li class="aside-socials__item"><a class="aside-socials__link"
+                        href="#"><i class="fab fa-google-plus" aria-hidden="true"></i></a></li>
+                <li class="aside-socials__item"><a class="aside-socials__link aside-socials__link--active" href="#"><i
+                            class="fab fa-twitter" aria-hidden="true"></i></a></li>
+                <li class="aside-socials__item"><a class="aside-socials__link" href="#"><i class="fab fa-facebook"
+                            aria-hidden="true"></i></a></li> --}}
             </ul>
         </div>
 
         <div class="aside-dropdown__item d-lg-none d-block">
-            <a class="button button--squared btn-block" href="{{route('campanha.create')}}" style="margin: 3% auto auto auto;"><span>Criar Cofrinho</span></a>
+            <a class="button button--squared btn-block" href="{{ route('campanha.create') }}"
+                style="margin: 3% auto auto auto;"><span>Criar Cofrinho</span></a>
         </div>
 
     </div>
 </div>
 {{-- Header Mobile END --}}
 
-{{-- <!-- header website start--> --}}
+{{--
+<!-- header website start--> --}}
+
 <header class="header header--inner">
     <div class="container-fluid">
         <div class="row no-gutters justify-content-between">
@@ -56,8 +75,9 @@
                     <div class="dropdown-trigger__item"></div>
                 </div> --}}
                 <div class="header-logo" style="margin-left: 50%">
-                    <a class="header-logo__link" href="{{route('website.index')}}">
-                        <img class="header-logo__img logo--light" src="{{asset('img')}}/logos/porquim-com-nome-crop.png" alt="logo"/>
+                    <a class="header-logo__link" href="{{ route('website.index') }}">
+                        <img class="header-logo__img logo--light"
+                            src="{{ asset('img') }}/logos/porquim-com-nome-crop.png" alt="logo" />
                     </a>
                 </div>
             </div>
@@ -65,12 +85,18 @@
                 <!-- main menu start-->
                 <nav>
                     <ul class="main-menu">
-                        <li class="main-menu__item"><a class="main-menu__link" href="{{route('website.campanhas')}}"><span>Cofrinhos</span></a></li>
-                        <li class="main-menu__item"><a class="main-menu__link" href="{{route('website.faq')}}"><span>Dúvidas Frequentes</span></a></li>
+                        <li class="main-menu__item"><a class="main-menu__link"
+                                href="{{ route('website.campanhas') }}"><span>Cofrinhos</span></a></li>
+                        <li class="main-menu__item"><a class="main-menu__link"
+                                href="{{ route('website.faq') }}"><span>Dúvidas Frequentes</span></a></li>
                         @if (Auth::check())
-                        <li class="main-menu__item"><a class="main-menu__link" href="{{route('profile.edit')}}"><span>Olá, {{auth()->user()->name}}</span></a></li>
+                            <li class="main-menu__item"><a class="main-menu__link"
+                                    href="{{ route('profile.edit') }}"><span>Olá, {{ auth()->user()->name }}</span></a>
+                            </li>
                         @else
+
                         <li class="main-menu__item"><a class="main-menu__link" href="{{route('login')}}"><span>Entrar</span></a></li>
+
                         @endif
                     </ul>
                 </nav>
@@ -81,7 +107,7 @@
                 {{-- <ul class="lang-select ">
                     <li class="lang-select__item lang-select__item--active"><span>En</span>
                         <ul class="lang-select__sub-list">
-                            <li><a href="#"|>French</a></li>
+                            <li><a href="#" |>French</a></li>
                             <li><a href="#">Spanish</a></li>
                             <li><a href="#">Deutsch</a></li>
                             <li><a href="#">Russian</a></li>
@@ -92,10 +118,30 @@
                 <div class="d-block d-md-none py-4">
 
                 </div>
+
+                <form action="{{ route('website.search') }}" method="POST">
+                    @csrf
+                    <div class="position-relative mr-4 mt-3" style="width:200px;">
+                        <button class="position-absolute ml-2 h-100 d-flex" style="border: 0px; background: none; outline: none;" type="submit">
+                            <i class="fas fa-search align-self-center"></i>    
+                        </button>
+                        <input name="q" class="form-control rounded-pill" style="padding-left: 40px" type="text" required>
+                    </div>                    
+                </form>
+
                 <div class="dropdown-trigger d-block d-sm-none">
                     <div class="dropdown-trigger__item"></div>
-                </div><a class="button button--squared" href="{{route('campanha.create')}}"><span>Criar Cofrinho</span></a>
+                </div>
+
+                <a class="button button--squared" href="{{ route('campanha.create') }}"><span>Criar Cofrinho</span></a>
             </div>
         </div>
     </div>
 </header>
+
+
+@section('scripts')
+<script>
+
+</script>
+@endsection
