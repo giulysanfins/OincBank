@@ -1,10 +1,9 @@
 @extends('layouts.app', ['activePage' => 'register', 'title' => 'Cadstre um novo Usúario'])
 @section('content')
-
- <head>
-        <meta name="grecaptcha-key" content="{{ config('recaptcha.v3.public_key') }}">
-        <script src="https://www.google.com/recaptcha/api.js?render={{ config('recaptcha.v3.public_key') }}"></script>
-    </head>
+<head>
+      <meta name="grecaptcha-key" content="{{ config('recaptcha.v3.public_key') }}">
+      <script src="https://www.google.com/recaptcha/api.js?render={{ config('recaptcha.v3.public_key') }}"></script>
+</head>
 <div class="full-page section-image" data-color="pink" data-image="{{ asset('charity.jpg') }}">
     <div class="content pt-5">
         <div class="container">
@@ -146,7 +145,9 @@
                                                 </div>
 
                                             </div>
-
+                                                </label>
+                                            </div>
+                                            <input type="hidden" name="tipo" id="tipo" value="1">
                                         </div>
                                     </div>
                                         <div class="row">
@@ -181,14 +182,7 @@
                 {{-- acaba aqui --}}
                 </form>
 
-                <div class="col">
-                    @foreach ($errors->all() as $error)
-                        <div class="alert alert-warning alert-dismissible fade show">
-                            <a href="#" class="close" data-dismiss="alert" aria-label="close"> &times;</a>
-                            {{ $error }}
-                        </div>
-                    @endforeach
-                </div>
+               
             </div>
         </div>
     </div>
@@ -199,15 +193,18 @@
 @endsection
 
 @section('scripts')
+    <script src="{{ asset('light-bootstrap') }}/js/register.js"></script>
+
     <script>
         $('.cpf').mask('000.000.000-00', {
             reverse: true
         });
+
         $('.cnpj').mask('00.000.000/0000-00', {
             reverse: true
         });
-        $('.telefone').mask('(00) 00000-0000');
 
+        $('.telefone').mask('(00) 00000-0000');
     </script>
     <script>
         var cpf = document.getElementById('gr-cpf');
@@ -232,7 +229,6 @@
         var input_cp = document.getElementById('password_confirmation');
         var input_ps = document.getElementById('password');
         var span_cp = document.getElementById('error_confirmation');
-        console.log(inp_documento_cpf);
 
         function validateCPF() {
             var input = document.getElementById('documento_cpf').value;
@@ -242,7 +238,6 @@
             } else {
                 document.getElementById("passwordHelp").innerHTML = '';
             }
-
         }
 
         function validateCNPJ() {
@@ -283,7 +278,6 @@
             }
         }
 
-
         function passwordValid() {
             var minMaxLength = /^[\s\S]{8,32}$/,
                 upper = /[A-Z]/,
@@ -293,17 +287,15 @@
             var password_confirmation = document.getElementById('password_confirmation').value;
             if ((minMaxLength.test(password) && upper.test(password) && lower.test(password) && number.test(password)) ==
                 false) {
-                console.log('min ' + minMaxLength.test(password));
-                console.log('maiscula ' + upper.test(password));
-                console.log('minusc ' + lower.test(password));
-                console.log('numero ' + number.test(password));
+                // console.log('min ' + minMaxLength.test(password));
+                // console.log('maiscula ' + upper.test(password));
+                // console.log('minusc ' + lower.test(password));
+                // console.log('numero ' + number.test(password));
                 document.getElementById("passwordValidate").innerHTML =
                     'Senha deve conter ao menos 1 número, 1 letra maiúscula, 1 letra minúscula e no mínimo 8 caracteres.';
 
-            } else if ((minMaxLength.test(password) && upper.test(password) && lower.test(password) && number.test(
-                    password)) == true) {
+            } else if ((minMaxLength.test(password) && upper.test(password) && lower.test(password) && number.test(password)) == true) {
                 document.getElementById("passwordValidate").innerHTML = '';
-
 
                 if (password == '') {
                     document.getElementById("passwordValidate").innerHTML = 'Por favor preencha sua senha.';
@@ -320,8 +312,6 @@
             }
 
         }
-
-
 
         btn_empresa.addEventListener("click", function() {
             btn_pessoa.classList.remove('active')

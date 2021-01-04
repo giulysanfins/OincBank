@@ -17,7 +17,14 @@ class WebsiteController extends Controller
      *
      * @return void
      */
-    public function __construct(CampanhaService $campanhaService, PaymentService $paymentService, ParameterService $parameterService, CategoryService $categoryService, PhotoService $photoService)
+  
+    public function __construct(
+        CampanhaService $campanhaService, 
+        PaymentService $paymentService, 
+        ParameterService $parameterService, 
+        CategoryService $categoryService,
+        PhotoService $photoService
+        )
     {
         $this->campanhaService = $campanhaService;
         $this->categoryService = $categoryService;
@@ -90,6 +97,7 @@ class WebsiteController extends Controller
             'perc' => (($valorTotal*100)/$campanha->valor),
             'minValue' => $this->parameterService->renderBySlug('campanhas.min'),
             'maxValue' => $this->parameterService->renderBySlug('campanhas.max'),
+            'fotos' => $this->photoService->renderByCampanha($id)
         ];
 
         // dd($data);
