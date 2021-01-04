@@ -86,16 +86,16 @@
                                 </div>
                                 {{-- comeco tabelas ativas --}}
                                 @if ($campanhas->count() == 0)
-                                    <div class="d-flex flex-column w-100 justify-content-center align-items-center" style="height:800px;"> 
+                                    <div class="d-flex flex-column w-100 justify-content-center align-items-center" style="height:800px;">
                                         {{-- class="d-flex flex-column w-100 h-100 justify-content-center align-items-center" --}}
                                         <i class="far fa-sad-cry mr-4" style="width:150px; height: 150px; color: #643348;"></i>
                                         <p style="font-size: 2em;">
-                                            Infelizmente não temos nenhum cofrinho no momento!!! 
+                                            Infelizmente não temos nenhum cofrinho no momento!!!
                                         </p>
                                     </div>
                                 @else
 
-                                
+
                                     <div class="accordion" id="acoordion_campanhas">
 
                                         <div class="card">
@@ -240,6 +240,7 @@
 
                                         <div id="ativos" class="collapse" aria-labelledby="headingThree" data-parent="#ativos">
                                             <div class="card-body">
+                                                @if($campanhas_aprovadas->count() > 0)
                                                 <table class="table">
                                                     <thead>
                                                         <tr>
