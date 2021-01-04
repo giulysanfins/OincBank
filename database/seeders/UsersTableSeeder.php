@@ -36,7 +36,9 @@ class UsersTableSeeder extends Seeder
             'description' => '',
             'telefone' => '0000',
             'documento' => '0000',
+
             'tipo' => 0,
+
             'created_at' => now(),
             'updated_at' => now(),
         ]);

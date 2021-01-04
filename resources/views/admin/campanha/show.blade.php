@@ -39,12 +39,18 @@
                          <h4 class="card-title">Dono</h4>
                     </div>
                     <div class="card-body d-flex align-items-center px-4">
+                        @if($ownerPhoto != null)
+
                         <img class="rounded-circle" style="width: 100px; height: 100px;" src="{{ asset('/storage/profile/' . $ownerPhoto->path) }}" alt="">
+                        @else
+                        <img class="rounded-circle" style="width: 100px; height: 100px;" src="{{ asset('pig-pork.jpg') }}" alt="...">
+
+                        @endif
                         <span class="mx-auto">{{ $campanha->user->name }}</span>
                     </div>
                 </div>
             </div>
-            
+
             <div class="col-12">
             <div class="card">
                 <div class="card-body">
