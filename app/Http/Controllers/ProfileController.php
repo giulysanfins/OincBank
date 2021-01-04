@@ -6,6 +6,7 @@ use App\Http\Requests\ProfileRequest;
 use App\Http\Requests\PasswordRequest;
 use Illuminate\Support\Facades\Hash;
 use App\Yahp\Services\PhotoService;
+use Intervention\Image\Facades\Image;
 use Storage;
 use Carbon\Carbon;
 
@@ -48,10 +49,16 @@ class ProfileController extends Controller
 
             if($request->file('photo_perfil'))
             {
+
+                $file = $request->file('photo_perfil');
+                $image = Image::make($file);
+                $image->orientate();
                 $ext = $request->file('photo_perfil')->extension();
                 $ts = Carbon::now()->timestamp;
                 $filename = $ts."_".$user_id.".".$ext;
-                $upload = Storage::putFileAs('public/profile',$request->file('photo_perfil'),$filename);
+
+                $image->save(storage_path('app/public/profile/') . $filename);
+
                 $insert = $this->photoService->buildInsert([
                     'area' => 'users',
                     'area_id' => $user_id,

@@ -38,6 +38,27 @@
 
             @yield('content')
 
+            @if(! isset($_COOKIE['privacityCheck']))
+                {{-- <div id="privacityDiv" class="position-fixed" style="z-index: 2000">
+                    <div style="width:100vw; height: 100vh; background-color:black; opacity:0.85;" ></div>
+                    <div class="alert alert-dark alert-dismissible fade show alert-policy" role="alert">
+                        A gente guarda estatísticas de visitas para melhorar sua experiência de navegação.
+                        Ao continuar, você concorda com a nossa <a href="" target="_blank"> Politica de Privacidade</a>.
+                        <button onclick="setPrivacityCookie()" type="button" class="btn button--primary" data-dismiss="alert" aria-label="Close">
+                            Continuar e Fechar
+                        </button>
+                    </div>
+                </div> --}}
+
+                <div class="alert alert-dark alert-dismissible fade show alert-policy" role="alert">
+                    A gente guarda estatísticas de visitas para melhorar sua experiência de navegação.
+                    Ao continuar, você concorda com a nossa <a href="" target="_blank"> Politica de Privacidade</a>.
+                    <button onclick="setPrivacityCookie()" type="button" class="btn button--primary" data-dismiss="alert" aria-label="Close">
+                        Continuar e Fechar
+                    </button>
+                </div>
+            @endif
+
             @include('layouts.site.components.footer')
 			<!-- footer end-->
 
@@ -54,5 +75,19 @@
 
         @yield('scripts')
 
+        <script>
+            function setPrivacityCookie(){
+                setCookie('privacityCheck', 1, 31);
+                // document.querySelector("#privacityDiv").remove();
+            }
+
+            function setCookie(cname, cvalue, exdays) {
+                var d = new Date();
+                d.setTime(d.getTime() + (exdays*24*60*60*1000));
+                var expires =  d.toUTCString();
+                document.cookie = `${cname}=${cvalue};expires=${expires};path=/;SameSite=Lax;`
+            }
+    
+        </script>
     </body>
 </html>

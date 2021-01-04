@@ -3,9 +3,8 @@
 @section('content')
     <div class="content">
         <div class="row">
-
-            <div class="col-3">
-                <div class="card">
+            <div class="col-3 pb-4">
+                <div class="card" style="height:200px;">
                     <div class="card-header">
                          <h4 class="card-title">Balanço</h4>
                     </div>
@@ -17,8 +16,8 @@
                 </div>
             </div>
 
-            <div class="col-3">
-                <div class="card">
+            <div class="col-3 pb-4" >
+                <div class="card" style="height:200px;">
                     <div class="card-header">
                          <h4 class="card-title">Valor Arrecadado:</h4>
                     </div>
@@ -34,6 +33,18 @@
                 </div>
             </div>
 
+            <div class="col-3 pb-4">
+                <div class="card" style="height:200px;">
+                    <div class="card-header">
+                         <h4 class="card-title">Dono</h4>
+                    </div>
+                    <div class="card-body d-flex align-items-center px-4">
+                        <img class="rounded-circle" style="width: 100px; height: 100px;" src="{{ asset('/storage/profile/' . $ownerPhoto->path) }}" alt="">
+                        <span class="mx-auto">{{ $campanha->user->name }}</span>
+                    </div>
+                </div>
+            </div>
+            
             <div class="col-12">
             <div class="card">
                 <div class="card-body">

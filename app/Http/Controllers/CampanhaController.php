@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Mail;
 use Intervention\Image\Facades\Image;
 
 use Illuminate\Http\Request;
-use Storage;
+use Illuminate\Support\Facades\Storage;
 use Validator;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
@@ -28,6 +28,7 @@ use App\Yahp\Services\PhotoService;
 
 class CampanhaController extends Controller
 {
+
 
     public function __construct(
         CampanhaService $campanhaService,
@@ -111,16 +112,6 @@ class CampanhaController extends Controller
         return view('admin.campanha.desativar',$data);
      }
 
-     public function mostrar($id)
-     {
-         $data = [
-            'campanhas' => $this->campanhaService->renderEdit($id),
-            'pageTitle' => 'Cofrinho',
-            'photo' => $this->photoService->renderPhotoUser('users',auth()->user()->id)
-         ];
-
-         return view('pages.campanha.show',$data);
-     }
 
      /**
       * Show the form for creating a new resource.
@@ -148,6 +139,7 @@ class CampanhaController extends Controller
         try
         {
             $user_id = auth()->user()->id;
+
             $ext = $request->file('photo_perfil')->extension();
             $ts = Carbon::now()->timestamp;
             $filename = $ts."_".$user_id.".".$ext;
@@ -221,6 +213,7 @@ class CampanhaController extends Controller
         }
 
         $data = [
+            'ownerPhoto' => $this->photoService->renderPhotoUser('users', $campanha->user_id),
             'campanha' => $this->campanhaService->renderEdit($id),
             'pageTitle' => 'Visualizar Cofrinho',
             'pagamentos' => $this->paymentService->renderByCampanha($id),
@@ -230,6 +223,7 @@ class CampanhaController extends Controller
             'perc' => (($valorTotal*100)/$campanha->valor),
             'clientes' => $this->userService->renderList(),
         ];
+
 
         return view('admin.campanha.show',$data);
     }

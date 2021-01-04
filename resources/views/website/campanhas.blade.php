@@ -46,7 +46,8 @@
                         {{-- botão procura cofrinho --}}
                         {{-- <label for="text">Procure por cofrinho</label> --}}
                         <div class="input-group-prepend">
-                            <input type="search" name="q" class="form-control-lg" placeholder="Procure por cofrinho" required>
+                            <input type="search" name="q" class="form-control-lg" placeholder="Procure por cofrinho" required oninvalid="this.setCustomValidity('Por favor, preencha esse campo.')"
+                            oninput="this.setCustomValidity('')">
                             <button type="submit" class="btn btn-secondary" >Pesquisar</button>
                         </div>
                     </form>
@@ -134,28 +135,12 @@
                     @endforeach
                     </div>
                 </div>
-
+                {{ $campanhas->onEachSide(1)->links() }}
 {{-- <div class="col-12">
 
     teste
     {{ $campanhas->render() }}
 </div> --}}
-                <div class="col-12">
-                    <!-- pagination start-->
-                    <ul class="pagination">
-                        <li class="pagination__item pagination__item--prev"><i class="fa fa-angle-left" aria-hidden="true"></i><span> Anterior</span></li>
-                        <li class="pagination__item pagination__item--active"><span>1</span></li>
-                        <li class="pagination__item"><span>2</span></li>
-                        <li class="pagination__item"><span>3</span></li>
-                        <li class="pagination__item"><span>4</span></li>
-                        <li class="pagination__item"><span>5</span></li>
-                        <li class="pagination__item pagination__item--disabled">...</li>
-                        <li class="pagination__item"><span>12</span></li>
-                        <li class="pagination__item pagination__item--next"><span>Próxima </span><i class="fa fa-angle-right" aria-hidden="true"></i>
-                        </li>
-                    </ul>
-                    <!-- pagination end-->
-                </div>
 
             </div>
         </div>

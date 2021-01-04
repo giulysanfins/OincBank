@@ -43,6 +43,18 @@
                                     <input class="form-control" readonly type="text" value="{{url()->current()}}">
                                 </div>
                             </div>
+
+                            <div class="row my-4">
+                                <div class="d-flex align-items-center">
+                                    @if($campanha->photo)
+                                        <img class="mr-4 rounded-circle shadow" style="width: 60px; height:60px;" src="{{ asset('/storage/profile/' . $campanha->photo->path) }}" alt="">
+                                    @else
+                                        <img class="mr-4 rounded-circle shadow" style="width: 60px; height:60px;" src="{{ asset('pig-pork.jpg') }}" alt="">
+                                    @endif
+                                    <strong>{{ $campanha->user->name }}</strong>
+                                </div>
+                            </div>
+
                             <div class="row align-items-end">
                                 <div class="col-lg-6">
                                     <div class="progress-bar">

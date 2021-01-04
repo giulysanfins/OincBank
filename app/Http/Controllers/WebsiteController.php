@@ -17,6 +17,7 @@ class WebsiteController extends Controller
      *
      * @return void
      */
+  
     public function __construct(
         CampanhaService $campanhaService, 
         PaymentService $paymentService, 
@@ -39,9 +40,14 @@ class WebsiteController extends Controller
      */
     public function index()
     {
+        $campanhas = $this->campanhaService->renderByIndex()->map(function($campanha){
+            $campanha->photo =  $this->photoService->renderPhotoUser('users', $campanha->user_id);
+            return $campanha;
+        });
+
         $data = [
             'minpay' => $this->parameterService->renderBySlug('campanha.num'),
-            'campanhas' => $this->campanhaService->renderByIndex(),
+            'campanhas' => $campanhas
         ];
 
         return view('website.index',$data);
@@ -55,10 +61,11 @@ class WebsiteController extends Controller
     public function campanhas()
     {
         $data = [
-            'campanhas' => $this->campanhaService->renderByStatus(2),
+            'campanhas' => $this->campanhaService->renderByPaginate(2),
             'categorias' => $this->categoryService->renderByStatus(1),
             'minpay' => $this->parameterService->renderBySlug('campanha.num'),
         ];
+        // dd($data['campanhas']);
 
         return view('website.campanhas',$data);
     }
@@ -72,6 +79,7 @@ class WebsiteController extends Controller
     {
         $pags = $this->paymentService->renderByCampanha($id);
         $campanha = $this->campanhaService->renderEdit($id);
+        $campanha->photo =  $this->photoService->renderPhotoUser('users', $campanha->user_id);
         $valorTotal = 0;
 
         foreach($pags as $pag)
@@ -84,7 +92,7 @@ class WebsiteController extends Controller
         }
 
         $data = [
-            'campanha' => $this->campanhaService->renderEdit($id),
+            'campanha' => $campanha,
             'arrecadado' => $valorTotal,
             'perc' => (($valorTotal*100)/$campanha->valor),
             'minValue' => $this->parameterService->renderBySlug('campanhas.min'),
@@ -309,30 +317,23 @@ class WebsiteController extends Controller
         if($request->q != ''){
 
              $campanha = $this->campanhaService->renderBySearch($request->q);
-            // dd($campanha);
+             //dd($campanha);
              if(count($campanha) > 0)
              {
                  $data = [
-                     'campanhas' => $campanha,
-                     'pageTitle' => 'Campanha',
-                     'query' => $request->q,
+                    'campanhas' => $campanha,
+                    'pageTitle' => 'Campanha',
+                    'query' => $request->q,
                  ];
                 //  dd($data);
                  return view('website.search',$data);
              }
              else{
-
-                 $data = [
-                     'campanha' => $this->campanhaService->renderList(),
-                     'pageTitle' => 'Campanha'
-                 ];
-
-                 //mudar para rota
-                 alert()->warning("Dados não encontrados");
-                 return view('website.campanhas',$data);
+                alert()->warning("Dados não encontrados");
+                return redirect()->route('website.campanhas');
              }
         }
-        return view('website.index')->withMessage("Nada encontrado 2");
+        return view('website.index')->withMessage("Nada encontrado");
      }
 
          /**
