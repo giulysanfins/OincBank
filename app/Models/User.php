@@ -43,6 +43,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    protected $dates = ['data_nascimento'];
+
     public function sendPasswordResetNotification($token)
 {
     // Não esquece: use App\Notifications\ResetPassword;

@@ -99,9 +99,12 @@
 
                         {{-- img upload --}}
                         <div class="col-md-6">
-                            <label class="form-control-label" for="input-photo_perfil">Foto Cofrinho</label>
+                            <label class="form-control-label" for="input-photo_perfil">Foto Principal Cofrinho</label>
                             <br />
                             <img class="img-thumbnail border-gray w-25" src="{{asset('storage')}}/images/{{$campanha->profile_image}}" alt="foto_{{$campanha->titulo}}">
+                            <div class="row">
+                                
+                            </div>
                         </div>
 
                             <div class="col-md-6" >

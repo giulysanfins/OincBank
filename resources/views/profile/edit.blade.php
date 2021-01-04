@@ -29,7 +29,7 @@
                                             <label class="form-control-label" for="input-name">
                                                 <i class="w3-xxlarge fas fa-user"></i> Nome
                                             </label>
-                                            <input type="text" name="name" id="input-name" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="Nome" value="{{ old('name', auth()->user()->name) }}" required autofocus>
+                                            <input type="text" name="name" id="input-name" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" value="{{ old('name', auth()->user()->name) }}" required autofocus>
                                         </div>
                                     </div>
 
@@ -37,14 +37,16 @@
                                         <div class="col-12 col-md-4">
                                             <div class="form-group{{ $errors->has('email') ? ' has-danger' : '' }}">
                                                 <label class="form-control-label" for="documento" ><i class="w3-xxlarge far fa-id-card"></i> CPF</label>
-                                                <input type="text" name="documento" id="documento" class="form-control cpf {{ $errors->has('email') ? ' is-invalid' : '' }}" readonly placeholder="CPF" value="{{ old('documento', auth()->user()->documento) }}" required>
+                                                <input type="text" name="documento" id="documento" class="form-control cpf {{ $errors->has('email') ? ' is-invalid' : '' }}" readonly value="{{ old('documento', auth()->user()->documento) }}" required>
                                             </div>
                                         </div>
 
                                         <div class="col-12 col-md-3">
                                             <div class="form-group{{ $errors->has('data_nascimento') ? ' has-danger' : '' }}">
                                                 <label class="form-control-label" for="documento"><i class="w3-xxlarge far fa-id-card"></i> Data Nascimento</label>
-                                                <input type="date" name="data_nascimento" id="data_nascimento" class="form-control{{ $errors->has('data_nascimento') ? ' is-invalid' : '' }}" placeholder="CPF" value="{{ old('documento', auth()->user()->data_nascimento) }}" required>
+                                                <input type="text" name="data_nascimento" id="data_nascimento" class="form-control{{ $errors->has('data_nascimento') ? ' is-invalid' : '' }} data_nascimento" value="{{ old('documento', auth()->user()->data_nascimento->format('d/m/Y')) }}" required>
+                                                <small id="erro_nascimento" class="text-danger d-none">Data de nascimento inválida.</small>
+                                            
                                             </div>
                                         </div>
 
@@ -52,14 +54,14 @@
                                         <div class="col-12 col-md-4">
                                             <div class="form-group{{ $errors->has('email') ? ' has-danger' : '' }}">
                                                 <label class="form-control-label" for="documento"><i class="w3-xxlarge far fa-id-card"></i> CNPJ</label>
-                                                <input type="text" name="documento" id="documento" class="form-control cnpj {{ $errors->has('email') ? ' is-invalid' : '' }}" placeholder="CNPJ" value="{{ old('documento', auth()->user()->documento) }}" required>
+                                                <input type="text" name="documento" id="documento" class="form-control cnpj {{ $errors->has('email') ? ' is-invalid' : '' }}" value="{{ old('documento', auth()->user()->documento) }}" required>
                                             </div>
                                         </div>
 
                                         <div class="col-12 col-md-3">
                                             <div class="form-group{{ $errors->has('inscricao_estadual') ? ' has-danger' : '' }}">
                                                 <label class="form-control-label" for="inscricao_estadual"><i class="w3-xxlarge far fa-id-card"></i> Inscricao Estadual</label>
-                                                <input type="text" name="inscricao_estadual" id="inscricao_estadual" class="form-control{{ $errors->has('inscricao_estadual') ? ' is-invalid' : '' }}" placeholder="Inscricao Estadual" value="{{ old('inscricao_estadual', auth()->user()->inscricao_estadual) }}" required>
+                                                <input type="text" name="inscricao_estadual" id="inscricao_estadual" class="form-control{{ $errors->has('inscricao_estadual') ? ' is-invalid' : '' }}" value="{{ old('inscricao_estadual', auth()->user()->inscricao_estadual) }}" required>
                                             </div>
                                         </div>
                                     @endif
@@ -67,7 +69,7 @@
                                     <div class="col-12 col-md-5">
                                         <div class="form-group{{ $errors->has('email') ? ' has-danger' : '' }}">
                                             <label class="form-control-label" for="input-email"><i class="w3-xxlarge far fa-envelope"></i> E-mail</label>
-                                            <input type="email" name="email" id="input-email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" placeholder="E-mail" value="{{ old('email', auth()->user()->email) }}" required>
+                                            <input type="email" name="email" id="input-email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" value="{{ old('email', auth()->user()->email) }}" required>
                                         </div>
                                     </div>
 
@@ -167,6 +169,7 @@
 @endsection
 
 @section('scripts')
+<script src="{{ asset('light-bootstrap') }}/js/register.js"></script>
 <script>
     $('.cpf').mask('000.000.000-00', {reverse: true});
     $('.cnpj').mask('00.000.000/0000-00', {reverse: true});

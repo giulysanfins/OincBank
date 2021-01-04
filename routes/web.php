@@ -73,7 +73,10 @@ Route::group(['prefix' => 'admin','middleware' => ['CheckPermission','auth']], f
         Route::get('/d/{id}', ['as' => 'campanha.desativar', 'uses' => 'App\Http\Controllers\CampanhaController@desativar']);
         Route::put('/deletar/{id}', ['as' => 'campanha.destroy', 'uses' => 'App\Http\Controllers\CampanhaController@destroy']);
 		Route::get('/a/{id}', ['as' => 'campanha.ativar', 'uses' => 'App\Http\Controllers\CampanhaController@ativar']);
-        Route::get('/visualizacao/{id}', ['as' => 'campanha.show', 'uses' => 'App\Http\Controllers\CampanhaController@show']);
+		Route::get('/visualizacao/{id}', ['as' => 'campanha.show', 'uses' => 'App\Http\Controllers\CampanhaController@show']);
+		Route::put('/foto/principal/{id}', ['as' => 'foto.principal', 'uses' => 'App\Http\Controllers\CampanhaController@principalFoto']);
+		Route::post('/foto/insert/', ['as' => 'foto.insert', 'uses' => 'App\Http\Controllers\CampanhaController@insertFoto']);
+		Route::delete('/foto/deletar/{id}', ['as' => 'foto.destroy', 'uses' => 'App\Http\Controllers\CampanhaController@destroyFoto']);
 	});
 
 	Route::group(['prefix' => 'categorias', 'middleware' => ['auth','CheckPermission']], function () {

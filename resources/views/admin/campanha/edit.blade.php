@@ -38,7 +38,7 @@
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="apelido">Valor*<small>(em Real)</small></label>
-                                        <input type="text" class="form-control" id="valor" name="valor" placeholder="EX: 100.000,00"   value="{{old('valor',$campanha->valor)}}"   oninvalid="this.setCustomValidity('Por favor preencha o valor.')"
+                                        <input type="text" class="form-control" id="valor" name="valor" placeholder="EX: 100.000,00" value="{{old('valor',$campanha->valor)}}" oninvalid="this.setCustomValidity('Por favor preencha o valor.')"
                                         oninput="this.setCustomValidity('')">
                                     </div>
                                 </div>
@@ -47,11 +47,13 @@
                                     <label for="data_encerramento">Que data o cofrinho deve encerrar?*</label>
                                     <br>
                                     <div class="form-group">
-
-                                        <input type="date" name="data_encerramento" max="3000-12-31"
-                                        min="{{\Carbon\Carbon::today()->format('Y-m-d')}}" class="form-control"  value="{{(old('data_encerramento',$campanha->data_encerramento->format('Y-m-d')))}}"  required
+                                        <input  class="form-control data_encerramento" type="text" id="data_encerramento"
+                                        name="data_encerramento" 
+                                        value="{{(old('data_encerramento',$campanha->data_encerramento->format('d/m/Y')))}}"
+                                        required
                                         oninvalid="this.setCustomValidity('Por favor preencha a data.')"
                                         oninput="this.setCustomValidity('')">
+                                        <small id="erro_encerramento" class="text-danger d-none">Data de encerramento inválida.</small>
                                     </div>
                                 </div>
 
@@ -65,23 +67,31 @@
                                     </div>
                                 </div>
 
+                                <div class="col-12 text-right">
+                                    <button type="submit" class="btn btn-success">Alterar</button>
+                                    </form>
+                                </div>
+
                                 <div class="col-12">
                                     <hr />
                                     <h4>Mídia</h4>
+                                    <form method="POST" action="{{route('foto.principal',$campanha->id)}}" enctype="multipart/form-data">
+                                        @csrf
+                                        @method('put')
                                 </div>
 
                                 {{-- img upload --}}
-                                <div class="col-md-2">
+                                <div class="col-md-3">
                                     {{-- @include('pages.campanha.imageUpload') --}}
-                                    <label class="form-control-label" for="input-photo_perfil">Foto Cofrinho</label>
+                                    <label class="form-control-label" for="input-photo_perfil">Foto Principal Cofrinho</label>
                                     <br />
                                     <label for="photo_perfil" class="btn btn-info">Selecionar Imagem</label>
-                                    <input id="photo_perfil" style="display: none;" required onchange="return fileValidation()" type="file" name="photo_perfil">
+                                    <input id="photo_perfil" style="display: none;" onchange="return fileValidation()" type="file" name="photo_perfil">
                                     <img class="img-thumbnail border-gray" src="{{asset('storage')}}/images/{{$campanha->profile_image}}" alt="foto_{{$campanha->titulo}}" id="foto_antiga">
                                     <div id="imagePreview"></div>
                                 </div>
 
-                                <div class="col-md-10" >
+                                <div class="col-md-9">
                                     <label for="data_encerramento">Vídeo*(url)</label>
                                     <br>
                                     <div class="form-group">
@@ -89,15 +99,51 @@
                                     </div>
                                 </div>
 
+                                <div class="col-12 text-right">
+                                    <button type="submit" class="btn btn-success">Alterar</button>
+                                    <hr />
+                                    </form>
+                                </div>
+
+                                {{-- outras img upload --}}
+                                <div class="col-md-12 mt-3">
+                                    <label class="form-control-label" for="input-photo_perfil">Outras Fotos do Cofrinho</label>
+                                    <form method="POST" action="{{route('foto.insert')}}" enctype="multipart/form-data">
+                                        @csrf
+                                        @method('post')
+                                        <input type="hidden" name="cofrinho_id" value="{{$campanha->id}}">
+                                    <div class="input-group">
+                                        <div class="custom-file">
+                                          <input type="file" class="custom-file-input d-none" name="fotos[]" id="fotos" multiple accept="image/*">
+                                          <label class="custom-file-label btn btn-info" for="fotos">Selecionar imagens</label>
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="btn btn-success">Alterar</button>
+
+                                    </form>
+                                </div>
+
+                                @foreach ($photos as $photo)
+                                    <div class="col-12 col-md-2">
+                                        <button type="button" class="btn-remove" data-toggle="modal" data-target="#deleteFoto-{{$photo->id}}">
+                                            <i class="far fa-trash-alt"></i>
+                                        </button>
+                                        <img class="img-thumbnail border-gray" src="{{asset('storage')}}/images/{{$photo->path}}" alt="foto_{{$photo->titulo}}" id="">
+                                    </div>
+
+                                    @component('admin.campanha.components.delete-foto',[
+                                        'foto' => $photo
+                                    ])@endcomponent
+                                @endforeach
+
+
                             </div>
                         </div>
 
-                        <div class="card-footer text-right">
-                            <button type="submit" class="btn btn-success">Alterar</button>
-                        </div>
+
                     </div>
 
-                </form>
+
 
             </div>
 
@@ -107,9 +153,12 @@
 @endsection
 
 @section('scripts')
+<script src="{{ asset('light-bootstrap') }}/js/cofrinho.js"></script>
+
 <script>
     $(document).ready(function(){
         $('#valor').mask("#.##0,00", {reverse: true});
+        $('.data_encerramento').mask('00/00/0000');
     });
 
 </script>
@@ -122,7 +171,7 @@
 
         // Allowing file type
         var allowedExtensions =
-            /(\.jpg|\.jpeg|\.png|\.gif)$/i;
+            /(\.jpg|\.jpeg|\.png|\.gif|\.webp)$/i;
 
         if (!allowedExtensions.exec(filePath)) {
             swal("Oops", "Não aceitamos essa extensão. Por favor tente novamente!", "error");
@@ -140,8 +189,6 @@
                             'imagePreview').innerHTML =
                         '<img class="img-thumbnail border-gray" src="' + e.target.result +
                         '"/>';
-
-
                 };
 
                 reader.readAsDataURL(fileInput.files[0]);
