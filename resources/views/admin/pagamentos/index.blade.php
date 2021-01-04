@@ -86,12 +86,13 @@
 
                                         @foreach ($pagamentos as $pagamento)
                                             <tr>
-                                                <td>{{$pagamento->id}}</td>
+                                            
+                                                <td> {{$pagamento->id}} </td> 
                                                 @if (auth()->user()->role == 1)
                                                     <td>{{$pagamento->user->name}}</td>
                                                 @endif
                                                 {{-- @dd($pagamento->campanha->titulo) --}}
-                                                <td>{{$pagamento->campanha->titulo}}</td>
+                                                <td><a href="{{ route('website.campanhas.detalhes', $pagamento->campanha->id) }}" target="_blank">{{$pagamento->campanha->titulo}} </a></td>
                                                 <td>
                                                     @if ($pagamento->tipo == 1)
                                                         Doação
