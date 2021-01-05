@@ -104,9 +104,9 @@
                                                 <input type="text" name="data_nascimento" id="data_nascimento"
                                                     class="form-control data_nascimento"
                                                     value="{{ old('data_nascimento') }}" required>
-                                                <small id="erro_nascimento" class="text-danger d-none">
+                                                {{-- <small id="erro_nascimento" class="text-danger d-none">
                                                     Data de nascimento inválida.
-                                                </small>
+                                                </small> --}}
                                             </div>
 
                                             {{-- Pessoa juridica
