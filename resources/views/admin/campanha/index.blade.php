@@ -119,6 +119,7 @@
                                             <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
                                                 data-parent="#accordionExample">
                                                 <div class="card-body">
+                                                    {{-- @dd($campanhas_expiradas) --}}
                                                     @if ($campanhas_expiradas->count() > 0)
 
                                                         <table class="table">
@@ -135,9 +136,10 @@
                                                             </thead>
                                                             <tbody>
                                                                 @foreach ($campanhas_expiradas as $campanha)
+
                                                                     @php
                                                                     $total = 0;
-
+                                                                    $dateToday = \Carbon\Carbon::now()->format('Y-m-d');
                                                                     foreach($campanha->payments as $pag)
                                                                     {
                                                                     if($pag->tipo == 1 && $pag->status == 2){
@@ -146,55 +148,57 @@
                                                                     }
 
                                                                     @endphp
-                                                                    <tr>
-                                                                        <th scope="row">{{ $campanha->id }}</th>
-                                                                        <td>{{ $campanha->titulo }}</td>
-                                                                        <td>{{ $campanha->categoria->name }}</td>
-                                                                        <td><b>R$
-                                                                                {{ number_format($total, 2, ',', '.') }}</b>
-                                                                            / R$
-                                                                            {{ number_format($campanha->valor, 2, ',', '.') }}
-                                                                        </td>
+                                                                    @if($campanha->data_encerramento < $dateToday)
+                                                                        <tr>
+                                                                            <th scope="row">{{ $campanha->id }}</th>
+                                                                            <td>{{ $campanha->titulo }}</td>
+                                                                            <td>{{ $campanha->categoria->name }}</td>
+                                                                            <td><b>R$
+                                                                                    {{ number_format($total, 2, ',', '.') }}</b>
+                                                                                / R$
+                                                                                {{ number_format($campanha->valor, 2, ',', '.') }}
+                                                                            </td>
 
-                                                                        <td>{{ $campanha->created_at->format('d/m/Y h:i:s') }}
-                                                                        </td>
-                                                                        <td>
-                                                                            {{ $campanha->user->name }}
-                                                                        </td>
-                                                                        <td>
-                                                                            <div class="btn-group float-right" role="group"
-                                                                                aria-label="Botões de Ação - Clientes">
+                                                                            <td>{{ $campanha->created_at->format('d/m/Y h:i:s') }}
+                                                                            </td>
+                                                                            <td>
+                                                                                {{ $campanha->user->name }}
+                                                                            </td>
+                                                                            <td>
+                                                                                <div class="btn-group float-right" role="group"
+                                                                                    aria-label="Botões de Ação - Clientes">
 
-                                                                                @if (auth()->user()->role == 2)
-                                                                                    <a href="{{ route('campanha.edit', $campanha->id) }}"
-                                                                                        class="btn btn-info">Editar</a>
-                                                                                @endif
-                                                                                <a href="{{ route('campanha.show', $campanha->id) }}"
-                                                                                    class="btn btn-secondary">Visualizar</a>
-                                                                                @if (auth()->user()->role == 2)
-                                                                                    <button type="button"
-                                                                                        class="btn btn-success"
+                                                                                    @if (auth()->user()->role == 2)
+                                                                                        <a href="{{ route('campanha.edit', $campanha->id) }}"
+                                                                                            class="btn btn-info">Editar</a>
+                                                                                    @endif
+                                                                                    <a href="{{ route('campanha.show', $campanha->id) }}"
+                                                                                        class="btn btn-secondary">Visualizar</a>
+                                                                                    @if (auth()->user()->role == 2)
+                                                                                        <button type="button"
+                                                                                            class="btn btn-success"
+                                                                                            data-toggle="modal"
+                                                                                            data-target="#sacar{{ $campanha->id }}">Sacar
+                                                                                            valor</button>
+                                                                                    @endif
+                                                                                    {{-- <a
+                                                                                        href="{{ route('campanha.desativar', $campanha->id) }}"
+                                                                                        onclick="validate()"
+                                                                                        class="btn btn-danger">Desativar</a>
+                                                                                    --}}
+                                                                                    <button type="button" class="btn btn-danger"
                                                                                         data-toggle="modal"
-                                                                                        data-target="#sacar{{ $campanha->id }}">Sacar
-                                                                                        valor</button>
-                                                                                @endif
-                                                                                {{-- <a
-                                                                                    href="{{ route('campanha.desativar', $campanha->id) }}"
-                                                                                    onclick="validate()"
-                                                                                    class="btn btn-danger">Desativar</a>
-                                                                                --}}
-                                                                                <button type="button" class="btn btn-danger"
-                                                                                    data-toggle="modal"
-                                                                                    data-target="#desativar{{ $campanha->id }}">Desativar</button>
+                                                                                        data-target="#desativar{{ $campanha->id }}">Desativar</button>
 
 
 
 
 
-                                                                            </div>
-                                                                        </td>
+                                                                                </div>
+                                                                            </td>
 
-                                                                    </tr>
+                                                                        </tr>
+                                                                    @endif
                                                                     @if (auth()->user()->role == 2)
                                                                         @component('admin.campanha.components.solicitar', [
                                                                             'campanha' => $campanha,
@@ -228,6 +232,7 @@
                                             <div id="ativos" class="collapse" aria-labelledby="headingThree"
                                                 data-parent="#ativos">
                                                 <div class="card-body">
+
                                                     @if ($campanhas_aprovadas->count() > 0)
                                                         <table class="table">
                                                             <thead>
@@ -245,61 +250,63 @@
                                                                 @foreach ($campanhas_aprovadas as $campanha)
                                                                     @php
                                                                     $total = 0;
-
+                                                                    $dateToday = \Carbon\Carbon::now()->format('Y-m-d');
                                                                     foreach($campanha->payments as $pag)
                                                                     {
                                                                     if($pag->tipo == 1 && $pag->status == 2){
                                                                     $total = $total + $pag->valor;
                                                                     }
                                                                     }
-
                                                                     @endphp
-                                                                    <tr>
-                                                                        <th scope="row">{{ $campanha->id }}</th>
-                                                                        <td>{{ $campanha->titulo }}</td>
-                                                                        <td>{{ $campanha->categoria->name }}</td>
-                                                                        <td><b>R$
-                                                                                {{ number_format($total, 2, ',', '.') }}</b>
-                                                                            / R$
-                                                                            {{ number_format($campanha->valor, 2, ',', '.') }}
-                                                                        </td>
+                                                                    @if($campanha->data_encerramento > $dateToday)
 
-                                                                        <td>{{ $campanha->created_at->format('d/m/Y h:i:s') }}
-                                                                        </td>
-                                                                        <td>
-                                                                            {{ $campanha->user->name }}
-                                                                        </td>
-                                                                        <td>
-                                                                            <div class="btn-group float-right" role="group"
-                                                                                aria-label="Botões de Ação - Clientes">
+                                                                        <tr>
+                                                                            <th scope="row">{{ $campanha->id }}</th>
+                                                                            <td>{{ $campanha->titulo }}</td>
+                                                                            <td>{{ $campanha->categoria->name }}</td>
+                                                                            <td><b>R$
+                                                                                    {{ number_format($total, 2, ',', '.') }}</b>
+                                                                                / R$
+                                                                                {{ number_format($campanha->valor, 2, ',', '.') }}
+                                                                            </td>
 
-                                                                                @if (auth()->user()->role == 2)
-                                                                                    <a href="{{ route('campanha.edit', $campanha->id) }}"
-                                                                                        class="btn btn-info">Editar</a>
-                                                                                @endif
-                                                                                <a href="{{ route('campanha.show', $campanha->id) }}"
-                                                                                    class="btn btn-secondary">Visualizar</a>
-                                                                                @if (auth()->user()->role == 2)
-                                                                                    <button type="button"
-                                                                                        class="btn btn-success"
+                                                                            <td>{{ $campanha->created_at->format('d/m/Y h:i:s') }}
+                                                                            </td>
+                                                                            <td>
+                                                                                {{ $campanha->user->name }}
+                                                                            </td>
+                                                                            <td>
+                                                                                <div class="btn-group float-right" role="group"
+                                                                                    aria-label="Botões de Ação - Clientes">
+
+                                                                                    @if (auth()->user()->role == 2)
+                                                                                        <a href="{{ route('campanha.edit', $campanha->id) }}"
+                                                                                            class="btn btn-info">Editar</a>
+                                                                                    @endif
+                                                                                    <a href="{{ route('campanha.show', $campanha->id) }}"
+                                                                                        class="btn btn-secondary">Visualizar</a>
+                                                                                    @if (auth()->user()->role == 2)
+                                                                                        <button type="button"
+                                                                                            class="btn btn-success"
+                                                                                            data-toggle="modal"
+                                                                                            data-target="#sacar{{ $campanha->id }}">Sacar
+                                                                                            valor</button>
+                                                                                    @endif
+                                                                                    {{-- <a
+                                                                                        href="{{ route('campanha.desativar', $campanha->id) }}"
+                                                                                        onclick="validate()"
+                                                                                        class="btn btn-danger">Desativar</a>
+                                                                                    --}}
+                                                                                    <button type="button" class="btn btn-danger"
                                                                                         data-toggle="modal"
-                                                                                        data-target="#sacar{{ $campanha->id }}">Sacar
-                                                                                        valor</button>
-                                                                                @endif
-                                                                                {{-- <a
-                                                                                    href="{{ route('campanha.desativar', $campanha->id) }}"
-                                                                                    onclick="validate()"
-                                                                                    class="btn btn-danger">Desativar</a>
-                                                                                --}}
-                                                                                <button type="button" class="btn btn-danger"
-                                                                                    data-toggle="modal"
-                                                                                    data-target="#desativar{{ $campanha->id }}">Desativar</button>
+                                                                                        data-target="#desativar{{ $campanha->id }}">Desativar</button>
 
 
 
-                                                                        </td>
+                                                                            </td>
 
-                                                                    </tr>
+                                                                        </tr>
+                                                                    @endif
                                                                     @if (auth()->user()->role == 2)
 
                                                                         @component('admin.campanha.components.solicitar', [
