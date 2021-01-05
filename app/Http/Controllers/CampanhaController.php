@@ -77,7 +77,7 @@ class CampanhaController extends Controller
                 'campanhas_pendentes' => $this->campanhaService->renderByStatusUser(1,auth()->user()->id),
                 'campanhas_desativadas' => $this->campanhaService->renderByStatusUser(4,auth()->user()->id),
                 'campanhas_aprovadas' => $this->campanhaService->renderByStatusUser(2,auth()->user()->id),
-                'campanhas_expiradas' => $this->campanhaService->renderByStatusUser(5,auth()->user()->id),
+                'campanhas_expiradas' => $this->campanhaService->renderByStatusUser(2,auth()->user()->id),
                 'categorias' => $this->categoryService->renderByStatus(1),
                 'bancos' => $this->bankService->renderList(),
                 'pagamentos' => $this->paymentService->renderByUser(auth()->user()->id),

@@ -61,8 +61,17 @@ class WebsiteController extends Controller
      */
     public function campanhas()
     {
+        $campanhas = $this->campanhaService->renderByPaginate(2);
+
+        // $campanhas->items = collect($campanhas->items())->map(function($campanha){
+        //     $campanha->photo =  $this->photoService->renderPhotoUser('users', $campanha->user_id);
+        //     // Map function
+        //     return $campanha;
+        // });
+
+
         $data = [
-            'campanhas' => $this->campanhaService->renderByPaginate(2),
+            'campanhas' => $campanhas,
             'categorias' => $this->categoryService->renderByStatus(1),
             'minpay' => $this->parameterService->renderBySlug('campanhas.num'),
         ];
