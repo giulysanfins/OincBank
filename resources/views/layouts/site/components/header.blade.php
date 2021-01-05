@@ -3,7 +3,7 @@
     <div class="aside-dropdown__inner">
         <div class="aside-dropdown__item d-lg-none d-block text-center ">
             <a class="header-logo__link " href="{{ route('website.index') }}">
-                <img class="header-logo__img logo--light" src="{{ asset('img') }}/logos/porquim-com-nome-crop.png"
+                <img class="header-logo__img logo--light" src="{{ asset('img') }}/logos/porquim-com-nome-crop.png "
                     alt="logo" />
             </a>
         </div>
@@ -68,16 +68,15 @@
 <!-- header website start--> --}}
 
 <header class="header header--inner">
-    <div class="container-fluid">
-        <div class="row no-gutters justify-content-between">
+    <div class="container-fluid" >
+        <div class="row no-gutters justify-content-between" >
             <div class="col-auto d-flex align-items-center">
                 {{-- <div class="dropdown-trigger d-none d-sm-block">
                     <div class="dropdown-trigger__item"></div>
                 </div> --}}
-                <div class="header-logo" style="margin-left: 50%">
+                <div class="header-logo" style="margin-left: 30%">
                     <a class="header-logo__link" href="{{ route('website.index') }}">
-                        <img class="header-logo__img logo--light"
-                            src="{{ asset('img') }}/logos/porquim-com-nome-crop.png" alt="logo" />
+                        <img src="{{ asset('img') }}/logos/porquim-com-nome-crop.png" alt="logo" style="width:180px;">
                     </a>
                 </div>
             </div>
@@ -123,10 +122,10 @@
                     @csrf
                     <div class="position-relative mr-4 mt-3" style="width:200px;">
                         <button class="position-absolute ml-2 h-100 d-flex" style="border: 0px; background: none; outline: none;" type="submit">
-                            <i class="fas fa-search align-self-center"></i>    
+                            <i class="fas fa-search align-self-center"></i>
                         </button>
                         <input name="q" class="form-control rounded-pill" style="padding-left: 40px" type="text" required>
-                    </div>                    
+                    </div>
                 </form>
 
                 <div class="dropdown-trigger d-block d-sm-none">
