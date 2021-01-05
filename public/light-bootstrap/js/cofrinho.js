@@ -13,12 +13,3 @@ $('.data_encerramento').datepicker({
 
 $('.data_encerramento').mask('00/00/0000');
 
-inp_data_encerramento.addEventListener("focusout", function() {
-    let span_ence = document.getElementById('erro_encerramento');
-    if(inp_data_encerramento.value == '')
-    {
-        span_ence.classList.remove('d-none');
-    } else {
-        span_ence.classList.add('d-none');
-    }
-});
