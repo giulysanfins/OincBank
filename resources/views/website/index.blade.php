@@ -192,7 +192,7 @@
                         <div class="d-flex col-sm-6 align-items-center">
                             <i class="far fa-sad-cry mr-4" style="width:100px; height: 100px; color: #643348;"></i>
                             <strong>
-                                Infelizmente não temos nenhum cofrinho no momento!!! 
+                                Infelizmente não temos nenhum cofrinho no momento!!!
                             </strong>
                         </div>
                     @endif
@@ -218,7 +218,7 @@
                                 }
                                 $perc = (($vTotal*100)/$campanha->valor);
                             @endphp
-                            @if ($payments->count() >= $minpay)
+                            @if ($payments->count() >= $minpay->valor)
                                 <div class="causes-slider__item">
                                     <div class="causes-item causes-item--primary">
                                         <div class="causes-item__body">

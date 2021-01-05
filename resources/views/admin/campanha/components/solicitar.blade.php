@@ -22,10 +22,10 @@
 
                         <div class="col-12 col-lg-4">
                             <div class="form-group" id="cpf_tab">
-                                <label  for="myInput" id="documento">CPF/CNPJ:</label>
-                                <input type="text" id="myInput" name="documento" class="form-control" maxlength="18" required placeholder="CPF/CNPJ">
-                                <input id="cnpj" name="documento" style="display: none">
-                                <input id="cpf" name="documento" style="display: none">
+                                <label  for="myInput" id="documento" class="meuinput">CPF/CNPJ:</label>
+                                <input type="text" id="myInput" name="documento" class="form-control documento" maxlength="18" required placeholder="CPF/CNPJ">
+                                <input id="cnpj" name="documento" class="cnpj" style="display: none">
+                                <input id="cpf" name="documento" class="cpf" style="display: none">
                             </div>
 
                         </div>

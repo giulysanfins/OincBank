@@ -17,11 +17,11 @@ class WebsiteController extends Controller
      *
      * @return void
      */
-  
+
     public function __construct(
-        CampanhaService $campanhaService, 
-        PaymentService $paymentService, 
-        ParameterService $parameterService, 
+        CampanhaService $campanhaService,
+        PaymentService $paymentService,
+        ParameterService $parameterService,
         CategoryService $categoryService,
         PhotoService $photoService
         )
@@ -42,11 +42,12 @@ class WebsiteController extends Controller
     {
         $campanhas = $this->campanhaService->renderByIndex()->map(function($campanha){
             $campanha->photo =  $this->photoService->renderPhotoUser('users', $campanha->user_id);
+            // Map function
             return $campanha;
         });
 
         $data = [
-            'minpay' => $this->parameterService->renderBySlug('campanha.num'),
+            'minpay' => $this->parameterService->renderBySlug('campanhas.num'),
             'campanhas' => $campanhas
         ];
 
@@ -63,9 +64,9 @@ class WebsiteController extends Controller
         $data = [
             'campanhas' => $this->campanhaService->renderByPaginate(2),
             'categorias' => $this->categoryService->renderByStatus(1),
-            'minpay' => $this->parameterService->renderBySlug('campanha.num'),
+            'minpay' => $this->parameterService->renderBySlug('campanhas.num'),
         ];
-        // dd($data['campanhas']);
+        // dd($data);
 
         return view('website.campanhas',$data);
     }
@@ -317,6 +318,8 @@ class WebsiteController extends Controller
         if($request->q != ''){
 
              $campanha = $this->campanhaService->renderBySearch($request->q);
+             $minimopay = $this->parameterService->renderBySlug('campanhas.num');
+            //  dd($minimopay);
              //dd($campanha);
              if(count($campanha) > 0)
              {
@@ -324,8 +327,9 @@ class WebsiteController extends Controller
                     'campanhas' => $campanha,
                     'pageTitle' => 'Campanha',
                     'query' => $request->q,
+                    'minpay' => $minimopay,
                  ];
-                //  dd($data);
+                //  dd($minimopay);
                  return view('website.search',$data);
              }
              else{

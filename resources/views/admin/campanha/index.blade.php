@@ -584,19 +584,19 @@
         });
 
         $(function() {
-            $('#cpf').mask('999.999.999-99');
-            $('#cnpj').mask('99.999.999/9999-99');
+            $('.cpf').mask('999.999.999-99');
+            $('.cnpj').mask('99.999.999/9999-99');
 
-            $('#myInput').keyup(function() {
+            $('.documento').keyup(function() {
                 const val = $(this).val().replace(/[^0-9]/g, '');
                 if (val.length <= 11) {
-                    $('#cpf').val(val);
-                    $(this).val($('#cpf').masked());
-                    $('#documento').text('CPF');
+                    $('.cpf').val(val);
+                    $(this).val($('.cpf').masked());
+                    $('.meuinput').text('CPF');
                 } else {
-                    $('#cnpj').val(val);
-                    $(this).val($('#cnpj').masked());
-                    $('#documento').text('CNPJ');
+                    $('.cnpj').val(val);
+                    $(this).val($('.cnpj').masked());
+                    $('.meuinput').text('CNPJ');
                 }
             });
         });

@@ -140,10 +140,15 @@ class CampanhaController extends Controller
         {
             $user_id = auth()->user()->id;
 
+            $file = $request->file('photo_perfil');
+            $image = Image::make($file);
+            $image->orientate();
             $ext = $request->file('photo_perfil')->extension();
             $ts = Carbon::now()->timestamp;
             $filename = $ts."_".$user_id.".".$ext;
-            $upload = Storage::putFileAs('public/images', $request->file('photo_perfil'),$filename);
+            $image->save(storage_path('app/public/images/') . $filename);
+
+
 
             $data = $this->campanhaService->buildInsert($request->merge([
                 'profile_image' => $filename,
@@ -261,10 +266,16 @@ class CampanhaController extends Controller
 
             if($request->file('photo_perfil'))
               {
+
+                $user_id = auth()->user()->id;
+
+                $file = $request->file('photo_perfil');
+                $image = Image::make($file);
+                $image->orientate();
                 $ext = $request->file('photo_perfil')->extension();
                 $ts = Carbon::now()->timestamp;
                 $filename = $ts."_".$user_id.".".$ext;
-                $upload = Storage::putFileAs('public/images', $request->file('photo_perfil'),$filename);
+                $image->save(storage_path('app/public/images/') . $filename);
                 $update = $this->campanhaService->buildUpdate($id,$request->merge([
                     'valor' => str_replace(',','.',str_replace('.','',$request->valor)),
                     'profile_image' => $filename,
