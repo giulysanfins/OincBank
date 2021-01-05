@@ -5,12 +5,12 @@
     <main class="main">
         <!-- promo start-->
         <section class="promo">
-            <div class="promo-slider">
+            <div class="promo-slider" style="height:750px;">
                 <div class="promo-slider__item promo-slider__item--style-1 img-effect">
-                    <picture>
-                        <source srcset="{{ asset('img') }}/photos/pig1_1.jpeg" media="(min-width: 835px)" />
+                    <picture >
+                        <source srcset="{{ asset('img') }}/photos/pig1_4.jpg" media="(min-width: 835px )" />
                         <source srcset="{{ asset('img') }}/photos/pig1_1.jpeg" media="(min-width: 376px)" />
-                        <img class="img--bg " src="{{ asset('img') }}/photos/pig1_1.jpeg" alt="https://br.freepik.com/fotos/mao'>Mão foto criado por mego-studio - br.freepik.com" />
+                        <img class="img--bg " src="{{ asset('img') }}/photos/pig1_4.jpg" alt="https://br.freepik.com/fotos/mao'>Mão foto criado por mego-studio - br.freepik.com" style="object-fit: cover; object-position: unset;"/>
                     </picture>
                     <div class="container">
                         <div class="row">
