@@ -122,7 +122,7 @@
                     @csrf
                     <div class="position-relative mr-4 mt-3" style="width:200px;">
                         <button class="position-absolute ml-2 h-100 d-flex" style="border: 0px; background: none; outline: none;" type="submit">
-                            <i class="fas fa-search align-self-center"></i>
+                            <i class="fas fa-search align-self-center" style="color: #643348"></i>
                         </button>
                         <input name="q" class="form-control rounded-pill" style="padding-left: 40px" type="text" required>
                     </div>
@@ -132,7 +132,11 @@
                     <div class="dropdown-trigger__item"></div>
                 </div>
 
-                <a class="button button--squared" href="{{ route('campanha.create') }}"><span>Criar Cofrinho</span></a>
+                <!--<a class="button button--primary" href="{{ route('campanha.create') }}"><span>Criar Cofrinho</span></a> -->
+                <a type="button" class="btn btn-danger mt-3 mr-3" style="text-decoration:none;background-color: #f1abd4; color: #643348 " href="{{ route('campanha.create') }}" >
+                        <span class="text-uppercase" style="font-size: 14px; font-weight:bold;">Criar Cofrinho </span>
+                </a>
+
             </div>
         </div>
     </div>
