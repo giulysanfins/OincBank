@@ -25,69 +25,67 @@
 
         <!-- causes inner start-->
         <section class="section causes-inner">
-            <div class="container">
-                <div class="row offset-margin">
+            @if (!$campanhas->isEmpty())
+                <div class="container">
+                    <div class="row offset-margin">
 
-                    <div class="col-md-8" id="myBtnContainer">
-                        <label for="text">Filtrar</label>
-                        <div class="btn-group " role="group">
-                            <button class="btn btn-link active" onclick="filterSelection('all')"
-                                style="text-decoration: none; color: black;"> Todos</button>
-                            @foreach ($categorias as $categoria)
-                                <button class="btn btn-link" onclick="filterSelection('{{ $categoria->name }}')">
-                                    {{ $categoria->name }}
-                                </button>
-                            @endforeach
-                        </div>
-                    </div>
-
-                    <div class="col-md-2">
-                        <form action="{{ route('website.search') }}" method="POST">
-                            @csrf
-                            {{-- botão procura cofrinho --}}
-                            {{-- <label for="text">Procure por cofrinho</label>
-                            --}}
-                            <div class="input-group-prepend">
-                                <input type="search" name="q" class="form-control-lg" placeholder="Procure por cofrinho"
-                                    required oninvalid="this.setCustomValidity('Por favor, preencha esse campo.')"
-                                    oninput="this.setCustomValidity('')">
-                                <button type="submit" class="btn btn-secondary">Pesquisar</button>
+                        <div class="col-md-8" id="myBtnContainer">
+                            <label for="text">Filtrar</label>
+                            <div class="btn-group " role="group">
+                                <button class="btn btn-link active" onclick="filterSelection('all')"
+                                    style="text-decoration: none; color: black;"> Todos</button>
+                                @foreach ($categorias as $categoria)
+                                    <button class="btn btn-link" onclick="filterSelection('{{ $categoria->name }}')">
+                                        {{ $categoria->name }}
+                                    </button>
+                                @endforeach
                             </div>
-                        </form>
-                        {{-- botões de categorias --}}
-                    </div>
-
-                    <div class="col-12 mt-4">
-                        <div class="row">
-                            @foreach ($campanhas as $campanha)
-                            @php
-                            $payments = \App\Yahp\Models\Payment::where('campanha_id',$campanha->id)->where('tipo',1)->where('status',2);
-                            $vTotal = 0;
-                            foreach ($payments->get() as $key => $pag) {
-                            $vTotal = $vTotal+$pag->valor;
-                            }
-                            $perc = (($vTotal*100)/$campanha->valor);
-                            @endphp
-                            @component('website.components.cardCampanha', [
-                                'campanha' => $campanha,
-                                'minpay' => $minpay,
-                                'payments' => $payments,
-                                'perc' => $perc,
-                                'vTotal' => $vTotal
-                            ])@endcomponent
-
-                            @endforeach
                         </div>
+
+                        <div class="col-md-2">
+                            <form action="{{ route('website.search') }}" method="POST">
+                                @csrf
+                                {{-- botão procura cofrinho --}}
+                                {{-- <label for="text">Procure por cofrinho</label>
+                                --}}
+                                <div class="input-group-prepend">
+                                    <input type="search" name="q" class="form-control-lg" placeholder="Procure por cofrinho"
+                                        required oninvalid="this.setCustomValidity('Por favor, preencha esse campo.')"
+                                        oninput="this.setCustomValidity('')">
+                                    <button type="submit" class="btn btn-secondary">Pesquisar</button>
+                                </div>
+                            </form>
+                            {{-- botões de categorias --}}
+                        </div>
+
+                        <div class="col-12 mt-4">
+                            <div class="row">
+                                @foreach ($campanhas as $campanha)
+                                    @component('website.components.cardCampanha', [
+                                        'campanha' => $campanha,
+                                    ])@endcomponent
+                                @endforeach
+                            </div>
+                        </div>
+                        {{ $campanhas->onEachSide(1)->links() }}
+                        {{-- <div class="col-12">
+
+                            teste
+                            {{ $campanhas->render() }}
+                        </div> --}}
+
                     </div>
-                    {{ $campanhas->onEachSide(1)->links() }}
-                    {{-- <div class="col-12">
-
-                        teste
-                        {{ $campanhas->render() }}
-                    </div> --}}
-
                 </div>
-            </div>
+            @else
+                <div class="d-flex flex-column w-100 justify-content-center align-items-center" style="height:800px;">
+                    {{-- class="d-flex flex-column w-100 h-100
+                    justify-content-center align-items-center" --}}
+                    <i class="far fa-sad-cry mr-4" style="width:150px; height: 150px; color: #643348;"></i>
+                    <p style="font-size: 2em;">
+                        Infelizmente não temos nenhum cofrinho no momento!!!
+                    </p>
+                </div>
+            @endif
         </section>
 
         <!-- bottom bg start-->
