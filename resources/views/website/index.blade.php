@@ -173,36 +173,37 @@
                     </div>
                 </div>
 
-                <div class="row align-items-end margin-bottom">
 
-                    @if($campanhas->count() != 0)
-                    <div class="col-sm-6 d-flex justify-content-sm-end">
-                        <!-- slider nav start-->
-                        <div class="slider__nav causes-slider__nav">
-                            <div class="slider__arrows">
-                                <div class="slider__prev"><i class="fa fa-chevron-left" aria-hidden="true"></i>
-                                </div>
-                                <div class="slider__next"><i class="fa fa-chevron-right" aria-hidden="true"></i>
+                @if($campanhas->count() != 0)
+                    <!-- slider nav start-->
+                    <div class="row d-flex d-flex align-items-end mb-4">
+                        <div class="col-9">
+                            <a class="button button--primary " href="{{route('campanha.index')}}">+ Cofrinhos</a>
+                        </div>
+                        <div class="col-3">
+                            <div class="slider__nav causes-slider__nav">
+                                <div class="slider__arrows">
+                                    <div class="slider__prev"><i class="fa fa-chevron-left" aria-hidden="true"></i>
+                                    </div>
+                                    <div class="slider__next"><i class="fa fa-chevron-right" aria-hidden="true"></i>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <!-- slider nav end-->
+
                     </div>
-                    @else
+                    <!-- slider nav end-->
+                @else
+                    <div class="row">
                         <div class="d-flex col-sm-6 align-items-center">
                             <i class="far fa-sad-cry mr-4" style="width:100px; height: 100px; color: #643348;"></i>
                             <strong>
                                 Infelizmente não temos nenhum cofrinho no momento!!!
                             </strong>
                         </div>
-                    @endif
-
-                </div>
-                @if($campanhas->count() != 0)
-                <div class="row">
-                    <div class="col-sm-6"><a class="button button--primary" href="{{route('campanha.index')}}">+ Cofrinhos</a></div>
-                </div>
+                    </div>
                 @endif
+
             </div>
 
             <div class="causes-holder offset-margin">
