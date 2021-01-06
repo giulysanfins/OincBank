@@ -28,24 +28,9 @@
             {{-- @dd($minpay) --}}
 
             @foreach ($campanhas as $campanha)
-                @php
-                    $payments =
-                    \App\Yahp\Models\Payment::where('campanha_id',$campanha->id)->where('tipo',1)->where('status',2);
-                    $vTotal = 0;
-                    foreach ($payments->get() as $key => $pag)
-                    {
-                    $vTotal = $vTotal+$pag->valor;
-                    }
-                    $perc = (($vTotal*100)/$campanha->valor);
-                @endphp
-                    @component('website.components.cardCampanha', [
-                        'campanha' => $campanha,
-                        'minpay' => $minpay,
-                        'payments' => $payments,
-                        'perc' => $perc,
-                        'vTotal' => $vTotal
-                    ])@endcomponent
-
+                @component('website.components.cardCampanha', [
+                    'campanha' => $campanha,
+                ])@endcomponent
             @endforeach
 
         </div>

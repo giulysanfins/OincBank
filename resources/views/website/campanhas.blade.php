@@ -25,7 +25,9 @@
 
         <!-- causes inner start-->
         <section class="section causes-inner">
-            <div class="container">
+
+            @if (!$campanhas->isEmpty())
+  <div class="container">
                 <div class="row offset-margin">
 
                     <div class="col-md-8" id="myBtnContainer">
@@ -52,12 +54,10 @@
                                 <i class="fas fa-times-circle"></i>
                                 </button>
                             </div>
-
-
                         </div>
-                    </div>
 
-                    <div class="col-md-2">
+
+                        <div class="col-md-2">
                         <form action="{{ route('website.search') }}" method="POST">
                             @csrf
                             {{-- botão procura cofrinho --}}
@@ -68,43 +68,39 @@
                                 <button type="submit" class="btn btn-secondary">Pesquisar</button>
                             </div>
                         </form>
-                        {{-- botões de categorias --}}
-                    </div>
-
-                    <div class="col-12 mt-4">
-                        <div class="row">
-                            @foreach ($campanhas as $campanha)
-                            @php
-                            $payments = \App\Yahp\Models\Payment::where('campanha_id',$campanha->id)->where('tipo',1)->where('status',2);
-                            $vTotal = 0;
-                            foreach ($payments->get() as $key => $pag) {
-                            $vTotal = $vTotal+$pag->valor;
-                            }
-                            $perc = (($vTotal*100)/$campanha->valor);
-                            @endphp
-                                {{-- colum é necessário para filtrar os cofrinhos, não tirar --}}
-                                @component('website.components.cardCampanha', [
-                                    'campanha' => $campanha,
-                                    'minpay' => $minpay,
-                                    'payments' => $payments,
-                                    'perc' => $perc,
-                                    'vTotal' => $vTotal,
-                                    'class' => 'column'
-                                ])@endcomponent
-
-
-                            @endforeach
+                            {{-- botões de categorias --}}
                         </div>
+
+                        <div class="col-12 mt-4">
+                            <div class="row">
+                                @foreach ($campanhas as $campanha)
+                                    @component('website.components.cardCampanha', [
+                                        'campanha' => $campanha,
+                                        'class' => 'column'
+                                    ])@endcomponent
+                                @endforeach
+                            </div>
+
+                        </div>
+                        {{ $campanhas->onEachSide(1)->links() }}
+                        {{-- <div class="col-12">
+
+                            teste
+                            {{ $campanhas->render() }}
+                        </div> --}}
+
                     </div>
-                    {{ $campanhas->onEachSide(1)->links() }}
-                    {{-- <div class="col-12">
-
-                        teste
-                        {{ $campanhas->render() }}
-                    </div> --}}
-
                 </div>
-            </div>
+            @else
+                <div class="d-flex flex-column w-100 justify-content-center align-items-center" style="height:800px;">
+                    {{-- class="d-flex flex-column w-100 h-100
+                    justify-content-center align-items-center" --}}
+                    <i class="far fa-sad-cry mr-4" style="width:150px; height: 150px; color: #643348;"></i>
+                    <p style="font-size: 2em;">
+                        Infelizmente não temos nenhum cofrinho no momento!!!
+                    </p>
+                </div>
+            @endif
         </section>
 
         <!-- bottom bg start-->

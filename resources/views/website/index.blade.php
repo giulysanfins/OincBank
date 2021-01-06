@@ -10,7 +10,8 @@
                     <picture>
                         <source srcset="{{ asset('img') }}/photos/pig1_1.jpeg" media="(min-width: 835px)" />
                         <source srcset="{{ asset('img') }}/photos/pig1_1.jpeg" media="(min-width: 376px)" />
-                        <img class="img--bg " src="{{ asset('img') }}/photos/pig1_1.jpeg" alt="https://br.freepik.com/fotos/mao'>Mão foto criado por mego-studio - br.freepik.com" />
+                        <img class="img--bg " src="{{ asset('img') }}/photos/pig1_1.jpeg"
+                            alt="https://br.freepik.com/fotos/mao'>Mão foto criado por mego-studio - br.freepik.com" />
                     </picture>
                     <div class="container">
                         <div class="row">
@@ -24,12 +25,15 @@
                                         </div>
                                         <div class="promo-slider__wrapper-2">
                                             <p class="promo-slider__subtitle " style="margin-top: 3%">
-                                                A vaca foi para o brejo, mas chamou o Oinc para te ajudar a juntar um dindin que você precisa para a sua causa.
+                                                A vaca foi para o brejo, mas chamou o Oinc para te ajudar a juntar um dindin
+                                                que você precisa para a sua causa.
                                             </p>
                                         </div>
                                         {{-- <div class="promo-slider__wrapper-3">
-                                            <a class="button promo-slider__button button--primary" href="{{route('website.campanhas')}}">Descubra Causas</a>
-                                            <a class="button promo-slider__button button--primary" href="{{route('register')}}">Registre seu cofrinho</a>
+                                            <a class="button promo-slider__button button--primary"
+                                                href="{{ route('website.campanhas') }}">Descubra Causas</a>
+                                            <a class="button promo-slider__button button--primary"
+                                                href="{{ route('register') }}">Registre seu cofrinho</a>
                                         </div> --}}
                                     </div>
                                 </div>
@@ -98,10 +102,11 @@
             </div>
             <!-- promo socials start-->
             <ul class="promo-socials">
-                <li class="promo-socials__item"><a class="promo-socials__link" target="_blank" href="https://www.instagram.com/oincbank/"><i class="fab fa-instagram"
-                            aria-hidden="true"></i></a></li>
-                {{-- <li class="promo-socials__item"><a class="promo-socials__link" href="#"><i class="fab fa-google-plus"
-                            aria-hidden="true"></i></a></li>
+                <li class="promo-socials__item"><a class="promo-socials__link" target="_blank"
+                        href="https://www.instagram.com/oincbank/"><i class="fab fa-instagram" aria-hidden="true"></i></a>
+                </li>
+                {{-- <li class="promo-socials__item"><a class="promo-socials__link"
+                        href="#"><i class="fab fa-google-plus" aria-hidden="true"></i></a></li>
                 <li class="promo-socials__item"><a class="promo-socials__link" href="#"><i class="fab fa-twitter"
                             aria-hidden="true"></i></a></li>
                 <li class="promo-socials__item"><a class="promo-socials__link" href="#"><i class="fab fa-facebook"
@@ -109,7 +114,8 @@
             </ul>
             <!-- promo socials end-->
             <!-- promo pannel start-->
-            {{-- <div class="promo-pannel"><a class="anchor promo-pannel__anchor" href="#about"> <span>Scroll Down</span></a>
+            {{-- <div class="promo-pannel"><a class="anchor promo-pannel__anchor"
+                    href="#about"> <span>Scroll Down</span></a>
                 <div class="promo-pannel__video"><img class="img--bg" src="{{ asset('helpo-theme') }}/img/video_block.jpg"
                         alt="image" /><a class="video-trigger"
                         href="https://www.youtube.com/watch?v=_sI_Ps7JSEk"><span>Watch our video</span><i class="fa fa-play"
@@ -157,7 +163,8 @@
                                     {{-- <div class="counter-item__top">
                                         <h6 class="counter-item__title">People We Helped on 2018</h6>
                                     </div>
-                                    <div class="counter-item__lower"><span class="js-counter">200</span><span>k</span></div> --}}
+                                    <div class="counter-item__lower"><span class="js-counter">200</span><span>k</span></div>
+                                    --}}
                                 </div>
                             </div>
                             <div class="col-6">
@@ -174,11 +181,11 @@
                 </div>
 
 
-                @if($campanhas->count() != 0)
+                @if ($campanhas->count() != 0)
                     <!-- slider nav start-->
                     <div class="row d-flex d-flex align-items-end mb-4">
                         <div class="col-9">
-                            <a class="button button--primary " href="{{route('campanha.index')}}">+ Cofrinhos</a>
+                            <a class="button button--primary " href="{{ route('campanha.index') }}">+ Cofrinhos</a>
                         </div>
                         <div class="col-3">
                             <div class="slider__nav causes-slider__nav">
@@ -211,81 +218,90 @@
                     <div class="causes-slider offset-margin">
 
                         @foreach ($campanhas as $campanha)
-                            @php
-                                $payments = \App\Yahp\Models\Payment::where('campanha_id',$campanha->id)->where('tipo',1)->where('status',2);
-                                $vTotal = 0;
-                                foreach ($payments->get() as $key => $pag) {
-                                    $vTotal = $vTotal+$pag->valor;
-                                }
-                                $perc = (($vTotal*100)/$campanha->valor);
-                            @endphp
-                            @if ($payments->count() >= $minpay->valor)
-                                <div class="causes-slider__item">
-                                    <div class="causes-item causes-item--primary">
-                                        <div class="causes-item__body">
-                                            <div class="causes-item__top">
-                                                <h6 class="causes-item__title">
-                                                    <a href="{{ route('website.campanhas.detalhes', $campanha->id) }}">{{ $campanha->titulo }}</a>
-                                                </h6>
-                                                <div class="d-flex align-items-center">
-                                                    @if($campanha->photo)
-                                                        <img class="mr-4 rounded-circle shadow" style="width: 60px; height:60px;" src="{{ asset('/storage/profile/' . $campanha->photo->path) }}" alt="">
-                                                    @else
-                                                        <img class="mr-4 rounded-circle shadow" style="width: 60px; height:60px;" src="{{ asset('pig-pork.jpg') }}" alt="">
-                                                    @endif
-                                                    <strong>{{ $campanha->user->name }}</strong>
-                                                </div>
-                                                <hr/>
-                                                <p>
-                                                    @if (strlen($campanha->descricao) > 35)
-                                                        @php
-                                                        $string = Str::substr($campanha->descricao, 0, 35)
-                                                        @endphp
-                                                        {{ $string . '...' }}
-                                                    @else
-                                                        {{ $campanha->descricao }}
-                                                    @endif
-                                                </p>
+                            {{-- @php
+                            $payments =
+                            \App\Yahp\Models\Payment::where('campanha_id',$campanha->id)->where('tipo',1)->where('status',2);
+                            $vTotal = 0;
+                            foreach ($payments->get() as $key => $pag) {
+                            $vTotal = $vTotal+$pag->valor;
+                            }
+                            $perc = (($vTotal*100)/$campanha->valor);
+                            @endphp --}}
+                            <div class="causes-slider__item">
+                                <div class="causes-item causes-item--primary">
+                                    <div class="causes-item__body">
+                                        <div class="causes-item__top">
+                                            <h6 class="causes-item__title">
+                                                <a
+                                                    href="{{ route('website.campanhas.detalhes', $campanha->id) }}">{{ $campanha->titulo }}</a>
+                                            </h6>
+                                            <div class="d-flex align-items-center">
+                                                @if ($campanha->photo)
+                                                    <img class="mr-4 rounded-circle shadow"
+                                                        style="width: 60px; height:60px;"
+                                                        src="{{ asset('/storage/profile/' . $campanha->photo->path) }}"
+                                                        alt="">
+                                                @else
+                                                    <img class="mr-4 rounded-circle shadow"
+                                                        style="width: 60px; height:60px;" src="{{ asset('pig-pork.jpg') }}"
+                                                        alt="">
+                                                @endif
+                                                <strong>{{ $campanha->user->name }}</strong>
                                             </div>
-                                            <div class="causes-item__img">
-                                                <div class="causes-item__badge" style="background-color: #49C2DF">
-                                                    {{ $campanha->categoria->name }}
-                                                </div>
-                                                <a href="{{ route('website.campanhas.detalhes', $campanha->id) }}">
-                                                    <img class="img--bg"
-                                                        src="{{ asset('storage') }}/images/{{ $campanha->profile_image }}"
-                                                        alt="foto_{{ $campanha->titulo }}">
-                                                </a>
+                                            <hr />
+                                            <p>
+                                                @if (strlen($campanha->descricao) > 35)
+                                                    @php
+                                                    $string = Str::substr($campanha->descricao, 0, 35)
+                                                    @endphp
+                                                    {{ $string . '...' }}
+                                                @else
+                                                    {{ $campanha->descricao }}
+                                                @endif
+                                            </p>
+                                        </div>
+                                        <div class="causes-item__img">
+                                            <div class="causes-item__badge" style="background-color: #49C2DF">
+                                                {{ $campanha->categoria->name }}
                                             </div>
+                                            <a href="{{ route('website.campanhas.detalhes', $campanha->id) }}">
+                                                <img class="img--bg"
+                                                    src="{{ asset('storage') }}/images/{{ $campanha->profile_image }}"
+                                                    alt="foto_{{ $campanha->titulo }}">
+                                            </a>
+                                        </div>
 
-                                            <div class="causes-item__lower">
-                                                <div class="progress-bar" style="width: 100%">
-                                                    <div class="progress-bar__inner" style="width: {{($perc >= 100)?'100':$perc}}%;">
-                                                        <div class="progress-bar__value">{{number_format($perc,2,".",".")}}%</div>
+                                        <div class="causes-item__lower">
+                                            <div class="progress-bar" style="width: 100%">
+                                                <div class="progress-bar__inner"
+                                                    style="width: {{ $campanha->perc >= 100 ? '100' : $campanha->perc }}%;">
+                                                    <div class="progress-bar__value">
+                                                        {{ number_format($campanha->perc, 2, '.', '.') }}%
                                                     </div>
                                                 </div>
-                                                <div class="causes-item__details-holder">
-                                                    <div class="causes-item__details-item">
-                                                        <span>Conquistado:</span>
-                                                        <br />
-                                                        <span>R$  {{number_format($vTotal,2,",",".")}}</span>
-                                                    </div>
+                                            </div>
+                                            <div class="causes-item__details-holder">
+                                                <div class="causes-item__details-item">
+                                                    <span>Conquistado:</span>
+                                                    <br />
+                                                    <span>R$ {{ number_format($campanha->vTotal, 2, ',', '.') }}</span>
+                                                </div>
 
-                                                    <div class="causes-item__details-item text-right">
-                                                        <span>Meta: </span>
-                                                        <br />
-                                                        <span>R$ {{number_format($campanha->valor,2,",",".")}}</span>
-                                                    </div>
+                                                <div class="causes-item__details-item text-right">
+                                                    <span>Meta: </span>
+                                                    <br />
+                                                    <span>R$ {{ number_format($campanha->valor, 2, ',', '.') }}</span>
                                                 </div>
                                             </div>
                                         </div>
-                                        <a class="button causes-item__button button--primary btn-block" href="{{ route('website.campanhas.detalhes', $campanha->id) }}">
-                                            + Doar
-                                        </a>
                                     </div>
-
+                                    <a class="button causes-item__button button--primary btn-block"
+                                        href="{{ route('website.campanhas.detalhes', $campanha->id) }}">
+                                        + Doar
+                                    </a>
                                 </div>
-                            @endif
+
+                            </div>
 
                         @endforeach
 
