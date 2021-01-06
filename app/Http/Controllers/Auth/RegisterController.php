@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
+use App\Rules\ReCAPTCHAv3;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -50,32 +51,33 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-        if($data['documento_cpf'] != null)
-        {
+        if ($data['documento_cpf'] != null) {
             return Validator::make($data, [
                 'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-                'password' => ['required',
-                'min:8',
-                'regex:"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$"',
-                'confirmed'],
-
-                'documento_cpf' => ['required','cpf','unique:users,documento'],
-                'agree' => ['required']
+                'password' => [
+                    'required',
+                    'min:8',
+                    'regex:"^\S*(?=\S{8,})(?=\S*[a-z])(?=\S*[A-Z])(?=\S*[\d])\S*$"',
+                    'confirmed'
+                ],
+                'documento_cpf' => ['required', 'cpf', 'unique:users,documento'],
+                'agree' => ['required'],
+                // 'grecaptcha' => ['required', new ReCAPTCHAv3]
             ]);
-
-        } elseif ($data['documento_cnpj'] != null)
-        {
+        } elseif ($data['documento_cnpj'] != null) {
             return Validator::make($data, [
                 'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-                'password' => ['required',
-                'min:8',
-                'regex:/"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$"/',
-                'confirmed'],
+                'password' => [
+                    'required',
+                    'min:8',
+                    'regex:"^\S*(?=\S{8,})(?=\S*[a-z])(?=\S*[A-Z])(?=\S*[\d])\S*$"',
+                    'confirmed'
+                ],
                 'documento_cnpj' => ['required', 'cnpj', 'unique:users,documento'],
-                'agree' => ['required']
+                'agree' => ['required'],
+                // 'grecaptcha' => ['required', new ReCAPTCHAv3]
             ]);
         }
-
     }
 
     /**
@@ -86,27 +88,20 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-
-
-        if($data['documento_cpf'] != null)
-        {
+        if ($data['documento_cpf'] != null) {
             $nome = $data['name_pessoa'];
             $documento = $data['documento_cpf'];
-
-        } elseif ($data['documento_cnpj'] != null)
-        {
+        } elseif ($data['documento_cnpj'] != null) {
             $nome = $data['name_empresa'];
             $documento = $data['documento_cnpj'];
         }
-
-
 
         return User::create([
             'name' => $nome,
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'documento' => $documento,
-            'data_nascimento' => $data['data_nascimento'],
+            'data_nascimento' => Carbon::createFromFormat('d/m/Y', $data['data_nascimento']),
             'inscricao_estadual' => $data['inscricao_estadual'],
             'telefone' => $data['telefone'],
             'termos_condicoes' => \Carbon\Carbon::now(),

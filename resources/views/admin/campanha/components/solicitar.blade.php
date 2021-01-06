@@ -15,21 +15,25 @@
                         <div class="col-12 col-lg-4">
                             <div class="form-group">
                                 <label for="valor">Valor</label>
-                                <input type="text" class="form-control dinheiro" id="valor" name="valor" placeholder="Valor">
+                                <input type="text" class="form-control dinheiro" id="valor" name="valor" placeholder="Valor" required>
                             </div>
+                        </div>
+
+
+                        <div class="col-12 col-lg-4">
+                            <div class="form-group" id="cpf_tab">
+                                <label  for="myInput" id="documento" class="meuinput">CPF/CNPJ:</label>
+                                <input type="text" id="myInput" name="documento" class="form-control documento" maxlength="18" required placeholder="CPF/CNPJ">
+                                <input id="cnpj" name="documento" class="cnpj" style="display: none">
+                                <input id="cpf" name="documento" class="cpf" style="display: none">
+                            </div>
+
                         </div>
 
                         <div class="col-12 col-lg-4">
                             <div class="form-group">
-                                <label for="">CPF/CNPJ</label>
-                                <input type="text" class="form-control documento" id="documento" name="documento" placeholder="CPF/CNPJ">
-                            </div>
-                        </div>
-                        
-                        <div class="col-12 col-lg-4">
-                            <div class="form-group">
                                 <label for="">Banco</label>
-                                <select class="form-control" id="bank_id" name="bank_id">
+                                <select class="form-control" id="bank_id" name="bank_id" required>
                                     @foreach ($bancos as $banco)
                                         <option value="{{$banco->id}}">{{$banco->numero}} - {{$banco->nome}}</option>
                                     @endforeach
@@ -40,19 +44,19 @@
                         <div class="col-12 col-lg-4">
                             <div class="form-group">
                                 <label for="">Agência</label>
-                                <input type="text" class="form-control agencia" id="agencia" name="agencia" placeholder="Agência">
+                                <input type="text" class="form-control agencia" id="agencia" name="agencia" placeholder="Agência" required>
                             </div>
                         </div>
 
                         <div class="col-12 col-lg-4">
                             <div class="form-group">
                                 <label for="">Conta Corrente</label>
-                                <input type="text" class="form-control conta" id="conta_corrente" name="conta_corrente" placeholder="Conta Corrente">
+                                <input type="text" class="form-control conta" id="conta_corrente" name="conta_corrente" placeholder="Conta Corrente" required>
                             </div>
                         </div>
 
                     </div>
-               
+
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
@@ -62,3 +66,4 @@
         </div>
     </div>
 </div>
+

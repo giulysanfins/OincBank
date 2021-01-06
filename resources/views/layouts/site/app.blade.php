@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
     <head>
         <meta charset="UTF-8"/>
         <meta name="description" content=""/>
@@ -9,7 +9,7 @@
         <title>OincBank {{$title ?? ''}}</title>
         <!-- styles-->
         {{-- <link rel="stylesheet" href="{{asset('helpo-theme')}}/css/styles.min.css"/> --}}
-         <link rel="stylesheet" href="{{asset('helpo-theme')}}/css/styles.css"/>
+        <link rel="stylesheet" href="{{asset('helpo-theme')}}/css/styles.css"/>
         <link rel="stylesheet" href="{{asset('vendors')}}/fontawesome/css/all.min.css"/>
         <link rel="apple-touch-icon" sizes="57x57" href="{{asset('img')}}/icons/apple-icon-57x57.png">
         <link rel="apple-touch-icon" sizes="60x60" href="{{asset('img')}}/icons/apple-icon-60x60.png">
@@ -28,6 +28,7 @@
         <meta name="msapplication-TileColor" content="#ffffff">
         <meta name="msapplication-TileImage" content="{{asset('img')}}/icons/ms-icon-144x144.png">
         <meta name="theme-color" content="#ffffff">
+        @yield('css')
     </head>
     <body>
         <div class="page-wrapper">
@@ -51,7 +52,7 @@
 
                 <div class="alert alert-dark alert-dismissible fade show alert-policy" role="alert">
                     A gente guarda estatísticas de visitas para melhorar sua experiência de navegação.
-                    Ao continuar, você concorda com a nossa <a href="" target="_blank"> Politica de Privacidade</a>.
+                    Ao continuar, você concorda com a nossa <a href="{{route('website.politica')}}" target="_blank"> Politica de Privacidade</a>.
                     <button onclick="setPrivacityCookie()" type="button" class="btn button--primary" data-dismiss="alert" aria-label="Close">
                         Continuar e Fechar
                     </button>
@@ -83,10 +84,10 @@
             function setCookie(cname, cvalue, exdays) {
                 var d = new Date();
                 d.setTime(d.getTime() + (exdays*24*60*60*1000));
-                var expires = "expires="+ d.toUTCString();
-                document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/;SameSite=Lax";
+                var expires =  d.toUTCString();
+                document.cookie = `${cname}=${cvalue};expires=${expires};path=/;SameSite=Lax;`
             }
-    
+
         </script>
     </body>
 </html>

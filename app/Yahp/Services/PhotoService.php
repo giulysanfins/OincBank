@@ -45,8 +45,18 @@ class PhotoService implements ServiceContract
      */
     public function renderPhotoUser($area,$area_id)
     {
-        return $this->repository->getByPhoto($area,$area_id);
+        return $this->repository->firstByPhoto($area,$area_id);
     }
+
+    /**
+     * @param $id
+     * @return mixed
+     */
+    public function renderByCampanha($area_id)
+    {
+        return $this->repository->getByPhoto('campanha',$area_id);
+    }
+    
     
     /**
      * @param $id

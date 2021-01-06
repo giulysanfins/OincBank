@@ -19,7 +19,8 @@
                                 {{ auth()->user()->name }}</span></a></li>
                 @else
 
-                <li class="aside-menu__item"><a class="aside-menu__link" href="{{route('login')}}"><span>Entrar</span></a></li>
+                    <li class="aside-menu__item"><a class="aside-menu__link"
+                            href="{{ route('login') }}"><span>Entrar</span></a></li>
 
                 @endif
             </ul>
@@ -94,7 +95,8 @@
                             </li>
                         @else
 
-                        <li class="main-menu__item"><a class="main-menu__link" href="{{route('login')}}"><span>Entrar</span></a></li>
+                            <li class="main-menu__item"><a class="main-menu__link"
+                                    href="{{ route('login') }}"><span>Entrar</span></a></li>
 
                         @endif
                     </ul>
@@ -121,10 +123,13 @@
                 <form action="{{ route('website.search') }}" method="POST">
                     @csrf
                     <div class="position-relative mr-4 mt-3" style="width:200px;">
-                        <button class="position-absolute ml-2 h-100 d-flex" style="border: 0px; background: none; outline: none;" type="submit">
-                            <i class="fas fa-search align-self-center" style="color: #643348"></i>
+                        <button class="position-absolute ml-2 h-100 d-flex"
+                            style="border: 0px; background: none; outline: none;" type="submit">
+                            <i class="fas fa-search align-self-center" style="color: #643348""></i>
                         </button>
-                        <input name="q" class="form-control rounded-pill" style="padding-left: 40px" type="text" required>
+                        <input name="q" class="form-control rounded-pill" style="padding-left: 40px" type="text"
+                            required oninvalid="this.setCustomValidity('Por favor, preencha esse campo.')">
+
                     </div>
                 </form>
 
@@ -144,7 +149,9 @@
 
 
 @section('scripts')
-<script>
+    <script>
 
-</script>
+
+    </script>
+
 @endsection

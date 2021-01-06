@@ -26,6 +26,7 @@ class UsersTableSeeder extends Seeder
             'tipo' => 1,
             'created_at' => now(),
             'updated_at' => now(),
+            'data_nascimento' => now(),
         ]);
 
         DB::table('users')->insert([
@@ -36,9 +37,12 @@ class UsersTableSeeder extends Seeder
             'description' => '',
             'telefone' => '0000',
             'documento' => '0000',
-            'tipo' => 1,
+
+            'tipo' => 0,
+
             'created_at' => now(),
             'updated_at' => now(),
+            'data_nascimento' => now(),
         ]);
     }
 }

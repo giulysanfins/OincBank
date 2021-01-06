@@ -7,6 +7,7 @@ use App\Yahp\Services\CampanhaService;
 use App\Yahp\Services\CategoryService;
 use App\Yahp\Services\PaymentService;
 use App\Yahp\Services\ParameterService;
+use App\Yahp\Services\PhotoService;
 use Illuminate\Support\Facades\Input;
 
 class WebsiteController extends Controller
@@ -16,12 +17,19 @@ class WebsiteController extends Controller
      *
      * @return void
      */
-    public function __construct(CampanhaService $campanhaService, PaymentService $paymentService, ParameterService $parameterService, CategoryService $categoryService)
-    {
+
+    public function __construct(
+        CampanhaService $campanhaService,
+        PaymentService $paymentService,
+        ParameterService $parameterService,
+        CategoryService $categoryService,
+        PhotoService $photoService
+    ) {
         $this->campanhaService = $campanhaService;
         $this->categoryService = $categoryService;
         $this->paymentService = $paymentService;
         $this->parameterService = $parameterService;
+        $this->photoService = $photoService;
     }
 
     /**
@@ -31,12 +39,26 @@ class WebsiteController extends Controller
      */
     public function index()
     {
+        $minpay = $this->parameterService->renderBySlug('campanhas.num');
+
+        $campanhas = $this->campanhaService->renderByIndex()
+            ->reject(function ($campanha) use ($minpay) {
+                return ($campanha->payments()->count() < $minpay->valor);
+            })->map(function ($campanha) {
+                //arrange
+                $payments = $campanha->payments();
+                //insert
+                $campanha->photo =  $this->photoService->renderPhotoUser('users', $campanha->user_id);
+                $campanha->vTotal = $payments->sum('valor');
+                $campanha->perc = (($campanha->vTotal * 100) / $campanha->valor);
+                return $campanha;
+            });
+
         $data = [
-            'minpay' => $this->parameterService->renderBySlug('campanha.num'),
-            'campanhas' => $this->campanhaService->renderByIndex(),
+            'campanhas' => $campanhas
         ];
 
-        return view('website.index',$data);
+        return view('website.index', $data);
     }
 
     /**
@@ -46,14 +68,44 @@ class WebsiteController extends Controller
      */
     public function campanhas()
     {
-        $data = [
-            'campanhas' => $this->campanhaService->renderByPaginate(2),
-            'categorias' => $this->categoryService->renderByStatus(1),
-            'minpay' => $this->parameterService->renderBySlug('campanha.num'),
-        ];
-        // dd($data['campanhas']);
+        $campanhas = $this->campanhaService->renderByPaginate(2);
 
-        return view('website.campanhas',$data);
+        $minpay = $this->parameterService->renderBySlug('campanhas.num');
+
+        $campanhasTransformed = $campanhas
+            ->getCollection()
+            ->reject(function ($campanha) use ($minpay) {
+                return ($campanha->payments()->count() < $minpay->valor);
+            })->map(function ($campanha) {
+                //arrange
+                $payments = $campanha->payments();
+                //insert
+                $campanha->photo =  $this->photoService->renderPhotoUser('users', $campanha->user_id);
+                $campanha->vTotal = $payments->sum('valor');
+                $campanha->perc = (($campanha->vTotal * 100) / $campanha->valor);
+                return $campanha;
+            });
+
+        $campanhas = new \Illuminate\Pagination\LengthAwarePaginator(
+            $campanhasTransformed,
+            $campanhas->total(),
+            $campanhas->perPage(),
+            $campanhas->currentPage(),
+            [
+                'path' => \Request::url(),
+                'query' => [
+                    'page' => $campanhas->currentPage()
+                ]
+            ]
+        );
+
+        $data = [
+            'campanhas' => $campanhas,
+            'categorias' => $this->categoryService->renderByStatus(1),
+            'minpay' => $this->parameterService->renderBySlug('campanhas.num'),
+        ];
+
+        return view('website.campanhas', $data);
     }
 
     /**
@@ -65,28 +117,26 @@ class WebsiteController extends Controller
     {
         $pags = $this->paymentService->renderByCampanha($id);
         $campanha = $this->campanhaService->renderEdit($id);
+        $campanha->photo =  $this->photoService->renderPhotoUser('users', $campanha->user_id);
         $valorTotal = 0;
 
-        foreach($pags as $pag)
-        {
+        foreach ($pags as $pag) {
             // arrecadações
-            if($pag->status == 2 && $pag->tipo == 1)
-            {
+            if ($pag->status == 2 && $pag->tipo == 1) {
                 $valorTotal = $valorTotal + $pag->valor;
             }
         }
 
         $data = [
-            'campanha' => $this->campanhaService->renderEdit($id),
+            'campanha' => $campanha,
             'arrecadado' => $valorTotal,
-            'perc' => (($valorTotal*100)/$campanha->valor),
+            'perc' => (($valorTotal * 100) / $campanha->valor),
             'minValue' => $this->parameterService->renderBySlug('campanhas.min'),
             'maxValue' => $this->parameterService->renderBySlug('campanhas.max'),
+            'fotos' => $this->photoService->renderByCampanha($id)
         ];
 
-        // dd($data);
-
-        return view('website.detalhe-campanhas',$data);
+        return view('website.detalhe-campanhas', $data);
     }
 
     /**
@@ -119,8 +169,7 @@ class WebsiteController extends Controller
     {
         try {
 
-            if($request->valor_manual == null)
-            {
+            if ($request->valor_manual == null) {
                 $valor = $request->valor_auto;
             } else {
                 $valor = $request->valor_manual;
@@ -129,18 +178,17 @@ class WebsiteController extends Controller
             $insert = $this->paymentService->buildInsert([
                 'user_id' => auth()->user()->id,
                 'campanha_id' => $id,
-                'valor' => str_replace(',','.',str_replace('.','',$valor)),
+                'valor' => str_replace(',', '.', str_replace('.', '', $valor)),
                 'status' => 1,
                 'tipo' => 1,
                 'anonimo' => $request->anonimo
             ]);
 
-            return redirect()->route('website.payment.checkout',$insert->id);
-
+            return redirect()->route('website.payment.checkout', $insert->id);
         } catch (\Exception $e) {
-           \Log::error($e->getFile() . "\n" . $e->getLine() . "\n" . $e->getMessage());
-           alert()->error('Erro','Erro em realizar o pagamento.')->persistent('Fechar');
-           return redirect()->route('website.campanhas.detalhes',$id)->withInput();
+            \Log::error($e->getFile() . "\n" . $e->getLine() . "\n" . $e->getMessage());
+            alert()->error('Erro', 'Erro em realizar o pagamento.')->persistent('Fechar');
+            return redirect()->route('website.campanhas.detalhes', $id)->withInput();
         }
     }
 
@@ -149,12 +197,10 @@ class WebsiteController extends Controller
         $pagamento = $this->paymentService->renderEdit($id);
         $urlenv = env('APP_URL');
         // Configura credenciais
-        if(env('APP_ENV') == 'production')
-        {
+        if (env('APP_ENV') == 'production') {
 
             \MercadoPago\SDK::setAccessToken('APP_USR-4344514941698315-121600-986ff558dea244808ea6fad7407436b3-671093218');
-        } else
-        {
+        } else {
             \MercadoPago\SDK::setAccessToken('TEST-3909980958286743-112018-c6a4d0c6de187c2bfd0897f4169cf7cf-41701013');
         }
 
@@ -164,21 +210,21 @@ class WebsiteController extends Controller
         // Cria um item na preferência
         $item = new \MercadoPago\Item();
         $item->id = $pagamento->id;
-        $item->title = $pagamento->campanha->titulo." | ".$pagamento->campanha_id."-".$pagamento->id;
+        $item->title = $pagamento->campanha->titulo . " | " . $pagamento->campanha_id . "-" . $pagamento->id;
         $item->quantity = 1;
         $item->unit_price = $pagamento->valor;
         $item->currency_id = "BRL";
         $preference->items = array($item);
         $preference->payment_methods = array(
             "excluded_payment_methods" => array(
-              array("id" => "paypal"),
-              array("id" => "pec")
+                array("id" => "paypal"),
+                array("id" => "pec")
             ),
         );
         $preference->back_urls = array(
-            "success" => $urlenv."/pagamento/sucesso/".$pagamento->campanha_id,
-            "failure" => $urlenv."/pagamento/falha/".$pagamento->campanha_id,
-            "pending" => $urlenv."/pagamento/pendente/".$pagamento->campanha_id
+            "success" => $urlenv . "/pagamento/sucesso/" . $pagamento->campanha_id,
+            "failure" => $urlenv . "/pagamento/falha/" . $pagamento->campanha_id,
+            "pending" => $urlenv . "/pagamento/pendente/" . $pagamento->campanha_id
         );
         $preference->auto_return = "approved";
         $preference->save();
@@ -188,24 +234,22 @@ class WebsiteController extends Controller
             'preference' => $preference,
         ];
 
-        return view('website.pagamento-checkout',$data);
+        return view('website.pagamento-checkout', $data);
     }
 
-    public function sucesso(Request $request,$id)
+    public function sucesso(Request $request, $id)
     {
         try {
             // http://localhost:8000/pagamento/sucesso/1
-            if (count($request->all()) == 0)
-            {
+            if (count($request->all()) == 0) {
                 $data = [
                     'exception' => null,
                 ];
 
-                return view('errors.403',$data);
+                return view('errors.403', $data);
+            } elseif ($request->status === 'approved') {
 
-            } elseif($request->status === 'approved') {
-
-                $update = $this->paymentService->buildUpdate($id,[
+                $update = $this->paymentService->buildUpdate($id, [
                     'status' => 2, //sucesso
                     'pagamento_id' => $request->payment_id,
                     'pagamento_tipo' => $request->payment_type,
@@ -214,29 +258,26 @@ class WebsiteController extends Controller
 
                 return view('website.sucesso');
             }
-
         } catch (\Exception $e) {
-           \Log::error($e->getFile() . "\n" . $e->getLine() . "\n" . $e->getMessage());
-           alert()->error('Erro','')->persistent('Fechar');
-           return redirect()->route('website.campanhas.detalhes',$id)->withInput();
+            \Log::error($e->getFile() . "\n" . $e->getLine() . "\n" . $e->getMessage());
+            alert()->error('Erro', '')->persistent('Fechar');
+            return redirect()->route('website.campanhas.detalhes', $id)->withInput();
         }
     }
 
-    public function pending(Request $request,$id)
+    public function pending(Request $request, $id)
     {
         try {
             // http://localhost:8000/pagamento/pendente/2
-            if (count($request->all()) == 0)
-            {
+            if (count($request->all()) == 0) {
                 $data = [
                     'exception' => null,
                 ];
 
-                return view('errors.403',$data);
+                return view('errors.403', $data);
+            } elseif ($request->status === 'pending' || $request->status === 'in_process') {
 
-            } elseif($request->status === 'pending' || $request->status === 'in_process') {
-
-                $update = $this->paymentService->buildUpdate($id,[
+                $update = $this->paymentService->buildUpdate($id, [
                     'status' => 3, // status = pendente
                     'pagamento_id' => $request->payment_id,
                     'pagamento_tipo' => $request->payment_type,
@@ -245,29 +286,26 @@ class WebsiteController extends Controller
 
                 return view('website.pendente');
             }
-
         } catch (\Exception $e) {
-           \Log::error($e->getFile() . "\n" . $e->getLine() . "\n" . $e->getMessage());
-           alert()->error('Erro','Erro em realizar o pagamento.')->persistent('Fechar');
-           return redirect()->route('website.campanhas.detalhes',$id)->withInput();
+            \Log::error($e->getFile() . "\n" . $e->getLine() . "\n" . $e->getMessage());
+            alert()->error('Erro', 'Erro em realizar o pagamento.')->persistent('Fechar');
+            return redirect()->route('website.campanhas.detalhes', $id)->withInput();
         }
     }
 
-    public function failed(Request $request,$id)
+    public function failed(Request $request, $id)
     {
         try {
             // http://localhost:8000/pagamento/sucesso/1
-            if (count($request->all()) == 0)
-            {
+            if (count($request->all()) == 0) {
                 $data = [
                     'exception' => null,
                 ];
 
-                return view('errors.403',$data);
+                return view('errors.403', $data);
+            } elseif ($request->status === 'failure') {
 
-            } elseif($request->status === 'failure') {
-
-                $update = $this->paymentService->buildUpdate($id,[
+                $update = $this->paymentService->buildUpdate($id, [
                     'status' => 4, // status = falha
                     'pagamento_id' => $request->payment_id,
                     'pagamento_tipo' => $request->payment_type,
@@ -276,51 +314,64 @@ class WebsiteController extends Controller
 
                 return view('website.falha');
             }
-
         } catch (\Exception $e) {
-           \Log::error($e->getFile() . "\n" . $e->getLine() . "\n" . $e->getMessage());
-           alert()->error('Erro','')->persistent('Fechar');
-           return redirect()->route('website.campanhas.detalhes',$id)->withInput();
+            \Log::error($e->getFile() . "\n" . $e->getLine() . "\n" . $e->getMessage());
+            alert()->error('Erro', '')->persistent('Fechar');
+            return redirect()->route('website.campanhas.detalhes', $id)->withInput();
         }
     }
 
-    public function duvidas(){
+    public function duvidas()
+    {
 
         return view('website.duvidas');
     }
 
-    public function faq(){
+    public function faq()
+    {
 
         return view('website.faq');
     }
 
 
 
-    public function search(Request $request){
+    public function search(Request $request)
+    {
 
-        if($request->q != ''){
+        if ($request->q != '') {
 
-             $campanha = $this->campanhaService->renderBySearch($request->q);
-             //dd($campanha);
-             if(count($campanha) > 0)
-             {
-                 $data = [
-                    'campanhas' => $campanha,
+            $minpay = $this->parameterService->renderBySlug('campanhas.num');
+
+            $campanhas = $this->campanhaService->renderBySearch($request->q)
+                ->reject(function ($campanha) use ($minpay) {
+                    return ($campanha->payments()->count() < $minpay->valor);
+                })->map(function ($campanha) {
+                    //arrange
+                    $payments = $campanha->payments();
+                    //insert
+                    $campanha->photo =  $this->photoService->renderPhotoUser('users', $campanha->user_id);
+                    $campanha->vTotal = $payments->sum('valor');
+                    $campanha->perc = (($campanha->vTotal * 100) / $campanha->valor);
+                    return $campanha;
+                });
+
+            if (count($campanhas) > 0) {
+                $data = [
+                    'campanhas' => $campanhas,
                     'pageTitle' => 'Campanha',
-                    'query' => $request->q,
-                 ];
-                //  dd($data);
-                 return view('website.search',$data);
-             }
-             else{
+                    'query' => $request->q
+                ];
+                //  dd($minimopay);
+                return view('website.search', $data);
+            } else {
                 alert()->warning("Dados não encontrados");
                 return redirect()->route('website.campanhas');
-             }
+            }
         }
         return view('website.index')->withMessage("Nada encontrado");
-     }
+    }
 
-         /**
+    /**
      * Show the application TOS.
      *
      * @return \Illuminate\Contracts\Support\Renderable

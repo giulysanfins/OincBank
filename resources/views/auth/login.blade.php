@@ -5,11 +5,11 @@
         <div class="content pt-5">
             <div class="container mt-5">
                 <div class="col-md-4 col-sm-6 ml-auto mr-auto">
-                    <form class="form" method="POST" action="{{ route('login') }}">
+                    <form class="form" method="POST" action="{{ route('login') }}"  data-grecaptcha-action="message">
                         @csrf
                         <div class="card card-login card-hidden">
                             <div class="card-header ">
-                                
+
                             </div>
                             <div class="card-body ">
                                 <div class="card-body">
@@ -53,6 +53,8 @@
                                             </div>
                                         </div>
                                     </div>
+
+
                                     <div class="container text-center" >
                                         <button type="submit" class="btn btn-oinc-primary btn-wd">Entrar</button>
                                     </div>

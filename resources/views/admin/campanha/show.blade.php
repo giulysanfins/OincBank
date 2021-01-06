@@ -39,12 +39,18 @@
                          <h4 class="card-title">Dono</h4>
                     </div>
                     <div class="card-body d-flex align-items-center px-4">
+                        @if($ownerPhoto != null)
+
                         <img class="rounded-circle" style="width: 100px; height: 100px;" src="{{ asset('/storage/profile/' . $ownerPhoto->path) }}" alt="">
+                        @else
+                        <img class="rounded-circle" style="width: 100px; height: 100px;" src="{{ asset('pig-pork.jpg') }}" alt="...">
+
+                        @endif
                         <span class="mx-auto">{{ $campanha->user->name }}</span>
                     </div>
                 </div>
             </div>
-            
+
             <div class="col-12">
             <div class="card">
                 <div class="card-body">
@@ -92,10 +98,33 @@
                         </div>
 
                         {{-- img upload --}}
-                        <div class="col-md-6">
-                            <label class="form-control-label" for="input-photo_perfil">Foto Cofrinho</label>
+                        <div class="col-md-3">
+                            <label class="form-control-label" for="input-photo_perfil">Foto Principal Cofrinho</label>
                             <br />
-                            <img class="img-thumbnail border-gray w-25" src="{{asset('storage')}}/images/{{$campanha->profile_image}}" alt="foto_{{$campanha->titulo}}">
+                            <img class="img-thumbnail border-gray"  src="{{asset('storage')}}/images/{{$campanha->profile_image}}" alt="foto_{{$campanha->titulo}}">
+                            <div class="row">
+
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-control-label" for="input-photo_perfil">Fotos do Cofrinho</label>
+                            <br/>
+
+
+                            {{-- <img class="img-thumbnail border-gray w-25" src="{{asset('storage')}}/images/{{$campanha->profile_image}}" alt="foto_{{$campanha->titulo}}"> --}}
+                            <div class="row">
+                                @foreach ($photos as $photo)
+                                <div class="col-12 col-md-3">
+
+                                    <a href="{{asset('storage')}}/images/{{$photo->path}}" data-toggle="lightbox" data-gallery="gallery" data-title="Fotos Cofrinhos">
+                                        <img class="img-thumbnail border-gray img-fluid"   src="{{asset('storage')}}/images/{{$photo->path}}" alt="foto_{{$photo->titulo}}" id="">
+                                    </a>
+
+                                </div>
+                                @endforeach
+
+                            </div>
                         </div>
 
                             <div class="col-md-6" >
@@ -198,6 +227,10 @@
 <script>
     $(document).ready(function(){
         $('#valor').mask("#.##0,00", {reverse: true});
+    });
+    $(document).on('click', '[data-toggle="lightbox"]', function(event) {
+        event.preventDefault();
+        $(this).ekkoLightbox();
     });
 </script>
 @endsection

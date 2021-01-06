@@ -1,5 +1,9 @@
 @extends('layouts.site.app', ['activePage' => '', 'title' => '| Detalhes da Campanha', 'navName' => '', 'activeButton' => ''])
 
+@section('css')
+
+@endsection
+
 @section('content')
 <div class="main">
     <section class="promo-primary">
@@ -39,6 +43,18 @@
                                     <input class="form-control" readonly type="text" value="{{url()->current()}}">
                                 </div>
                             </div>
+
+                            <div class="row my-4">
+                                <div class="d-flex align-items-center">
+                                    @if($campanha->photo)
+                                        <img class="mr-4 rounded-circle shadow" style="width: 60px; height:60px;" src="{{ asset('/storage/profile/' . $campanha->photo->path) }}" alt="">
+                                    @else
+                                        <img class="mr-4 rounded-circle shadow" style="width: 60px; height:60px;" src="{{ asset('pig-pork.jpg') }}" alt="">
+                                    @endif
+                                    <strong>{{ $campanha->user->name }}</strong>
+                                </div>
+                            </div>
+
                             <div class="row align-items-end">
                                 <div class="col-lg-6">
                                     <div class="progress-bar">
@@ -67,8 +83,6 @@
                                         <br>
 
                                         <div class="" id="erro">
-
-
                                         </div>
                                     </div>
                                     {{-- <div class="col-lg-9 col-xl-8 text-lg-right">
@@ -125,9 +139,8 @@
                                         @endif
                                     </div>
 
-                                    <div class="col-lg-4">
+                                    <div class="col-lg-12 text-center">
                                         @if (Auth::check())
-                                        <br><br>
                                             <button class="form__submit" id="btnSubmit" type="submit">+ Doar</button>
                                         @else
                                             <a class="form__submit" href="{{route('login',['campanha' => $campanha->id])}}" >Login</a>
@@ -154,7 +167,7 @@
                             @if ($campanha->video != null)
                             <li class="r-tabs-state-default r-tabs-tab"><a href="#horizontal-tabs__item-3" class="r-tabs-anchor"><span>Video</span></a></li>
                             @endif
-                            {{-- <li class="r-tabs-state-default r-tabs-tab"><a href="#horizontal-tabs__item-4" class="r-tabs-anchor"><span>Fotos</span></a></li> --}}
+                            <li class="r-tabs-state-default r-tabs-tab"><a href="#horizontal-tabs__item-4" class="r-tabs-anchor"><span>Fotos</span></a></li>
                         </ul>
                         <div class="horizontal-tabs__content">
                             <div class="r-tabs-accordion-title r-tabs-state-active"><a href="#horizontal-tabs__item-1" class="r-tabs-anchor">
@@ -175,16 +188,20 @@
                             </div>
                             @endif
 
-                            <div class="r-tabs-accordion-title"><a href="#horizontal-tabs__item-4" class="r-tabs-anchor"><span>Fotos</span></a></div><div class="horizontal-tabs__item r-tabs-state-default r-tabs-panel" id="horizontal-tabs__item-4">
+                            <div class="r-tabs-accordion-title">
+                                <a href="#horizontal-tabs__item-4" class="r-tabs-anchor"><span>Fotos</span></a>
+                            </div>
+                            
+                            <div class="horizontal-tabs__item r-tabs-state-default r-tabs-panel" id="horizontal-tabs__item-4">
                                 <div class="gallery-simple">
                                     <div class="row offset-30">
-
-                                        <div class="col-12 col-sm-6 col-lg-4 col-xl-3">
-                                            <a class="gallery-simple__item" href="{{asset('helpo-theme')}}/img/ig_1.jpg" data-fancybox="simple-gallery">
-                                                <img class="img--bg" src="{{asset('helpo-theme')}}/img/ig_1.jpg" alt="img">
-                                            </a>
-                                        </div>
-
+                                        @foreach ($fotos as $foto)
+                                            <div class="col-12 col-sm-6 col-lg-4 col-xl-3">
+                                                <a class="gallery-simple__item" href="{{asset('storage')}}/images/{{$foto->path}}" data-fancybox="simple-gallery-{{$campanha->id}}">
+                                                    <img class="img--bg" src="{{asset('storage')}}/images/{{$foto->path}}" alt="Campanha_{{$campanha->id}}_{{$foto->id}}" id="foto_{{$foto->path}}">
+                                                </a>
+                                            </div>
+                                        @endforeach
                                     </div>
                                 </div>
                             </div>
@@ -215,31 +232,25 @@
         let val2 = val1.replace(",",".");
         if(val2 < parseFloat({{$minValue->valor}}) || val2 > parseFloat({{$maxValue->valor}}))
         {
-            document.getElementById("erro").className += "alert alert-warning alert-dismissible fade show";
-            document.getElementById('erro').innerHTML = 'O valor deve ser entre R$:{{number_format($minValue->valor,2,",",".")}} até R$:{{number_format($maxValue->valor,2,",",".")}}.';
+            document.getElementById("erro").className += "alert alert-warning alert-sm alert-dismissible fade show mt-2 text-center";
+            document.getElementById('erro').innerHTML = 'O valor deve ser entre R$ {{number_format($minValue->valor,2,",",".")}} até R$ {{number_format($maxValue->valor,2,",",".")}}.';
             $("#btnSubmit").attr("disabled", true);
-                var elem = document.getElementById('btnSubmit');
-
-
+            var elem = document.getElementById('btnSubmit');
         }
         else
         {
             document.getElementById("erro").className = "";
             document.getElementById('erro').innerHTML = '';
             $("#btnSubmit").attr("disabled", false);
-
         }
-
-
     }
+
     var input = document.getElementById('dinheiro');
 
     input.addEventListener("change", validar,false);
     document.addEventListener("DOMContentLoaded", validar,false);
     $(document).ready(function(){
         $('.money').mask("#.##0,00", {reverse: true});
-
-
     });
 </script>
 @endsection

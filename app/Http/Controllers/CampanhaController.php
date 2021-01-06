@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use App\Yahp\Services\CampanhaService;
-use App\Yahp\Services\PhotoService;
 use App\Mail\newLaravelTips;
 use Illuminate\Support\Facades\Mail;
 use Intervention\Image\Facades\Image;
@@ -13,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Validator;
 use Carbon\Carbon;
+use Illuminate\Support\Str;
 
 use App\Http\Requests\ProfileRequest;
 use App\Http\Requests\PasswordRequest;
@@ -23,12 +22,22 @@ use App\Yahp\Services\CategoryService;
 use App\Yahp\Services\PaymentService;
 use App\Yahp\Services\BankService;
 use App\Yahp\Services\UserService;
+use App\Yahp\Services\CampanhaService;
+use App\Yahp\Services\PhotoService;
 
 
 class CampanhaController extends Controller
 {
 
-    public function __construct(CampanhaService $campanhaService,CategoryService $categoryService,PaymentService $paymentService, BankService $bankService, UserService $userService, PhotoService $photoService)
+
+    public function __construct(
+        CampanhaService $campanhaService,
+        CategoryService $categoryService,
+        PaymentService $paymentService,
+        BankService $bankService,
+        UserService $userService,
+        PhotoService $photoService
+        )
     {
         $this->middleware('auth');
         $this->campanhaService = $campanhaService;
@@ -68,7 +77,7 @@ class CampanhaController extends Controller
                 'campanhas_pendentes' => $this->campanhaService->renderByStatusUser(1,auth()->user()->id),
                 'campanhas_desativadas' => $this->campanhaService->renderByStatusUser(4,auth()->user()->id),
                 'campanhas_aprovadas' => $this->campanhaService->renderByStatusUser(2,auth()->user()->id),
-                'campanhas_expiradas' => $this->campanhaService->renderByStatusUser(5,auth()->user()->id),
+                'campanhas_expiradas' => $this->campanhaService->renderByStatusUser(2,auth()->user()->id),
                 'categorias' => $this->categoryService->renderByStatus(1),
                 'bancos' => $this->bankService->renderList(),
                 'pagamentos' => $this->paymentService->renderByUser(auth()->user()->id),
@@ -130,41 +139,50 @@ class CampanhaController extends Controller
         try
         {
             $user_id = auth()->user()->id;
-            //  if($request->file('photo_perfil'))
+
+            $file = $request->file('photo_perfil');
+            $image = Image::make($file);
+            $image->orientate();
+            $ext = $request->file('photo_perfil')->extension();
+            $ts = Carbon::now()->timestamp;
+            $filename = $ts."_".$user_id.".".$ext;
+            $image->save(storage_path('app/public/images/') . $filename);
 
 
 
-                //process the file
+            $data = $this->campanhaService->buildInsert($request->merge([
+                'profile_image' => $filename,
+                'user_id' => auth()->user()->id,
+                'status' => 2,
+                'valor' => str_replace(',','.',str_replace('.','',$request->valor)),
+                'data_encerramento' => Carbon::createFromFormat('d/m/Y', $request->data_encerramento),
+            ])->all());
 
-                $file = $request->file('photo_perfil');
-                $image = Image::make($file);
-                $image->orientate();
-                $ext = $request->file('photo_perfil')->extension();
-                $ts = Carbon::now()->timestamp;
-                $filename = $ts."_".$user_id.".".$ext;
+            if($request->file('fotos') != null)
+            {
+                foreach($request->fotos as $foto)
+                {
+                    $ext = $foto->extension();
+                    $random = Str::random(15);
+                    $ts = Carbon::now()->timestamp;
+                    $filename = $random."_".$ts.".".$ext;
+                    $upFoto = Storage::putFileAs('public/images', $foto, $filename);
+                    $insertPhoto = $this->photoService->buildInsert([
+                        'area' => 'campanha',
+                        'area_id' => $data->id,
+                        'path' => $filename,
+                    ]);
+                }
+            }
 
-                $image->save(storage_path('app/public/images/') . $filename);
-
-                // $upload = Storage::putFileAs('public/images', $image, $filename);
-
-
-                $data = $this->campanhaService->buildInsert($request->merge([
-                    'profile_image' => $filename,
-                    'user_id' => auth()->user()->id,
-                    'status' => 2,
-                    'valor' => str_replace(',','.',str_replace('.','',$request->valor))
-                ])->all());
-                alert()->success('Sucesso','Cofrinho adicionado com sucesso.')->persistent('Fechar');
-
-             return redirect()->route('campanha.index',$data);
+            alert()->success('Sucesso','Cofrinho adicionado com sucesso.')->persistent('Fechar');
+            return redirect()->route('campanha.index',$data);
 
         } catch (\Exception $e) {
-
 
              \Log::error($e->getFile() . "\n" . $e->getLine() . "\n" . $e->getMessage());
              alert()->error('Erro','Erro em adicionar o Cofrinho.')->persistent('Fechar');
              return redirect()->route('campanha.create')->withInput();
-
          }
      }
 
@@ -209,6 +227,7 @@ class CampanhaController extends Controller
             'balanco' => $balanco,
             'perc' => (($valorTotal*100)/$campanha->valor),
             'clientes' => $this->userService->renderList(),
+            'photos' => $this->photoService->renderByCampanha($id)
         ];
 
 
@@ -226,7 +245,8 @@ class CampanhaController extends Controller
          $data = [
              'campanha' => $this->campanhaService->renderEdit($id),
              'categorias' => $this->categoryService->renderByStatus(1),
-             'pageTitle' => 'Editar Cofrinho'
+             'pageTitle' => 'Editar Cofrinho',
+             'photos' => $this->photoService->renderByCampanha($id)
          ];
 
          return view('admin.campanha.edit',$data);
@@ -243,33 +263,41 @@ class CampanhaController extends Controller
      {
          try {
             $user_id = auth()->user()->id;
+
             if($request->file('photo_perfil'))
               {
+
+                $user_id = auth()->user()->id;
+
+                $file = $request->file('photo_perfil');
+                $image = Image::make($file);
+                $image->orientate();
                 $ext = $request->file('photo_perfil')->extension();
                 $ts = Carbon::now()->timestamp;
                 $filename = $ts."_".$user_id.".".$ext;
-                $upload = Storage::putFileAs('public/images', $request->file('photo_perfil'),$filename);
+                $image->save(storage_path('app/public/images/') . $filename);
                 $update = $this->campanhaService->buildUpdate($id,$request->merge([
                     'valor' => str_replace(',','.',str_replace('.','',$request->valor)),
-                    'profile_image' => $filename
+                    'profile_image' => $filename,
+                    'data_encerramento' => Carbon::createFromFormat('d/m/Y', $request->data_encerramento),
                  ])->all());
                  alert()->success('Sucesso','Cofrinho alterado com sucesso.')->persistent('Fechar');
                  return redirect()->route('campanha.index',$id);
               }
               else{
                 $update = $this->campanhaService->buildUpdate($id,$request->merge([
-                    'valor' => str_replace(',','.',str_replace('.','',$request->valor))
-
+                    'valor' => str_replace(',','.',str_replace('.','',$request->valor)),
+                    'data_encerramento' => Carbon::createFromFormat('d/m/Y', $request->data_encerramento),
                  ])->all());
                  alert()->success('Sucesso','Cofrinho alterado com sucesso.')->persistent('Fechar');
-                 return redirect()->route('campanha.index',$id);
+                 return redirect()->route('campanha.edit',$id);
               }
 
 
          } catch (\Exception $e) {
              \Log::error($e->getFile() . "\n" . $e->getLine() . "\n" . $e->getMessage());
              alert()->error('Erro','Erro em alterar o Cofrinho.')->persistent('Fechar');
-             return redirect()->route('campanha.index',$id)->withInput();
+             return redirect()->route('campanha.edit',$id)->withInput();
          }
      }
 
@@ -306,8 +334,8 @@ class CampanhaController extends Controller
                 'motivo_deletado' => $escolha
             ]);
             Mail::send(new mensagemDesativado($id));
-             alert()->success('Sucesso','Cofrinho desativado com sucesso.')->persistent('Fechar');
-             return redirect()->route('campanha.index');
+            alert()->success('Sucesso','Cofrinho desativado com sucesso.')->persistent('Fechar');
+            return redirect()->route('campanha.index');
          } catch (\Exception $e) {
              \Log::error($e->getFile() . "\n" . $e->getLine() . "\n" . $e->getMessage());
              alert()->error('Erro','Erro em alterar a Campanha.')->persistent('Fechar');
@@ -318,19 +346,13 @@ class CampanhaController extends Controller
      public function ativar(Request $request, $id)
      {
          try {
-
-             $update = $this->campanhaService->buildUpdate($id,['status' => 2]);
-
-             alert()->success('Sucesso','Cofrinho ativado com sucesso.')->persistent('Fechar');
-             return redirect()->route('campanha.index');
-
+            $update = $this->campanhaService->buildUpdate($id,['status' => 2]);
+            alert()->success('Sucesso','Cofrinho ativado com sucesso.')->persistent('Fechar');
+            return redirect()->route('campanha.index');
          } catch (\Exception $e) {
-
-             \Log::error($e->getFile() . "\n" . $e->getLine() . "\n" . $e->getMessage());
-             alert()->error('Erro','Erro em alterar o Cofrinho.')->persistent('Fechar');
-             return redirect()->route('campanha.index')->withInput();
-
-
+            \Log::error($e->getFile() . "\n" . $e->getLine() . "\n" . $e->getMessage());
+            alert()->error('Erro','Erro em alterar o Cofrinho.')->persistent('Fechar');
+            return redirect()->route('campanha.index')->withInput();
          }
      }
 
@@ -349,6 +371,82 @@ class CampanhaController extends Controller
             return redirect()->route('campanha.index')->withInput();
         }
      }
+
+     public function insertFoto(Request $request)
+     {
+        try {
+            if($request->file('fotos') != null)
+            {
+                foreach($request->fotos as $foto)
+                {
+                    $ext = $foto->extension();
+                    $random = Str::random(15);
+                    $ts = Carbon::now()->timestamp;
+                    $filename = $random."_".$ts.".".$ext;
+                    $upFoto = Storage::putFileAs('public/images', $foto, $filename);
+                    $insertPhoto = $this->photoService->buildInsert([
+                        'area' => 'campanha',
+                        'area_id' => $request->cofrinho_id,
+                        'path' => $filename,
+                    ]);
+                }
+                alert()->success('Sucesso','Foto adicionada com sucesso.')->persistent('Fechar');
+            } else {
+                alert()->warning('Atenção','Sem fotos para fazer upload.')->persistent('Fechar');
+            }
+
+            return redirect()->route('campanha.edit',$request->cofrinho_id);
+        } catch (\Exception $e) {
+            \Log::error($e->getFile() . "\n" . $e->getLine() . "\n" . $e->getMessage());
+            alert()->error('Erro','Erro em excluir o Cofrinho.')->persistent('Fechar');
+            return redirect()->route('campanha.edit',$request->cofrinho_id)->withInput();
+        }
+     }
+
+     public function destroyFoto($id, Request $request)
+     {
+        try {
+            $photo = $this->photoService->renderEdit($id);
+            Storage::delete('public/images/'.$photo->path);
+            $deletePhoto = $this->photoService->buildDelete($photo->id);
+            alert()->success('Sucesso','Foto excluida com sucesso.')->persistent('Fechar');
+            return redirect()->route('campanha.edit',$request->cofrinho_id);
+        } catch (\Exception $e) {
+            \Log::error($e->getFile() . "\n" . $e->getLine() . "\n" . $e->getMessage());
+            alert()->error('Erro','Erro em excluir o Cofrinho.')->persistent('Fechar');
+            return redirect()->route('campanha.edit',$request->cofrinho_id)->withInput();
+        }
+     }
+
+     public function principalFoto($id, Request $request)
+     {
+        try {
+            if($request->file('photo_perfil'))
+            {
+                $ext = $request->file('photo_perfil')->extension();
+                $ts = Carbon::now()->timestamp;
+                $random = Str::random(15);
+                $filename = $random."_".$ts.".".$ext;
+                $upload = Storage::putFileAs('public/images', $request->file('photo_perfil'),$filename);
+                $update = $this->campanhaService->buildUpdate($id,$request->merge([
+                    'profile_image' => $filename
+                 ])->all());
+                 alert()->success('Sucesso','Cofrinho alterado com sucesso.')->persistent('Fechar');
+            }
+            else
+            {
+                $update = $this->campanhaService->buildUpdate($id,$request->all());
+                alert()->success('Sucesso','Cofrinho alterado com sucesso.')->persistent('Fechar');
+            }
+
+            return redirect()->route('campanha.edit',$id);
+        } catch (\Exception $e) {
+            \Log::error($e->getFile() . "\n" . $e->getLine() . "\n" . $e->getMessage());
+            alert()->error('Erro','Erro em excluir foto.')->persistent('Fechar');
+            return redirect()->route('campanha.edit',$id)->withInput();
+        }
+     }
+
 
 
  }

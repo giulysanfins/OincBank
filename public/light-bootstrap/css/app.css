@@ -17,3 +17,14 @@
     border: 2px solid #fdcfdf;
     color: #643348;
 }
+
+.btn-remove
+{
+    position: relative;
+    z-index: 2;
+    top: 30px !important;
+    left: 0px !important;
+    border-color: transparent !important;
+    background-color: transparent !important;
+    color: red;
+}
