@@ -1,5 +1,6 @@
 {{-- @dd($campanha->categoria) --}}
-<div class="col-12 col-md-6 col-lg-4 {{ $campanha->categoria->name }}">
+{{-- esse $class verifica se tá chegando "column", é necessário para filtrar nos cofrinhos  --}}
+<div class="col-12 col-md-6 col-lg-4 {{ $class ?? '' }}  {{ $campanha->categoria->name }}">
     <div class="causes-item causes-item--primary">
         <div class="causes-item__body">
             <div class="causes-item__top">
