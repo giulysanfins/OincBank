@@ -29,15 +29,31 @@
                 <div class="row offset-margin">
 
                     <div class="col-md-8" id="myBtnContainer">
-                        <label for="text">Filtrar</label>
+                        {{-- <i class="fas fa-search"></i> --}}
                         <div class="btn-group " role="group">
-                            <button class="btn btn-link active" onclick="filterSelection('all')"
-                                style="text-decoration: none; color: black;"> Todos</button>
-                            @foreach ($categorias as $categoria)
-                                <button class="btn btn-link" onclick="filterSelection('{{ $categoria->name }}')">
-                                    {{ $categoria->name }}
+                            <div class="d-flex">
+                                <input list="browsers" id="valorLista" placeholder="Filtre por categoria"/>
+                                <datalist id="browsers">
+                                    @foreach ($categorias as $categoria)
+                                        <option value="{{ $categoria->name }}" >  </option>
+                                    @endforeach
+
+                                </datalist>
+                                <script>
+                                    var e = document.getElementById("valorLista");
+                                    console.log(e.value);
+                                </script>
+
+                                <button class="btn btn-link" onclick="filterSelection(e.value)">
+                                    <i class="fas fa-filter"></i>
                                 </button>
-                            @endforeach
+                                <button class="btn btn-link" onclick="ClearFields()"
+                                style="text-decoration: none; ">
+                                <i class="fas fa-times-circle"></i>
+                                </button>
+                            </div>
+
+
                         </div>
                     </div>
 
@@ -45,10 +61,8 @@
                         <form action="{{ route('website.search') }}" method="POST">
                             @csrf
                             {{-- botão procura cofrinho --}}
-                            {{-- <label for="text">Procure por cofrinho</label>
-                            --}}
-                            <div class="input-group-prepend">
-                                <input type="search" name="q" class="form-control-lg" placeholder="Procure por cofrinho"
+                            <div class="btn-group">
+                                <input type="text" name="q" class="" placeholder="Procure por cofrinho"
                                     required oninvalid="this.setCustomValidity('Por favor, preencha esse campo.')"
                                     oninput="this.setCustomValidity('')">
                                 <button type="submit" class="btn btn-secondary">Pesquisar</button>
@@ -68,13 +82,16 @@
                             }
                             $perc = (($vTotal*100)/$campanha->valor);
                             @endphp
-                            @component('website.components.cardCampanha', [
-                                'campanha' => $campanha,
-                                'minpay' => $minpay,
-                                'payments' => $payments,
-                                'perc' => $perc,
-                                'vTotal' => $vTotal
-                            ])@endcomponent
+                                {{-- colum é necessário para filtrar os cofrinhos, não tirar --}}
+                                @component('website.components.cardCampanha', [
+                                    'campanha' => $campanha,
+                                    'minpay' => $minpay,
+                                    'payments' => $payments,
+                                    'perc' => $perc,
+                                    'vTotal' => $vTotal,
+                                    'class' => 'column'
+                                ])@endcomponent
+
 
                             @endforeach
                         </div>
@@ -103,18 +120,31 @@
         </section>
         <!-- bottom bg end-->
         <script type="text/javascript">
+            function ClearFields() {
+
+                document.getElementById("valorLista").value = "";
+                filterSelection("all")
+            }
             filterSelection("all") // Execute the function and show all columns
             function filterSelection(c) {
+
                 var x, i;
                 x = document.getElementsByClassName("column");
-                if (c == "all") c = "";
+                if (c == "all"){
+                    c = "";
+                    document.getElementById("valorLista").innerHTML = "";
+
+                }
                 // Add the "show" class (display:block) to the filtered elements, and remove the "show" class from the elements that are not selected
+                // console.log(c);
                 for (i = 0; i < x.length; i++) {
-                    console.log(x[i]);
+                    // console.log(x[i]);
                     w3RemoveClass(x[i], "show");
                     if (x[i].className.indexOf(c) > -1) w3AddClass(x[i], "show");
                 }
             }
+
+
 
             // Show filtered elements
             function w3AddClass(element, name) {
@@ -127,7 +157,6 @@
                         element.className += " " + arr2[i];
                     }
                 }
-
             }
 
             // Hide elements that are not selected
@@ -143,16 +172,16 @@
                 element.className = arr1.join(" ");
             }
 
-            // Add active class to the current button (highlight it)
-            var btnContainer = document.getElementById("myBtnContainer");
-            var btns = btnContainer.getElementsByClassName("btn");
-            for (var i = 0; i < btns.length; i++) {
-                btns[i].addEventListener("click", function() {
-                    var current = document.getElementsByClassName("active");
-                    current[0].className = current[0].className.replace(" active", "");
-                    this.className += " active";
-                });
-            }
+            // // Add active class to the current button (highlight it)
+            // var btnContainer = document.getElementById("myBtnContainer");
+            // var btns = btnContainer.getElementsByClassName("btn");
+            // for (var i = 0; i < btns.length; i++) {
+            //     btns[i].addEventListener("click", function() {
+            //         var current = document.getElementsByClassName("active");
+            //         current[0].className = current[0].className.replace(" active", "");
+            //         this.className += " active";
+            //     });
+            // }
 
         </script>
     </main>
